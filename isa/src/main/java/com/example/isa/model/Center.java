@@ -34,5 +34,8 @@ public class Center implements Serializable {
     @OneToMany(mappedBy = "center", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<User> administrators;
 
+    @OneToMany(mappedBy = "centerTerm", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Term> terms;
+
 
 }

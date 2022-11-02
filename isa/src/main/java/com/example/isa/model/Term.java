@@ -26,6 +26,9 @@ public class Term implements Serializable {
     @OneToMany(mappedBy = "term", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<User> users;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Center centerTerm;
+
     public Term() {
 
     }
