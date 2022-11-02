@@ -5,9 +5,12 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 enum Role {USER, CENTER_ADMINISTRATOR, SYSTEM_ADMINISTRATOR}
 enum Gender {MALE, FEMALE}
+
+enum LoyalityProgram{REGULAR, SILVER, GOLD}
 
 @Entity
 @Getter
@@ -58,13 +61,20 @@ public class User implements Serializable {
     @Column
     private Integer penalties;
 
+    @Column
+    private LoyalityProgram loyalityProgram;
+
+    @Column
+    private Integer points;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Center center;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Term term;
 
-
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Complaint> complaints;
 
     public User() {
     }
