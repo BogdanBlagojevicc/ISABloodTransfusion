@@ -32,6 +32,8 @@ public class Term implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private RegularUser regular_user;
 
+    @OneToOne
+    private CenterAdministrator centerAdministrator;
 
     public Term() {
 

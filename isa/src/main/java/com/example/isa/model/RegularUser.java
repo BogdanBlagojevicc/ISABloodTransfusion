@@ -25,6 +25,9 @@ public class RegularUser extends User implements Serializable{
     @OneToMany(mappedBy = "regular_user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Term> terms;
 
+    @OneToMany(mappedBy = "regularUser", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Complaint> complaints;
+
     public RegularUser(){
 
     }

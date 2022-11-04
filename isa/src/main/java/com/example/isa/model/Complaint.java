@@ -17,21 +17,22 @@ public class Complaint implements Serializable {
     @Column
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
-
     @OneToOne
     private Center centerComplaint;
 
     @OneToOne
-    private User userComplaint;
+    private CenterAdministrator administratorComplaint;
+
+    @Column
+    private String response;
 
     public Complaint(){
 
     }
 
-    public Complaint(Long id, String text) {
+    public Complaint(Long id, String text, String response) {
         this.id = id;
         this.text = text;
+        this.response = response;
     }
 }
