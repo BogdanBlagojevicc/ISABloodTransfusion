@@ -3,9 +3,9 @@ package com.example.isa.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 enum LoyaltyProgram{REGULAR, SILVER, GOLD}
 
@@ -21,6 +21,9 @@ public class RegularUser extends User implements Serializable{
 
     @Column
     private Integer penalties;
+
+    @OneToMany(mappedBy = "regular_user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Term> terms;
 
     public RegularUser(){
 

@@ -12,6 +12,6 @@ import java.io.Serializable;
 @Setter
 public class SystemAdministrator extends User implements Serializable {
     public SystemAdministrator(){
-        
+
     }
 }
