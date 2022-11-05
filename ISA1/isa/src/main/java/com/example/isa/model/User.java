@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-enum Role {USER, CENTER_ADMINISTRATOR, SYSTEM_ADMINISTRATOR}
+
 enum Gender {MALE, FEMALE}
 
 enum LoyalityProgram{REGULAR, SILVER, GOLD}
@@ -15,7 +15,7 @@ enum LoyalityProgram{REGULAR, SILVER, GOLD}
 @Entity
 @Getter
 @Setter
-@Table(name = "users")
+@Table(name="users")
 public class User implements Serializable {
 
     @Id
@@ -59,14 +59,7 @@ public class User implements Serializable {
     @Column
     private String education;
 
-    @Column
-    private Integer penalties;
-
-    @Column
-    private LoyalityProgram loyalityProgram;
-
-    @Column
-    private Integer points;
+    
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Center center;
@@ -80,7 +73,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Long id, String email, String password, String firstName, String lastName, String address, String city, String country, String phoneNumber, String jmbg, Gender gender, String profession, String education, Integer penalties) {
+    public User(Long id, String email, String password, String firstName, String lastName, String address, String city, String country, String phoneNumber, String jmbg, Gender gender, String profession, String education) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -94,7 +87,7 @@ public class User implements Serializable {
         this.gender = gender;
         this.profession = profession;
         this.education = education;
-        this.penalties = penalties;
+        
     }
 }
 

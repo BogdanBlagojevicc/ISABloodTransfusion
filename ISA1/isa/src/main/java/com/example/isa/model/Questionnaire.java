@@ -7,6 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
+
+enum BloodType {ZERO, A, B, AB}
 @Entity
 @Getter
 @Setter
@@ -16,7 +18,12 @@ public class Questionnaire implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
+    @Enumerated(EnumType.STRING)
+    private BloodType bloodType;
+
     @OneToOne
-    private User user;
+    private RegularUser regularUser;
+
 }
 

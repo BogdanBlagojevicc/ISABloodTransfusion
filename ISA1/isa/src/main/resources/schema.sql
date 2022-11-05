@@ -1,1 +1,0 @@
-INSERT INTO centers (address, average_grade, country, description, name ) VALUES ('Kisacka 1', 0, 'Republika Srbija', 'dobro', 'LL')
