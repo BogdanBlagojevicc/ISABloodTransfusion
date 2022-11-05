@@ -4,16 +4,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
-enum LoyaltyProgram{REGULAR, SILVER, GOLD}
+enum LoyaltyProgram {REGULAR, SILVER, GOLD}
 
 @Entity
 @Getter
 @Setter
-public class RegularUser extends User implements Serializable{
+@Table(name="regularusers")
+public class RegularUser extends User {
+    
     @Column
+    @Enumerated(EnumType.STRING)
     private LoyaltyProgram loyalty;
 
     @Column
@@ -25,7 +27,8 @@ public class RegularUser extends User implements Serializable{
     @OneToMany(mappedBy = "regular_user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Term> terms;
 
-    @OneToMany(mappedBy = "regularUser", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+     
+   @OneToMany(mappedBy = "regularUser", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Complaint> complaints;
 
     public RegularUser(){
@@ -38,3 +41,4 @@ public class RegularUser extends User implements Serializable{
         this.penalties = penalties;
     }
 }
+

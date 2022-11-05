@@ -5,12 +5,13 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalTime;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@Table(name = "centers")
 public class Center implements Serializable {
 
     @Id
@@ -33,10 +34,10 @@ public class Center implements Serializable {
     private String country;
 
     @Column
-    private LocalTime start;
+    private Date startTime;
 
     @Column
-    private LocalTime end;
+    private Date endTime;
 
     @OneToMany(mappedBy = "center", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CenterAdministrator> administrators;
@@ -48,16 +49,17 @@ public class Center implements Serializable {
 
     }
 
-    public Center(Long id, String name, String address, String description, Double averageGrade, String country, LocalTime start, LocalTime end, List<CenterAdministrator> administrators, List<Term> terms) {
+    public Center(Long id, String name, String address, String description, Double averageGrade, Date hend, String country, Date start, List<CenterAdministrator> administrators, List<Term> terms) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.description = description;
         this.averageGrade = averageGrade;
         this.country = country;
-        this.start = start;
-        this.end = end;
+        this.startTime = start;
+        this.endTime = hend;
         this.administrators = administrators;
         this.terms = terms;
     }
+
 }

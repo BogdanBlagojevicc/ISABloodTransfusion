@@ -5,14 +5,14 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+
 
 enum Gender {MALE, FEMALE}
-
 
 @Entity
 @Getter
 @Setter
+@Table(name="users")
 public class User implements Serializable {
 
     @Id
@@ -56,9 +56,23 @@ public class User implements Serializable {
     @Column
     private String education;
 
-
     public User() {
     }
 
-
+    public User(Long id, String email, String password, String firstName, String lastName, String address, String city, String country, String phoneNumber, String jmbg, Gender gender, String profession, String education) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+        this.jmbg = jmbg;
+        this.gender = gender;
+        this.profession = profession;
+        this.education = education;
+    }
 }
+

@@ -9,14 +9,12 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-
+@Table(name="warehouses")
 public class Warehouse implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-
-    @OneToOne
-    private Center center;
 
     @Column
     private Integer bloodQuantityA;
@@ -39,10 +37,13 @@ public class Warehouse implements Serializable {
     @Column
     private Integer bandage;
 
+    @OneToOne
+    private Center center;
+
     public Warehouse() {
     }
 
-    public Warehouse(Long id, Center center, Integer bloodQuantityA, Integer bloodQuantityB, Integer bloodQuantityAB, Integer bloodQuantity0, Integer needles, Integer testTubes, Integer bandage) {
+    public Warehouse(Long id, Integer bloodQuantityA, Integer bloodQuantityB, Integer bloodQuantityAB, Integer bloodQuantity0, Integer needles, Integer testTubes, Integer bandage, Center center) {
         Id = id;
         this.center = center;
         this.bloodQuantityA = bloodQuantityA;

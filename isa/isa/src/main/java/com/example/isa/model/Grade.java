@@ -9,7 +9,9 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
+@Table(name = "grades")
 public class Grade implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,3 +33,4 @@ public class Grade implements Serializable {
         this.grade = grade;
     }
 }
+

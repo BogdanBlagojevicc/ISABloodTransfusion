@@ -1,30 +1,27 @@
 package com.example.isa.model;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
 
 @Entity
 @Getter
 @Setter
-
+@Table(name = "terms")
 public class Term implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
     @Column
-    private Date date;
+    private Date dateTerm;
 
     @Column
     private Integer duration;
-
-    @OneToMany(mappedBy = "term", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<User> users;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Center centerTerm;
@@ -39,10 +36,11 @@ public class Term implements Serializable {
 
     }
 
-    public Term(Long id, Date date, Integer duration) {
+    public Term(Long id, Date dateTerm, Integer duration) {
         Id = id;
-        this.date = date;
+        this.dateTerm = dateTerm;
         this.duration = duration;
     }
 
 }
+

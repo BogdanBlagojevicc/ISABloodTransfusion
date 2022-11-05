@@ -4,14 +4,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import java.io.Serializable;
-
+import javax.persistence.Table;
 
 @Entity
 @Getter
 @Setter
-public class SystemAdministrator extends User implements Serializable {
+@Table(name="systemadministrators")
+public class SystemAdministrator extends User  {
+    
     public SystemAdministrator(){
 
     }
-}
+} 

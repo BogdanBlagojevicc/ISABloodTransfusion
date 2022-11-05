@@ -9,7 +9,9 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
+@Table(name = "complaints")
 public class Complaint implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,14 +19,18 @@ public class Complaint implements Serializable {
     @Column
     private String text;
 
+    @Column
+    private String response;
+
     @OneToOne
     private Center centerComplaint;
 
     @OneToOne
-    private CenterAdministrator administratorComplaint;
+    private User userComplaint;
 
-    @Column
-    private String response;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private RegularUser regularUser;
 
     public Complaint(){
 
@@ -36,3 +42,4 @@ public class Complaint implements Serializable {
         this.response = response;
     }
 }
+
