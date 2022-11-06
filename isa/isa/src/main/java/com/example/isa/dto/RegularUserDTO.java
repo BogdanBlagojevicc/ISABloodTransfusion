@@ -1,11 +1,13 @@
 package com.example.isa.dto;
 
+import com.example.isa.model.Gender;
+import com.example.isa.model.LoyaltyProgram;
+
 import lombok.Getter;
 import lombok.Setter;
 
-enum Gender {MALE, FEMALE}
 
-enum LoyaltyProgram {REGULAR, SILVER, GOLD}
+
 
 @Getter
 @Setter

@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
-enum LoyaltyProgram {REGULAR, SILVER, GOLD}
+
 
 @Entity
 @Getter
@@ -35,10 +35,20 @@ public class RegularUser extends User {
 
     }
 
-    public RegularUser(LoyaltyProgram loyalty, Integer points, Integer penalties) {
+
+
+    public RegularUser(String email, String password, String firstName, String lastName, String address, String city,
+            String country, String phoneNumber, String jmbg, Gender gender, String profession, String education,
+            LoyaltyProgram loyalty, Integer points, Integer penalties) {
+        super(email, password, firstName, lastName, address, city, country, phoneNumber, jmbg, gender, profession,
+                education);
         this.loyalty = loyalty;
         this.points = points;
         this.penalties = penalties;
     }
+
+   
+
+    
 }
 

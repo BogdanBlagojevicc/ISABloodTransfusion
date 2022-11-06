@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 
-enum Gender {MALE, FEMALE}
 
 @Entity
 @Getter
@@ -59,8 +58,8 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Long id, String email, String password, String firstName, String lastName, String address, String city, String country, String phoneNumber, String jmbg, Gender gender, String profession, String education) {
-        this.id = id;
+    public User(String email, String password, String firstName, String lastName, String address, String city,
+            String country, String phoneNumber, String jmbg, Gender gender, String profession, String education) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -74,5 +73,7 @@ public class User implements Serializable {
         this.profession = profession;
         this.education = education;
     }
+
+    
 }
 
