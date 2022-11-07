@@ -1,4 +1,4 @@
-/*package com.example.isa.controller;
+package com.example.isa.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.isa.dto.CenterDTO;
 import com.example.isa.model.Center;
+import com.example.isa.model.dto.CenterDTO;
 import com.example.isa.service.CenterService;
 
 @RestController
@@ -135,4 +135,4 @@ public class CenterController {
     }
 
 }
-*/
+

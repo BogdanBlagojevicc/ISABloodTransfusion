@@ -17,7 +17,7 @@ public class RegularUserService {
         this.regularUserRepository = regularUserRepository;
     }
 
-    /* 
+    
     public RegularUser create(RegularUser regularUser) throws Exception{
         if(regularUser.getId() != null){
             throw new Exception("ID must be null");
@@ -25,10 +25,11 @@ public class RegularUserService {
         RegularUser newRegularUser = this.regularUserRepository.save(regularUser);
         return newRegularUser;
     }
-    */
+    
 
-    public RegularUser getOne(Long id){
-        return this.regularUserRepository.findRegularUserById(id);
+    public RegularUser findOne(Long id){
+        RegularUser regularUser = this.regularUserRepository.getOne(id);
+        return regularUser;
     }
 
 

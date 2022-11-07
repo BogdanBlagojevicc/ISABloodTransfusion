@@ -5,8 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-
+import com.example.isa.model.dto.Gender;
 enum LoyaltyProgram {REGULAR, SILVER, GOLD}
+
 
 @Entity
 @Getter
@@ -105,6 +106,28 @@ public class RegularUser {
         this.points = points;
         this.penalties = penalties;
     }
+
+    public RegularUser(com.example.isa.model.dto.LoyaltyProgram loyalty, String email, String password,
+            String firstName, String lastName, String address, String city, String country, String phoneNumber,
+            String jmbg, com.example.isa.model.dto.Gender gender2, String profession, String education, Integer points, Integer penalties) {
+        this.loyalty = loyalty;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+        this.jmbg = jmbg;
+        this.gender = gender2;
+        this.profession = profession;
+        this.education = education;
+        this.points = points;
+        this.penalties = penalties;
+    }
+
+    
 
    
 

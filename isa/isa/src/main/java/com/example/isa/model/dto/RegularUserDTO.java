@@ -44,8 +44,8 @@ public class RegularUserDTO {
     }
 
     public RegularUserDTO(Long id, String email, String password, String firstName, String lastName, String address,
-            String city, String country, String phoneNumber, String jmbg, String gender, String profession,
-            String education, String loyalty, Integer points, Integer penalties) {
+            String city, String country, String phoneNumber, String jmbg, Gender gender2, String profession,
+            String education, LoyaltyProgram loyaltyProgram, Integer points, Integer penalties) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -56,10 +56,10 @@ public class RegularUserDTO {
         this.country = country;
         this.phoneNumber = phoneNumber;
         this.jmbg = jmbg;
-        this.gender = gender;
+        this.gender = String.valueOf(gender2);
         this.profession = profession;
         this.education = education;
-        this.loyalty = loyalty;
+        this.loyalty = String.valueOf(loyaltyProgram);
         this.points = points;
         this.penalties = penalties;
     }
