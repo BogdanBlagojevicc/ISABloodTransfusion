@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 
 enum BloodType {ZERO, A, B, AB}
+
 @Entity
 @Getter
 @Setter

@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
+enum LoyaltyProgram {REGULAR, SILVER, GOLD}
 
 @Entity
 @Getter
@@ -19,7 +20,7 @@ public class RegularUser {
     
     @Column
     @Enumerated(EnumType.STRING)
-    private LoyaltyProgram loyalty;
+    public com.example.isa.model.dto.LoyaltyProgram loyalty;
 
     @Column
     private Integer points;
@@ -27,6 +28,7 @@ public class RegularUser {
     @Column
     private Integer penalties;
 
+    @Column
     private User userField;
 
     @OneToOne(mappedBy = "regularUser")
@@ -48,7 +50,7 @@ public class RegularUser {
 
     }
 
-    public RegularUser(Long id, LoyaltyProgram loyalty, Integer points, Integer penalties, User userField) {
+    public RegularUser(Long id, com.example.isa.model.dto.LoyaltyProgram loyalty, Integer points, Integer penalties, User userField) {
         this.id = id;
         this.loyalty = loyalty;
         this.points = points;

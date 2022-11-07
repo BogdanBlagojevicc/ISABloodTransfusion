@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
-
+enum Gender {MALE, FEMALE}
 
 @Entity
 @Getter
@@ -58,7 +58,7 @@ public class User implements Serializable {
     @OneToOne
     private CenterAdministrator centerAdministrator;
 
-    @OneToOne
+    @OneToOne(mappedBy = "user")
     private RegularUser regularUser;
 
     @OneToOne

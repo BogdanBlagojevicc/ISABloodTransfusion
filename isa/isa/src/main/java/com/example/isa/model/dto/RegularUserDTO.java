@@ -1,12 +1,7 @@
-package com.example.isa.dto;
-
-import com.example.isa.model.Gender;
-import com.example.isa.model.LoyaltyProgram;
+package com.example.isa.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-
-
 
 
 @Getter
@@ -32,13 +27,13 @@ public class RegularUserDTO {
 
     private String jmbg;
 
-    private Gender gender;
+    private String gender;
 
     private String profession;
 
     private String education;
 
-    private LoyaltyProgram loyalty;
+    private String loyalty;
 
     private Integer points;
 
@@ -49,8 +44,8 @@ public class RegularUserDTO {
     }
 
     public RegularUserDTO(Long id, String email, String password, String firstName, String lastName, String address,
-            String city, String country, String phoneNumber, String jmbg, Gender gender, String profession,
-            String education, LoyaltyProgram loyalty, Integer points, Integer penalties) {
+            String city, String country, String phoneNumber, String jmbg, String gender, String profession,
+            String education, String loyalty, Integer points, Integer penalties) {
         this.id = id;
         this.email = email;
         this.password = password;

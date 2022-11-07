@@ -1,4 +1,4 @@
-package com.example.isa.dto;
+package com.example.isa.model.dto;
 
 import java.sql.Date;
 

@@ -4,8 +4,8 @@ VALUES ('Kisacka 1', 0, 'Republika Srbija', 'dobro', '2000-10-11', 'LL',  '2000-
 INSERT INTO warehouses (bandage, blood_quantity0, blood_quantitya, blood_quantityab, blood_quantityb, needles, test_tubes, center_id)
 VALUES (1, 2, 3, 4, 5, 6, 7, 1);
 
-INSERT INTO regularusers (loyalty, penalties, points)
-VALUES (0, 1, 1);
+INSERT INTO regularusers (loyalty, penalties, points, user_id)
+VALUES ('GOLD', 1, 1, 1);
 
 INSERT INTO terms(date_term, duration, center_term_id, regular_user_id)
 VALUES ('2000-10-10', 10, 1, 1);
@@ -20,13 +20,15 @@ INSERT INTO grades (grade, center_id, regular_user_id)
 VALUES (5, 1, 1);
 
 INSERT INTO questionnaries (blood_type, regular_user_id)
-VALUES (0, 1);
+VALUES ('ZERO', 1);
+
+INSERT INTO users(address, city, country, education, email, first_name, gender, jmbg, last_name, password, phone_number, profession, center_administrator_id, regular_user_id, system_administrator_id)
+VALUES('micurinova 72', 'novi sad', 'srbija', 'srednja', 'nenad@gmail.com', 'nenad', 'MALE', '30040032432', 'joldic', '1234j', '234234', 'student', 1, 1, null);
 
 INSERT INTO systemadministrators (user_field)
 VALUES (null);
 
-INSERT INTO users(address, city, country, education, email, first_name, gender, jmbg, last_name, password, phone_number, profession, center_administrator_id, regular_user_id, system_administrator_id)
-VALUES('micurinova 72', 'novi sad', 'srbija', 'srednja', 'nenad@gmail.com', 'nenad', 'MALE', '30040032432', 'joldic', '1234j', '234234', 'student', 1, 1, 1);
+
 
 
 

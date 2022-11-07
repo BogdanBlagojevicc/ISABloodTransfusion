@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CollectionId;
+
 @Entity
 @Getter
 @Setter
@@ -21,6 +23,7 @@ public class SystemAdministrator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private User userField;
 
     @OneToOne(mappedBy = "systemAdministrator")

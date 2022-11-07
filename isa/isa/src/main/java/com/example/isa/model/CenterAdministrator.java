@@ -26,6 +26,7 @@ public class CenterAdministrator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private User userField;
 
     @OneToOne(mappedBy = "centerAdministrator")
