@@ -11,7 +11,6 @@ import javax.persistence.Enumerated;
 
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 enum Gender {MALE, FEMALE}
@@ -63,11 +62,25 @@ public class SystemAdministrator {
     @Column
     private String education;
 
-    @OneToOne(mappedBy = "systemAdministrator")
-    private User user;
     
     public SystemAdministrator(){
 
+    }
+
+
+    public SystemAdministrator(Long id, String email, String password, String firstName, String lastName,
+            String address, String city, String country, String phoneNumber, String jmbg, Gender gender) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+        this.jmbg = jmbg;
+        this.gender = gender;
     }
 
     

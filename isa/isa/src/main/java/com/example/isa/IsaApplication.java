@@ -1,7 +1,6 @@
 package com.example.isa;
 
-import java.io.Console;
-import java.sql.Date;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
