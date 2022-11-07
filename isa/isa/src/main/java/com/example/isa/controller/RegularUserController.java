@@ -46,20 +46,20 @@ public class RegularUserController {
         return new ResponseEntity<>(newRegularUserDTO, HttpStatus.CREATED);
     }*/
 
-    @GetMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RegularUserDTO> getRegularUser(@PathVariable("Id") Long Id){
+ //   @GetMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
+   // public ResponseEntity<RegularUserDTO> getRegularUser(@PathVariable("Id") Long Id){
         
-        RegularUser regularUser = this.regularUserService.getOne(Id);
+     //   RegularUser regularUser = this.regularUserService.getOne(Id);
 
         /*RegularUserDTO regularUserDTO = new RegularUserDTO(regularUser.getId(), regularUser.getUserField().getEmail(), regularUser.getUserField().getPassword(), regularUser.getUserField().getFirstName(),  regularUser.getUserField().getLastName(), regularUser.getUserField().getAddress(), regularUser.getUserField().getCity(), regularUser.getUserField().getCountry(), regularUser.getUserField().getPhoneNumber(), regularUser.getUserField().getJmbg(), regularUser.getUserField().getGender().toString(), regularUser.getUserField().getProfession(), regularUser.getUserField().getEducation(), regularUser.getLoyalty(), regularUser.getPoints(), regularUser.getPenalties());*/
 
 
         //puca jer regularUser.getUserField().getEmail() je null
-        RegularUserDTO regularUserDTO = new RegularUserDTO(regularUser.getId(), regularUser.getUserField().getEmail(), "121", "11", "11", "11", "11", "11", "11", "11", "11","11","11", regularUser.getLoyalty().toString(), regularUser.getPoints(), regularUser.getPenalties());
+       // RegularUserDTO regularUserDTO = new RegularUserDTO(regularUser.getId(), regularUser.getUserField().getEmail(), "121", "11", "11", "11", "11", "11", "11", "11", "11","11","11", regularUser.getLoyalty().toString(), regularUser.getPoints(), regularUser.getPenalties());
         
 
-        return new ResponseEntity<>(regularUserDTO, HttpStatus.OK);
+        //return new ResponseEntity<>(regularUserDTO, HttpStatus.OK);
 
-    }
+ //   } 
 
 }
