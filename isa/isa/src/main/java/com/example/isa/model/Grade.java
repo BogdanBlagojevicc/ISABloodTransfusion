@@ -19,10 +19,10 @@ public class Grade implements Serializable {
     @Column
     private Integer grade;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private User user;
+    @OneToOne
+    private RegularUser regularUser;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne
     private Center center;
 
     public Grade() {

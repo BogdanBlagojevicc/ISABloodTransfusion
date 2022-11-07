@@ -1,4 +1,4 @@
-package com.example.isa.controller;
+/*package com.example.isa.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class RegularUserController {
     public RegularUserController(RegularUserService regularUserService){
         this.regularUserService = regularUserService;
     }
-
+ 
     @PostMapping(value = "/regularUserRegistration", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RegularUserDTO> createRegularUser(@RequestBody RegularUserDTO regularUserDTO) throws Exception{
 
@@ -45,3 +45,4 @@ public class RegularUserController {
     }
 
 }
+*/

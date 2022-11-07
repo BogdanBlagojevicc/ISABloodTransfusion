@@ -39,6 +39,15 @@ public class Center implements Serializable {
     @Column
     private Date endTime;
 
+    @OneToOne(mappedBy = "center")
+    private Warehouse wareHouse;
+
+    @OneToOne(mappedBy = "center")
+    private Grade grade;
+
+    @OneToOne(mappedBy = "center")
+    private Complaint complaint;
+
     @OneToMany(mappedBy = "center", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CenterAdministrator> administrators;
 

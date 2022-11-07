@@ -55,6 +55,15 @@ public class User implements Serializable {
     @Column
     private String education;
 
+    @OneToOne
+    private CenterAdministrator centerAdministrator;
+
+    @OneToOne
+    private RegularUser regularUser;
+
+    @OneToOne
+    private SystemAdministrator systemAdministrator;
+
     public User() {
     }
 

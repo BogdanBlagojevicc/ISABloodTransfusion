@@ -7,12 +7,15 @@ import javax.persistence.*;
 import java.util.List;
 
 
-
 @Entity
 @Getter
 @Setter
 @Table(name="regularusers")
-public class RegularUser extends User {
+public class RegularUser {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     @Column
     @Enumerated(EnumType.STRING)
@@ -24,30 +27,35 @@ public class RegularUser extends User {
     @Column
     private Integer penalties;
 
+    private User userField;
+
+    @OneToOne(mappedBy = "regularUser")
+    private Questionnaire questionnaire;
+
+    @OneToOne(mappedBy = "regularUser")
+    private Grade grade;
+
+    @OneToOne(mappedBy = "regularUser")
+    private User user;
+
     @OneToMany(mappedBy = "regular_user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Term> terms;
-
      
-   @OneToMany(mappedBy = "regularUser", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "regularUser", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Complaint> complaints;
 
     public RegularUser(){
 
     }
 
-
-
-    public RegularUser(String email, String password, String firstName, String lastName, String address, String city,
-            String country, String phoneNumber, String jmbg, Gender gender, String profession, String education,
-            LoyaltyProgram loyalty, Integer points, Integer penalties) {
-        super(email, password, firstName, lastName, address, city, country, phoneNumber, jmbg, gender, profession,
-                education);
+    public RegularUser(Long id, LoyaltyProgram loyalty, Integer points, Integer penalties, User userField) {
+        this.id = id;
         this.loyalty = loyalty;
         this.points = points;
         this.penalties = penalties;
+        this.userField = userField;
     }
 
-   
 
     
 }

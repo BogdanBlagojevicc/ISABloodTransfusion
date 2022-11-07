@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.websocket.OnError;
+
 import java.io.Serializable;
 
 @Entity
@@ -23,11 +25,10 @@ public class Complaint implements Serializable {
     private String response;
 
     @OneToOne
-    private Center centerComplaint;
+    private Center center;
 
     @OneToOne
-    private User userComplaint;
-
+    private CenterAdministrator centerAdministrator;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private RegularUser regularUser;

@@ -1,4 +1,4 @@
-package com.example.isa.repository;
+/*package com.example.isa.repository;
 
 import java.util.List;
 
@@ -21,3 +21,4 @@ public interface CenterRepository extends JpaRepository<Center, Long> {
 
 
 }
+*/
