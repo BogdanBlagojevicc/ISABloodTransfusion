@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,7 +34,7 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime(), center.getEndTime(),center.getAddress());
             centerDTOS.add(centerDTO);
         }
 
@@ -49,7 +50,7 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime(), center.getEndTime(), center.getAddress());
             centerDTOS.add(centerDTO);
         }
 
@@ -65,7 +66,7 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime(), center.getEndTime(), center.getAddress());
             centerDTOS.add(centerDTO);
         }
 
@@ -80,7 +81,7 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime(), center.getEndTime(), center.getAddress());
             centerDTOS.add(centerDTO);
         }
 
@@ -96,7 +97,7 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime(), center.getEndTime(), center.getAddress());
             centerDTOS.add(centerDTO);
         }
 
@@ -112,7 +113,7 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime(), center.getEndTime(), center.getAddress());
             centerDTOS.add(centerDTO);
         }
 
@@ -127,12 +128,41 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime(), center.getEndTime(), center.getAddress());
             centerDTOS.add(centerDTO);
         }
 
         return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
     }
+
+
+    @GetMapping(value = "/{Name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CenterDTO> getCenter(@PathVariable("Name") String name){
+         
+        Center center = this.centerService.findByNamee(name);
+ 
+        CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getDescription(), center.getAverageGrade(),
+        center.getCountry(), center.getStartTime(), center.getEndTime(), center.getAddress());
+        
+ 
+ 
+         return new ResponseEntity<>(centerDTO, HttpStatus.OK);
+ 
+    } 
+
+    @GetMapping(value = "/adresa/{Address}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CenterDTO> getRegularUser(@PathVariable("Address") String address){
+         
+        Center center = this.centerService.findByAddresss(address);
+ 
+        CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getDescription(), center.getAverageGrade(),
+        center.getCountry(), center.getStartTime(), center.getEndTime(), center.getAddress());
+        
+ 
+ 
+         return new ResponseEntity<>(centerDTO, HttpStatus.OK);
+ 
+    } 
 
 }
 

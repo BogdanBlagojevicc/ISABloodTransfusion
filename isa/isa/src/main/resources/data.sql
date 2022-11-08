@@ -1,5 +1,5 @@
 INSERT INTO centers (address, average_grade, country, description, end_time, name, start_time) 
-VALUES ('Kisacka 1', 0, 'Republika Srbija', 'dobro', '2000-10-11', 'LL',  '2000-10-10');
+VALUES ('Kisacka', 0, 'Republika Srbija', 'dobro', '2000-10-11', 'LL',  '2000-10-10');
 
 INSERT INTO warehouses (bandage, blood_quantity0, blood_quantitya, blood_quantityab, blood_quantityb, needles, test_tubes, center_id)
 VALUES (1, 2, 3, 4, 5, 6, 7, 1);

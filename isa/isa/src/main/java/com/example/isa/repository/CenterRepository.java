@@ -19,5 +19,10 @@ public interface CenterRepository extends JpaRepository<Center, Long> {
 
     List<Center> findByOrderByCountryDesc();
 
+    Center findByName(String name);
+
+    Center findByAddress(String address);
+   
+
 
 }

@@ -46,4 +46,14 @@ public class CenterService {
         return this.centerRepository.findByOrderByAverageGradeDesc();
     }
 
+    
+    public Center findByNamee(String name){
+        return this.centerRepository.findByName(name);
+    }
+
+    
+    public Center findByAddresss(String address){
+        return this.centerRepository.findByAddress(address);
+    }
+
 }

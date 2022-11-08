@@ -28,9 +28,16 @@ public class RegularUserService {
     
 
     public RegularUser findOne(Long id){
-        RegularUser regularUser = this.regularUserRepository.getOne(id);
+        RegularUser regularUser = this.regularUserRepository.findRegularUserById(id);
         return regularUser;
     }
 
+    public RegularUser update(RegularUser regularUser) throws Exception{
+        if(regularUser.getId() == null){
+            throw new Exception("ID can not be null");
+        }
+        return this.regularUserRepository.save(regularUser);
+    }
+    
 
 }

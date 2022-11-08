@@ -22,12 +22,14 @@ public class CenterDTO {
 
     private Date endTime;
 
+    private String address;   
+
     public CenterDTO(){
 
     }
 
     public CenterDTO(Long id, String name, String description, Double averageGrade, String country, Date startTime,
-            Date endTime) {
+            Date endTime, String address) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -35,6 +37,7 @@ public class CenterDTO {
         this.country = country;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.address=address;
     }
 
 
