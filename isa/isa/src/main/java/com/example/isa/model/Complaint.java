@@ -24,13 +24,16 @@ public class Complaint implements Serializable {
     private String response;
 
     @OneToOne
-    private Center center;
+    private Center center; 
 
     @OneToOne
-    private CenterAdministrator centerAdministrator;
+    private CenterAdministrator centerAdministrator; 
 
     @ManyToOne(fetch = FetchType.LAZY)
     private RegularUser regularUser;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private SystemAdministrator systemAdministrator;
 
     public Complaint(){
 

@@ -65,14 +65,11 @@ public class CenterAdministrator {
     @Column
     private String education;
 
-
     @OneToOne(mappedBy = "centerAdministrator")
     private Complaint complaint;
 
     @OneToOne
     private Term term;
-
-    
 
     @ManyToOne(fetch= FetchType.LAZY)
     private Center center;
@@ -98,8 +95,5 @@ public class CenterAdministrator {
         this.profession = profession;
         this.education = education;
     }
-    
-    
-    
 }
 
