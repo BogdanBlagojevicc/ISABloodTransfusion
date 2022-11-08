@@ -8,9 +8,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CenterDTO {
+    
     private Long id;
 
     private String name;
+
+    private String address;
 
     private String description;
 
@@ -20,18 +23,17 @@ public class CenterDTO {
 
     private Date startTime;
 
-    private Date endTime;
-
-    private String address;   
+    private Date endTime; 
 
     public CenterDTO(){
 
     }
 
-    public CenterDTO(Long id, String name, String description, Double averageGrade, String country, Date startTime,
-            Date endTime, String address) {
+    public CenterDTO(Long id, String name, String address, String description, Double averageGrade, String country, Date startTime,
+            Date endTime) {
         this.id = id;
         this.name = name;
+        this.address = address;
         this.description = description;
         this.averageGrade = averageGrade;
         this.country = country;

@@ -46,6 +46,54 @@ public class CenterService {
         return this.centerRepository.findByOrderByAverageGradeDesc();
     }
 
+    public Center update(Center center) throws Exception {
+
+        Center centerToUpdate = this.centerRepository.getOne(center.getId());
+
+        if(centerToUpdate == null){
+            throw new Exception("Center doesn't exist");
+        }
+
+
+        if(!center.getName().equals("")){
+            centerToUpdate.setName(center.getName());
+        }
+
+        if(!center.getAddress().equals("")){
+            centerToUpdate.setAddress(center.getAddress());
+        }
+
+        if(!center.getDescription().equals("")){
+            centerToUpdate.setDescription(center.getDescription());
+        }
+
+        if(!center.getCountry().equals("")){
+            centerToUpdate.setCountry(center.getCountry());
+        }
+
+        if(center.getStartTime() != null){
+            centerToUpdate.setStartTime(center.getStartTime());
+        }
+
+        if(center.getEndTime() != null){
+            centerToUpdate.setEndTime(center.getEndTime());
+        }
+
+
+        Center savedCenter = this.centerRepository.save(centerToUpdate);
+        
+        return savedCenter;
+    }
+
+    public Center findOne(Long id){
+        Center center = this.centerRepository.getOne(id);
+        return center;
+    }
+
+    
+}
+
+
     
     public Center findByNamee(String name){
         return this.centerRepository.findByName(name);
