@@ -90,11 +90,7 @@ public class CenterService {
         return center;
     }
 
-    
-}
 
-
-    
     public Center findByNamee(String name){
         return this.centerRepository.findByName(name);
     }
@@ -102,6 +98,6 @@ public class CenterService {
     
     public Center findByAddresss(String address){
         return this.centerRepository.findByAddress(address);
-    }
-
+    }    
 }
+
