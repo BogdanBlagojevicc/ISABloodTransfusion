@@ -6,8 +6,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 import com.example.isa.model.dto.Gender;
-enum LoyaltyProgram {REGULAR, SILVER, GOLD}
 
+enum LoyaltyProgram {REGULAR, SILVER, GOLD}
 
 @Entity
 @Getter
@@ -60,13 +60,11 @@ public class RegularUser {
     @Column
     private String education;
 
-
     @Column
     private Integer points;
 
     @Column
     private Integer penalties;
-
 
     @OneToOne(mappedBy = "regularUser")
     private Questionnaire questionnaire;
@@ -74,11 +72,9 @@ public class RegularUser {
     @OneToOne(mappedBy = "regularUser")
     private Grade grade;
 
-    
-
     @OneToMany(mappedBy = "regular_user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Term> terms;
-     
+    
     @OneToMany(mappedBy = "regularUser", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Complaint> complaints;
 
@@ -126,12 +122,5 @@ public class RegularUser {
         this.points = points;
         this.penalties = penalties;
     }
-
-    
-
-   
-
-
-    
 }
 

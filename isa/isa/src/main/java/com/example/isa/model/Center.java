@@ -51,6 +51,7 @@ public class Center implements Serializable {
     @OneToMany(mappedBy = "center", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CenterAdministrator> administrators;
 
+    //slobodni termini za rezervaciju
     @OneToMany(mappedBy = "centerTerm", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Term> terms;
 
@@ -58,15 +59,15 @@ public class Center implements Serializable {
 
     }
 
-    public Center(Long id, String name, String address, String description, Double averageGrade, Date hend, String country, Date start, List<CenterAdministrator> administrators, List<Term> terms) {
+    public Center(Long id, String name, String address, String description, Double averageGrade, String country,Date startTime, Date endTime, List<CenterAdministrator> administrators, List<Term> terms) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.description = description;
         this.averageGrade = averageGrade;
         this.country = country;
-        this.startTime = start;
-        this.endTime = hend;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.administrators = administrators;
         this.terms = terms;
     }

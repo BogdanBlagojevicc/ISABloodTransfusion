@@ -13,6 +13,7 @@ import java.sql.Date;
 @Setter
 @Table(name = "terms")
 public class Term implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;

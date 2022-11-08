@@ -26,7 +26,7 @@ public class Warehouse implements Serializable {
     private Integer bloodQuantityAB;
 
     @Column
-    private Integer bloodQuantity0;
+    private Integer bloodQuantity0; 
 
     @Column
     private Integer needles;
