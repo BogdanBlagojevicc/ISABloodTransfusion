@@ -48,15 +48,26 @@ public class Center implements Serializable {
     @OneToOne(mappedBy = "center")
     private Complaint complaint;
 
-    @OneToMany(mappedBy = "center", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "center", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CenterAdministrator> administrators;
 
     //slobodni termini za rezervaciju
-    @OneToMany(mappedBy = "centerTerm", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "centerTerm", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Term> terms;
 
     public Center(){
 
+    }
+
+    public Center(String name, String address, String description, Double averageGrade, String country, Date startTime,
+            Date endTime) {
+        this.name = name;
+        this.address = address;
+        this.description = description;
+        this.averageGrade = averageGrade;
+        this.country = country;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public Center(Long id, String name, String address, String description, Double averageGrade, String country,Date startTime, Date endTime, List<CenterAdministrator> administrators, List<Term> terms) {

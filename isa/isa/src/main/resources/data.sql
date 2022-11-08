@@ -1,5 +1,5 @@
 INSERT INTO centers (address, average_grade, country, description, end_time, name, start_time) 
-VALUES ('Kisacka 1', 0, 'Republika Srbija', 'dobro', '2000-10-11', 'LL',  '2000-10-10');
+VALUES ('Kisacka 1', 8, 'Republika Srbija', 'dobro', '2000-10-11', 'LL',  '2000-10-10');
 
 INSERT INTO systemadministrators (address, city, country, education, email, first_name, gender, jmbg, last_name, password, phone_number, profession)
 VALUES ('micurinova 72', 'novi sad', 'srbija', 'srednja', 'nenaad@gmail.com', 'nenad', 'MALE', '30040032432', 'joldic', '1234j', '234234', 'student');
