@@ -56,4 +56,8 @@ public class CenterService {
         return this.centerRepository.findByAddress(address);
     }
 
+    public Center findByGrade(Double averageGrade){
+        return this.centerRepository.findByAverageGrade(averageGrade);
+    }
+
 }
