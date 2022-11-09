@@ -166,8 +166,8 @@ public class CenterController {
          
         Center center = this.centerService.findByGrade(averageGrade);
  
-        CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getDescription(), center.getAverageGrade(),
-        center.getCountry(), center.getStartTime(), center.getEndTime(), center.getAddress());
+        CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(),center.getAddress(), center.getDescription(), center.getAverageGrade(),
+        center.getCountry(), center.getStartTime(), center.getEndTime());
         
  
  
