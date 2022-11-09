@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +20,11 @@ import com.example.isa.model.dto.RegularUserDTO;
 import com.example.isa.model.RegularUser;
 import com.example.isa.service.RegularUserService;
 
+//@CrossOrigin(origins = "http://localhost:63342")
+@CrossOrigin
 @RestController
-@RequestMapping(value = "api/regularUsers/")
+@RequestMapping(value = "api/regularUsers")
+
 public class RegularUserController {
     
     private final RegularUserService regularUserService;
