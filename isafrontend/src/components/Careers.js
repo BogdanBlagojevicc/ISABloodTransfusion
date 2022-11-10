@@ -1,13 +1,5 @@
 //import React, { useEffect, useState } from 'react'
 import React from "react";
-import Grid from "@mui/material/Grid";
-import { Button, Typography} from "@mui/material";
-import { green } from "@mui/material/colors";
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axiosApi from "../api/axios";
-import { useForm } from "react-hook-form";
-import InputTextField from "./InputTextField"; 
 
 const Careers = () => {
   return (
