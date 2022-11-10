@@ -1,7 +1,5 @@
 package com.example.isa.model.dto;
 
-import java.sql.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,16 +19,16 @@ public class CenterDTO {
 
     private String country;
 
-    private Date startTime;
+    private String startTime;
 
-    private Date endTime; 
+    private String endTime; 
 
     public CenterDTO(){
 
     }
 
-    public CenterDTO(Long id, String name, String address, String description, Double averageGrade, String country, Date startTime,
-            Date endTime) {
+    public CenterDTO(Long id, String name, String address, String description, Double averageGrade, String country, String startTime,
+            String endTime) {
         this.id = id;
         this.name = name;
         this.address = address;

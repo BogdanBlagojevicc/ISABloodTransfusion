@@ -4,8 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -34,9 +37,11 @@ public class Center implements Serializable {
     private String country;
 
     @Column
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date startTime;
 
     @Column
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date endTime;
 
     @OneToOne(mappedBy = "center")

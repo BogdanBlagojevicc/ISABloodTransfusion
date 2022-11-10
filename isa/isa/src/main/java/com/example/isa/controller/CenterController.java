@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +19,17 @@ import com.example.isa.model.CenterAdministrator;
 import com.example.isa.model.dto.CenterDTO;
 import com.example.isa.service.CenterAdministratorService;
 import com.example.isa.service.CenterService;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/centers")
@@ -43,7 +53,7 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(), center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
             centerDTOS.add(centerDTO);
         }
 
@@ -59,7 +69,7 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
             centerDTOS.add(centerDTO);
         }
 
@@ -75,7 +85,7 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
             centerDTOS.add(centerDTO);
         }
 
@@ -90,7 +100,7 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
             centerDTOS.add(centerDTO);
         }
 
@@ -106,7 +116,7 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
             centerDTOS.add(centerDTO);
         }
 
@@ -122,7 +132,7 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
             centerDTOS.add(centerDTO);
         }
 
@@ -137,7 +147,7 @@ public class CenterController {
 
         for(Center center : centers){
             CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime(), center.getEndTime());
+            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
             centerDTOS.add(centerDTO);
         }
 
@@ -147,18 +157,29 @@ public class CenterController {
     @PutMapping(value = "/{adminCenterId}/{centerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CenterDTO> update(@PathVariable Long adminCenterId, @PathVariable Long centerId, @RequestBody CenterDTO centerDTO) throws Exception{
 
+        System.out.println("VREME" + centerDTO.getEndTime());
+
         CenterAdministrator centerAdministrator = this.centerAdministratorService.findOne(adminCenterId);
         if(centerAdministrator == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        Center center = new Center(centerDTO.getName(), centerDTO.getAddress(), centerDTO.getDescription(), centerDTO.getAverageGrade(), centerDTO.getCountry(), centerDTO.getStartTime(), centerDTO.getEndTime());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
+        Center center = new Center(
+            centerDTO.getName(),
+            centerDTO.getAddress(),
+            centerDTO.getDescription(),
+            centerDTO.getAverageGrade(),
+            centerDTO.getCountry(),
+            formatter.parse(centerDTO.getStartTime()),
+            formatter.parse(centerDTO.getEndTime())
+        );
 
         center.setId(centerId);
 
         Center updatedCenter = centerService.update(center);
 
-        CenterDTO updatedCenterDTO = new CenterDTO(updatedCenter.getId(), updatedCenter.getName(), updatedCenter.getAddress(), updatedCenter.getDescription(), updatedCenter.getAverageGrade(), updatedCenter.getCountry(), updatedCenter.getStartTime(), updatedCenter.getEndTime());
+        CenterDTO updatedCenterDTO = new CenterDTO(updatedCenter.getId(), updatedCenter.getName(), updatedCenter.getAddress(), updatedCenter.getDescription(), updatedCenter.getAverageGrade(), updatedCenter.getCountry(), updatedCenter.getStartTime().toString(), updatedCenter.getEndTime().toString());
 
         return new ResponseEntity<>(updatedCenterDTO, HttpStatus.OK);
     }

@@ -54,10 +54,10 @@ public class CenterAdministrator {
 
     @Column(unique = true)
     private String jmbg;
-
+    
     @Column
     @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private com.example.isa.model.dto.Gender gender;
 
     @Column
     private String profession;
@@ -79,7 +79,7 @@ public class CenterAdministrator {
     }
 
     public CenterAdministrator(Long id, String email, String password, String firstName, String lastName,
-            String address, String city, String country, String phoneNumber, String jmbg, Gender gender,
+            String address, String city, String country, String phoneNumber, String jmbg, com.example.isa.model.dto.Gender gender,
             String profession, String education) {
         this.id = id;
         this.email = email;
@@ -95,5 +95,24 @@ public class CenterAdministrator {
         this.profession = profession;
         this.education = education;
     }
+
+    public CenterAdministrator(String email, String password, String firstName, String lastName, String address,
+            String city, String country, String phoneNumber, String jmbg, com.example.isa.model.dto.Gender gender, String profession,
+            String education) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+        this.jmbg = jmbg;
+        this.gender = gender;
+        this.profession = profession;
+        this.education = education;
+    }
+
+    
 }
 
