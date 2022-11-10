@@ -169,5 +169,18 @@ public class CenterController {
         return new ResponseEntity<>(updatedCenterDTO, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/grade/{AverageGrade}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CenterDTO> getAVG(@PathVariable("AverageGrade") Double averageGrade){
+         
+        Center center = this.centerService.findByGrade(averageGrade);
+ 
+        CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(),center.getAddress(), center.getDescription(), center.getAverageGrade(),
+        center.getCountry(), center.getStartTime(), center.getEndTime());
+        
+ 
+ 
+         return new ResponseEntity<>(centerDTO, HttpStatus.OK);
+ 
+    } 
 }
 

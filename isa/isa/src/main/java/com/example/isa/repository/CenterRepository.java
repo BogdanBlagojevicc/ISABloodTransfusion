@@ -26,7 +26,9 @@ public interface CenterRepository extends JpaRepository<Center, Long> {
 
     Center findByAddress(String address);
 
-
     List<Center> findAll();
+
+    Center findByAverageGrade(Double averageGrade);
+   
 
 }

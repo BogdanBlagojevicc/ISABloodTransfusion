@@ -97,6 +97,11 @@ public class CenterService {
     
     public Center findByAddresss(String address){
         return this.centerRepository.findByAddress(address);
-    }    
+    }
+
+    public Center findByGrade(Double averageGrade){
+        return this.centerRepository.findByAverageGrade(averageGrade);
+    }
+
 }
 
