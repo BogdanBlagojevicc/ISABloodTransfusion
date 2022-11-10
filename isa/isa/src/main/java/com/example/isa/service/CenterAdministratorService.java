@@ -67,4 +67,19 @@ public class CenterAdministratorService {
         CenterAdministrator savedCenterAdministrator = this.centerAdministratorRepository.save(centerAdministratorToUpdate);
         return savedCenterAdministrator;
     }
+
+    public CenterAdministrator updatePassword(CenterAdministrator centerAdministrator) throws Exception{
+
+        CenterAdministrator centerAdministratorToUpdate = this.centerAdministratorRepository.getOne(centerAdministrator.getId());
+        if(centerAdministratorToUpdate == null){
+            throw new Exception("Center Administrator doesn't exist");
+        }
+
+        if(!centerAdministrator.getPassword().equals("")){
+            centerAdministratorToUpdate.setPassword(centerAdministrator.getPassword());
+        }
+
+        CenterAdministrator savedCenterAdministrator = this.centerAdministratorRepository.save(centerAdministratorToUpdate);
+        return savedCenterAdministrator;
+    }
 }

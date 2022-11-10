@@ -73,4 +73,50 @@ public class CenterAdministratorController {
 
         return new ResponseEntity<>(updatedCenterAdministratorDTO, HttpStatus.OK);
     }
+
+    @PutMapping(value = "/updatePassword/{adminCenterId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CenterAdministratorDTO> updatePassword(@PathVariable Long adminCenterId, @RequestBody CenterAdministratorDTO centerAdministratorDTO) throws Exception{
+
+        CenterAdministrator centerAdministrator2 = this.centerAdministratorService.findOne(adminCenterId);
+        if(centerAdministrator2 == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        CenterAdministrator centerAdministrator = new CenterAdministrator(
+            centerAdministrator2.getEmail(),
+            centerAdministratorDTO.getPassword(), 
+            centerAdministrator2.getFirstName(), 
+            centerAdministrator2.getLastName(), 
+            centerAdministrator2.getAddress(), 
+            centerAdministrator2.getCity(), 
+            centerAdministrator2.getCountry(), 
+            centerAdministrator2.getPhoneNumber(), 
+            centerAdministrator2.getJmbg(), 
+            Gender.valueOf("FEMALE"), 
+            centerAdministrator2.getProfession(), 
+            centerAdministrator2.getEducation()
+        );
+
+        centerAdministrator.setId(adminCenterId);
+
+        CenterAdministrator updatedCenterAdministrator = centerAdministratorService.updatePassword(centerAdministrator);
+
+        CenterAdministratorDTO updatedCenterAdministratorDTO = new CenterAdministratorDTO(
+            updatedCenterAdministrator.getId(),
+            updatedCenterAdministrator.getEmail(),
+            updatedCenterAdministrator.getPassword(),
+            updatedCenterAdministrator.getFirstName(), 
+            updatedCenterAdministrator.getLastName(), 
+            updatedCenterAdministrator.getAddress(), 
+            updatedCenterAdministrator.getCity(), 
+            updatedCenterAdministrator.getCountry(), 
+            updatedCenterAdministrator.getPhoneNumber(), 
+            updatedCenterAdministrator.getJmbg(),
+            updatedCenterAdministrator.getGender().toString(),
+            updatedCenterAdministrator.getProfession(),
+            updatedCenterAdministrator.getEducation() 
+        );
+
+        return new ResponseEntity<>(updatedCenterAdministratorDTO, HttpStatus.OK);
+    }
 }
