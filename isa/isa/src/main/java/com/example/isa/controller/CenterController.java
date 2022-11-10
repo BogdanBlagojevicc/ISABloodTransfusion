@@ -190,8 +190,7 @@ public class CenterController {
         Center center = this.centerService.findByGrade(averageGrade);
  
         CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(),center.getAddress(), center.getDescription(), center.getAverageGrade(),
-        center.getCountry(), center.getStartTime(), center.getEndTime());
-        
+        center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
  
  
          return new ResponseEntity<>(centerDTO, HttpStatus.OK);
