@@ -17,6 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+//@CrossOrigin(origins = "http://localhost:63342")
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/centers")
 public class CenterController {
@@ -175,7 +177,7 @@ public class CenterController {
         Center center = this.centerService.findByGrade(averageGrade);
  
         CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(),center.getAddress(), center.getDescription(), center.getAverageGrade(),
-        center.getCountry(), center.getStartTime(), center.getEndTime());
+        center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
         
  
  

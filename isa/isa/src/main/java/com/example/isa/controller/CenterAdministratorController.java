@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,8 @@ import com.example.isa.model.dto.CenterAdministratorDTO;
 import com.example.isa.model.dto.Gender;
 import com.example.isa.service.CenterAdministratorService;
 
+//@CrossOrigin(origins = "http://localhost:63342")
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/centerAdministrators")
 public class CenterAdministratorController {
@@ -119,4 +123,28 @@ public class CenterAdministratorController {
 
         return new ResponseEntity<>(updatedCenterAdministratorDTO, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/{centerAdministratorId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CenterAdministratorDTO> getOne(@PathVariable Long centerAdministratorId) {
+
+        CenterAdministrator centerAdministrator = this.centerAdministratorService.findOne(centerAdministratorId);
+
+        CenterAdministratorDTO centerAdministratorDTO = new CenterAdministratorDTO(
+            centerAdministrator.getId(), 
+            centerAdministrator.getEmail(),
+            centerAdministrator.getPassword(),
+            centerAdministrator.getFirstName(),
+            centerAdministrator.getLastName(),
+            centerAdministrator.getAddress(), 
+            centerAdministrator.getCity(), 
+            centerAdministrator.getCountry(), 
+            centerAdministrator.getPhoneNumber(), 
+            centerAdministrator.getJmbg(), 
+            centerAdministrator.getGender().toString(), 
+            centerAdministrator.getProfession(), 
+            centerAdministrator.getEducation());
+
+        return new ResponseEntity<>(centerAdministratorDTO, HttpStatus.OK);
+    }
+
 }
