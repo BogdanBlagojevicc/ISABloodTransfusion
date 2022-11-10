@@ -31,9 +31,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+//@CrossOrigin(origins = "http://localhost:63342")
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/centers")
-@CrossOrigin
 public class CenterController {
 
     private final CenterService centerService;
@@ -191,6 +192,7 @@ public class CenterController {
  
         CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(),center.getAddress(), center.getDescription(), center.getAverageGrade(),
         center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+        
  
  
          return new ResponseEntity<>(centerDTO, HttpStatus.OK);
