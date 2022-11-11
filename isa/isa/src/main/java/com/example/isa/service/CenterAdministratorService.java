@@ -82,4 +82,11 @@ public class CenterAdministratorService {
         CenterAdministrator savedCenterAdministrator = this.centerAdministratorRepository.save(centerAdministratorToUpdate);
         return savedCenterAdministrator;
     }
+
+    public CenterAdministrator create(CenterAdministrator centerAdministrator) throws Exception{
+        if(centerAdministrator.getId() != null){
+            throw new Exception("ID must be null");
+        }
+        return this.centerAdministratorRepository.save(centerAdministrator);
+    }
 }

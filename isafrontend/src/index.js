@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ChangePassword from './components/ChangePassword';
 import About from './components/About';
 import Contact from './components/Contact'
+import Projects from './components/Projects'
 import ChangeAll from './components/ChangeAll'
 
 ReactDOM.render(
@@ -16,6 +17,7 @@ ReactDOM.render(
       <Route path='/changePassword' element={<ChangePassword/>}/>
       <Route path='/about' element={<About/>}/>
       <Route path='contact' element={<Contact/>}/>
+      <Route path='projects' element={<Projects/>}/>
       <Route path='/changeAll' element={<ChangeAll/>}/>
     </Routes>
   </Router>,

@@ -1,6 +1,7 @@
 package com.example.isa.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import com.example.isa.model.CenterAdministrator;
 import com.example.isa.model.dto.CenterDTO;
 import com.example.isa.service.CenterAdministratorService;
 import com.example.isa.service.CenterService;
-
+import com.example.isa.service.SystemAdministratorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,11 +40,13 @@ public class CenterController {
 
     private final CenterService centerService;
     private final CenterAdministratorService centerAdministratorService;
+    private final SystemAdministratorService systemAdministratorService;
 
     @Autowired
-    public CenterController(CenterService centerService, CenterAdministratorService centerAdministratorService){
+    public CenterController(CenterService centerService, CenterAdministratorService centerAdministratorService, SystemAdministratorService systemAdministratorService){
         this.centerService = centerService;
         this.centerAdministratorService = centerAdministratorService;
+        this.systemAdministratorService = systemAdministratorService;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -198,5 +201,20 @@ public class CenterController {
          return new ResponseEntity<>(centerDTO, HttpStatus.OK);
  
     } 
+
+    @PostMapping(value = "/createNewCenter/{SystemAdminId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CenterDTO> createCenter(@PathVariable("SystemAdminId") Long systemAdminId, @RequestBody CenterDTO centerDTO) throws Exception{
+        if(systemAdministratorService.findOne(systemAdminId) == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Center center = new Center(centerDTO.getName(), centerDTO.getAddress(), centerDTO.getDescription(), centerDTO.getAverageGrade(), centerDTO.getCountry(), formatter.parse(centerDTO.getStartTime()), formatter.parse(centerDTO.getEndTime()));
+        
+        Center newCenter = this.centerService.create(center);
+
+        CenterDTO newCenterDTO = new CenterDTO(newCenter.getId(), newCenter.getName(), newCenter.getAddress(), newCenter.getDescription(), newCenter.getAverageGrade(), newCenter.getCountry(), newCenter.getStartTime().toString(), newCenter.getEndTime().toString());
+
+        return new ResponseEntity<>(newCenterDTO, HttpStatus.CREATED);
+    }
 }
 

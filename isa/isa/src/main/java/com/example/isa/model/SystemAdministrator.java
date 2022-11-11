@@ -58,7 +58,7 @@ public class SystemAdministrator {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private com.example.isa.model.dto.Gender gender;
 
     @Column
     private String profession;
@@ -74,8 +74,22 @@ public class SystemAdministrator {
     }
 
     public SystemAdministrator(Long id, String email, String password, String firstName, String lastName,
-            String address, String city, String country, String phoneNumber, String jmbg, Gender gender) {
+            String address, String city, String country, String phoneNumber, String jmbg, com.example.isa.model.dto.Gender gender) {
         this.id = id;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+        this.jmbg = jmbg;
+        this.gender = gender;
+    }
+
+    public SystemAdministrator(String email, String password, String firstName, String lastName,
+            String address, String city, String country, String phoneNumber, String jmbg, com.example.isa.model.dto.Gender gender) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
