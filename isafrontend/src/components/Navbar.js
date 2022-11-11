@@ -28,6 +28,9 @@ const Navbar = () => {
                     <li>
                         <Link to='/changeAll'>Change all</Link>
                     </li>
+                    <li>
+                        <Link to='/questionaire'>Questionare</Link>
+                    </li>
                 </ul>
             </nav>
         </div>
