@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.example.isa.model.CenterAdministrator;
 import com.example.isa.model.dto.CenterAdministratorDTO;
 import com.example.isa.model.dto.Gender;
 import com.example.isa.service.CenterAdministratorService;
+import com.example.isa.service.SystemAdministratorService;
 
 //@CrossOrigin(origins = "http://localhost:63342")
 @CrossOrigin
@@ -24,10 +26,12 @@ import com.example.isa.service.CenterAdministratorService;
 public class CenterAdministratorController {
 
     private final CenterAdministratorService centerAdministratorService;
+    private final SystemAdministratorService systemAdministratorService;
 
     @Autowired
-    public CenterAdministratorController(CenterAdministratorService centerAdministratorService){
+    public CenterAdministratorController(CenterAdministratorService centerAdministratorService, SystemAdministratorService systemAdministratorService){
         this.centerAdministratorService = centerAdministratorService;
+        this.systemAdministratorService = systemAdministratorService;
     }
 
     @PutMapping(value = "/{adminCenterId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -145,6 +149,21 @@ public class CenterAdministratorController {
             centerAdministrator.getEducation());
 
         return new ResponseEntity<>(centerAdministratorDTO, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/createNewCenterAdmin/{SystemAdminId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CenterAdministratorDTO> createCenterAdmin(@PathVariable("SystemAdminId") Long systemAdminId, @RequestBody CenterAdministratorDTO centerAdministratorDTO) throws Exception{
+        if(systemAdministratorService.findOne(systemAdminId) == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        CenterAdministrator centerAdministrator = new CenterAdministrator(centerAdministratorDTO.getEmail(), centerAdministratorDTO.getPassword(), centerAdministratorDTO.getFirstName(), centerAdministratorDTO.getLastName(), centerAdministratorDTO.getAddress(), centerAdministratorDTO.getCity(), centerAdministratorDTO.getCountry(), centerAdministratorDTO.getPhoneNumber(), centerAdministratorDTO.getJmbg(), Gender.valueOf(centerAdministratorDTO.getGender()), centerAdministratorDTO.getProfession(), centerAdministratorDTO.getEducation());
+        
+        CenterAdministrator newCenterAdministrator = this.centerAdministratorService.create(centerAdministrator);
+
+        CenterAdministratorDTO newCenterAdministratorDTO = new CenterAdministratorDTO(newCenterAdministrator.getId(), newCenterAdministrator.getEmail(), newCenterAdministrator.getPassword(), newCenterAdministrator.getFirstName(), newCenterAdministrator.getLastName(), newCenterAdministrator.getAddress(), newCenterAdministrator.getCity(), newCenterAdministrator.getCountry(), newCenterAdministrator.getPhoneNumber(), newCenterAdministrator.getJmbg(), newCenterAdministrator.getGender().toString(), newCenterAdministrator.getProfession(), newCenterAdministrator.getEducation());
+
+        return new ResponseEntity<>(newCenterAdministratorDTO, HttpStatus.CREATED);
     }
 
 }

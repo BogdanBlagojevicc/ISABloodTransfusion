@@ -44,5 +44,10 @@ public class Complaint implements Serializable {
         this.text = text;
         this.response = response;
     }
+
+    public Complaint(String text, String response){
+        this.text = text;
+        this.response = response;
+    }
 }
 
