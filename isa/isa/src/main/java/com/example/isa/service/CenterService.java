@@ -98,6 +98,13 @@ public class CenterService {
     
     public Center findByAddresss(String address){
         return this.centerRepository.findByAddress(address);
-    }    
+    }  
+    
+    public Center create(Center center) throws Exception{
+        if(center.getId() != null){
+            throw new Exception("ID must be null");
+        }
+        return this.centerRepository.save(center);
+    }
 }
 

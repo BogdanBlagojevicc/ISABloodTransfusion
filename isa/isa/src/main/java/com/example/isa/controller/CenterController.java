@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -160,6 +161,15 @@ public class CenterController {
 
         return new ResponseEntity<>(updatedCenterDTO, HttpStatus.OK);
     }
+     
+    @PostMapping(value = "/createCenter", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CenterDTO> createCenter(@RequestBody CenterDTO centerDTO) throws Exception{
 
+        Center center = new Center(centerDTO.getName(), centerDTO.getAddress(), centerDTO.getDescription(), centerDTO.getAverageGrade(), centerDTO.getCountry(), centerDTO.getStartTime(), centerDTO.getEndTime());
+        Center newCenter = centerService.create(center);
+        CenterDTO newCenterDTO = new CenterDTO(newCenter.getId(), newCenter.getName(), newCenter.getAddress(), newCenter.getDescription(), newCenter.getAverageGrade(), newCenter.getCountry(), newCenter.getStartTime(), newCenter.getEndTime());
+
+        return new ResponseEntity<>(newCenterDTO, HttpStatus.CREATED);
+    }
 }
 

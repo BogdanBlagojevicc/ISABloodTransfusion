@@ -1,5 +1,7 @@
 package com.example.isa.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +41,8 @@ public class RegularUserService {
         return this.regularUserRepository.save(regularUser);
     }
     
+    public List<RegularUser> findAll(){
+        return regularUserRepository.findAll();
+    }
 
 }

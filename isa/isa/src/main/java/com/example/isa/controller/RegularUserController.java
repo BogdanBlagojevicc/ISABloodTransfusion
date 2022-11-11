@@ -1,6 +1,9 @@
 package com.example.isa.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,17 +20,23 @@ import com.example.isa.model.dto.Gender;
 import com.example.isa.model.dto.LoyaltyProgram;
 import com.example.isa.model.dto.RegularUserDTO;
 import com.example.isa.model.RegularUser;
+import com.example.isa.service.CenterAdministratorService;
 import com.example.isa.service.RegularUserService;
+import com.example.isa.service.SystemAdministratorService;
 
 @RestController
 @RequestMapping(value = "api/regularUsers/")
 public class RegularUserController {
     
     private final RegularUserService regularUserService;
+    private final CenterAdministratorService centerAdministratorService;
+    private final SystemAdministratorService systemAdministratorService;
 
     @Autowired
-    public RegularUserController(RegularUserService regularUserService){
+    public RegularUserController(RegularUserService regularUserService, CenterAdministratorService centerAdministratorService, SystemAdministratorService systemAdministratorService){
         this.regularUserService = regularUserService;
+        this.centerAdministratorService = centerAdministratorService;
+        this.systemAdministratorService = systemAdministratorService;
     }
  
     @PostMapping(value = "/regularUserRegistration", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -84,4 +93,22 @@ public class RegularUserController {
 	        return new ResponseEntity<>(updatedEmDTO, HttpStatus.OK);
 	    }
 
+    @GetMapping(value = "/getAll/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<RegularUserDTO>> getAllRegularUsers(@PathVariable("Id") Long Id){
+
+        if(centerAdministratorService.findOne(Id) == null || systemAdministratorService.findOne(Id) == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        else{
+            List<RegularUser> regularUsers = regularUserService.findAll();
+            List<RegularUserDTO> regularUserDTOs = new ArrayList<>();
+
+            for (RegularUser regularUser : regularUsers) {
+                RegularUserDTO regularUserDTO = new RegularUserDTO(regularUser.getId(), regularUser.getEmail(), regularUser.getPassword(), regularUser.getFirstName(), regularUser.getLastName(), regularUser.getAddress(), regularUser.getCity(), regularUser.getCountry(), regularUser.getPhoneNumber(), regularUser.getJmbg(), regularUser.getGender(), regularUser.getProfession(), regularUser.getProfession(), regularUser.getLoyalty(), regularUser.getPoints(), regularUser.getPenalties());
+                regularUserDTOs.add(regularUserDTO);
+            }
+            
+            return new ResponseEntity<>(regularUserDTOs, HttpStatus.OK);
+        }
+    }
 }

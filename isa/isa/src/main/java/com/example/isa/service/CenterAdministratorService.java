@@ -17,8 +17,15 @@ public class CenterAdministratorService {
     }
 
     public CenterAdministrator findOne(Long id){
-        CenterAdministrator centerAdministrator = this.centerAdministratorRepository.getOne(id);
+        CenterAdministrator centerAdministrator = this.centerAdministratorRepository.findByCenterAdministratorId(id);
         return centerAdministrator;
+    }
+
+    public CenterAdministrator create(CenterAdministrator centerAdministrator) throws Exception{
+        if(centerAdministrator.getId() != null){
+            throw new Exception("ID must be null");
+        }
+        return this.centerAdministratorRepository.save(centerAdministrator);
     }
     
 }
