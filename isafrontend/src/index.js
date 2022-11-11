@@ -4,17 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Careers from './components/Careers';
+import ChangePassword from './components/ChangePassword';
 import About from './components/About';
 import Contact from './components/Contact'
+import ChangeAll from './components/ChangeAll'
 
 ReactDOM.render(
   <Router>
     <Routes>
       <Route path='/' element={<App/>} />
-      <Route path='/careers' element={<Careers/>}/>
+      <Route path='/changePassword' element={<ChangePassword/>}/>
       <Route path='/about' element={<About/>}/>
       <Route path='contact' element={<Contact/>}/>
+      <Route path='/changeAll' element={<ChangeAll/>}/>
     </Routes>
   </Router>,
   document.getElementById('root')

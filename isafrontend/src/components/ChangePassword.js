@@ -45,7 +45,7 @@ export default function CenterAdministrator() {
       autoComplete="off"
     >
       <Container>
-        <h1>Show admin</h1>
+        <h1>Change administrator's password</h1>
         <Paper elevation={3} style={paperStyle}>
 
       
