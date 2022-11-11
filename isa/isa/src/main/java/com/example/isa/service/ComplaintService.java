@@ -1,5 +1,7 @@
 package com.example.isa.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,10 @@ public class ComplaintService {
             throw new Exception("ID can not be null");
         }
         return this.complaintRepository.save(complaint);
+    }
+
+    public List<Complaint> findAll(){
+        return this.complaintRepository.findAll();
     }
 
 }
