@@ -24,8 +24,6 @@ VALUES ('micurinova 72', 'novi sad', 'srbija', 'srednja', 'nenad@gmail.com', 'ne
 
 INSERT INTO complaints (response, text, center_id, center_administrator_id, regular_user_id, system_administrator_id) 
 VALUES (NULL, 'WC nema sapuna', 1, 1, 1, 1);
-INSERT INTO complaints (response, text, center_id, center_administrator_id, regular_user_id, system_administrator_id) 
-VALUES (NULL, 'Medicinsko osoblje je kasnilo na zakazani termin', 1, 1, 1, 1);
 
 INSERT INTO grades (grade, center_id, regular_user_id)
 VALUES (5, 1, 1);
