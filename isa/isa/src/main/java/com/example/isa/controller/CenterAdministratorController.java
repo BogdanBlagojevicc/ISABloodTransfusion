@@ -54,7 +54,7 @@ public class CenterAdministratorController {
             centerAdministratorDTO.getCountry(), 
             centerAdministratorDTO.getPhoneNumber(), 
             centerAdministratorDTO.getJmbg(), 
-            Gender.valueOf("FEMALE"), 
+            Gender.valueOf(centerAdministratorDTO.getGender()), 
             centerAdministratorDTO.getProfession(), 
             centerAdministratorDTO.getEducation()
         );
@@ -100,7 +100,7 @@ public class CenterAdministratorController {
             centerAdministrator2.getCountry(), 
             centerAdministrator2.getPhoneNumber(), 
             centerAdministrator2.getJmbg(), 
-            Gender.valueOf("FEMALE"), 
+            centerAdministrator2.getGender(), 
             centerAdministrator2.getProfession(), 
             centerAdministrator2.getEducation()
         );
@@ -128,7 +128,7 @@ public class CenterAdministratorController {
         return new ResponseEntity<>(updatedCenterAdministratorDTO, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{centerAdministratorId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/getOne/{centerAdministratorId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CenterAdministratorDTO> getOne(@PathVariable Long centerAdministratorId) {
 
         CenterAdministrator centerAdministrator = this.centerAdministratorService.findOne(centerAdministratorId);
