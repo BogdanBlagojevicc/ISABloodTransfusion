@@ -161,8 +161,6 @@ public class CenterController {
     @PutMapping(value = "/{adminCenterId}/{centerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CenterDTO> update(@PathVariable Long adminCenterId, @PathVariable Long centerId, @RequestBody CenterDTO centerDTO) throws Exception{
 
-        System.out.println("VREME" + centerDTO.getEndTime());
-
         CenterAdministrator centerAdministrator = this.centerAdministratorService.findOne(adminCenterId);
         if(centerAdministrator == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -215,6 +213,25 @@ public class CenterController {
         CenterDTO newCenterDTO = new CenterDTO(newCenter.getId(), newCenter.getName(), newCenter.getAddress(), newCenter.getDescription(), newCenter.getAverageGrade(), newCenter.getCountry(), newCenter.getStartTime().toString(), newCenter.getEndTime().toString());
 
         return new ResponseEntity<>(newCenterDTO, HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "/getOneByCentersAdministratorId/{centerAdministratorId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CenterDTO> getByCentersAdministratorId(@PathVariable Long centerAdministratorId) {
+
+        Center center = this.centerAdministratorService.findOne(centerAdministratorId).getCenter();
+
+        CenterDTO centerDTO = new CenterDTO(
+            center.getId(),
+            center.getName(),
+            center.getAddress(),
+            center.getDescription(),
+            center.getAverageGrade(),
+            center.getCountry(),
+            center.getStartTime().toString(),
+            center.getEndTime().toString()
+        );
+
+        return new ResponseEntity<>(centerDTO, HttpStatus.OK);
     }
 }
 
