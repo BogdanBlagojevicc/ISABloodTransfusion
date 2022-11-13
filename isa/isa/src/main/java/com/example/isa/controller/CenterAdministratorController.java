@@ -1,5 +1,8 @@
 package com.example.isa.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -164,6 +167,35 @@ public class CenterAdministratorController {
         CenterAdministratorDTO newCenterAdministratorDTO = new CenterAdministratorDTO(newCenterAdministrator.getId(), newCenterAdministrator.getEmail(), newCenterAdministrator.getPassword(), newCenterAdministrator.getFirstName(), newCenterAdministrator.getLastName(), newCenterAdministrator.getAddress(), newCenterAdministrator.getCity(), newCenterAdministrator.getCountry(), newCenterAdministrator.getPhoneNumber(), newCenterAdministrator.getJmbg(), newCenterAdministrator.getGender().toString(), newCenterAdministrator.getProfession(), newCenterAdministrator.getEducation());
 
         return new ResponseEntity<>(newCenterAdministratorDTO, HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "/{centerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CenterAdministratorDTO>> getCenterAdministratorsByCenterId(@PathVariable Long centerId) {
+
+        List<CenterAdministrator> centerAdministratorList = this.centerAdministratorService.findAllByCenterId(centerId);
+
+        List<CenterAdministratorDTO> centerAdministratorDTOs = new ArrayList<>();
+
+        for(CenterAdministrator centerAdministrator : centerAdministratorList){
+            CenterAdministratorDTO centerAdministratorDTO = new CenterAdministratorDTO(
+                centerAdministrator.getId(),
+                centerAdministrator.getEmail(),
+                centerAdministrator.getPassword(), 
+                centerAdministrator.getFirstName(),
+                centerAdministrator.getLastName(), 
+                centerAdministrator.getAddress(), 
+                centerAdministrator.getCity(), 
+                centerAdministrator.getCountry(), 
+                centerAdministrator.getPhoneNumber(), 
+                centerAdministrator.getJmbg(), 
+                centerAdministrator.getGender().toString(), 
+                centerAdministrator.getProfession(), 
+                centerAdministrator.getEducation()
+            );
+            centerAdministratorDTOs.add(centerAdministratorDTO);
+        }
+
+        return new ResponseEntity<>(centerAdministratorDTOs, HttpStatus.OK);
     }
 
 }

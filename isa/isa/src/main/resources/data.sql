@@ -19,8 +19,20 @@ VALUES ('micurinova 72', 'novi sad', 'srbija', 'srednja', 'nenad@gmail.com', 'ne
 INSERT INTO terms(date_term, duration, center_term_id, regular_user_id)
 VALUES ('2000-10-10', 10, 1, 1);
 
+INSERT INTO terms(date_term, duration, center_term_id, regular_user_id)
+VALUES ('2001-10-10', 15, 1, 1);
+
+INSERT INTO terms(date_term, duration, center_term_id, regular_user_id)
+VALUES ('2002-10-10', 20, 1, 1);
+
 INSERT INTO centeradministrators (address, city, country, education, email, first_name, gender, jmbg, last_name, password, phone_number, profession,center_id, term_id)
-VALUES ('micurinova 72', 'novi sad', 'srbija', 'srednja', 'nenad@gmail.com', 'nenad', 'MALE', '30040032432', 'joldic', '1234j', '234234', 'student',1, 1);
+VALUES ('micurinova 72', 'novi sad', 'srbija', 'srednja', 'nenad@gmail.com', 'nenad', 'MALE', '30040032432', 'joldic', '1234j', '234234', 'student', 1, 1);
+
+INSERT INTO centeradministrators (address, city, country, education, email, first_name, gender, jmbg, last_name, password, phone_number, profession,center_id, term_id)
+VALUES ('majevicka 10', 'novi sad', 'srbija', 'faks', 'boki@gmail.com', 'bogdan', 'MALE', '115588', 'blagojevic', '8987', '4548', 'student', 1, 2);
+
+INSERT INTO centeradministrators (address, city, country, education, email, first_name, gender, jmbg, last_name, password, phone_number, profession,center_id, term_id)
+VALUES ('klisa 5', 'novi sad', 'srbija', 'osnovna', 'tole@gmail.com', 'srdjan', 'MALE', '66565', 'tosic', '7745', '6648', 'student', 2, 3);
 
 INSERT INTO complaints (response, text, center_id, center_administrator_id, regular_user_id, system_administrator_id) 
 VALUES ('Kisacka 1', 'Republika Srbija', 1, 1, 1, 1);

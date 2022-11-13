@@ -10,6 +10,7 @@ import Contact from './components/Contact'
 import Projects from './components/Projects'
 import ChangeAll from './components/ChangeAll'
 import CenterUpdate from './components/CenterUpdate'
+import ShowAdminCenters from './components/ShowAdminCenters'
 
 ReactDOM.render(
   <Router>
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Route path='projects' element={<Projects/>}/>
       <Route path='/changeAll' element={<ChangeAll/>}/>
       <Route path='/centerUpdate' element={<CenterUpdate/>}/>
+      <Route path='/showAdminCenters' element={<ShowAdminCenters/>}/>
     </Routes>
   </Router>,
   document.getElementById('root')

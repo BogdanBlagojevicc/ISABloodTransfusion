@@ -31,6 +31,9 @@ const Navbar = () => {
                     <li>
                         <Link to='/centerUpdate'>Center Update</Link>
                     </li>
+                    <li>
+                        <Link to='/showAdminCenters'>Show admin centers</Link>
+                    </li>
                 </ul>
             </nav>
         </div>

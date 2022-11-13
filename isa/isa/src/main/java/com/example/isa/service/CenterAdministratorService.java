@@ -1,5 +1,7 @@
 package com.example.isa.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -88,5 +90,9 @@ public class CenterAdministratorService {
             throw new Exception("ID must be null");
         }
         return this.centerAdministratorRepository.save(centerAdministrator);
+    }
+
+    public List<CenterAdministrator> findAllByCenterId(Long centerId){
+        return this.centerAdministratorRepository.findAllByCenterId(centerId);
     }
 }

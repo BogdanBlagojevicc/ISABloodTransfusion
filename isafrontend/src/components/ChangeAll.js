@@ -8,6 +8,9 @@ import {Paper, Button} from '@mui/material'
 export default function CenterAdministrator() {
   const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
   var [centerAdministrator, setCenterAdministrator] = useState([])
+
+  const emailRegex = /[a-zA-Z0-9._%+-]+@[a-z0-9*-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+
   var [ema, setEma] = useState('')
   var [fir, setFir]  = useState('')
   var [las, setLas]  = useState('')
@@ -32,15 +35,20 @@ export default function CenterAdministrator() {
   const handleClick = (e) =>{
     e.preventDefault()
     var admin = centerAdministrator;
-    admin.email = ema;
-    admin.firstName = fir;
-    admin.lastName = las;
-    admin.address = add;
-    admin.city = cit;
-    admin.country = cou;
-    admin.phoneNumber = pnu;
-    admin.profession = pro;
-    admin.education = edu;
+    if(!emailRegex.test(ema)){
+      alert('Wrong email');
+    }else{
+      admin.email = ema;
+      admin.firstName = fir;
+      admin.lastName = las;
+      admin.address = add;
+      admin.city = cit;
+      admin.country = cou;
+      admin.phoneNumber = pnu;
+      admin.profession = pro;
+      admin.education = edu;
+    }
+
     console.log(admin);
     fetch("http://localhost:8081/api/centerAdministrators/1",{
     method:"PUT",
