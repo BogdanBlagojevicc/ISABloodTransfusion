@@ -9,6 +9,7 @@ import About from './components/About';
 import Contact from './components/Contact'
 import Projects from './components/Projects'
 import ChangeAll from './components/ChangeAll'
+import Questionare from './components/Questionare'
 
 ReactDOM.render(
   <Router>
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Route path='contact' element={<Contact/>}/>
       <Route path='projects' element={<Projects/>}/>
       <Route path='/changeAll' element={<ChangeAll/>}/>
+      <Route path='/questionaire' element={<Questionare/>}/>
     </Routes>
   </Router>,
   document.getElementById('root')
