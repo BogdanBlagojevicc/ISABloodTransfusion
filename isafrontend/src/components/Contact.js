@@ -11,6 +11,7 @@ export default function RegularUser() {
   const[loyalty, setLoyalty] = useState('')
   const[email, setEmail] = useState('')
   const[password, setPassword] = useState('')
+  const[repeatedpassword, setRepeatedPassword] = useState('')
   const[firstName, setFirstName] = useState('')
   const[lastName, setLastName] = useState('')
   const[address, setAddress] = useState('')
@@ -29,6 +30,14 @@ export default function RegularUser() {
     e.preventDefault()
     const student = {loyalty, email, password, firstName, lastName, address, city, country, phoneNumber, jmbg, gender, profession, education, points, penalties}
     console.log(student);
+    console.log(password);
+
+    console.log(repeatedpassword);
+    if(!(password === repeatedpassword)){
+      window.alert("Passwords must match!!!");
+      return;
+    }
+
     fetch("http://localhost:8081/api/regularUsers/regularUserRegistration",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
@@ -64,6 +73,13 @@ export default function RegularUser() {
           value={password}
           onChange = {(e) =>setPassword(e.target.value)}
           />
+
+          <TextField id="standard-basic" label="repeatedpassword" variant="standard" fullWidth 
+          value={repeatedpassword}
+          onChange = {(e) =>setRepeatedPassword(e.target.value)}
+          />
+
+
             <TextField id="standard-basic" label="firstname" variant="standard" fullWidth 
           value={firstName}
           onChange = {(e) =>setFirstName(e.target.value)}
