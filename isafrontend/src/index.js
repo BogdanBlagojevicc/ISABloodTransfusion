@@ -9,6 +9,7 @@ import About from './components/About';
 import Contact from './components/Contact'
 import Projects from './components/Projects'
 import ChangeAll from './components/ChangeAll'
+import Questionare from './components/Questionare'
 import CenterUpdate from './components/CenterUpdate'
 import ShowAdminCenters from './components/ShowAdminCenters'
 
@@ -23,6 +24,7 @@ ReactDOM.render(
       <Route path='/changeAll' element={<ChangeAll/>}/>
       <Route path='/centerUpdate' element={<CenterUpdate/>}/>
       <Route path='/showAdminCenters' element={<ShowAdminCenters/>}/>
+      <Route path='/questionaire' element={<Questionare/>}/>
     </Routes>
   </Router>,
   document.getElementById('root')

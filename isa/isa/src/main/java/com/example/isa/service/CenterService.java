@@ -110,5 +110,9 @@ public class CenterService {
         return this.centerRepository.save(center);
     }
 
+    public List<Center> filterByGrade(Double firstnumber, Double secondnumber){
+        return this.centerRepository.filterByGrade(firstnumber, secondnumber);
+    }
+
 }
 

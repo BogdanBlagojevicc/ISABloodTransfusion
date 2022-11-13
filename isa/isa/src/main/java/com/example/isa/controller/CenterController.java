@@ -233,5 +233,20 @@ public class CenterController {
 
         return new ResponseEntity<>(centerDTO, HttpStatus.OK);
     }
+    @GetMapping("/filter/{firstnumber}/{secondnumber}")
+    public ResponseEntity<List<CenterDTO>> filterCenters(@PathVariable("firstnumber") Double firstnumber, @PathVariable("secondnumber")Double secondnumber){
+        List<Center> centers = this.centerService.filterByGrade(firstnumber,secondnumber);
+
+        List<CenterDTO> centerDTOS = new ArrayList<>();
+
+        for(Center center : centers){
+            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
+            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+            centerDTOS.add(centerDTO);
+        }
+
+        return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
+    }
+
 }
 

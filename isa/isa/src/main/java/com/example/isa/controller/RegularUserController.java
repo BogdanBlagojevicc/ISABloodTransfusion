@@ -1,6 +1,9 @@
 package com.example.isa.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +21,9 @@ import com.example.isa.model.dto.Gender;
 import com.example.isa.model.dto.LoyaltyProgram;
 import com.example.isa.model.dto.RegularUserDTO;
 import com.example.isa.model.RegularUser;
+import com.example.isa.service.CenterAdministratorService;
 import com.example.isa.service.RegularUserService;
+import com.example.isa.service.SystemAdministratorService;
 
 //@CrossOrigin(origins = "http://localhost:63342")
 @CrossOrigin
@@ -28,10 +33,14 @@ import com.example.isa.service.RegularUserService;
 public class RegularUserController {
     
     private final RegularUserService regularUserService;
+    private final SystemAdministratorService systemAdministratorService;
+    private final CenterAdministratorService centerAdministratorService;
 
     @Autowired
-    public RegularUserController(RegularUserService regularUserService){
+    public RegularUserController(RegularUserService regularUserService, SystemAdministratorService systemAdministratorService, CenterAdministratorService centerAdministratorService){
         this.regularUserService = regularUserService;
+        this.systemAdministratorService = systemAdministratorService;
+        this.centerAdministratorService = centerAdministratorService;
     }
  
     @PostMapping(value = "/regularUserRegistration", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -87,5 +96,39 @@ public class RegularUserController {
 	        
 	        return new ResponseEntity<>(updatedEmDTO, HttpStatus.OK);
 	    }
+
+    @GetMapping(value = "/getAllRegularUsers/{SystemAdminId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<RegularUserDTO>> getAllRegularUsers(@PathVariable("SystemAdminId") Long systemAdminId){
+
+        if(systemAdministratorService.findOne(systemAdminId) == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        List<RegularUser> regularUsers = this.regularUserService.findAll();
+        List<RegularUserDTO> regularUserDTOs = new ArrayList<>();
+
+        for(RegularUser regularUser : regularUsers){
+            RegularUserDTO regularUserDTO = new RegularUserDTO(regularUser.getId(), regularUser.getEmail(), regularUser.getFirstName(), regularUser.getLastName(), regularUser.getAddress(), regularUser.getCity(), regularUser.getCountry(), regularUser.getPhoneNumber(), regularUser.getJmbg(), regularUser.getGender(), regularUser.getProfession(), regularUser.getEducation(), regularUser.getLoyalty(), regularUser.getPoints(), regularUser.getPenalties());
+            regularUserDTOs.add(regularUserDTO);
+        }
+        return new ResponseEntity<>(regularUserDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/findByFirstNameAndLastName/{Id}/{FirstName}/{LastName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<RegularUserDTO>> getRegularUsersByFirstAndLastName(@PathVariable("Id") Long id, @PathVariable("FirstName") String firstName, @PathVariable("LastName") String lastName){
+
+        if((systemAdministratorService.findOne(id) == null) && (centerAdministratorService.findOne(id) == null)){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        List<RegularUser> regularUsers = regularUserService.findByFirstNameAndLastName(firstName, lastName);
+        List<RegularUserDTO> regularUserDTOs = new ArrayList<>();
+
+        for (RegularUser regularUser : regularUsers) {
+            RegularUserDTO regularUserDTO = new RegularUserDTO(regularUser.getId(), regularUser.getEmail(), regularUser.getFirstName(), regularUser.getLastName(), regularUser.getAddress(), regularUser.getCity(), regularUser.getCountry(), regularUser.getPhoneNumber(), regularUser.getJmbg(), regularUser.getGender(), regularUser.getProfession(), regularUser.getEducation(), regularUser.getLoyalty(), regularUser.getPoints(), regularUser.getPenalties());
+            regularUserDTOs.add(regularUserDTO);
+        }
+        return new ResponseEntity<>(regularUserDTOs, HttpStatus.OK);
+    }
 
 }

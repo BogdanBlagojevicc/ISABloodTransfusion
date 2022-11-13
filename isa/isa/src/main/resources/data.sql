@@ -35,7 +35,7 @@ INSERT INTO centeradministrators (address, city, country, education, email, firs
 VALUES ('klisa 5', 'novi sad', 'srbija', 'osnovna', 'tole@gmail.com', 'srdjan', 'MALE', '66565', 'tosic', '7745', '6648', 'student', 2, 3);
 
 INSERT INTO complaints (response, text, center_id, center_administrator_id, regular_user_id, system_administrator_id) 
-VALUES ('Kisacka 1', 'Republika Srbija', 1, 1, 1, 1);
+VALUES (NULL, 'WC nema sapuna', 1, 1, 1, 1);
 
 INSERT INTO grades (grade, center_id, regular_user_id)
 VALUES (5, 1, 1);

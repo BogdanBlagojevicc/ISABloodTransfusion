@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import './styles/Contact.scss'
+import TextField from '@mui/material/TextField'
 import { Container } from '@mui/system';
 import {Paper, Button} from '@mui/material'
 

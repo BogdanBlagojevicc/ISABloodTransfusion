@@ -6,9 +6,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import filterFactory, { textFilter} from 'react-bootstrap-table2-filter'
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css'
+import TextField from '@mui/material/TextField'
+import {Paper} from '@mui/material'
 
 const About = () => {
   const [centers, setCenters] = useState([])
+  const[firstnumber, setFirstNumber] = useState('')
+  const[secondnumber, setSecondNumber] = useState('')
+  const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
 
 const columns =[
 {dataField:'name', text:'Name', sort:true, filter: textFilter()},
@@ -76,7 +81,16 @@ const columns =[
   };
 
   
-
+  const handleClick = (e) =>{
+    e.preventDefault()
+    fetch("http://localhost:8081/api/centers/filter/"+firstnumber+"/"+secondnumber)
+    .then(res =>res.json())
+    .then((result)=>
+    {
+      setCenters(result);
+    }
+    )
+  };
 
 
      
@@ -106,7 +120,22 @@ const columns =[
       <BootstrapTable bootstrap4 keyField='name' columns = {columns}
        data ={centers} 
        filter = {filterFactory()}/>
+<Paper elevation={3} style={paperStyle}>
+        <TextField id="standard-basic" variant="standard" label="Min grade"  
+        value={firstnumber}
+        onChange = {(e) =>setFirstNumber(e.target.value)}
+        //onChange = {(e) => setPas(e.target.value)}
+        />
+        
+        <TextField id="standard-basic" variant="standard" label="Max grade"  
+          value={secondnumber}
+          onChange = {(e) =>setSecondNumber(e.target.value)}
+          />
+        <Button variant="contained" color="secondary" onClick={handleClick}>
+          Search
+        </Button>
 
+</Paper>
       {/* <Button variant="contained" color="secondary" onClick={CountryAsc}>
           CountryAsc
         </Button>

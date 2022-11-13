@@ -1,10 +1,14 @@
 package com.example.isa.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,5 +50,18 @@ public class ComplaintController {
         ComplaintDTO updatedComplaintDTO = new ComplaintDTO(updatedComplaint.getId(), updatedComplaint.getText(), updatedComplaint.getResponse());
 
         return new ResponseEntity<>(updatedComplaintDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/allComplaints", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ComplaintDTO>> getAllComplaints(){
+
+        List<Complaint> complaints = this.complaintService.findAll();
+        List<ComplaintDTO> complaintDTOs = new ArrayList<>();
+
+        for (Complaint complaint : complaints) {
+            ComplaintDTO complaintDTO = new ComplaintDTO(complaint.getId(), complaint.getText(), complaint.getResponse());
+            complaintDTOs.add(complaintDTO);
+        }
+        return new ResponseEntity<>(complaintDTOs, HttpStatus.OK);
     }
 }

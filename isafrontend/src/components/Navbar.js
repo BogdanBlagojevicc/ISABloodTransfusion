@@ -17,10 +17,10 @@ const Navbar = () => {
                         <Link to='/changePassword'>Change password</Link>
                     </li>
                     <li>
-                        <Link to='/about'>About</Link>
+                        <Link to='/about'>Centers</Link>
                     </li>
                     <li>
-                        <Link to='/projects'>Projects</Link>
+                        <Link to='/projects'>Your profile</Link>
                     </li>
                     <li>
                         <Link to='/contact'>Contact</Link>
@@ -33,6 +33,9 @@ const Navbar = () => {
                     </li>
                     <li>
                         <Link to='/showAdminCenters'>Show admin centers</Link>
+                    </li>
+                    <li>
+                        <Link to='/questionaire'>Questionare</Link>
                     </li>
                 </ul>
             </nav>
