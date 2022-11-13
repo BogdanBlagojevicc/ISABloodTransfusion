@@ -8,10 +8,20 @@ import { Container } from '@mui/system';
 import {Paper, Button} from '@mui/material'
 import Switch from '@mui/material/Switch'
 
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 const Questionare = () => {
   const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
+
+  const [age, setAge] = React.useState('');
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
   const handleClick = (e) =>{
 
 }
@@ -25,80 +35,83 @@ const Questionare = () => {
     autoComplete="off"
   >
     <Container>
-      <h1>Add user</h1>
+      <h1>Questionare</h1>
       <Paper elevation={3} style={paperStyle}>
 
-      <TextField id="standard-basic" label="loyalty" variant="standard" fullWidth 
+      <TextField id="standard-basic" label="name" variant="standard" fullWidth 
         />
 
-        <TextField id="standard-basic" label="email" variant="standard" fullWidth 
-        />
-          <TextField id="standard-basic" label="password" variant="standard" fullWidth 
-
-        />
-          <TextField id="standard-basic" label="firstname" variant="standard" fullWidth 
-
-        />
-
-        <TextField id="standard-basic" label="firstname" variant="standard" fullWidth 
-
-        />
-
-          <TextField id="standard-basic" label="address" variant="standard" fullWidth 
-
-        />
-          <TextField id="standard-basic" label="city" variant="standard" fullWidth 
-
-        />
-          <TextField id="standard-basic" label="country" variant="standard" fullWidth 
-
-        />
-          <TextField id="standard-basic" label="phoneNumber" variant="standard" fullWidth 
-
+        <TextField id="standard-basic" label="lastname" variant="standard" fullWidth 
         />
           <TextField id="standard-basic" label="jmbg" variant="standard" fullWidth 
 
         />
-          <TextField id="standard-basic" label="gender" variant="standard" fullWidth 
+          <TextField id="standard-basic" label="address" variant="standard" fullWidth 
 
         />
+
+        <TextField id="standard-basic" label="phone number" variant="standard" fullWidth 
+
+        />
+
           <TextField id="standard-basic" label="profession" variant="standard" fullWidth 
 
         />
-          <TextField id="standard-basic" label="education" variant="standard" fullWidth 
+                      <br></br>
+                      <br></br>
 
-        />
-          <TextField id="standard-basic" label="points" variant="standard" fullWidth 
+      <FormControl fullWidth>
 
-        />
-          <TextField id="standard-basic" label="penalties" variant="standard" fullWidth 
-        />
+              <InputLabel id="demo-simple-select-label">Blood</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={age}
+                label="Age"
+                onChange={handleChange}
+              >
 
-        Have you donated blood before? 
+                <MenuItem value={0}>A</MenuItem>
+                <MenuItem value={1}>B</MenuItem>
+                <MenuItem value={2}>AB</MenuItem>
+                <MenuItem value={3}>0</MenuItem>
+              </Select>
+      </FormControl>
+
+        <br></br>
+        <br></br>
+        <br></br>
+        <b>Did you in past 6 months?</b>
+        <br></br>
+        Have a surgery?
         <Switch {...label} defaultChecked />
 
         <br></br>
-        Did you have unprotecte sexual intercourse within past 6 months?
+        Done a tattoo?
         <Switch {...label} defaultChecked />
 
         <br></br>
-        Have you donated blood before? 
+        Had sexual intercourse without protection?
         <Switch {...label} defaultChecked />
 
         <br></br>
-        Have you donated blood before? 
+        <b>Forms of risky behaviours</b>
+
+        <br></br>
+        Did you ever have hepatitis A, B or C?
         <Switch {...label} defaultChecked />
 
         <br></br>
-        Have you donated blood before? 
+        Did you consume any kind of psychoactive substances?
         <Switch {...label} defaultChecked />
         
         <br></br>
-        Have you donated blood before? 
+        Did you offer sexual service for money or drugs?
         <Switch {...label} defaultChecked />
         
 
 
+        <br></br>
         <br></br>
         
       <Button variant="contained" color="secondary" onClick={handleClick}>
