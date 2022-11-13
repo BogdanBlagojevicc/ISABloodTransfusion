@@ -45,7 +45,7 @@ export default function RegularUser() {
       autoComplete="off"
     >
       <Container>
-        <h1>Show admin</h1>
+        <h1>Your profile</h1>
         <Paper elevation={3} style={paperStyle}>
 
       

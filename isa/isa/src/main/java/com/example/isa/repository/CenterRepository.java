@@ -3,6 +3,7 @@ package com.example.isa.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.example.isa.model.Center;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,9 @@ public interface CenterRepository extends JpaRepository<Center, Long> {
     List<Center> findByOrderByAverageGradeDesc();
 
     List<Center> findByOrderByNameAsc();
+
+    @Query("select c from Center c where c.averageGrade>=?1 and c.averageGrade<=?2")
+    List<Center> filterByGrade(Double firstnumber, Double  secondnumber);
 
     List<Center> findByOrderByNameDesc();
 
