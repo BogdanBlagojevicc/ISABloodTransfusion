@@ -12,6 +12,9 @@ import ChangeAll from './components/ChangeAll'
 import Questionare from './components/Questionare'
 import CenterUpdate from './components/CenterUpdate'
 import ShowAdminCenters from './components/ShowAdminCenters'
+import NewCenter from './components/NewCenter'
+import CenterAdministratorNew from './components/CenterAdministratorNew'
+import RegularUsers from './components/RegularUsers'
 
 ReactDOM.render(
   <Router>
@@ -25,6 +28,9 @@ ReactDOM.render(
       <Route path='/centerUpdate' element={<CenterUpdate/>}/>
       <Route path='/showAdminCenters' element={<ShowAdminCenters/>}/>
       <Route path='/questionaire' element={<Questionare/>}/>
+      <Route path='/newCenter' element={<NewCenter/>}/>
+      <Route path='/centerAdministrator' element={<CenterAdministratorNew/>}/>
+      <Route path='/regularUsers' element={<RegularUsers/>}/>
     </Routes>
   </Router>,
   document.getElementById('root')

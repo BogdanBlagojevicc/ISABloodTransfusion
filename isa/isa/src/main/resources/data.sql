@@ -14,7 +14,10 @@ INSERT INTO warehouses (bandage, blood_quantity0, blood_quantitya, blood_quantit
 VALUES (1, 2, 3, 4, 5, 6, 7, 1);
 
 INSERT INTO regularusers (address, city, country, education, email, first_name, gender, jmbg, last_name, password, phone_number, profession,loyalty, penalties, points)
-VALUES ('micurinova 72', 'novi sad', 'srbija', 'srednja', 'nenad@gmail.com', 'nenad', 'MALE', '30040032432', 'joldic', '1234j', '234234', 'student','GOLD', 1, 1);
+VALUES ('titova 72', 'sarajevo', 'bosna', 'visoka', 'sesa@gmail.com', 'sesa', 'FEMALE', '30040032432', 'sesovic', '1234j', '234234', 'student','SILVER', 2, 4);
+
+INSERT INTO regularusers (address, city, country, education, email, first_name, gender, jmbg, last_name, password, phone_number, profession,loyalty, penalties, points)
+VALUES ('micurinova 72', 'beograd', 'srbija', 'nisko', 'nenad@gmail.com', 'nenad', 'MALE', '3004008000', 'joldic', '12a34j', '2344234', 'radnik','GOLD', 1, 1);
 
 INSERT INTO terms(date_term, duration, center_term_id, regular_user_id)
 VALUES ('2000-10-10', 10, 1, 1);

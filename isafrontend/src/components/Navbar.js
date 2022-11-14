@@ -23,7 +23,7 @@ const Navbar = () => {
                         <Link to='/projects'>Your profile</Link>
                     </li>
                     <li>
-                        <Link to='/contact'>Contact</Link>
+                        <Link to='/contact'>Add regular user</Link>
                     </li>
                     <li>
                         <Link to='/changeAll'>Change all</Link>
@@ -37,6 +37,19 @@ const Navbar = () => {
                     <li>
                         <Link to='/questionaire'>Questionare</Link>
                     </li>
+
+                    <li>
+                        <Link to='/newCenter'>NewCenter</Link>
+                    </li>
+
+                    <li>
+                        <Link to='/centerAdministrator'>Add centerAdmin</Link>
+                    </li>
+
+                    <li>
+                        <Link to='/regularUsers'>Regular users</Link>
+                    </li>
+
                 </ul>
             </nav>
         </div>
