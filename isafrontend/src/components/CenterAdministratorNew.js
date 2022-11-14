@@ -61,7 +61,7 @@ export default function CenterAdministratorNew() {
           onChange = {(e) =>setFirstName(e.target.value)}
           />
 
-          <TextField id="standard-basic" label="firstname" variant="standard" fullWidth 
+          <TextField id="standard-basic" label="lastName" variant="standard" fullWidth 
                 value={lastName}
                 onChange = {(e) =>setLastName(e.target.value)}
           />
