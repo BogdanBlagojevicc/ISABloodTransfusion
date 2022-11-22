@@ -112,26 +112,6 @@ public class RegularUserController {
 
    } 
 
-   // ISPRAVLJENO
-
-//    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
-// 	            produces = MediaType.APPLICATION_JSON_VALUE)
-// 	    public ResponseEntity<RegularUserDTO> updateRegularUser(@PathVariable Long id, @RequestBody RegularUserDTO regularUserDTO) throws Exception {
-
-//             RegularUser regularUser = new RegularUser(regularUserDTO.getId(), LoyaltyProgram.valueOf( regularUserDTO.getLoyalty()), regularUserDTO.getEmail(), regularUserDTO.getPassword(), regularUserDTO.getFirstName(),regularUserDTO.getLastName() ,
-//             regularUserDTO.getAddress(), regularUserDTO.getCity(), regularUserDTO.getCountry(), regularUserDTO.getPhoneNumber(), regularUserDTO.getJmbg(), Gender.valueOf(regularUserDTO.getGender()), regularUserDTO.getProfession(),
-//             regularUserDTO.getEducation(), regularUserDTO.getPoints(), regularUserDTO.getPenalties());
-	        
-// 	       regularUser.setId(id);
-//            RegularUser updatedEm = regularUserService.update(regularUser);
-	       
-// 	       RegularUserDTO updatedEmDTO = new RegularUserDTO(updatedEm.getId(), updatedEm.getEmail(), updatedEm.getPassword(), updatedEm.getFirstName(),updatedEm.getLastName() ,
-//            updatedEm.getAddress(), updatedEm.getCity(), updatedEm.getCountry(), updatedEm.getPhoneNumber(), updatedEm.getJmbg(), updatedEm.getGender(), updatedEm.getProfession(),
-//            updatedEm.getEducation(), updatedEm.getLoyalty(), updatedEm.getPoints(), updatedEm.getPenalties());
-	        
-// 	        return new ResponseEntity<>(updatedEmDTO, HttpStatus.OK);
-// 	    }
-
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RegularUserDTO> updateRegularUser(@PathVariable Long id, @RequestBody RegularUserDTO regularUserDTO) throws Exception {
         RegularUser updatedRegularUser = this.regularUserService.update(id, regularUserDTO);
