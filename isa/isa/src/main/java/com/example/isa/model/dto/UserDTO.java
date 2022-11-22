@@ -3,10 +3,9 @@ package com.example.isa.model.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
-public class RegularUserDTO {
+public class UserDTO {
     private Long id;
 
     private String email;
@@ -33,19 +32,14 @@ public class RegularUserDTO {
 
     private String education;
 
-    private String loyalty;
 
-    private Integer points;
-
-    private Integer penalties;
-
-    public RegularUserDTO(){
+    private UserDTO(){
 
     }
 
-    public RegularUserDTO(Long id, String email, String password, String firstName, String lastName, String address,
-            String city, String country, String phoneNumber, String jmbg, Gender gender2, String profession,
-            String education, LoyaltyProgram loyaltyProgram, Integer points, Integer penalties) {
+    public UserDTO(Long id, String email, String password, String firstName, String lastName, String address,
+            String city, String country, String phoneNumber, String jmbg, String gender, String profession,
+            String education) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -56,18 +50,16 @@ public class RegularUserDTO {
         this.country = country;
         this.phoneNumber = phoneNumber;
         this.jmbg = jmbg;
-        this.gender = String.valueOf(gender2);
+        this.gender = gender;
         this.profession = profession;
         this.education = education;
-        this.loyalty = String.valueOf(loyaltyProgram);
-        this.points = points;
-        this.penalties = penalties;
     }
 
-    public RegularUserDTO(String email, String firstName, String lastName, String address,
-            String city, String country, String phoneNumber, String jmbg, Gender gender2, String profession,
-            String education, LoyaltyProgram loyaltyProgram, Integer points, Integer penalties) {
+    public UserDTO(String email, String password, String firstName, String lastName, String address,
+            String city, String country, String phoneNumber, String jmbg, String gender, String profession,
+            String education) {
         this.email = email;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -75,13 +67,10 @@ public class RegularUserDTO {
         this.country = country;
         this.phoneNumber = phoneNumber;
         this.jmbg = jmbg;
-        this.gender = String.valueOf(gender2);
+        this.gender = gender;
         this.profession = profession;
         this.education = education;
-        this.loyalty = String.valueOf(loyaltyProgram);
-        this.points = points;
-        this.penalties = penalties;
     }
 
-
+    
 }

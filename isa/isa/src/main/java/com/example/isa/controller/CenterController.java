@@ -65,188 +65,188 @@ public class CenterController {
         
     }
 
-    @GetMapping("/nameASC")
-    public ResponseEntity<List<CenterDTO>> getCentersSortedByNameASC(){
-        List<Center> centers = this.centerService.findByOrderByNameAsc();
+    // @GetMapping("/nameASC")
+    // public ResponseEntity<List<CenterDTO>> getCentersSortedByNameASC(){
+    //     List<Center> centers = this.centerService.findByOrderByNameAsc();
 
-        List<CenterDTO> centerDTOS = new ArrayList<>();
+    //     List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
-            centerDTOS.add(centerDTO);
-        }
+    //     for(Center center : centers){
+    //         CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
+    //         center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+    //         centerDTOS.add(centerDTO);
+    //     }
 
-        return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
-    }
-
-    
-    @GetMapping("/nameDESC")
-    public ResponseEntity<List<CenterDTO>> getCentersSortedByNameDESC(){
-        List<Center> centers = this.centerService.findByOrderByNameDesc();
-
-        List<CenterDTO> centerDTOS = new ArrayList<>();
-
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
-            centerDTOS.add(centerDTO);
-        }
-
-        return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
-    }
-
-    @GetMapping("/averageGradeASC")
-    public ResponseEntity<List<CenterDTO>> getCentersSortedByAverageGradeASC(){
-        List<Center> centers = this.centerService.findByOrderByAverageGradeAsc();
-
-        List<CenterDTO> centerDTOS = new ArrayList<>();
-
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
-            centerDTOS.add(centerDTO);
-        }
-
-        return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
-    }
+    //     return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
+    // }
 
     
-    @GetMapping("/averageGradeDESC")
-    public ResponseEntity<List<CenterDTO>> getCentersSortedByAverageGradeDESC(){
-        List<Center> centers = this.centerService.findByOrderByAverageGradeDesc();
+    // @GetMapping("/nameDESC")
+    // public ResponseEntity<List<CenterDTO>> getCentersSortedByNameDESC(){
+    //     List<Center> centers = this.centerService.findByOrderByNameDesc();
 
-        List<CenterDTO> centerDTOS = new ArrayList<>();
+    //     List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
-            centerDTOS.add(centerDTO);
-        }
+    //     for(Center center : centers){
+    //         CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
+    //         center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+    //         centerDTOS.add(centerDTO);
+    //     }
 
-        return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
-    }
+    //     return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
+    // }
+
+    // @GetMapping("/averageGradeASC")
+    // public ResponseEntity<List<CenterDTO>> getCentersSortedByAverageGradeASC(){
+    //     List<Center> centers = this.centerService.findByOrderByAverageGradeAsc();
+
+    //     List<CenterDTO> centerDTOS = new ArrayList<>();
+
+    //     for(Center center : centers){
+    //         CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
+    //         center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+    //         centerDTOS.add(centerDTO);
+    //     }
+
+    //     return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
+    // }
 
     
-    @GetMapping("/countryASC")
-    public ResponseEntity<List<CenterDTO>> getCentersSortedByCountryASC(){
-        List<Center> centers = this.centerService.findByOrderByCountryAsc();
+    // @GetMapping("/averageGradeDESC")
+    // public ResponseEntity<List<CenterDTO>> getCentersSortedByAverageGradeDESC(){
+    //     List<Center> centers = this.centerService.findByOrderByAverageGradeDesc();
 
-        List<CenterDTO> centerDTOS = new ArrayList<>();
+    //     List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
-            centerDTOS.add(centerDTO);
-        }
+    //     for(Center center : centers){
+    //         CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
+    //         center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+    //         centerDTOS.add(centerDTO);
+    //     }
 
-        return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
-    }
+    //     return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
+    // }
 
-    @GetMapping("/countryDESC")
-    public ResponseEntity<List<CenterDTO>> getCentersSortedByCountryDESC(){
-        List<Center> centers = this.centerService.findByOrderByCountryDesc();
+    
+    // @GetMapping("/countryASC")
+    // public ResponseEntity<List<CenterDTO>> getCentersSortedByCountryASC(){
+    //     List<Center> centers = this.centerService.findByOrderByCountryAsc();
 
-        List<CenterDTO> centerDTOS = new ArrayList<>();
+    //     List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
-            centerDTOS.add(centerDTO);
-        }
+    //     for(Center center : centers){
+    //         CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
+    //         center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+    //         centerDTOS.add(centerDTO);
+    //     }
 
-        return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
-    }
+    //     return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
+    // }
 
-    @PutMapping(value = "/{adminCenterId}/{centerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CenterDTO> update(@PathVariable Long adminCenterId, @PathVariable Long centerId, @RequestBody CenterDTO centerDTO) throws Exception{
+    // @GetMapping("/countryDESC")
+    // public ResponseEntity<List<CenterDTO>> getCentersSortedByCountryDESC(){
+    //     List<Center> centers = this.centerService.findByOrderByCountryDesc();
 
-        CenterAdministrator centerAdministrator = this.centerAdministratorService.findOne(adminCenterId);
-        if(centerAdministrator == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    //     List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
-        Center center = new Center(
-            centerDTO.getName(),
-            centerDTO.getAddress(),
-            centerDTO.getDescription(),
-            centerDTO.getAverageGrade(),
-            centerDTO.getCountry(),
-            formatter.parse(centerDTO.getStartTime()),
-            formatter.parse(centerDTO.getEndTime())
-        );
+    //     for(Center center : centers){
+    //         CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
+    //         center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+    //         centerDTOS.add(centerDTO);
+    //     }
 
-        center.setId(centerId);
+    //     return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
+    // }
 
-        Center updatedCenter = centerService.update(center);
+    // @PutMapping(value = "/{adminCenterId}/{centerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<CenterDTO> update(@PathVariable Long adminCenterId, @PathVariable Long centerId, @RequestBody CenterDTO centerDTO) throws Exception{
 
-        CenterDTO updatedCenterDTO = new CenterDTO(updatedCenter.getId(), updatedCenter.getName(), updatedCenter.getAddress(), updatedCenter.getDescription(), updatedCenter.getAverageGrade(), updatedCenter.getCountry(), updatedCenter.getStartTime().toString(), updatedCenter.getEndTime().toString());
+    //     CenterAdministrator centerAdministrator = this.centerAdministratorService.findOne(adminCenterId);
+    //     if(centerAdministrator == null){
+    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //     }
 
-        return new ResponseEntity<>(updatedCenterDTO, HttpStatus.OK);
-    }
+    //     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
+    //     Center center = new Center(
+    //         centerDTO.getName(),
+    //         centerDTO.getAddress(),
+    //         centerDTO.getDescription(),
+    //         centerDTO.getAverageGrade(),
+    //         centerDTO.getCountry(),
+    //         formatter.parse(centerDTO.getStartTime()),
+    //         formatter.parse(centerDTO.getEndTime())
+    //     );
 
-    @GetMapping(value = "/grade/{AverageGrade}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CenterDTO> getAVG(@PathVariable("AverageGrade") Double averageGrade){
+    //     center.setId(centerId);
+
+    //     Center updatedCenter = centerService.update(center);
+
+    //     CenterDTO updatedCenterDTO = new CenterDTO(updatedCenter.getId(), updatedCenter.getName(), updatedCenter.getAddress(), updatedCenter.getDescription(), updatedCenter.getAverageGrade(), updatedCenter.getCountry(), updatedCenter.getStartTime().toString(), updatedCenter.getEndTime().toString());
+
+    //     return new ResponseEntity<>(updatedCenterDTO, HttpStatus.OK);
+    // }
+
+    // @GetMapping(value = "/grade/{AverageGrade}", produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<CenterDTO> getAVG(@PathVariable("AverageGrade") Double averageGrade){
          
-        Center center = this.centerService.findByGrade(averageGrade);
+    //     Center center = this.centerService.findByGrade(averageGrade);
  
-        CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(),center.getAddress(), center.getDescription(), center.getAverageGrade(),
-        center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+    //     CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(),center.getAddress(), center.getDescription(), center.getAverageGrade(),
+    //     center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
         
  
  
-         return new ResponseEntity<>(centerDTO, HttpStatus.OK);
+    //      return new ResponseEntity<>(centerDTO, HttpStatus.OK);
  
-    } 
+    // } 
 
-    @PostMapping(value = "/createNewCenter/{SystemAdminId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CenterDTO> createCenter(@PathVariable("SystemAdminId") Long systemAdminId, @RequestBody CenterDTO centerDTO) throws Exception{
-        if(systemAdministratorService.findOne(systemAdminId) == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Center center = new Center(centerDTO.getName(), centerDTO.getAddress(), centerDTO.getDescription(), centerDTO.getAverageGrade(), centerDTO.getCountry(), formatter.parse(centerDTO.getStartTime()), formatter.parse(centerDTO.getEndTime()));
+    // @PostMapping(value = "/createNewCenter/{SystemAdminId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<CenterDTO> createCenter(@PathVariable("SystemAdminId") Long systemAdminId, @RequestBody CenterDTO centerDTO) throws Exception{
+    //     if(systemAdministratorService.findOne(systemAdminId) == null){
+    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //     }
+    //     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    //     Center center = new Center(centerDTO.getName(), centerDTO.getAddress(), centerDTO.getDescription(), centerDTO.getAverageGrade(), centerDTO.getCountry(), formatter.parse(centerDTO.getStartTime()), formatter.parse(centerDTO.getEndTime()));
         
-        Center newCenter = this.centerService.create(center);
+    //     Center newCenter = this.centerService.create(center);
 
-        CenterDTO newCenterDTO = new CenterDTO(newCenter.getId(), newCenter.getName(), newCenter.getAddress(), newCenter.getDescription(), newCenter.getAverageGrade(), newCenter.getCountry(), newCenter.getStartTime().toString(), newCenter.getEndTime().toString());
+    //     CenterDTO newCenterDTO = new CenterDTO(newCenter.getId(), newCenter.getName(), newCenter.getAddress(), newCenter.getDescription(), newCenter.getAverageGrade(), newCenter.getCountry(), newCenter.getStartTime().toString(), newCenter.getEndTime().toString());
 
-        return new ResponseEntity<>(newCenterDTO, HttpStatus.CREATED);
-    }
+    //     return new ResponseEntity<>(newCenterDTO, HttpStatus.CREATED);
+    // }
 
-    @GetMapping(value = "/getOneByCentersAdministratorId/{centerAdministratorId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CenterDTO> getByCentersAdministratorId(@PathVariable Long centerAdministratorId) {
+    // @GetMapping(value = "/getOneByCentersAdministratorId/{centerAdministratorId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<CenterDTO> getByCentersAdministratorId(@PathVariable Long centerAdministratorId) {
 
-        Center center = this.centerAdministratorService.findOne(centerAdministratorId).getCenter();
+    //     Center center = this.centerAdministratorService.findOne(centerAdministratorId).getCenter();
 
-        CenterDTO centerDTO = new CenterDTO(
-            center.getId(),
-            center.getName(),
-            center.getAddress(),
-            center.getDescription(),
-            center.getAverageGrade(),
-            center.getCountry(),
-            center.getStartTime().toString(),
-            center.getEndTime().toString()
-        );
+    //     CenterDTO centerDTO = new CenterDTO(
+    //         center.getId(),
+    //         center.getName(),
+    //         center.getAddress(),
+    //         center.getDescription(),
+    //         center.getAverageGrade(),
+    //         center.getCountry(),
+    //         center.getStartTime().toString(),
+    //         center.getEndTime().toString()
+    //     );
 
-        return new ResponseEntity<>(centerDTO, HttpStatus.OK);
-    }
-    @GetMapping("/filter/{firstnumber}/{secondnumber}")
-    public ResponseEntity<List<CenterDTO>> filterCenters(@PathVariable("firstnumber") Double firstnumber, @PathVariable("secondnumber")Double secondnumber){
-        List<Center> centers = this.centerService.filterByGrade(firstnumber,secondnumber);
+    //     return new ResponseEntity<>(centerDTO, HttpStatus.OK);
+    // }
+    // @GetMapping("/filter/{firstnumber}/{secondnumber}")
+    // public ResponseEntity<List<CenterDTO>> filterCenters(@PathVariable("firstnumber") Double firstnumber, @PathVariable("secondnumber")Double secondnumber){
+    //     List<Center> centers = this.centerService.filterByGrade(firstnumber,secondnumber);
 
-        List<CenterDTO> centerDTOS = new ArrayList<>();
+    //     List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
-            centerDTOS.add(centerDTO);
-        }
+    //     for(Center center : centers){
+    //         CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
+    //         center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+    //         centerDTOS.add(centerDTO);
+    //     }
 
-        return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
-    }
+    //     return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
+    // }
 
 }
 

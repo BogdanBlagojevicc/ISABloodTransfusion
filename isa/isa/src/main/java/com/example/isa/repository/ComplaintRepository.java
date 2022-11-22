@@ -8,5 +8,5 @@ import com.example.isa.model.Complaint;
 
 public interface ComplaintRepository extends JpaRepository<Complaint, Long> {
     
-    List<Complaint> findAll();
+    // List<Complaint> findAll();
 }

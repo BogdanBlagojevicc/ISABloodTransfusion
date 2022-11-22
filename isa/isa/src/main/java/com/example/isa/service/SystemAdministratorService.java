@@ -15,28 +15,28 @@ public class SystemAdministratorService {
     public SystemAdministratorService(SystemAdministratorRepository systemAdministratorRepository){
         this.systemAdministratorRepository = systemAdministratorRepository;
     }
-    public SystemAdministrator findOne(Long id){
-        return this.systemAdministratorRepository.getOne(id);
-    }
+    // public SystemAdministrator findOne(Long id){
+    //     return this.systemAdministratorRepository.getOne(id);
+    // }
 
     public SystemAdministrator create(SystemAdministrator systemAdministrator) throws Exception{
-        if(systemAdministrator.getId() != null){
+        if(systemAdministrator.getBaseUser().getId() != null){
             throw new Exception("ID must be null");
         }
         return this.systemAdministratorRepository.save(systemAdministrator);
     }
 
-    public SystemAdministrator updatePassword(SystemAdministrator systemAdministrator) throws Exception{
+    // public SystemAdministrator updatePassword(SystemAdministrator systemAdministrator) throws Exception{
         
-        SystemAdministrator systemAdministratorToUpade = this.systemAdministratorRepository.getOne(systemAdministrator.getId());
-        if(systemAdministratorToUpade == null){
-            throw new Exception("System administrator doesn't exist");
-        }
+    //     SystemAdministrator systemAdministratorToUpade = this.systemAdministratorRepository.getOne(systemAdministrator.getId());
+    //     if(systemAdministratorToUpade == null){
+    //         throw new Exception("System administrator doesn't exist");
+    //     }
 
-        if(!systemAdministrator.getPassword().equals("")){
-            systemAdministratorToUpade.setPassword(systemAdministrator.getPassword());
-        }
+    //     if(!systemAdministrator.getPassword().equals("")){
+    //         systemAdministratorToUpade.setPassword(systemAdministrator.getPassword());
+    //     }
 
-        return this.systemAdministratorRepository.save(systemAdministratorToUpade);
-    }
+    //     return this.systemAdministratorRepository.save(systemAdministratorToUpade);
+    // }
 }

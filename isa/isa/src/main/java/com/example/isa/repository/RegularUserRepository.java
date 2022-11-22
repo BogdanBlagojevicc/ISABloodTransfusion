@@ -6,10 +6,12 @@ import com.example.isa.model.RegularUser;
 
 public interface RegularUserRepository extends JpaRepository<RegularUser, Long> {
 
-    RegularUser findRegularUserById(Long id);
+    // RegularUser findRegularUserById(Long id);
 
-    List<RegularUser> findAll();
+    RegularUser findByUserId(Long id);
 
-    List<RegularUser> findByFirstNameAndLastName(String firstName, String lastName);
+    // List<RegularUser> findAll();
+
+    // List<RegularUser> findByFirstNameAndLastName(String firstName, String lastName);
 
 }

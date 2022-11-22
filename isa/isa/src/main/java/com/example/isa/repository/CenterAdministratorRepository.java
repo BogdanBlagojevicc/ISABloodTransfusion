@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CenterAdministratorRepository extends JpaRepository<CenterAdministrator, Long> {
 
-    List<CenterAdministrator> findAllByCenterId(Long centerId);
+    // List<CenterAdministrator> findAllByCenterId(Long centerId);
     
 }

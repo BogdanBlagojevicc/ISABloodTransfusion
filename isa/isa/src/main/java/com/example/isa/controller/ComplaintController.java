@@ -38,9 +38,9 @@ public class ComplaintController {
     @PutMapping(value = "/updateComplaint/{SystemAdminId}/{ComplaintId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ComplaintDTO> updateComplaint(@PathVariable("SystemAdminId") Long systemAdminId, @PathVariable("ComplaintId") Long complaintId, @RequestBody ComplaintDTO complaintDTO) throws Exception{
         
-        if(systemAdministratorService.findOne(systemAdminId) == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        // if(systemAdministratorService.findOne(systemAdminId) == null){
+        //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        // }
 
         Complaint complaint = new Complaint(complaintDTO.getText(), complaintDTO.getResponse());
         complaint.setId(complaintId);

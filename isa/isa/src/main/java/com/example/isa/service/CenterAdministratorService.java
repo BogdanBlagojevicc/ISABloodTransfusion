@@ -18,81 +18,81 @@ public class CenterAdministratorService {
         this.centerAdministratorRepository = centerAdministratorRepository;
     }
 
-    public CenterAdministrator findOne(Long id){
-        CenterAdministrator centerAdministrator = this.centerAdministratorRepository.getOne(id);
-        return centerAdministrator;
-    }
+    // public CenterAdministrator findOne(Long id){
+    //     CenterAdministrator centerAdministrator = this.centerAdministratorRepository.getOne(id);
+    //     return centerAdministrator;
+    // }
 
-    public CenterAdministrator update(CenterAdministrator centerAdministrator) throws Exception{
+    // public CenterAdministrator update(CenterAdministrator centerAdministrator) throws Exception{
 
-        CenterAdministrator centerAdministratorToUpdate = this.centerAdministratorRepository.getOne(centerAdministrator.getId());
-        if(centerAdministratorToUpdate == null){
-            throw new Exception("Center Administrator doesn't exist");
-        }
+    //     CenterAdministrator centerAdministratorToUpdate = this.centerAdministratorRepository.getOne(centerAdministrator.getId());
+    //     if(centerAdministratorToUpdate == null){
+    //         throw new Exception("Center Administrator doesn't exist");
+    //     }
 
-        if(!centerAdministrator.getEmail().equals("")){
-            centerAdministratorToUpdate.setEmail(centerAdministrator.getEmail());
-        }
+    //     if(!centerAdministrator.getBaseUser().getEmail().equals("")){
+    //         centerAdministratorToUpdate.getBaseUser().setEmail(centerAdministrator.getBaseUser().getEmail());
+    //     }
 
-        if(!centerAdministrator.getFirstName().equals("")){
-            centerAdministratorToUpdate.setFirstName(centerAdministrator.getFirstName());
-        }
+    //     if(!centerAdministrator.getBaseUser().getFirstName().equals("")){
+    //         centerAdministratorToUpdate.getBaseUser().setFirstName(centerAdministrator.getBaseUser().getFirstName());
+    //     }
 
-        if(!centerAdministrator.getLastName().equals("")){
-            centerAdministratorToUpdate.setLastName(centerAdministrator.getLastName());
-        }
+    //     if(!centerAdministrator.getBaseUser().getLastName().equals("")){
+    //         centerAdministratorToUpdate.getBaseUser().setLastName(centerAdministrator.getBaseUser().getLastName());
+    //     }
 
-        if(!centerAdministrator.getAddress().equals("")){
-            centerAdministratorToUpdate.setAddress(centerAdministrator.getAddress());
-        }
+    //     if(!centerAdministrator.getBaseUser().getAddress().equals("")){
+    //         centerAdministratorToUpdate.getBaseUser().setAddress(centerAdministrator.getBaseUser().getAddress());
+    //     }
 
-        if(!centerAdministrator.getCity().equals("")){
-            centerAdministratorToUpdate.setCity(centerAdministrator.getCity());
-        }
+    //     if(!centerAdministrator.getBaseUser().getCity().equals("")){
+    //         centerAdministratorToUpdate.getBaseUser().setCity(centerAdministrator.getBaseUser().getCity());
+    //     }
 
-        if(!centerAdministrator.getCountry().equals("")){
-            centerAdministratorToUpdate.setCountry(centerAdministrator.getCountry());
-        }
+    //     if(!centerAdministrator.getBaseUser().getCountry().equals("")){
+    //         centerAdministratorToUpdate.getBaseUser().setCountry(centerAdministrator.getBaseUser().getCountry());
+    //     }
 
-        if(!centerAdministrator.getPhoneNumber().equals("")){
-            centerAdministratorToUpdate.setPhoneNumber(centerAdministrator.getPhoneNumber());
-        }
+    //     if(!centerAdministrator.getBaseUser().getPhoneNumber().equals("")){
+    //         centerAdministratorToUpdate.getBaseUser().setPhoneNumber(centerAdministrator.getBaseUser().getPhoneNumber());
+    //     }
 
-        if(!centerAdministrator.getProfession().equals("")){
-            centerAdministratorToUpdate.setProfession(centerAdministrator.getProfession());
-        }
+    //     if(!centerAdministrator.getBaseUser().getProfession().equals("")){
+    //         centerAdministratorToUpdate.getBaseUser().setProfession(centerAdministrator.getBaseUser().getProfession());
+    //     }
 
-        if(!centerAdministrator.getEducation().equals("")){
-            centerAdministratorToUpdate.setEducation(centerAdministrator.getEducation());
-        }
+    //     if(!centerAdministrator.getBaseUser().getEducation().equals("")){
+    //         centerAdministratorToUpdate.getBaseUser().setEducation(centerAdministrator.getBaseUser().getEducation());
+    //     }
 
-        CenterAdministrator savedCenterAdministrator = this.centerAdministratorRepository.save(centerAdministratorToUpdate);
-        return savedCenterAdministrator;
-    }
+    //     CenterAdministrator savedCenterAdministrator = this.centerAdministratorRepository.save(centerAdministratorToUpdate);
+    //     return savedCenterAdministrator;
+    // }
 
-    public CenterAdministrator updatePassword(CenterAdministrator centerAdministrator) throws Exception{
+    // public CenterAdministrator updatePassword(CenterAdministrator centerAdministrator) throws Exception{
 
-        CenterAdministrator centerAdministratorToUpdate = this.centerAdministratorRepository.getOne(centerAdministrator.getId());
-        if(centerAdministratorToUpdate == null){
-            throw new Exception("Center Administrator doesn't exist");
-        }
+    //     CenterAdministrator centerAdministratorToUpdate = this.centerAdministratorRepository.getOne(centerAdministrator.getId());
+    //     if(centerAdministratorToUpdate == null){
+    //         throw new Exception("Center Administrator doesn't exist");
+    //     }
 
-        if(!centerAdministrator.getPassword().equals("")){
-            centerAdministratorToUpdate.setPassword(centerAdministrator.getPassword());
-        }
+    //     if(!centerAdministrator.getPassword().equals("")){
+    //         centerAdministratorToUpdate.setPassword(centerAdministrator.getPassword());
+    //     }
 
-        CenterAdministrator savedCenterAdministrator = this.centerAdministratorRepository.save(centerAdministratorToUpdate);
-        return savedCenterAdministrator;
-    }
+    //     CenterAdministrator savedCenterAdministrator = this.centerAdministratorRepository.save(centerAdministratorToUpdate);
+    //     return savedCenterAdministrator;
+    // }
 
     public CenterAdministrator create(CenterAdministrator centerAdministrator) throws Exception{
-        if(centerAdministrator.getId() != null){
+        if(centerAdministrator.getBaseUser().getId() != null){
             throw new Exception("ID must be null");
         }
         return this.centerAdministratorRepository.save(centerAdministrator);
     }
 
-    public List<CenterAdministrator> findAllByCenterId(Long centerId){
-        return this.centerAdministratorRepository.findAllByCenterId(centerId);
-    }
+    // public List<CenterAdministrator> findAllByCenterId(Long centerId){
+    //     return this.centerAdministratorRepository.findAllByCenterId(centerId);
+    // }
 }
