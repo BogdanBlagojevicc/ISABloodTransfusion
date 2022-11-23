@@ -29,7 +29,7 @@ public class RegularUserService {
 
     
     public RegularUser create(RegularUser regularUser) throws Exception{
-        if(regularUser.getUser().getId() != null){
+        if(regularUser.getBaseUser().getId() != null){
             throw new Exception("ID must be null");
         }
         RegularUser newRegularUser = this.regularUserRepository.save(regularUser);
@@ -37,7 +37,7 @@ public class RegularUserService {
     }
 
     public RegularUser findOne(Long id) throws Exception{
-        RegularUser regularUser = this.regularUserRepository.findByUserId(id);
+        RegularUser regularUser = this.regularUserRepository.findByBaseUserId(id);
         if(regularUser == null){
             throw new Exception("User does not exist");
         }
@@ -46,7 +46,7 @@ public class RegularUserService {
 
     public RegularUser update(Long id, RegularUserDTO regularUserDTO) throws Exception{
 
-        if(this.regularUserRepository.findByUserId(id) == null){
+        if(this.regularUserRepository.findByBaseUserId(id) == null){
             throw new Exception("User does not exist");
         }
 
@@ -82,18 +82,9 @@ public class RegularUserService {
     }
     
 
-    // public RegularUser findOne(Long id){
-    //     RegularUser regularUser = this.regularUserRepository.findRegularUserById(id);
-    //     return regularUser;
-    // }
 
-    // public RegularUser update(RegularUser regularUser) throws Exception{
-    //     if(regularUser.getId() == null){
-    //         throw new Exception("ID can not be null");
-    //     }
-    //     return this.regularUserRepository.save(regularUser);
-    // }
-    
+
+    //NE MOZE DOK NE RESIMO PROBLEM ONEtoONE
     // public List<RegularUser> findAll(){
     //     return regularUserRepository.findAll();
     // }

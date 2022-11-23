@@ -1,6 +1,7 @@
 package com.example.isa.model;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -39,7 +40,7 @@ public class CenterAdministrator {
     @OneToOne
     private Term term;
 
-    @ManyToOne(fetch= FetchType.LAZY)
+    @ManyToOne(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
     private Center center;
 
     public CenterAdministrator(){

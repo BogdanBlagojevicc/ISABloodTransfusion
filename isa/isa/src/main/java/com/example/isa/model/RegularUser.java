@@ -42,17 +42,17 @@ public class RegularUser {
 
     @OneToOne
     @JoinColumn(name = "userId")
-    private User user;
+    private User baseUser;
 
     public RegularUser(){
 
     }
 
-    public RegularUser(LoyaltyProgram loyalty, Integer points, Integer penalties, User user) {
+    public RegularUser(LoyaltyProgram loyalty, Integer points, Integer penalties, User baseUser) {
         this.loyalty = loyalty;
         this.points = points;
         this.penalties = penalties;
-        this.user = user;
+        this.baseUser = baseUser;
     }
 
     

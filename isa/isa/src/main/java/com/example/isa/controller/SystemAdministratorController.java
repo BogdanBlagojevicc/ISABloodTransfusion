@@ -63,7 +63,7 @@ public class SystemAdministratorController {
                 newSystemAdministrator.getBaseUser().getCountry(),
                 newSystemAdministrator.getBaseUser().getPhoneNumber(),
                 newSystemAdministrator.getBaseUser().getJmbg(),
-                newSystemAdministrator.getBaseUser().getGender().toString(), 
+                newSystemAdministrator.getBaseUser().getGender(), 
                 newSystemAdministrator.getBaseUser().getProfession(),
                 newSystemAdministrator.getBaseUser().getEducation()
         );
@@ -71,21 +71,31 @@ public class SystemAdministratorController {
         return new ResponseEntity<>(newSystemAdministratorDTO, HttpStatus.CREATED);
     }
 
-    // @PutMapping(value = "/updatePassword/{SystemAdminId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<SystemAdministratorDTO> updatePassword(@PathVariable("SystemAdminId") Long systemAdminId, @RequestBody SystemAdministratorDTO systemAdministratorDTO) throws Exception{
+    @PutMapping(value = "/updatePassword/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<SystemAdministratorDTO> updatePassword(@PathVariable Long id, @RequestBody SystemAdministratorDTO systemAdministratorDTO) throws Exception{
 
-    //     SystemAdministrator systemAdministratorToUpdate = this.systemAdministratorService.findOne(systemAdminId);
-    //     if(systemAdministratorToUpdate == null){
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
+        SystemAdministrator updatedSystemAdministrator = this.systemAdministratorService.updatePassword(systemAdministratorDTO);
 
-    //     systemAdministratorToUpdate.setPassword(systemAdministratorDTO.getPassword());
+        SystemAdministratorDTO updatedSystemAdministratorDTO = new SystemAdministratorDTO(
+            updatedSystemAdministrator.getBaseUser().getId(),
+            updatedSystemAdministrator.getBaseUser().getEmail(),
+            updatedSystemAdministrator.getBaseUser().getPassword(),
+            updatedSystemAdministrator.getBaseUser().getFirstName(), 
+            updatedSystemAdministrator.getBaseUser().getLastName(), 
+            updatedSystemAdministrator.getBaseUser().getAddress(), 
+            updatedSystemAdministrator.getBaseUser().getCity(), 
+            updatedSystemAdministrator.getBaseUser().getCountry(), 
+            updatedSystemAdministrator.getBaseUser().getPhoneNumber(), 
+            updatedSystemAdministrator.getBaseUser().getJmbg(),
+            updatedSystemAdministrator.getBaseUser().getGender(),
+            updatedSystemAdministrator.getBaseUser().getProfession(),
+            updatedSystemAdministrator.getBaseUser().getEducation() 
+        );
 
-    //     SystemAdministrator updatedSystemAdministrator = this.systemAdministratorService.updatePassword(systemAdministratorToUpdate);
-
-    //     SystemAdministratorDTO updatedSystemAdministratorDTO = new SystemAdministratorDTO(updatedSystemAdministrator.getId(), updatedSystemAdministrator.getEmail(), updatedSystemAdministrator.getPassword(), updatedSystemAdministrator.getFirstName(), updatedSystemAdministrator.getLastName(), updatedSystemAdministrator.getAddress(), updatedSystemAdministrator.getCity(), updatedSystemAdministrator.getCountry(), updatedSystemAdministrator.getPhoneNumber(), updatedSystemAdministrator.getJmbg(), updatedSystemAdministrator.getGender().toString(), updatedSystemAdministrator.getProfession(), updatedSystemAdministrator.getEducation());
-
-    //     return new ResponseEntity<>(updatedSystemAdministratorDTO, HttpStatus.OK);
+        return new ResponseEntity<>(updatedSystemAdministratorDTO, HttpStatus.OK);
        
-    // }
+    }
+
+
+
 }

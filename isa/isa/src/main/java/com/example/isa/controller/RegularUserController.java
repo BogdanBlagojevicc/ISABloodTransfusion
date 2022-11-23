@@ -61,17 +61,17 @@ public class RegularUserController {
         RegularUser newRegularUser = regularUserService.create(regularUser);
 
         RegularUserDTO newRegularUserDTO = new RegularUserDTO(
-            newRegularUser.getUser().getEmail(),
-            newRegularUser.getUser().getFirstName(),
-            newRegularUser.getUser().getLastName(), 
-            newRegularUser.getUser().getAddress(),
-            newRegularUser.getUser().getCity(),
-            newRegularUser.getUser().getCountry(),
-            newRegularUser.getUser().getPhoneNumber(),
-            newRegularUser.getUser().getJmbg(),
-            newRegularUser.getUser().getGender(),
-            newRegularUser.getUser().getProfession(),
-            newRegularUser.getUser().getEducation(),
+            newRegularUser.getBaseUser().getEmail(),
+            newRegularUser.getBaseUser().getFirstName(),
+            newRegularUser.getBaseUser().getLastName(), 
+            newRegularUser.getBaseUser().getAddress(),
+            newRegularUser.getBaseUser().getCity(),
+            newRegularUser.getBaseUser().getCountry(),
+            newRegularUser.getBaseUser().getPhoneNumber(),
+            newRegularUser.getBaseUser().getJmbg(),
+            newRegularUser.getBaseUser().getGender(),
+            newRegularUser.getBaseUser().getProfession(),
+            newRegularUser.getBaseUser().getEducation(),
             newRegularUser.getLoyalty(),
             newRegularUser.getPoints(),
             newRegularUser.getPenalties()
@@ -118,19 +118,19 @@ public class RegularUserController {
 
 
         RegularUserDTO updatedRegularUserDTO = new RegularUserDTO(
-            updatedRegularUser.getUser().getId(),
-            updatedRegularUser.getUser().getEmail(),
-            updatedRegularUser.getUser().getPassword(),
-            updatedRegularUser.getUser().getFirstName(),
-            updatedRegularUser.getUser().getLastName(),
-            updatedRegularUser.getUser().getAddress(),
-            updatedRegularUser.getUser().getCity(),
-            updatedRegularUser.getUser().getCountry(),
-            updatedRegularUser.getUser().getPhoneNumber(),
-            updatedRegularUser.getUser().getJmbg(),
-            updatedRegularUser.getUser().getGender(),
-            updatedRegularUser.getUser().getProfession(),
-            updatedRegularUser.getUser().getEducation(),
+            updatedRegularUser.getBaseUser().getId(),
+            updatedRegularUser.getBaseUser().getEmail(),
+            updatedRegularUser.getBaseUser().getPassword(),
+            updatedRegularUser.getBaseUser().getFirstName(),
+            updatedRegularUser.getBaseUser().getLastName(),
+            updatedRegularUser.getBaseUser().getAddress(),
+            updatedRegularUser.getBaseUser().getCity(),
+            updatedRegularUser.getBaseUser().getCountry(),
+            updatedRegularUser.getBaseUser().getPhoneNumber(),
+            updatedRegularUser.getBaseUser().getJmbg(),
+            updatedRegularUser.getBaseUser().getGender(),
+            updatedRegularUser.getBaseUser().getProfession(),
+            updatedRegularUser.getBaseUser().getEducation(),
             updatedRegularUser.getLoyalty(),
             updatedRegularUser.getPoints(),
             updatedRegularUser.getPenalties()
@@ -142,39 +142,40 @@ public class RegularUserController {
     }
 
 
+    //OVA METODA NE RADI DOK NE RESIMO ONEtoONE PROBLEM
+    // @GetMapping(value = "/getAllRegularUsers/{SystemAdminId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<List<RegularUserDTO>> getAllRegularUsers(@PathVariable("SystemAdminId") Long systemAdminId){
 
-//     @GetMapping(value = "/getAllRegularUsers/{SystemAdminId}", produces = MediaType.APPLICATION_JSON_VALUE)
-//     public ResponseEntity<List<RegularUserDTO>> getAllRegularUsers(@PathVariable("SystemAdminId") Long systemAdminId){
+    //     if(systemAdministratorService.findOne(systemAdminId) == null){
+    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //     }
 
-//         if(systemAdministratorService.findOne(systemAdminId) == null){
-//             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//         }
+    //     List<RegularUser> regularUsers = this.regularUserService.findAll();
+    //     List<RegularUserDTO> regularUserDTOs = new ArrayList<>();
 
-//         List<RegularUser> regularUsers = this.regularUserService.findAll();
-//         List<RegularUserDTO> regularUserDTOs = new ArrayList<>();
+    //     for(RegularUser regularUser : regularUsers){
+    //         RegularUserDTO regularUserDTO = new RegularUserDTO(regularUser.getId(), regularUser.getEmail(), regularUser.getFirstName(), regularUser.getLastName(), regularUser.getAddress(), regularUser.getCity(), regularUser.getCountry(), regularUser.getPhoneNumber(), regularUser.getJmbg(), regularUser.getGender(), regularUser.getProfession(), regularUser.getEducation(), regularUser.getLoyalty(), regularUser.getPoints(), regularUser.getPenalties());
+    //         regularUserDTOs.add(regularUserDTO);
+    //     }
+    //     return new ResponseEntity<>(regularUserDTOs, HttpStatus.OK);
+    // }
 
-//         for(RegularUser regularUser : regularUsers){
-//             RegularUserDTO regularUserDTO = new RegularUserDTO(regularUser.getId(), regularUser.getEmail(), regularUser.getFirstName(), regularUser.getLastName(), regularUser.getAddress(), regularUser.getCity(), regularUser.getCountry(), regularUser.getPhoneNumber(), regularUser.getJmbg(), regularUser.getGender(), regularUser.getProfession(), regularUser.getEducation(), regularUser.getLoyalty(), regularUser.getPoints(), regularUser.getPenalties());
-//             regularUserDTOs.add(regularUserDTO);
-//         }
-//         return new ResponseEntity<>(regularUserDTOs, HttpStatus.OK);
-//     }
+    //SESA METODA
+    // @GetMapping(value = "/findByFirstNameAndLastName/{Id}/{FirstName}/{LastName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<List<RegularUserDTO>> getRegularUsersByFirstAndLastName(@PathVariable("Id") Long id, @PathVariable("FirstName") String firstName, @PathVariable("LastName") String lastName){
 
-//     @GetMapping(value = "/findByFirstNameAndLastName/{Id}/{FirstName}/{LastName}", produces = MediaType.APPLICATION_JSON_VALUE)
-//     public ResponseEntity<List<RegularUserDTO>> getRegularUsersByFirstAndLastName(@PathVariable("Id") Long id, @PathVariable("FirstName") String firstName, @PathVariable("LastName") String lastName){
+    //     if((systemAdministratorService.findOne(id) == null) && (centerAdministratorService.findOne(id) == null)){
+    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //     }
 
-//         if((systemAdministratorService.findOne(id) == null) && (centerAdministratorService.findOne(id) == null)){
-//             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//         }
+    //     List<RegularUser> regularUsers = regularUserService.findByFirstNameAndLastName(firstName, lastName);
+    //     List<RegularUserDTO> regularUserDTOs = new ArrayList<>();
 
-//         List<RegularUser> regularUsers = regularUserService.findByFirstNameAndLastName(firstName, lastName);
-//         List<RegularUserDTO> regularUserDTOs = new ArrayList<>();
-
-//         for (RegularUser regularUser : regularUsers) {
-//             RegularUserDTO regularUserDTO = new RegularUserDTO(regularUser.getId(), regularUser.getEmail(), regularUser.getFirstName(), regularUser.getLastName(), regularUser.getAddress(), regularUser.getCity(), regularUser.getCountry(), regularUser.getPhoneNumber(), regularUser.getJmbg(), regularUser.getGender(), regularUser.getProfession(), regularUser.getEducation(), regularUser.getLoyalty(), regularUser.getPoints(), regularUser.getPenalties());
-//             regularUserDTOs.add(regularUserDTO);
-//         }
-//         return new ResponseEntity<>(regularUserDTOs, HttpStatus.OK);
-//     }
+    //     for (RegularUser regularUser : regularUsers) {
+    //         RegularUserDTO regularUserDTO = new RegularUserDTO(regularUser.getId(), regularUser.getEmail(), regularUser.getFirstName(), regularUser.getLastName(), regularUser.getAddress(), regularUser.getCity(), regularUser.getCountry(), regularUser.getPhoneNumber(), regularUser.getJmbg(), regularUser.getGender(), regularUser.getProfession(), regularUser.getEducation(), regularUser.getLoyalty(), regularUser.getPoints(), regularUser.getPenalties());
+    //         regularUserDTOs.add(regularUserDTO);
+    //     }
+    //     return new ResponseEntity<>(regularUserDTOs, HttpStatus.OK);
+    // }
 
 }

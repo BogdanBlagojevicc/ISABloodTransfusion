@@ -7,5 +7,5 @@ import com.example.isa.model.SystemAdministrator;
 
 @Repository
 public interface SystemAdministratorRepository extends JpaRepository<SystemAdministrator, Long> {
-    
+    SystemAdministrator findByBaseUserId(Long id);
 }

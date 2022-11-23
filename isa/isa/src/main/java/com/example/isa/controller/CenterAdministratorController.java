@@ -42,122 +42,79 @@ public class CenterAdministratorController {
         this.userService = userService;
     }
 
-    // @PutMapping(value = "/{adminCenterId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<CenterAdministratorDTO> update(@PathVariable Long adminCenterId, @RequestBody CenterAdministratorDTO centerAdministratorDTO) throws Exception{
+    @PutMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CenterAdministratorDTO> update(@PathVariable Long id, @RequestBody CenterAdministratorDTO centerAdministratorDTO) throws Exception{
 
-    //     // CenterAdministrator centerAdministrator2 = this.centerAdministratorService.findOne(adminCenterId);
-    //     // if(centerAdministrator2 == null){
-    //     //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     // }
+        CenterAdministrator updatedCenterAdministrator = this.centerAdministratorService.update(centerAdministratorDTO);
 
-        
+        CenterAdministratorDTO updatedCenterAdministratorDTO = new CenterAdministratorDTO(
+            updatedCenterAdministrator.getBaseUser().getId(),
+            updatedCenterAdministrator.getBaseUser().getEmail(),
+            updatedCenterAdministrator.getBaseUser().getPassword(),
+            updatedCenterAdministrator.getBaseUser().getFirstName(),
+            updatedCenterAdministrator.getBaseUser().getLastName(),
+            updatedCenterAdministrator.getBaseUser().getAddress(),
+            updatedCenterAdministrator.getBaseUser().getCity(),
+            updatedCenterAdministrator.getBaseUser().getCountry(),
+            updatedCenterAdministrator.getBaseUser().getPhoneNumber(),
+            updatedCenterAdministrator.getBaseUser().getJmbg(),
+            updatedCenterAdministrator.getBaseUser().getGender(),
+            updatedCenterAdministrator.getBaseUser().getProfession(),
+            updatedCenterAdministrator.getBaseUser().getEducation()
+        );
 
-    //     CenterAdministrator centerAdministrator = new CenterAdministrator(
-    //         centerAdministratorDTO.getEmail(),
-    //         centerAdministratorDTO.getPassword(), 
-    //         centerAdministratorDTO.getFirstName(), 
-    //         centerAdministratorDTO.getLastName(), 
-    //         centerAdministratorDTO.getAddress(), 
-    //         centerAdministratorDTO.getCity(), 
-    //         centerAdministratorDTO.getCountry(), 
-    //         centerAdministratorDTO.getPhoneNumber(), 
-    //         centerAdministratorDTO.getJmbg(), 
-    //         Gender.valueOf(centerAdministratorDTO.getGender()), 
-    //         centerAdministratorDTO.getProfession(), 
-    //         centerAdministratorDTO.getEducation()
-    //     );
+        return new ResponseEntity<>(updatedCenterAdministratorDTO, HttpStatus.OK);
 
-    //     centerAdministrator.setId(adminCenterId);
+    }
 
-    //     CenterAdministrator updatedCenterAdministrator = centerAdministratorService.update(centerAdministrator);
+    @PutMapping(value = "/updatePassword/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CenterAdministratorDTO> updatePassword(@PathVariable Long id, @RequestBody CenterAdministratorDTO centerAdministratorDTO) throws Exception{
 
-    //     CenterAdministratorDTO updatedCenterAdministratorDTO = new CenterAdministratorDTO(
-    //         updatedCenterAdministrator.getId(),
-    //         updatedCenterAdministrator.getEmail(),
-    //         updatedCenterAdministrator.getPassword(),
-    //         updatedCenterAdministrator.getFirstName(), 
-    //         updatedCenterAdministrator.getLastName(), 
-    //         updatedCenterAdministrator.getAddress(), 
-    //         updatedCenterAdministrator.getCity(), 
-    //         updatedCenterAdministrator.getCountry(), 
-    //         updatedCenterAdministrator.getPhoneNumber(), 
-    //         updatedCenterAdministrator.getJmbg(),
-    //         updatedCenterAdministrator.getGender().toString(),
-    //         updatedCenterAdministrator.getProfession(),
-    //         updatedCenterAdministrator.getEducation() 
-    //     );
+        CenterAdministrator updatedCenterAdministrator = this.centerAdministratorService.updatePassword(centerAdministratorDTO);
 
-    //     return new ResponseEntity<>(updatedCenterAdministratorDTO, HttpStatus.OK);
-    // }
 
-    // @PutMapping(value = "/updatePassword/{adminCenterId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<CenterAdministratorDTO> updatePassword(@PathVariable Long adminCenterId, @RequestBody CenterAdministratorDTO centerAdministratorDTO) throws Exception{
 
-    //     CenterAdministrator centerAdministrator2 = this.centerAdministratorService.findOne(adminCenterId);
-    //     if(centerAdministrator2 == null){
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
+        CenterAdministratorDTO updatedCenterAdministratorDTO = new CenterAdministratorDTO(
+            updatedCenterAdministrator.getBaseUser().getId(),
+            updatedCenterAdministrator.getBaseUser().getEmail(),
+            updatedCenterAdministrator.getBaseUser().getPassword(),
+            updatedCenterAdministrator.getBaseUser().getFirstName(), 
+            updatedCenterAdministrator.getBaseUser().getLastName(), 
+            updatedCenterAdministrator.getBaseUser().getAddress(), 
+            updatedCenterAdministrator.getBaseUser().getCity(), 
+            updatedCenterAdministrator.getBaseUser().getCountry(), 
+            updatedCenterAdministrator.getBaseUser().getPhoneNumber(), 
+            updatedCenterAdministrator.getBaseUser().getJmbg(),
+            updatedCenterAdministrator.getBaseUser().getGender(),
+            updatedCenterAdministrator.getBaseUser().getProfession(),
+            updatedCenterAdministrator.getBaseUser().getEducation() 
+        );
 
-    //     CenterAdministrator centerAdministrator = new CenterAdministrator(
-    //         centerAdministrator2.getEmail(),
-    //         centerAdministratorDTO.getPassword(), 
-    //         centerAdministrator2.getFirstName(), 
-    //         centerAdministrator2.getLastName(), 
-    //         centerAdministrator2.getAddress(), 
-    //         centerAdministrator2.getCity(), 
-    //         centerAdministrator2.getCountry(), 
-    //         centerAdministrator2.getPhoneNumber(), 
-    //         centerAdministrator2.getJmbg(), 
-    //         centerAdministrator2.getGender(), 
-    //         centerAdministrator2.getProfession(), 
-    //         centerAdministrator2.getEducation()
-    //     );
+        return new ResponseEntity<>(updatedCenterAdministratorDTO, HttpStatus.OK);
+    }
 
-    //     centerAdministrator.setId(adminCenterId);
+    @GetMapping(value = "/getOne/{centerAdministratorId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CenterAdministratorDTO> getOne(@PathVariable Long centerAdministratorId) throws Exception {
 
-    //     CenterAdministrator updatedCenterAdministrator = centerAdministratorService.updatePassword(centerAdministrator);
+        CenterAdministrator centerAdministrator = this.centerAdministratorService.findOne(centerAdministratorId);
 
-    //     CenterAdministratorDTO updatedCenterAdministratorDTO = new CenterAdministratorDTO(
-    //         updatedCenterAdministrator.getId(),
-    //         updatedCenterAdministrator.getEmail(),
-    //         updatedCenterAdministrator.getPassword(),
-    //         updatedCenterAdministrator.getFirstName(), 
-    //         updatedCenterAdministrator.getLastName(), 
-    //         updatedCenterAdministrator.getAddress(), 
-    //         updatedCenterAdministrator.getCity(), 
-    //         updatedCenterAdministrator.getCountry(), 
-    //         updatedCenterAdministrator.getPhoneNumber(), 
-    //         updatedCenterAdministrator.getJmbg(),
-    //         updatedCenterAdministrator.getGender().toString(),
-    //         updatedCenterAdministrator.getProfession(),
-    //         updatedCenterAdministrator.getEducation() 
-    //     );
+        CenterAdministratorDTO centerAdministratorDTO = new CenterAdministratorDTO(
+            centerAdministrator.getBaseUser().getId(), 
+            centerAdministrator.getBaseUser().getEmail(),
+            centerAdministrator.getBaseUser().getPassword(),
+            centerAdministrator.getBaseUser().getFirstName(),
+            centerAdministrator.getBaseUser().getLastName(),
+            centerAdministrator.getBaseUser().getAddress(), 
+            centerAdministrator.getBaseUser().getCity(), 
+            centerAdministrator.getBaseUser().getCountry(), 
+            centerAdministrator.getBaseUser().getPhoneNumber(), 
+            centerAdministrator.getBaseUser().getJmbg(), 
+            centerAdministrator.getBaseUser().getGender(), 
+            centerAdministrator.getBaseUser().getProfession(), 
+            centerAdministrator.getBaseUser().getEducation());
 
-    //     return new ResponseEntity<>(updatedCenterAdministratorDTO, HttpStatus.OK);
-    // }
-
-    // @GetMapping(value = "/getOne/{centerAdministratorId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<CenterAdministratorDTO> getOne(@PathVariable Long centerAdministratorId) {
-
-    //     CenterAdministrator centerAdministrator = this.centerAdministratorService.findOne(centerAdministratorId);
-
-    //     CenterAdministratorDTO centerAdministratorDTO = new CenterAdministratorDTO(
-    //         centerAdministrator.getId(), 
-    //         centerAdministrator.getEmail(),
-    //         centerAdministrator.getPassword(),
-    //         centerAdministrator.getFirstName(),
-    //         centerAdministrator.getLastName(),
-    //         centerAdministrator.getAddress(), 
-    //         centerAdministrator.getCity(), 
-    //         centerAdministrator.getCountry(), 
-    //         centerAdministrator.getPhoneNumber(), 
-    //         centerAdministrator.getJmbg(), 
-    //         centerAdministrator.getGender().toString(), 
-    //         centerAdministrator.getProfession(), 
-    //         centerAdministrator.getEducation());
-
-    //     return new ResponseEntity<>(centerAdministratorDTO, HttpStatus.OK);
-    // }
+        return new ResponseEntity<>(centerAdministratorDTO, HttpStatus.OK);
+    }
 
     @PostMapping(value = "/createNewCenterAdmin/{SystemAdminId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CenterAdministratorDTO> createCenterAdmin(@PathVariable("SystemAdminId") Long systemAdminId, @RequestBody UserDTO userDTO) throws Exception{
@@ -185,7 +142,7 @@ public class CenterAdministratorController {
             newCenterAdministrator.getBaseUser().getCountry(),
             newCenterAdministrator.getBaseUser().getPhoneNumber(),
             newCenterAdministrator.getBaseUser().getJmbg(), 
-            newCenterAdministrator.getBaseUser().getGender().toString(), 
+            newCenterAdministrator.getBaseUser().getGender(), 
             newCenterAdministrator.getBaseUser().getProfession(), 
             newCenterAdministrator.getBaseUser().getEducation()
         );
@@ -193,33 +150,35 @@ public class CenterAdministratorController {
         return new ResponseEntity<>(newCenterAdministratorDTO, HttpStatus.CREATED);
     }
 
-    // @GetMapping(value = "/{centerId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<List<CenterAdministratorDTO>> getCenterAdministratorsByCenterId(@PathVariable Long centerId) {
+    //vraca jedan objekat ne vraca listu
+    @GetMapping(value = "/{centerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CenterAdministratorDTO>> getCenterAdministratorsByCenterId(@PathVariable Long centerId) {
 
-    //     List<CenterAdministrator> centerAdministratorList = this.centerAdministratorService.findAllByCenterId(centerId);
+        List<CenterAdministrator> centerAdministratorList = this.centerAdministratorService.findAllByCenterId(centerId);
 
-    //     List<CenterAdministratorDTO> centerAdministratorDTOs = new ArrayList<>();
+        List<CenterAdministratorDTO> centerAdministratorDTOs = new ArrayList<CenterAdministratorDTO>();
 
-    //     for(CenterAdministrator centerAdministrator : centerAdministratorList){
-    //         CenterAdministratorDTO centerAdministratorDTO = new CenterAdministratorDTO(
-    //             centerAdministrator.getId(),
-    //             centerAdministrator.getEmail(),
-    //             centerAdministrator.getPassword(), 
-    //             centerAdministrator.getFirstName(),
-    //             centerAdministrator.getLastName(), 
-    //             centerAdministrator.getAddress(), 
-    //             centerAdministrator.getCity(), 
-    //             centerAdministrator.getCountry(), 
-    //             centerAdministrator.getPhoneNumber(), 
-    //             centerAdministrator.getJmbg(), 
-    //             centerAdministrator.getGender().toString(), 
-    //             centerAdministrator.getProfession(), 
-    //             centerAdministrator.getEducation()
-    //         );
-    //         centerAdministratorDTOs.add(centerAdministratorDTO);
-    //     }
+        for(CenterAdministrator centerAdministrator : centerAdministratorList){
+            System.out.println(centerAdministrator.getBaseUser().getId() + " ******************************");
+            CenterAdministratorDTO centerAdministratorDTO = new CenterAdministratorDTO(
+                centerAdministrator.getBaseUser().getId(),
+                centerAdministrator.getBaseUser().getEmail(),
+                centerAdministrator.getBaseUser().getPassword(), 
+                centerAdministrator.getBaseUser().getFirstName(),
+                centerAdministrator.getBaseUser().getLastName(), 
+                centerAdministrator.getBaseUser().getAddress(), 
+                centerAdministrator.getBaseUser().getCity(), 
+                centerAdministrator.getBaseUser().getCountry(), 
+                centerAdministrator.getBaseUser().getPhoneNumber(), 
+                centerAdministrator.getBaseUser().getJmbg(), 
+                centerAdministrator.getBaseUser().getGender(), 
+                centerAdministrator.getBaseUser().getProfession(), 
+                centerAdministrator.getBaseUser().getEducation()
+            );
+            centerAdministratorDTOs.add(centerAdministratorDTO);
+        }
 
-    //     return new ResponseEntity<>(centerAdministratorDTOs, HttpStatus.OK);
-    // }
+        return new ResponseEntity<>(centerAdministratorDTOs, HttpStatus.OK);
+    }
 
 }

@@ -37,7 +37,7 @@ public class SystemAdministratorDTO {
     }
 
     public SystemAdministratorDTO(Long id, String email, String password, String firstName, String lastName,
-            String address, String city, String country, String phoneNumber, String jmbg, String gender,
+            String address, String city, String country, String phoneNumber, String jmbg, Gender gender,
             String profession, String education) {
         this.id = id;
         this.email = email;
@@ -49,7 +49,7 @@ public class SystemAdministratorDTO {
         this.country = country;
         this.phoneNumber = phoneNumber;
         this.jmbg = jmbg;
-        this.gender = gender;
+        this.gender = String.valueOf(gender);
         this.profession = profession;
         this.education = education;
     }
