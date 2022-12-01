@@ -15,6 +15,7 @@ import ShowAdminCenters from './components/ShowAdminCenters'
 import NewCenter from './components/NewCenter'
 import CenterAdministratorNew from './components/CenterAdministratorNew'
 import RegularUsers from './components/RegularUsers'
+import Login from './components/Login';
 
 ReactDOM.render(
   <Router>
@@ -31,6 +32,8 @@ ReactDOM.render(
       <Route path='/newCenter' element={<NewCenter/>}/>
       <Route path='/centerAdministrator' element={<CenterAdministratorNew/>}/>
       <Route path='/regularUsers' element={<RegularUsers/>}/>
+      <Route path='/logIn' element={<Login/>}/>
+
     </Routes>
   </Router>,
   document.getElementById('root')

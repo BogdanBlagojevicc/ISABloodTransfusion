@@ -50,6 +50,9 @@ public class AuthenticationController {
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
 				authenticationRequest.getUsername(), authenticationRequest.getPassword()));
 
+		System.out.println("********* " + authenticationRequest.getUsername().toString() + " " + authenticationRequest.getPassword().toString() +
+		"*********************************");
+
 		// Ukoliko je autentifikacija uspesna, ubaci korisnika u trenutni security
 		// kontekst
 		SecurityContextHolder.getContext().setAuthentication(authentication);

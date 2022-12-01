@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,6 +69,7 @@ public class CenterAdministratorController {
     }
 
     @PutMapping(value = "/updatePassword/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('center_administrator')")
     public ResponseEntity<CenterAdministratorDTO> updatePassword(@PathVariable Long id, @RequestBody CenterAdministratorDTO centerAdministratorDTO) throws Exception{
 
         CenterAdministrator updatedCenterAdministrator = this.centerAdministratorService.updatePassword(centerAdministratorDTO);
@@ -150,8 +152,8 @@ public class CenterAdministratorController {
         return new ResponseEntity<>(newCenterAdministratorDTO, HttpStatus.CREATED);
     }
 
-    //vraca jedan objekat ne vraca listu
     @GetMapping(value = "/{centerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('center_administrator')")
     public ResponseEntity<List<CenterAdministratorDTO>> getCenterAdministratorsByCenterId(@PathVariable Long centerId) {
 
         List<CenterAdministrator> centerAdministratorList = this.centerAdministratorService.findAllByCenterId(centerId);
@@ -159,7 +161,6 @@ public class CenterAdministratorController {
         List<CenterAdministratorDTO> centerAdministratorDTOs = new ArrayList<CenterAdministratorDTO>();
 
         for(CenterAdministrator centerAdministrator : centerAdministratorList){
-            System.out.println(centerAdministrator.getBaseUserCA().getId() + " ******************************");
             CenterAdministratorDTO centerAdministratorDTO = new CenterAdministratorDTO(
                 centerAdministrator.getBaseUserCA().getId(),
                 centerAdministrator.getBaseUserCA().getUsername(),

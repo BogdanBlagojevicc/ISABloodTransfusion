@@ -83,7 +83,7 @@ public class User implements UserDetails {
     private SystemAdministrator systemAdministrator;
 
     @Column(name = "enabled")
-    private boolean enabled;
+    private boolean enabled = true;
 
     @Column(name = "last_password_reset_date")
     private Timestamp lastPasswordResetDate;
