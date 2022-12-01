@@ -22,8 +22,6 @@ import com.example.isa.security.auth.TokenAuthenticationFilter;
 import com.example.isa.service.CustomUserDetailsService;
 import com.example.isa.util.TokenUtils;
 
-// import rs.ac.uns.ftn.springsecurityexample.service.impl.CustomUserDetailsService;
-
 @Configuration
 // Injektovanje bean-a za bezbednost 
 @EnableWebSecurity

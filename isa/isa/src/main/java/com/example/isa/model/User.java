@@ -73,8 +73,6 @@ public class User implements UserDetails {
     @Column
     private String education;
 
-
-
     @OneToOne(mappedBy = "baseUserCA", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private CenterAdministrator centerAdministrator;
 
@@ -159,10 +157,4 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
-
-
-    
-
-    
 }

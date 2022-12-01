@@ -8,6 +8,10 @@ VALUES ('Kisacka 1', 2, 'Mepublika Srbija', 'dobro', '2000-10-11', 'braon',  '20
 INSERT INTO centers (address, average_grade, country, description, end_time, name, start_time) 
 VALUES ('Kisacka 1', 9, 'Aepublika Srbija', 'lose', '2000-10-11', 'zeleni',  '2000-10-10');
 
+INSERT INTO ROLE (name) VALUES('system_admin');
+INSERT INTO ROLE (name) VALUES('regular_user');
+INSERT INTO ROLE (name) VALUES('center_admin');
+
 
 INSERT INTO warehouses (bandage, blood_quantity0, blood_quantitya, blood_quantityab, blood_quantityb, needles, test_tubes, centerwh_id)
 VALUES (1, 2, 3, 4, 5, 6, 7, 1);
@@ -39,6 +43,12 @@ VALUES(3, 1, 1);
 
 INSERT INTO centeradministrators(user_id, centercas_id, term_id)
 VALUES(4, 1, 1);
+
+INSERT INTO user_role (user_id, role_id) VALUES (3, 3);
+INSERT INTO user_role (user_id, role_id) VALUES (4, 3);
+
+INSERT INTO user_role (user_id, role_id) VALUES (2, 1);
+INSERT INTO user_role (user_id, role_id) VALUES (1, 2);
 
 INSERT INTO complaints(response, text, centerco_id, center_administrator_id, regular_user_id, system_administrator_id)
 VALUES ('dobar', 'neki test', 1, 1, 1 ,1);
