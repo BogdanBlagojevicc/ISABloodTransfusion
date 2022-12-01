@@ -51,7 +51,7 @@ public class RegularUserController {
     @PostMapping(value = "/regularUserRegistration", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RegularUserDTO> createRegularUser(@RequestBody UserDTO userDTO) throws Exception{
 
-        User user = new User(userDTO.getEmail(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getAddress(),
+        User user = new User(userDTO.getUsername(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getAddress(),
         userDTO.getCity(), userDTO.getCountry(), userDTO.getPhoneNumber(), userDTO.getJmbg(), Gender.valueOf(userDTO.getGender()), userDTO.getProfession(), userDTO.getEducation());
         
         User newUser = this.userService.create(user);
@@ -61,7 +61,7 @@ public class RegularUserController {
         RegularUser newRegularUser = regularUserService.create(regularUser);
 
         RegularUserDTO newRegularUserDTO = new RegularUserDTO(
-            newRegularUser.getBaseUserRU().getEmail(),
+            newRegularUser.getBaseUserRU().getUsername(),
             newRegularUser.getBaseUserRU().getFirstName(),
             newRegularUser.getBaseUserRU().getLastName(), 
             newRegularUser.getBaseUserRU().getAddress(),
@@ -90,7 +90,7 @@ public class RegularUserController {
 
        RegularUserDTO regularUserDTO = new RegularUserDTO(
         user.getId(),
-        user.getEmail(), 
+        user.getUsername(), 
         user.getPassword(), 
         user.getFirstName(),
         user.getLastName() ,
@@ -119,7 +119,7 @@ public class RegularUserController {
 
         RegularUserDTO updatedRegularUserDTO = new RegularUserDTO(
             updatedRegularUser.getBaseUserRU().getId(),
-            updatedRegularUser.getBaseUserRU().getEmail(),
+            updatedRegularUser.getBaseUserRU().getUsername(),
             updatedRegularUser.getBaseUserRU().getPassword(),
             updatedRegularUser.getBaseUserRU().getFirstName(),
             updatedRegularUser.getBaseUserRU().getLastName(),

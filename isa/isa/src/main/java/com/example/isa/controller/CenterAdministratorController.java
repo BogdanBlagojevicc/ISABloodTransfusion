@@ -49,7 +49,7 @@ public class CenterAdministratorController {
 
         CenterAdministratorDTO updatedCenterAdministratorDTO = new CenterAdministratorDTO(
             updatedCenterAdministrator.getBaseUserCA().getId(),
-            updatedCenterAdministrator.getBaseUserCA().getEmail(),
+            updatedCenterAdministrator.getBaseUserCA().getUsername(),
             updatedCenterAdministrator.getBaseUserCA().getPassword(),
             updatedCenterAdministrator.getBaseUserCA().getFirstName(),
             updatedCenterAdministrator.getBaseUserCA().getLastName(),
@@ -76,7 +76,7 @@ public class CenterAdministratorController {
 
         CenterAdministratorDTO updatedCenterAdministratorDTO = new CenterAdministratorDTO(
             updatedCenterAdministrator.getBaseUserCA().getId(),
-            updatedCenterAdministrator.getBaseUserCA().getEmail(),
+            updatedCenterAdministrator.getBaseUserCA().getUsername(),
             updatedCenterAdministrator.getBaseUserCA().getPassword(),
             updatedCenterAdministrator.getBaseUserCA().getFirstName(), 
             updatedCenterAdministrator.getBaseUserCA().getLastName(), 
@@ -100,7 +100,7 @@ public class CenterAdministratorController {
 
         CenterAdministratorDTO centerAdministratorDTO = new CenterAdministratorDTO(
             centerAdministrator.getBaseUserCA().getId(), 
-            centerAdministrator.getBaseUserCA().getEmail(),
+            centerAdministrator.getBaseUserCA().getUsername(),
             centerAdministrator.getBaseUserCA().getPassword(),
             centerAdministrator.getBaseUserCA().getFirstName(),
             centerAdministrator.getBaseUserCA().getLastName(),
@@ -122,7 +122,7 @@ public class CenterAdministratorController {
         //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         // }
                 
-        User user = new User(userDTO.getEmail(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getAddress(),
+        User user = new User(userDTO.getUsername(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getAddress(),
         userDTO.getCity(), userDTO.getCountry(), userDTO.getPhoneNumber(), userDTO.getJmbg(), Gender.valueOf(userDTO.getGender()), userDTO.getProfession(), userDTO.getEducation());
         
         User newUser = this.userService.create(user);
@@ -133,7 +133,7 @@ public class CenterAdministratorController {
 
         CenterAdministratorDTO newCenterAdministratorDTO = new CenterAdministratorDTO(
             newCenterAdministrator.getBaseUserCA().getId(),
-            newCenterAdministrator.getBaseUserCA().getEmail(), 
+            newCenterAdministrator.getBaseUserCA().getUsername(), 
             newCenterAdministrator.getBaseUserCA().getPassword(), 
             newCenterAdministrator.getBaseUserCA().getFirstName(), 
             newCenterAdministrator.getBaseUserCA().getLastName(),
@@ -162,7 +162,7 @@ public class CenterAdministratorController {
             System.out.println(centerAdministrator.getBaseUserCA().getId() + " ******************************");
             CenterAdministratorDTO centerAdministratorDTO = new CenterAdministratorDTO(
                 centerAdministrator.getBaseUserCA().getId(),
-                centerAdministrator.getBaseUserCA().getEmail(),
+                centerAdministrator.getBaseUserCA().getUsername(),
                 centerAdministrator.getBaseUserCA().getPassword(), 
                 centerAdministrator.getBaseUserCA().getFirstName(),
                 centerAdministrator.getBaseUserCA().getLastName(), 

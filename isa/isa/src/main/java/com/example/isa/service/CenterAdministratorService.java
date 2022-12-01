@@ -41,8 +41,8 @@ public class CenterAdministratorService {
             throw new Exception("Center Administrator doesn't exist");
         }
 
-        if(!centerAdministratorDTO.getEmail().equals("")){
-            centerAdministratorToUpdate.getBaseUserCA().setEmail(centerAdministratorDTO.getEmail());
+        if(!centerAdministratorDTO.getUsername().equals("")){
+            centerAdministratorToUpdate.getBaseUserCA().setUsername(centerAdministratorDTO.getUsername());
         }
 
         if(!centerAdministratorDTO.getFirstName().equals("")){
@@ -79,7 +79,7 @@ public class CenterAdministratorService {
 
         User updatedUser = new User(
             centerAdministratorDTO.getId(),
-            centerAdministratorDTO.getEmail(),
+            centerAdministratorDTO.getUsername(),
             centerAdministratorDTO.getPassword(),
             centerAdministratorDTO.getFirstName(),
             centerAdministratorDTO.getLastName(),

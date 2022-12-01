@@ -9,7 +9,7 @@ import lombok.Setter;
 public class RegularUserDTO {
     private Long id;
 
-    private String email;
+    private String username;
 
     private String password;
 
@@ -43,11 +43,11 @@ public class RegularUserDTO {
 
     }
 
-    public RegularUserDTO(Long id, String email, String password, String firstName, String lastName, String address,
+    public RegularUserDTO(Long id, String username, String password, String firstName, String lastName, String address,
             String city, String country, String phoneNumber, String jmbg, Gender gender2, String profession,
             String education, LoyaltyProgram loyaltyProgram, Integer points, Integer penalties) {
         this.id = id;
-        this.email = email;
+        this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -64,10 +64,10 @@ public class RegularUserDTO {
         this.penalties = penalties;
     }
 
-    public RegularUserDTO(String email, String firstName, String lastName, String address,
+    public RegularUserDTO(String username, String firstName, String lastName, String address,
             String city, String country, String phoneNumber, String jmbg, Gender gender2, String profession,
             String education, LoyaltyProgram loyaltyProgram, Integer points, Integer penalties) {
-        this.email = email;
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;

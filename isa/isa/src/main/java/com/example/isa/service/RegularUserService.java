@@ -52,7 +52,7 @@ public class RegularUserService {
 
         User updatedUser = new User(
             id,
-            regularUserDTO.getEmail(),
+            regularUserDTO.getUsername(),
             regularUserDTO.getPassword(),
             regularUserDTO.getFirstName(),
             regularUserDTO.getLastName(),

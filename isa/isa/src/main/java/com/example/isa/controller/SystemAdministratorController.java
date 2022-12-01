@@ -43,7 +43,7 @@ public class SystemAdministratorController {
         //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         // }
         
-        User user = new User(userDTO.getEmail(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getAddress(),
+        User user = new User(userDTO.getUsername(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getAddress(),
         userDTO.getCity(), userDTO.getCountry(), userDTO.getPhoneNumber(), userDTO.getJmbg(), Gender.valueOf(userDTO.getGender()), userDTO.getProfession(), userDTO.getEducation());
         
         User newUser = this.userService.create(user);
@@ -54,7 +54,7 @@ public class SystemAdministratorController {
 
         SystemAdministratorDTO newSystemAdministratorDTO = new SystemAdministratorDTO(
                 newSystemAdministrator.getBaseUserSA().getId(),
-                newSystemAdministrator.getBaseUserSA().getEmail(),
+                newSystemAdministrator.getBaseUserSA().getUsername(),
                 newSystemAdministrator.getBaseUserSA().getPassword(),
                 newSystemAdministrator.getBaseUserSA().getFirstName(),
                 newSystemAdministrator.getBaseUserSA().getLastName(), 
@@ -78,7 +78,7 @@ public class SystemAdministratorController {
 
         SystemAdministratorDTO updatedSystemAdministratorDTO = new SystemAdministratorDTO(
             updatedSystemAdministrator.getBaseUserSA().getId(),
-            updatedSystemAdministrator.getBaseUserSA().getEmail(),
+            updatedSystemAdministrator.getBaseUserSA().getUsername(),
             updatedSystemAdministrator.getBaseUserSA().getPassword(),
             updatedSystemAdministrator.getBaseUserSA().getFirstName(), 
             updatedSystemAdministrator.getBaseUserSA().getLastName(), 
