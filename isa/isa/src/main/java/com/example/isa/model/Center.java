@@ -44,16 +44,16 @@ public class Center implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date endTime;
 
-    @OneToOne(mappedBy = "center")
+    @OneToOne(mappedBy = "centerWH", fetch = FetchType.LAZY)
     private Warehouse wareHouse;
 
-    @OneToOne(mappedBy = "center")
+    @OneToOne(mappedBy = "centerGR", fetch = FetchType.LAZY)
     private Grade grade;
 
-    @OneToOne(mappedBy = "center")
+    @OneToOne(mappedBy = "centerCO", fetch = FetchType.LAZY)
     private Complaint complaint;
 
-    @OneToMany(mappedBy = "center", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "centerCAS", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CenterAdministrator> administrators;
 
     //slobodni termini za rezervaciju

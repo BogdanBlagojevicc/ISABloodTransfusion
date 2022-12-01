@@ -33,7 +33,7 @@ public class SystemAdministrator {
 
     @OneToOne
     @JoinColumn(name = "userId")
-    private User baseUser;
+    private User baseUserSA;
 
     @OneToMany(mappedBy = "systemAdministrator", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Complaint> complaints;
@@ -42,8 +42,8 @@ public class SystemAdministrator {
 
     }
 
-    public SystemAdministrator(User baseUser){
-        this.baseUser = baseUser;
+    public SystemAdministrator(User baseUserSA){
+        this.baseUserSA = baseUserSA;
     }
 
 } 

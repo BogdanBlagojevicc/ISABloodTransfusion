@@ -27,7 +27,7 @@ public class CenterAdministratorService {
     }
 
     public CenterAdministrator findOne(Long id) throws Exception{
-        CenterAdministrator centerAdministrator = this.centerAdministratorRepository.findByBaseUserId(id);
+        CenterAdministrator centerAdministrator = this.centerAdministratorRepository.findByBaseUserCAId(id);
         if (centerAdministrator == null){
             throw new Exception("User does not exist");
         }
@@ -36,45 +36,45 @@ public class CenterAdministratorService {
 
     public CenterAdministrator update(CenterAdministratorDTO centerAdministratorDTO) throws Exception{
 
-        CenterAdministrator centerAdministratorToUpdate = this.centerAdministratorRepository.findByBaseUserId(centerAdministratorDTO.getId());
+        CenterAdministrator centerAdministratorToUpdate = this.centerAdministratorRepository.findByBaseUserCAId(centerAdministratorDTO.getId());
         if(centerAdministratorToUpdate == null){
             throw new Exception("Center Administrator doesn't exist");
         }
 
         if(!centerAdministratorDTO.getEmail().equals("")){
-            centerAdministratorToUpdate.getBaseUser().setEmail(centerAdministratorDTO.getEmail());
+            centerAdministratorToUpdate.getBaseUserCA().setEmail(centerAdministratorDTO.getEmail());
         }
 
         if(!centerAdministratorDTO.getFirstName().equals("")){
-            centerAdministratorToUpdate.getBaseUser().setFirstName(centerAdministratorDTO.getFirstName());
+            centerAdministratorToUpdate.getBaseUserCA().setFirstName(centerAdministratorDTO.getFirstName());
         }
 
         if(!centerAdministratorDTO.getLastName().equals("")){
-            centerAdministratorToUpdate.getBaseUser().setLastName(centerAdministratorDTO.getLastName());
+            centerAdministratorToUpdate.getBaseUserCA().setLastName(centerAdministratorDTO.getLastName());
         }
 
         if(!centerAdministratorDTO.getAddress().equals("")){
-            centerAdministratorToUpdate.getBaseUser().setAddress(centerAdministratorDTO.getAddress());
+            centerAdministratorToUpdate.getBaseUserCA().setAddress(centerAdministratorDTO.getAddress());
         }
 
         if(!centerAdministratorDTO.getCity().equals("")){
-            centerAdministratorToUpdate.getBaseUser().setCity(centerAdministratorDTO.getCity());
+            centerAdministratorToUpdate.getBaseUserCA().setCity(centerAdministratorDTO.getCity());
         }
 
         if(!centerAdministratorDTO.getCountry().equals("")){
-            centerAdministratorToUpdate.getBaseUser().setCountry(centerAdministratorDTO.getCountry());
+            centerAdministratorToUpdate.getBaseUserCA().setCountry(centerAdministratorDTO.getCountry());
         }
 
         if(!centerAdministratorDTO.getPhoneNumber().equals("")){
-            centerAdministratorToUpdate.getBaseUser().setPhoneNumber(centerAdministratorDTO.getPhoneNumber());
+            centerAdministratorToUpdate.getBaseUserCA().setPhoneNumber(centerAdministratorDTO.getPhoneNumber());
         }
 
         if(!centerAdministratorDTO.getProfession().equals("")){
-            centerAdministratorToUpdate.getBaseUser().setProfession(centerAdministratorDTO.getProfession());
+            centerAdministratorToUpdate.getBaseUserCA().setProfession(centerAdministratorDTO.getProfession());
         }
 
         if(!centerAdministratorDTO.getEducation().equals("")){
-            centerAdministratorToUpdate.getBaseUser().setEducation(centerAdministratorDTO.getEducation());
+            centerAdministratorToUpdate.getBaseUserCA().setEducation(centerAdministratorDTO.getEducation());
         }
 
         User updatedUser = new User(
@@ -95,20 +95,20 @@ public class CenterAdministratorService {
 
         User savedUser = this.userRepository.save(updatedUser);
 
-        centerAdministratorToUpdate.setBaseUser(savedUser);
+        centerAdministratorToUpdate.setBaseUserCA(savedUser);
 
         return centerAdministratorToUpdate;        
     }
 
     public CenterAdministrator updatePassword(CenterAdministratorDTO centerAdministratorDTO) throws Exception{
 
-        CenterAdministrator centerAdministratorToUpdate = this.centerAdministratorRepository.findByBaseUserId(centerAdministratorDTO.getId());
+        CenterAdministrator centerAdministratorToUpdate = this.centerAdministratorRepository.findByBaseUserCAId(centerAdministratorDTO.getId());
         if(centerAdministratorToUpdate == null){
             throw new Exception("Center Administrator doesn't exist");
         }
 
         if(!centerAdministratorDTO.getPassword().equals("")){
-            centerAdministratorToUpdate.getBaseUser().setPassword(centerAdministratorDTO.getPassword());
+            centerAdministratorToUpdate.getBaseUserCA().setPassword(centerAdministratorDTO.getPassword());
         }
 
         User userToUpdate = this.userRepository.getOne(centerAdministratorDTO.getId());
@@ -116,7 +116,7 @@ public class CenterAdministratorService {
 
         User updatedUser = this.userRepository.save(userToUpdate);
 
-        centerAdministratorToUpdate.setBaseUser(updatedUser);
+        centerAdministratorToUpdate.setBaseUserCA(updatedUser);
 
         //mozda ne treba
         //this.centerAdministratorRepository.save(centerAdministratorToUpdate);
@@ -126,13 +126,13 @@ public class CenterAdministratorService {
     }
 
     public CenterAdministrator create(CenterAdministrator centerAdministrator) throws Exception{
-        if(centerAdministrator.getBaseUser().getId() != null){
+        if(centerAdministrator.getBaseUserCA().getId() != null){
             throw new Exception("ID must be null");
         }
         return this.centerAdministratorRepository.save(centerAdministrator);
     }
 
     public List<CenterAdministrator> findAllByCenterId(Long centerId){
-        return this.centerAdministratorRepository.findAllCenterAdministrators(centerId);
+        return this.centerAdministratorRepository.findAllByCenterCASId(centerId);
     }
 }

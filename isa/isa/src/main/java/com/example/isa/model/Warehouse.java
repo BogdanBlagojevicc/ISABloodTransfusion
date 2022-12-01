@@ -38,14 +38,14 @@ public class Warehouse implements Serializable {
     private Integer bandage;
 
     @OneToOne
-    private Center center;
+    private Center centerWH;
 
     public Warehouse() {
     }
 
-    public Warehouse(Long id, Integer bloodQuantityA, Integer bloodQuantityB, Integer bloodQuantityAB, Integer bloodQuantity0, Integer needles, Integer testTubes, Integer bandage, Center center) {
+    public Warehouse(Long id, Integer bloodQuantityA, Integer bloodQuantityB, Integer bloodQuantityAB, Integer bloodQuantity0, Integer needles, Integer testTubes, Integer bandage, Center centerWH) {
         Id = id;
-        this.center = center;
+        this.centerWH = centerWH;
         this.bloodQuantityA = bloodQuantityA;
         this.bloodQuantityB = bloodQuantityB;
         this.bloodQuantityAB = bloodQuantityAB;

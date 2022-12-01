@@ -23,10 +23,10 @@ public class Complaint implements Serializable {
     @Column
     private String response;
 
-    @OneToOne
-    private Center center; 
+    @OneToOne(fetch = FetchType.LAZY)
+    private Center centerCO; 
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private CenterAdministrator centerAdministrator; 
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -62,13 +62,13 @@ public class User {
     @Column
     private String education;
 
-    @OneToOne(mappedBy = "baseUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "baseUserCA", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private CenterAdministrator centerAdministrator;
 
-    @OneToOne(mappedBy = "baseUser")
+    @OneToOne(mappedBy = "baseUserRU", fetch = FetchType.LAZY)
     private RegularUser regularUser;
 
-    @OneToOne(mappedBy = "baseUser")
+    @OneToOne(mappedBy = "baseUserSA", fetch = FetchType.LAZY)
     private SystemAdministrator systemAdministrator;
 
     public User() {

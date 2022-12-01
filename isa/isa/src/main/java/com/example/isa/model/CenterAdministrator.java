@@ -32,23 +32,23 @@ public class CenterAdministrator {
 
     @OneToOne
     @JoinColumn(name = "userId")
-    private User baseUser;
+    private User baseUserCA;
 
-    @OneToOne(mappedBy = "centerAdministrator")
+    @OneToOne(mappedBy = "centerAdministrator", fetch = FetchType.LAZY)
     private Complaint complaint;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Term term;
 
-    @ManyToOne(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
-    private Center center;
+    @ManyToOne(fetch= FetchType.LAZY, cascade = CascadeType.ALL)
+    private Center centerCAS;
 
     public CenterAdministrator(){
 
     }
 
-    public CenterAdministrator(User baseUser){
-        this.baseUser = baseUser;
+    public CenterAdministrator(User baseUserCA){
+        this.baseUserCA = baseUserCA;
     }
 
 

@@ -53,19 +53,19 @@ public class SystemAdministratorController {
         SystemAdministrator newSystemAdministrator = this.systemAdministratorService.create(systemAdministrator);
 
         SystemAdministratorDTO newSystemAdministratorDTO = new SystemAdministratorDTO(
-                newSystemAdministrator.getBaseUser().getId(),
-                newSystemAdministrator.getBaseUser().getEmail(),
-                newSystemAdministrator.getBaseUser().getPassword(),
-                newSystemAdministrator.getBaseUser().getFirstName(),
-                newSystemAdministrator.getBaseUser().getLastName(), 
-                newSystemAdministrator.getBaseUser().getAddress(),
-                newSystemAdministrator.getBaseUser().getCity(), 
-                newSystemAdministrator.getBaseUser().getCountry(),
-                newSystemAdministrator.getBaseUser().getPhoneNumber(),
-                newSystemAdministrator.getBaseUser().getJmbg(),
-                newSystemAdministrator.getBaseUser().getGender(), 
-                newSystemAdministrator.getBaseUser().getProfession(),
-                newSystemAdministrator.getBaseUser().getEducation()
+                newSystemAdministrator.getBaseUserSA().getId(),
+                newSystemAdministrator.getBaseUserSA().getEmail(),
+                newSystemAdministrator.getBaseUserSA().getPassword(),
+                newSystemAdministrator.getBaseUserSA().getFirstName(),
+                newSystemAdministrator.getBaseUserSA().getLastName(), 
+                newSystemAdministrator.getBaseUserSA().getAddress(),
+                newSystemAdministrator.getBaseUserSA().getCity(), 
+                newSystemAdministrator.getBaseUserSA().getCountry(),
+                newSystemAdministrator.getBaseUserSA().getPhoneNumber(),
+                newSystemAdministrator.getBaseUserSA().getJmbg(),
+                newSystemAdministrator.getBaseUserSA().getGender(), 
+                newSystemAdministrator.getBaseUserSA().getProfession(),
+                newSystemAdministrator.getBaseUserSA().getEducation()
         );
 
         return new ResponseEntity<>(newSystemAdministratorDTO, HttpStatus.CREATED);
@@ -77,19 +77,19 @@ public class SystemAdministratorController {
         SystemAdministrator updatedSystemAdministrator = this.systemAdministratorService.updatePassword(systemAdministratorDTO);
 
         SystemAdministratorDTO updatedSystemAdministratorDTO = new SystemAdministratorDTO(
-            updatedSystemAdministrator.getBaseUser().getId(),
-            updatedSystemAdministrator.getBaseUser().getEmail(),
-            updatedSystemAdministrator.getBaseUser().getPassword(),
-            updatedSystemAdministrator.getBaseUser().getFirstName(), 
-            updatedSystemAdministrator.getBaseUser().getLastName(), 
-            updatedSystemAdministrator.getBaseUser().getAddress(), 
-            updatedSystemAdministrator.getBaseUser().getCity(), 
-            updatedSystemAdministrator.getBaseUser().getCountry(), 
-            updatedSystemAdministrator.getBaseUser().getPhoneNumber(), 
-            updatedSystemAdministrator.getBaseUser().getJmbg(),
-            updatedSystemAdministrator.getBaseUser().getGender(),
-            updatedSystemAdministrator.getBaseUser().getProfession(),
-            updatedSystemAdministrator.getBaseUser().getEducation() 
+            updatedSystemAdministrator.getBaseUserSA().getId(),
+            updatedSystemAdministrator.getBaseUserSA().getEmail(),
+            updatedSystemAdministrator.getBaseUserSA().getPassword(),
+            updatedSystemAdministrator.getBaseUserSA().getFirstName(), 
+            updatedSystemAdministrator.getBaseUserSA().getLastName(), 
+            updatedSystemAdministrator.getBaseUserSA().getAddress(), 
+            updatedSystemAdministrator.getBaseUserSA().getCity(), 
+            updatedSystemAdministrator.getBaseUserSA().getCountry(), 
+            updatedSystemAdministrator.getBaseUserSA().getPhoneNumber(), 
+            updatedSystemAdministrator.getBaseUserSA().getJmbg(),
+            updatedSystemAdministrator.getBaseUserSA().getGender(),
+            updatedSystemAdministrator.getBaseUserSA().getProfession(),
+            updatedSystemAdministrator.getBaseUserSA().getEducation() 
         );
 
         return new ResponseEntity<>(updatedSystemAdministratorDTO, HttpStatus.OK);

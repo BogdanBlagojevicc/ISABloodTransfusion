@@ -9,7 +9,7 @@ INSERT INTO centers (address, average_grade, country, description, end_time, nam
 VALUES ('Kisacka 1', 9, 'Aepublika Srbija', 'lose', '2000-10-11', 'zeleni',  '2000-10-10');
 
 
-INSERT INTO warehouses (bandage, blood_quantity0, blood_quantitya, blood_quantityab, blood_quantityb, needles, test_tubes, center_id)
+INSERT INTO warehouses (bandage, blood_quantity0, blood_quantitya, blood_quantityab, blood_quantityb, needles, test_tubes, centerwh_id)
 VALUES (1, 2, 3, 4, 5, 6, 7, 1);
 
 INSERT INTO users (address, city, country, education, email, first_name, gender, jmbg, last_name, password, phone_number, profession)
@@ -34,16 +34,16 @@ VALUES(2);
 INSERT INTO terms (date_term, duration, center_term_id, regular_user_id)
 VALUES ('2000-10-10', 18, 1, 1);
 
-INSERT INTO centeradministrators(user_id, center_id, term_id)
+INSERT INTO centeradministrators(user_id, centercas_id, term_id)
 VALUES(3, 1, 1);
 
-INSERT INTO centeradministrators(user_id, center_id, term_id)
+INSERT INTO centeradministrators(user_id, centercas_id, term_id)
 VALUES(4, 1, 1);
 
-INSERT INTO complaints(response, text, center_id, center_administrator_id, regular_user_id, system_administrator_id)
+INSERT INTO complaints(response, text, centerco_id, center_administrator_id, regular_user_id, system_administrator_id)
 VALUES ('dobar', 'neki test', 1, 1, 1 ,1);
 
-INSERT INTO grades(grade, center_id, regular_user_id)
+INSERT INTO grades(grade, centergr_id, regular_user_id)
 VALUES (5, 1, 1);
 
 

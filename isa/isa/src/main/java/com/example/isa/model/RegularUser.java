@@ -28,10 +28,10 @@ public class RegularUser {
     @Column
     private Integer penalties;
 
-    @OneToOne(mappedBy = "regularUser")
+    @OneToOne(mappedBy = "regularUser", fetch = FetchType.LAZY)
     private Questionnaire questionnaire;
 
-    @OneToOne(mappedBy = "regularUser")
+    @OneToOne(mappedBy = "regularUser", fetch = FetchType.LAZY)
     private Grade grade;
 
     @OneToMany(mappedBy = "regular_user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -42,17 +42,17 @@ public class RegularUser {
 
     @OneToOne
     @JoinColumn(name = "userId")
-    private User baseUser;
+    private User baseUserRU;
 
     public RegularUser(){
 
     }
 
-    public RegularUser(LoyaltyProgram loyalty, Integer points, Integer penalties, User baseUser) {
+    public RegularUser(LoyaltyProgram loyalty, Integer points, Integer penalties, User baseUserRU) {
         this.loyalty = loyalty;
         this.points = points;
         this.penalties = penalties;
-        this.baseUser = baseUser;
+        this.baseUserRU = baseUserRU;
     }
 
     

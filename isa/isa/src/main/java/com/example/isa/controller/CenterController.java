@@ -218,7 +218,7 @@ public class CenterController {
     @GetMapping(value = "/getOneByCentersAdministratorId/{centerAdministratorId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CenterDTO> getByCentersAdministratorId(@PathVariable Long centerAdministratorId) throws Exception{
 
-        Center center = this.centerAdministratorService.findOne(centerAdministratorId).getCenter();
+        Center center = this.centerAdministratorService.findOne(centerAdministratorId).getCenterCAS();
 
         CenterDTO centerDTO = new CenterDTO(
             center.getId(),

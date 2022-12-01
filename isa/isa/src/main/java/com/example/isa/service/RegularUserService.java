@@ -29,7 +29,7 @@ public class RegularUserService {
 
     
     public RegularUser create(RegularUser regularUser) throws Exception{
-        if(regularUser.getBaseUser().getId() != null){
+        if(regularUser.getBaseUserRU().getId() != null){
             throw new Exception("ID must be null");
         }
         RegularUser newRegularUser = this.regularUserRepository.save(regularUser);
@@ -37,7 +37,7 @@ public class RegularUserService {
     }
 
     public RegularUser findOne(Long id) throws Exception{
-        RegularUser regularUser = this.regularUserRepository.findByBaseUserId(id);
+        RegularUser regularUser = this.regularUserRepository.findByBaseUserRUId(id);
         if(regularUser == null){
             throw new Exception("User does not exist");
         }
@@ -46,7 +46,7 @@ public class RegularUserService {
 
     public RegularUser update(Long id, RegularUserDTO regularUserDTO) throws Exception{
 
-        if(this.regularUserRepository.findByBaseUserId(id) == null){
+        if(this.regularUserRepository.findByBaseUserRUId(id) == null){
             throw new Exception("User does not exist");
         }
 
