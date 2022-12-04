@@ -40,7 +40,8 @@ public class CenterAdministrator {
     @OneToOne
     private Term term;
 
-    @ManyToOne(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch= FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "center_id")
     private Center center;
 
     public CenterAdministrator(){

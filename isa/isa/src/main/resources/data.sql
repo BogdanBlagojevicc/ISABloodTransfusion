@@ -1,11 +1,11 @@
-INSERT INTO centers (address, average_grade, country, description, end_time, name, start_time) 
+INSERT INTO centers (address, average_grade, country, description, end_time, name, start_time)
 VALUES ('Kisacka 1', 8, 'Republika Srbija', 'odlicno', '2000-10-11', 'srbija',  '2000-10-10');
 
-INSERT INTO centers (address, average_grade, country, description, end_time, name, start_time) 
+INSERT INTO centers (address, average_grade, country, description, end_time, name, start_time)
 VALUES ('Kisacka 1', 2, 'Mepublika Srbija', 'dobro', '2000-10-11', 'braon',  '2000-10-10');
 
 
-INSERT INTO centers (address, average_grade, country, description, end_time, name, start_time) 
+INSERT INTO centers (address, average_grade, country, description, end_time, name, start_time)
 VALUES ('Kisacka 1', 9, 'Aepublika Srbija', 'lose', '2000-10-11', 'zeleni',  '2000-10-10');
 
 
@@ -25,7 +25,7 @@ VALUES ('micurinova2', 'novi sad', 'srbija', 'srednja', 'sesa@gmail.com', 'nenad
 INSERT INTO users (address, city, country, education, email, first_name, gender, jmbg, last_name, password, phone_number, profession)
 VALUES ('zepsa', 'novi sad', 'bosna', 'srednja', 'sladjana@gmail.com', 'kava', 'MALE', '67452', 'solja', '1286634', '45445', 'radi');
 
-INSERT INTO regularusers (loyalty, penalties, points, user_id) 
+INSERT INTO regularusers (loyalty, penalties, points, user_id)
 VALUES ('REGULAR', 0, 0, 1);
 
 INSERT INTO systemadministrators(user_id)
