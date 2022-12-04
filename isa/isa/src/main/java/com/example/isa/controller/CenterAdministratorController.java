@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,19 +49,19 @@ public class CenterAdministratorController {
         CenterAdministrator updatedCenterAdministrator = this.centerAdministratorService.update(centerAdministratorDTO);
 
         CenterAdministratorDTO updatedCenterAdministratorDTO = new CenterAdministratorDTO(
-            updatedCenterAdministrator.getBaseUser().getId(),
-            updatedCenterAdministrator.getBaseUser().getEmail(),
-            updatedCenterAdministrator.getBaseUser().getPassword(),
-            updatedCenterAdministrator.getBaseUser().getFirstName(),
-            updatedCenterAdministrator.getBaseUser().getLastName(),
-            updatedCenterAdministrator.getBaseUser().getAddress(),
-            updatedCenterAdministrator.getBaseUser().getCity(),
-            updatedCenterAdministrator.getBaseUser().getCountry(),
-            updatedCenterAdministrator.getBaseUser().getPhoneNumber(),
-            updatedCenterAdministrator.getBaseUser().getJmbg(),
-            updatedCenterAdministrator.getBaseUser().getGender(),
-            updatedCenterAdministrator.getBaseUser().getProfession(),
-            updatedCenterAdministrator.getBaseUser().getEducation()
+            updatedCenterAdministrator.getBaseUserCA().getId(),
+            updatedCenterAdministrator.getBaseUserCA().getUsername(),
+            updatedCenterAdministrator.getBaseUserCA().getPassword(),
+            updatedCenterAdministrator.getBaseUserCA().getFirstName(),
+            updatedCenterAdministrator.getBaseUserCA().getLastName(),
+            updatedCenterAdministrator.getBaseUserCA().getAddress(),
+            updatedCenterAdministrator.getBaseUserCA().getCity(),
+            updatedCenterAdministrator.getBaseUserCA().getCountry(),
+            updatedCenterAdministrator.getBaseUserCA().getPhoneNumber(),
+            updatedCenterAdministrator.getBaseUserCA().getJmbg(),
+            updatedCenterAdministrator.getBaseUserCA().getGender(),
+            updatedCenterAdministrator.getBaseUserCA().getProfession(),
+            updatedCenterAdministrator.getBaseUserCA().getEducation()
         );
 
         return new ResponseEntity<>(updatedCenterAdministratorDTO, HttpStatus.OK);
@@ -68,6 +69,7 @@ public class CenterAdministratorController {
     }
 
     @PutMapping(value = "/updatePassword/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('center_administrator')")
     public ResponseEntity<CenterAdministratorDTO> updatePassword(@PathVariable Long id, @RequestBody CenterAdministratorDTO centerAdministratorDTO) throws Exception{
 
         CenterAdministrator updatedCenterAdministrator = this.centerAdministratorService.updatePassword(centerAdministratorDTO);
@@ -75,19 +77,19 @@ public class CenterAdministratorController {
 
 
         CenterAdministratorDTO updatedCenterAdministratorDTO = new CenterAdministratorDTO(
-            updatedCenterAdministrator.getBaseUser().getId(),
-            updatedCenterAdministrator.getBaseUser().getEmail(),
-            updatedCenterAdministrator.getBaseUser().getPassword(),
-            updatedCenterAdministrator.getBaseUser().getFirstName(), 
-            updatedCenterAdministrator.getBaseUser().getLastName(), 
-            updatedCenterAdministrator.getBaseUser().getAddress(), 
-            updatedCenterAdministrator.getBaseUser().getCity(), 
-            updatedCenterAdministrator.getBaseUser().getCountry(), 
-            updatedCenterAdministrator.getBaseUser().getPhoneNumber(), 
-            updatedCenterAdministrator.getBaseUser().getJmbg(),
-            updatedCenterAdministrator.getBaseUser().getGender(),
-            updatedCenterAdministrator.getBaseUser().getProfession(),
-            updatedCenterAdministrator.getBaseUser().getEducation() 
+            updatedCenterAdministrator.getBaseUserCA().getId(),
+            updatedCenterAdministrator.getBaseUserCA().getUsername(),
+            updatedCenterAdministrator.getBaseUserCA().getPassword(),
+            updatedCenterAdministrator.getBaseUserCA().getFirstName(), 
+            updatedCenterAdministrator.getBaseUserCA().getLastName(), 
+            updatedCenterAdministrator.getBaseUserCA().getAddress(), 
+            updatedCenterAdministrator.getBaseUserCA().getCity(), 
+            updatedCenterAdministrator.getBaseUserCA().getCountry(), 
+            updatedCenterAdministrator.getBaseUserCA().getPhoneNumber(), 
+            updatedCenterAdministrator.getBaseUserCA().getJmbg(),
+            updatedCenterAdministrator.getBaseUserCA().getGender(),
+            updatedCenterAdministrator.getBaseUserCA().getProfession(),
+            updatedCenterAdministrator.getBaseUserCA().getEducation() 
         );
 
         return new ResponseEntity<>(updatedCenterAdministratorDTO, HttpStatus.OK);
@@ -99,19 +101,19 @@ public class CenterAdministratorController {
         CenterAdministrator centerAdministrator = this.centerAdministratorService.findOne(centerAdministratorId);
 
         CenterAdministratorDTO centerAdministratorDTO = new CenterAdministratorDTO(
-            centerAdministrator.getBaseUser().getId(), 
-            centerAdministrator.getBaseUser().getEmail(),
-            centerAdministrator.getBaseUser().getPassword(),
-            centerAdministrator.getBaseUser().getFirstName(),
-            centerAdministrator.getBaseUser().getLastName(),
-            centerAdministrator.getBaseUser().getAddress(), 
-            centerAdministrator.getBaseUser().getCity(), 
-            centerAdministrator.getBaseUser().getCountry(), 
-            centerAdministrator.getBaseUser().getPhoneNumber(), 
-            centerAdministrator.getBaseUser().getJmbg(), 
-            centerAdministrator.getBaseUser().getGender(), 
-            centerAdministrator.getBaseUser().getProfession(), 
-            centerAdministrator.getBaseUser().getEducation());
+            centerAdministrator.getBaseUserCA().getId(), 
+            centerAdministrator.getBaseUserCA().getUsername(),
+            centerAdministrator.getBaseUserCA().getPassword(),
+            centerAdministrator.getBaseUserCA().getFirstName(),
+            centerAdministrator.getBaseUserCA().getLastName(),
+            centerAdministrator.getBaseUserCA().getAddress(), 
+            centerAdministrator.getBaseUserCA().getCity(), 
+            centerAdministrator.getBaseUserCA().getCountry(), 
+            centerAdministrator.getBaseUserCA().getPhoneNumber(), 
+            centerAdministrator.getBaseUserCA().getJmbg(), 
+            centerAdministrator.getBaseUserCA().getGender(), 
+            centerAdministrator.getBaseUserCA().getProfession(), 
+            centerAdministrator.getBaseUserCA().getEducation());
 
         return new ResponseEntity<>(centerAdministratorDTO, HttpStatus.OK);
     }
@@ -122,7 +124,7 @@ public class CenterAdministratorController {
         //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         // }
                 
-        User user = new User(userDTO.getEmail(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getAddress(),
+        User user = new User(userDTO.getUsername(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getAddress(),
         userDTO.getCity(), userDTO.getCountry(), userDTO.getPhoneNumber(), userDTO.getJmbg(), Gender.valueOf(userDTO.getGender()), userDTO.getProfession(), userDTO.getEducation());
         
         User newUser = this.userService.create(user);
@@ -132,26 +134,26 @@ public class CenterAdministratorController {
         CenterAdministrator newCenterAdministrator = this.centerAdministratorService.create(centerAdministrator);
 
         CenterAdministratorDTO newCenterAdministratorDTO = new CenterAdministratorDTO(
-            newCenterAdministrator.getBaseUser().getId(),
-            newCenterAdministrator.getBaseUser().getEmail(), 
-            newCenterAdministrator.getBaseUser().getPassword(), 
-            newCenterAdministrator.getBaseUser().getFirstName(), 
-            newCenterAdministrator.getBaseUser().getLastName(),
-            newCenterAdministrator.getBaseUser().getAddress(), 
-            newCenterAdministrator.getBaseUser().getCity(), 
-            newCenterAdministrator.getBaseUser().getCountry(),
-            newCenterAdministrator.getBaseUser().getPhoneNumber(),
-            newCenterAdministrator.getBaseUser().getJmbg(), 
-            newCenterAdministrator.getBaseUser().getGender(), 
-            newCenterAdministrator.getBaseUser().getProfession(), 
-            newCenterAdministrator.getBaseUser().getEducation()
+            newCenterAdministrator.getBaseUserCA().getId(),
+            newCenterAdministrator.getBaseUserCA().getUsername(), 
+            newCenterAdministrator.getBaseUserCA().getPassword(), 
+            newCenterAdministrator.getBaseUserCA().getFirstName(), 
+            newCenterAdministrator.getBaseUserCA().getLastName(),
+            newCenterAdministrator.getBaseUserCA().getAddress(), 
+            newCenterAdministrator.getBaseUserCA().getCity(), 
+            newCenterAdministrator.getBaseUserCA().getCountry(),
+            newCenterAdministrator.getBaseUserCA().getPhoneNumber(),
+            newCenterAdministrator.getBaseUserCA().getJmbg(), 
+            newCenterAdministrator.getBaseUserCA().getGender(), 
+            newCenterAdministrator.getBaseUserCA().getProfession(), 
+            newCenterAdministrator.getBaseUserCA().getEducation()
         );
 
         return new ResponseEntity<>(newCenterAdministratorDTO, HttpStatus.CREATED);
     }
 
-    //vraca jedan objekat ne vraca listu
     @GetMapping(value = "/{centerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('center_administrator')")
     public ResponseEntity<List<CenterAdministratorDTO>> getCenterAdministratorsByCenterId(@PathVariable Long centerId) {
 
         List<CenterAdministrator> centerAdministratorList = this.centerAdministratorService.findAllByCenterId(centerId);
@@ -159,21 +161,20 @@ public class CenterAdministratorController {
         List<CenterAdministratorDTO> centerAdministratorDTOs = new ArrayList<CenterAdministratorDTO>();
 
         for(CenterAdministrator centerAdministrator : centerAdministratorList){
-            System.out.println(centerAdministrator.getBaseUser().getId() + " ******************************");
             CenterAdministratorDTO centerAdministratorDTO = new CenterAdministratorDTO(
-                centerAdministrator.getBaseUser().getId(),
-                centerAdministrator.getBaseUser().getEmail(),
-                centerAdministrator.getBaseUser().getPassword(), 
-                centerAdministrator.getBaseUser().getFirstName(),
-                centerAdministrator.getBaseUser().getLastName(), 
-                centerAdministrator.getBaseUser().getAddress(), 
-                centerAdministrator.getBaseUser().getCity(), 
-                centerAdministrator.getBaseUser().getCountry(), 
-                centerAdministrator.getBaseUser().getPhoneNumber(), 
-                centerAdministrator.getBaseUser().getJmbg(), 
-                centerAdministrator.getBaseUser().getGender(), 
-                centerAdministrator.getBaseUser().getProfession(), 
-                centerAdministrator.getBaseUser().getEducation()
+                centerAdministrator.getBaseUserCA().getId(),
+                centerAdministrator.getBaseUserCA().getUsername(),
+                centerAdministrator.getBaseUserCA().getPassword(), 
+                centerAdministrator.getBaseUserCA().getFirstName(),
+                centerAdministrator.getBaseUserCA().getLastName(), 
+                centerAdministrator.getBaseUserCA().getAddress(), 
+                centerAdministrator.getBaseUserCA().getCity(), 
+                centerAdministrator.getBaseUserCA().getCountry(), 
+                centerAdministrator.getBaseUserCA().getPhoneNumber(), 
+                centerAdministrator.getBaseUserCA().getJmbg(), 
+                centerAdministrator.getBaseUserCA().getGender(), 
+                centerAdministrator.getBaseUserCA().getProfession(), 
+                centerAdministrator.getBaseUserCA().getEducation()
             );
             centerAdministratorDTOs.add(centerAdministratorDTO);
         }

@@ -19,11 +19,11 @@ public class Grade implements Serializable {
     @Column
     private Integer grade;
 
-    @OneToOne
+    @OneToOne()
     private RegularUser regularUser;
 
     @OneToOne
-    private Center center;
+    private Center centerGR;
 
     public Grade() {
     }

@@ -49,6 +49,10 @@ const Navbar = () => {
                     <li>
                         <Link to='/regularUsers'>Regular users</Link>
                     </li>
+                    
+                    <li>
+                        <Link to='/logIn'>Log In</Link>
+                    </li>
 
                 </ul>
             </nav>

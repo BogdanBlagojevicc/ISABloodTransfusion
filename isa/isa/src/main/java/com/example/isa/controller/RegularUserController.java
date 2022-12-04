@@ -51,7 +51,7 @@ public class RegularUserController {
     @PostMapping(value = "/regularUserRegistration", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RegularUserDTO> createRegularUser(@RequestBody UserDTO userDTO) throws Exception{
 
-        User user = new User(userDTO.getEmail(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getAddress(),
+        User user = new User(userDTO.getUsername(), userDTO.getPassword(), userDTO.getFirstName(), userDTO.getLastName(), userDTO.getAddress(),
         userDTO.getCity(), userDTO.getCountry(), userDTO.getPhoneNumber(), userDTO.getJmbg(), Gender.valueOf(userDTO.getGender()), userDTO.getProfession(), userDTO.getEducation());
         
         User newUser = this.userService.create(user);
@@ -61,17 +61,17 @@ public class RegularUserController {
         RegularUser newRegularUser = regularUserService.create(regularUser);
 
         RegularUserDTO newRegularUserDTO = new RegularUserDTO(
-            newRegularUser.getBaseUser().getEmail(),
-            newRegularUser.getBaseUser().getFirstName(),
-            newRegularUser.getBaseUser().getLastName(), 
-            newRegularUser.getBaseUser().getAddress(),
-            newRegularUser.getBaseUser().getCity(),
-            newRegularUser.getBaseUser().getCountry(),
-            newRegularUser.getBaseUser().getPhoneNumber(),
-            newRegularUser.getBaseUser().getJmbg(),
-            newRegularUser.getBaseUser().getGender(),
-            newRegularUser.getBaseUser().getProfession(),
-            newRegularUser.getBaseUser().getEducation(),
+            newRegularUser.getBaseUserRU().getUsername(),
+            newRegularUser.getBaseUserRU().getFirstName(),
+            newRegularUser.getBaseUserRU().getLastName(), 
+            newRegularUser.getBaseUserRU().getAddress(),
+            newRegularUser.getBaseUserRU().getCity(),
+            newRegularUser.getBaseUserRU().getCountry(),
+            newRegularUser.getBaseUserRU().getPhoneNumber(),
+            newRegularUser.getBaseUserRU().getJmbg(),
+            newRegularUser.getBaseUserRU().getGender(),
+            newRegularUser.getBaseUserRU().getProfession(),
+            newRegularUser.getBaseUserRU().getEducation(),
             newRegularUser.getLoyalty(),
             newRegularUser.getPoints(),
             newRegularUser.getPenalties()
@@ -90,7 +90,7 @@ public class RegularUserController {
 
        RegularUserDTO regularUserDTO = new RegularUserDTO(
         user.getId(),
-        user.getEmail(), 
+        user.getUsername(), 
         user.getPassword(), 
         user.getFirstName(),
         user.getLastName() ,
@@ -118,19 +118,19 @@ public class RegularUserController {
 
 
         RegularUserDTO updatedRegularUserDTO = new RegularUserDTO(
-            updatedRegularUser.getBaseUser().getId(),
-            updatedRegularUser.getBaseUser().getEmail(),
-            updatedRegularUser.getBaseUser().getPassword(),
-            updatedRegularUser.getBaseUser().getFirstName(),
-            updatedRegularUser.getBaseUser().getLastName(),
-            updatedRegularUser.getBaseUser().getAddress(),
-            updatedRegularUser.getBaseUser().getCity(),
-            updatedRegularUser.getBaseUser().getCountry(),
-            updatedRegularUser.getBaseUser().getPhoneNumber(),
-            updatedRegularUser.getBaseUser().getJmbg(),
-            updatedRegularUser.getBaseUser().getGender(),
-            updatedRegularUser.getBaseUser().getProfession(),
-            updatedRegularUser.getBaseUser().getEducation(),
+            updatedRegularUser.getBaseUserRU().getId(),
+            updatedRegularUser.getBaseUserRU().getUsername(),
+            updatedRegularUser.getBaseUserRU().getPassword(),
+            updatedRegularUser.getBaseUserRU().getFirstName(),
+            updatedRegularUser.getBaseUserRU().getLastName(),
+            updatedRegularUser.getBaseUserRU().getAddress(),
+            updatedRegularUser.getBaseUserRU().getCity(),
+            updatedRegularUser.getBaseUserRU().getCountry(),
+            updatedRegularUser.getBaseUserRU().getPhoneNumber(),
+            updatedRegularUser.getBaseUserRU().getJmbg(),
+            updatedRegularUser.getBaseUserRU().getGender(),
+            updatedRegularUser.getBaseUserRU().getProfession(),
+            updatedRegularUser.getBaseUserRU().getEducation(),
             updatedRegularUser.getLoyalty(),
             updatedRegularUser.getPoints(),
             updatedRegularUser.getPenalties()

@@ -25,7 +25,7 @@ public class SystemAdministratorService {
     }
 
     public SystemAdministrator create(SystemAdministrator systemAdministrator) throws Exception{
-        if(systemAdministrator.getBaseUser().getId() != null){
+        if(systemAdministrator.getBaseUserSA().getId() != null){
             throw new Exception("ID must be null");
         }
         return this.systemAdministratorRepository.save(systemAdministrator);
@@ -33,13 +33,13 @@ public class SystemAdministratorService {
 
     public SystemAdministrator updatePassword(SystemAdministratorDTO systemAdministratorDTO) throws Exception{
         
-        SystemAdministrator systemAdministratorToUpdate = this.systemAdministratorRepository.findByBaseUserId(systemAdministratorDTO.getId());
+        SystemAdministrator systemAdministratorToUpdate = this.systemAdministratorRepository.findByBaseUserSAId(systemAdministratorDTO.getId());
         if(systemAdministratorToUpdate == null){
             throw new Exception("System administrator doesn't exist");
         }
 
         if(!systemAdministratorDTO.getPassword().equals("")){
-            systemAdministratorToUpdate.getBaseUser().setPassword(systemAdministratorDTO.getPassword());
+            systemAdministratorToUpdate.getBaseUserSA().setPassword(systemAdministratorDTO.getPassword());
         }
 
         User userToUpdate = this.userRepository.getOne(systemAdministratorDTO.getId());
@@ -47,7 +47,7 @@ public class SystemAdministratorService {
 
         User updatedUser = this.userRepository.save(userToUpdate);
 
-        systemAdministratorToUpdate.setBaseUser(updatedUser);
+        systemAdministratorToUpdate.setBaseUserSA(updatedUser);
 
         //mozda ne treba
         //this.systemAdministratorRepository.save(systemAdministratorToUpdate);

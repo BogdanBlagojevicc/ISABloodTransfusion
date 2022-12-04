@@ -11,11 +11,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CenterAdministratorRepository extends JpaRepository<CenterAdministrator, Long> {
 
-    List<CenterAdministrator> findAllByCenterId(Long centerId);
+    List<CenterAdministrator> findAllByCenterCASId(Long centerId);
 
-    CenterAdministrator findByBaseUserId(Long id);
+    CenterAdministrator findByBaseUserCAId(Long id);
 
-    List<Long> findAllUserIdByCenterId(Long id);
+    List<Long> findAllUserIdByCenterCASId(Long id);
 
     //@Query("select c from CenterAdministrator c where c.center =?1")
     @Query(value = "SELECT * FROM centeradministrators u WHERE u.center_id = ?1", nativeQuery = true)

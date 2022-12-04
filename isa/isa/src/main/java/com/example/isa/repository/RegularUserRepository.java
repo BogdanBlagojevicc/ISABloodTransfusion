@@ -8,7 +8,7 @@ public interface RegularUserRepository extends JpaRepository<RegularUser, Long> 
 
     // RegularUser findRegularUserById(Long id);
 
-    RegularUser findByBaseUserId(Long id);
+    RegularUser findByBaseUserRUId(Long id);
 
     // List<RegularUser> findAll();
 
