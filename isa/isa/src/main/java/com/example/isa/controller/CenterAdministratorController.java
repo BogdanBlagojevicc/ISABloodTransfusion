@@ -69,7 +69,7 @@ public class CenterAdministratorController {
     }
 
     @PutMapping(value = "/updatePassword/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('center_administrator')")
+    @PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
     public ResponseEntity<CenterAdministratorDTO> updatePassword(@PathVariable Long id, @RequestBody CenterAdministratorDTO centerAdministratorDTO) throws Exception{
 
         CenterAdministrator updatedCenterAdministrator = this.centerAdministratorService.updatePassword(centerAdministratorDTO);
@@ -153,7 +153,7 @@ public class CenterAdministratorController {
     }
 
     @GetMapping(value = "/{centerId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('center_administrator')")
+    @PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
     public ResponseEntity<List<CenterAdministratorDTO>> getCenterAdministratorsByCenterId(@PathVariable Long centerId) {
 
         List<CenterAdministrator> centerAdministratorList = this.centerAdministratorService.findAllByCenterId(centerId);

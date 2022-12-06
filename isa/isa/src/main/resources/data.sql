@@ -8,9 +8,9 @@ VALUES ('Kisacka 1', 2, 'Mepublika Srbija', 'dobro', '2000-10-11', 'braon',  '20
 INSERT INTO centers (address, average_grade, country, description, end_time, name, start_time)
 VALUES ('Kisacka 1', 9, 'Aepublika Srbija', 'lose', '2000-10-11', 'zeleni',  '2000-10-10');
 
-INSERT INTO ROLE (name) VALUES('system_administrator');
-INSERT INTO ROLE (name) VALUES('regular_user');
-INSERT INTO ROLE (name) VALUES('center_administrator');
+INSERT INTO ROLE (name) VALUES('ROLE_SYSTEM_ADMINISTRATOR');
+INSERT INTO ROLE (name) VALUES('ROLE_REGULAR_USER');
+INSERT INTO ROLE (name) VALUES('ROLE_CENTER_ADMINISTRATOR');
 
 
 INSERT INTO warehouses (bandage, blood_quantity0, blood_quantitya, blood_quantityab, blood_quantityb, needles, test_tubes, centerwh_id)

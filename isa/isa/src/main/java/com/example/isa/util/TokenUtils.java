@@ -1,6 +1,8 @@
 package com.example.isa.util;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -56,8 +58,13 @@ public class TokenUtils {
 	 * @return JWT token
 	 */
 	public String generateToken(String username) {
+
+		Map<String, Object> claims = new HashMap<>();
+		claims.put("role", "ROLE_CENTER_ADMINISTRATOR");
+		//claims.put("username", username);
 		return Jwts.builder()
 				.setIssuer(APP_NAME)
+				.setClaims(claims)
 				.setSubject(username)
 				.setAudience(generateAudience())
 				.setIssuedAt(new Date())

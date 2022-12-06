@@ -64,7 +64,7 @@ public class UserService {
 		//u.setEmail(userRequest.getEmail()); ****************** MOZDA BUDE TREBALO DA SE MENJA ************************ CONE
 
 		// u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
-		List<Role> roles = roleService.findByName("ROLE_USER");
+		List<Role> roles = roleService.findByName("ROLE_CENTER_ADMINISTRATOR");
 		u.setRoles(roles);
 		
 		return this.userRepository.save(u);
