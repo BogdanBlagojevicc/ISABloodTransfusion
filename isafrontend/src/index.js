@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Routes, Router,  Route } from 'react-router-dom';
 import ChangePassword from './components/ChangePassword';
 import About from './components/About';
 import Contact from './components/Contact'
@@ -16,6 +16,8 @@ import NewCenter from './components/NewCenter'
 import CenterAdministratorNew from './components/CenterAdministratorNew'
 import RegularUsers from './components/RegularUsers'
 import Login from './components/Login';
+
+
 
 ReactDOM.render(
   <Router>
@@ -33,6 +35,7 @@ ReactDOM.render(
       <Route path='/centerAdministrator' element={<CenterAdministratorNew/>}/>
       <Route path='/regularUsers' element={<RegularUsers/>}/>
       <Route path='/logIn' element={<Login/>}/>
+      
 
     </Routes>
   </Router>,

@@ -7,18 +7,20 @@ import {Paper, Button} from '@mui/material'
 
 export default function Login() {
   const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
-  var [use, setUse] = useState('')
-  var [pas, setPas]  = useState('')
+  var [username, setUse] = useState('')
+  var [password, setPas]  = useState('')
 
   const handleClick = (e) =>{
     e.preventDefault()
+    let admin = {username, password}
+    console.log(admin);
     fetch("http://localhost:8081/auth/login",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
-    //body:JSON.stringify(admin)
+    body:JSON.stringify(admin)
 
   }).then(() =>{
-    console.log("Admin changed")
+    console.log("Log in")
   })
 }
 
