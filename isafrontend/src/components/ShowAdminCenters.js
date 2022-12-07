@@ -7,6 +7,8 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import filterFactory, { textFilter} from 'react-bootstrap-table2-filter'
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css'
 
+// import Userfront from "@userfront/react";
+
 const ShowAdminCenters = () => {
   const [adminCenters, setAdminCenters] = useState([])
 
@@ -28,7 +30,14 @@ const columns =[
 
 ]
   useEffect(()=>{
-    fetch("http://localhost:8081/api/centerAdministrators/1")
+    var test = JSON.parse(localStorage.getItem('testToken'))
+    fetch("http://localhost:8081/api/centerAdministrators/1",{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+         Authorization: `Bearer ${test.accessToken}`,
+       },
+    })
     .then(res =>res.json())
     .then((result)=>
     {

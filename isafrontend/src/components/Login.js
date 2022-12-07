@@ -18,7 +18,7 @@ export default function Login() {
     fetch("http://localhost:8081/auth/login",{
       headers : { 
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
        },
     method:"POST",
     body:JSON.stringify(admin),
