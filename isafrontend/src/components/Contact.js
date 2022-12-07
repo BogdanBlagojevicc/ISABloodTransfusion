@@ -10,10 +10,11 @@ export default function RegularUser() {
   const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
   const[loyalty, setLoyalty] = useState('')
   const[email, setEmail] = useState('')
+  const[username, setUsername] = useState('')
   const[password, setPassword] = useState('')
   const[repeat, setRepeat] = useState('')
-  const[firstName, setFirstName] = useState('')
-  const[lastName, setLastName] = useState('')
+  const[firstname, setFirstName] = useState('')
+  const[lastname, setLastName] = useState('')
   const[address, setAddress] = useState('')
   const[city, setCity] = useState('')
   const[country, setCountry] = useState('')
@@ -28,18 +29,19 @@ export default function RegularUser() {
 
   const handleClick = (e) =>{
     e.preventDefault()
-    const student = {loyalty, email, password, firstName, lastName, address, city, country, phoneNumber, jmbg, gender, profession, education, points, penalties}
-    console.log(student);
+    //const student = {loyalty, email, password, firstname, lastName, address, city, country, phoneNumber, jmbg, gender, profession, education, points, penalties}
+    const new_user = {email, password, firstname, lastname, username}
+    console.log(new_user);
     console.log(password);
     console.log(repeat);
     if(!(password === repeat)){
       window.alert("Passwords must match")
       return;
     }
-    fetch("http://localhost:8081/api/regularUsers/regularUserRegistration",{
+    fetch("http://localhost:8081/auth/signup",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(student)
+    body:JSON.stringify(new_user)
 
   }).then(() =>{
     console.log("New user added")
@@ -58,9 +60,9 @@ export default function RegularUser() {
         <h1>Add user</h1>
         <Paper elevation={3} style={paperStyle}>
 
-        <TextField id="standard-basic" label="loyalty" variant="standard" fullWidth 
-          value={loyalty}
-          onChange = {(e) =>setLoyalty(e.target.value)}
+          <TextField id="standard-basic" label="username" variant="standard" fullWidth 
+          value={username}
+          onChange = {(e) =>setUsername(e.target.value)}
           />
 
           <TextField id="standard-basic" label="email" variant="standard" fullWidth 
@@ -79,16 +81,16 @@ export default function RegularUser() {
           />
 
             <TextField id="standard-basic" label="firstname" variant="standard" fullWidth 
-          value={firstName}
+          value={firstname}
           onChange = {(e) =>setFirstName(e.target.value)}
           />
 
           <TextField id="standard-basic" label="lastName" variant="standard" fullWidth 
-                value={lastName}
+                value={lastname}
                 onChange = {(e) =>setLastName(e.target.value)}
           />
 
-            <TextField id="standard-basic" label="address" variant="standard" fullWidth 
+            {/* <TextField id="standard-basic" label="address" variant="standard" fullWidth 
           value={address}
           onChange = {(e) =>setAddress(e.target.value)}
           />
@@ -118,16 +120,9 @@ export default function RegularUser() {
           />
             <TextField id="standard-basic" label="education" variant="standard" fullWidth 
           value={education}
-          onChange = {(e) =>setEducation(e.target.value)}
-          />
-            <TextField id="standard-basic" label="points" variant="standard" fullWidth 
-          value={points}
-          onChange = {(e) =>setPoints(e.target.value)}
-          />
-            <TextField id="standard-basic" label="penalties" variant="standard" fullWidth 
-          value={penalties}
-          onChange = {(e) =>setPenalties(e.target.value)}
-          />
+          onChange = {(e) =>setEducation(e.target.value)} }
+    /> */}
+       
 
 
           
