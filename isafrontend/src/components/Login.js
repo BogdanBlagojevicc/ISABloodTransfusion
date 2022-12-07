@@ -7,20 +7,52 @@ import {Paper, Button} from '@mui/material'
 
 export default function Login() {
   const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
-  var [use, setUse] = useState('')
-  var [pas, setPas]  = useState('')
+  var [username, setUse] = useState('')
+  var [password, setPas]  = useState('')
+  var [token1, setToken1] = useState([])
 
   const handleClick = (e) =>{
     e.preventDefault()
+    let admin = {username, password}
+    console.log(admin)
     fetch("http://localhost:8081/auth/login",{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       },
     method:"POST",
-    headers:{"Content-Type":"application/json"},
-    //body:JSON.stringify(admin)
+    body:JSON.stringify(admin),
 
-  }).then(() =>{
-    console.log("Admin changed")
-  })
-}
+
+  }).then(res =>res.json())
+  .then((result)=>
+  {
+    setToken1(result);
+    // console.log(token1);
+    // console.log(token1.accessToken);
+    // console.log(token1.expiresIn);
+
+    let testToken = {
+      accessToken : "",
+      expiresIn : 0
+    }
+
+    testToken.accessToken = result.accessToken;
+    testToken.expiresIn = result.expiresIn;
+
+
+    localStorage.setItem('testToken', JSON.stringify(testToken));
+
+
+    let test = localStorage.getItem('testToken')
+    console.log(JSON.parse(test));
+
+  }
+  )
+
+    
+};
+
 
   return (
     <Box
