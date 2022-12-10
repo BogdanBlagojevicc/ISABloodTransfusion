@@ -51,7 +51,7 @@ export default function Login() {
     console.log(JSON.parse(test));
 
 
-    window.location.href = '/projects';    
+    window.location.href = '/navbar';    
 
   }
   )    

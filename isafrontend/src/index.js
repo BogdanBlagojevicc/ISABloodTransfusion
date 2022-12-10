@@ -16,6 +16,7 @@ import NewCenter from './components/NewCenter'
 import CenterAdministratorNew from './components/CenterAdministratorNew'
 import RegularUsers from './components/RegularUsers'
 import Login from './components/Login';
+import Navbar from './components/Navbar';
 
 ReactDOM.render(
   <Router>
@@ -32,6 +33,7 @@ ReactDOM.render(
         <Route path='/newCenter' element={<NewCenter/>}/>
         <Route path='/centerAdministrator' element={<CenterAdministratorNew/>}/>
         <Route path='/regularUsers' element={<RegularUsers/>}/>
+        <Route path='/navbar' element={<Navbar/>}/>
     </Routes>
   </Router>,
  document.getElementById('root')
