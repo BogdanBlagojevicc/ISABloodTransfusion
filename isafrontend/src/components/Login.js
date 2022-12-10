@@ -1,9 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Box from '@mui/material/Box';
+import ReactDOM from 'react-dom';
 import TextField from '@mui/material/TextField';
 import './styles/Contact.scss'
 import { Container } from '@mui/system';
 import {Paper, Button} from '@mui/material'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import Homepage from './components/Homepage';
+
 
 export default function Login() {
   const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
@@ -28,10 +32,6 @@ export default function Login() {
   .then((result)=>
   {
     setToken1(result);
-    // console.log(token1);
-    // console.log(token1.accessToken);
-    // console.log(token1.expiresIn);
-
     let testToken = {
       accessToken : "",
       expiresIn : 0
@@ -47,10 +47,14 @@ export default function Login() {
     let test = localStorage.getItem('testToken')
     console.log(JSON.parse(test));
 
-  }
-  )
+    console.log(window.location.href);
 
-    
+    window.location.href = '/homepage';
+
+
+
+  }
+  )    
 };
 
 
@@ -83,6 +87,12 @@ export default function Login() {
         </Paper>
 
       </Container>
+
+
+      {/* <Routes>
+          <Route path="/homepage" element={<Homepage/>} />
+        </Routes> */}
+
     </Box>
   );
 }

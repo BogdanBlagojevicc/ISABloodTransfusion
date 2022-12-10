@@ -54,6 +54,10 @@ const Navbar = () => {
                         <Link to='/logIn'>Log In</Link>
                     </li>
 
+                    <li>
+                        <Link to='/homepage'>Log In</Link>
+                    </li>
+
                 </ul>
             </nav>
         </div>
