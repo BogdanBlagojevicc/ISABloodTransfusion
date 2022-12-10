@@ -6,11 +6,14 @@ import './styles/Contact.scss'
 import { Container } from '@mui/system';
 import {Paper, Button} from '@mui/material'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import Homepage from './components/Homepage';
+import ChangePassword from './ChangePassword';
+import { Navigate  } from 'react-router-dom';
 
 
 export default function Login() {
   const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
+  const [goToChangePassword, setGoToChangePassword] = React.useState(false);
+
   var [username, setUse] = useState('')
   var [password, setPas]  = useState('')
   var [token1, setToken1] = useState([])
@@ -47,11 +50,8 @@ export default function Login() {
     let test = localStorage.getItem('testToken')
     console.log(JSON.parse(test));
 
-    console.log(window.location.href);
 
-    window.location.href = '/homepage';
-
-
+    window.location.href = '/projects';    
 
   }
   )    
@@ -87,11 +87,7 @@ export default function Login() {
         </Paper>
 
       </Container>
-
-
-      {/* <Routes>
-          <Route path="/homepage" element={<Homepage/>} />
-        </Routes> */}
+      
 
     </Box>
   );

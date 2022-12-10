@@ -19,12 +19,16 @@ export default function NewCenter() {
   
   
     const handleClick = (e) =>{
+      var test = JSON.parse(localStorage.getItem('testToken'))
       e.preventDefault()
       const center = {name, address, description, country, averageGrade, startTime, endTime}
       console.log(center);
       fetch("http://localhost:8081/api/centers/createNewCenter/1",{
       method:"POST",
-      headers:{"Content-Type":"application/json"},
+      headers : { 
+        'Content-Type': 'application/json',
+         Authorization: `Bearer ${test.accessToken}`,
+       },
       body:JSON.stringify(center)
   
     }).then(() =>{

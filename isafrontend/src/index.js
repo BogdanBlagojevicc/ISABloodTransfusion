@@ -20,23 +20,21 @@ import Login from './components/Login';
 ReactDOM.render(
   <Router>
     <Routes>
-      {/* <Route path='/' element={<App/>} />
-      <Route path='/changePassword' element={<ChangePassword/>}/>
-      <Route path='/about' element={<About/>}/>
-      <Route path='contact' element={<Contact/>}/>
-      <Route path='projects' element={<Projects/>}/>
-      <Route path='/changeAll' element={<ChangeAll/>}/>
-      <Route path='/centerUpdate' element={<CenterUpdate/>}/>
-      <Route path='/showAdminCenters' element={<ShowAdminCenters/>}/>
-      <Route path='/questionaire' element={<Questionare/>}/>
-      <Route path='/newCenter' element={<NewCenter/>}/>
-      <Route path='/centerAdministrator' element={<CenterAdministratorNew/>}/>
-      <Route path='/regularUsers' element={<RegularUsers/>}/> */}
-      <Route path='*' element={<Login/>}/>
-
+        <Route path='/' element={<Login/>}/>
+        <Route path='/changePassword' element={<ChangePassword/>}/>
+        <Route path='/about' element={<About/>}/>
+        <Route path='/contact' element={<Contact/>}/>
+        <Route path='/projects' element={<Projects/>}/>
+        <Route path='/changeAll' element={<ChangeAll/>}/>
+        <Route path='/centerUpdate' element={<CenterUpdate/>}/>
+        <Route path='/showAdminCenters' element={<ShowAdminCenters/>}/>
+        <Route path='/questionaire' element={<Questionare/>}/>
+        <Route path='/newCenter' element={<NewCenter/>}/>
+        <Route path='/centerAdministrator' element={<CenterAdministratorNew/>}/>
+        <Route path='/regularUsers' element={<RegularUsers/>}/>
     </Routes>
   </Router>,
-  document.getElementById('root')
+ document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

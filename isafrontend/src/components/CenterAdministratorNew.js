@@ -22,13 +22,18 @@ export default function CenterAdministratorNew() {
   const[education, setEducation] = useState('')
 
 
+
   const handleClick = (e) =>{
+    var test = JSON.parse(localStorage.getItem('testToken'))
     e.preventDefault()
     const centerAdministrator = {email, password, firstName, lastName, address, city, country, phoneNumber, jmbg, gender, profession, education}
     console.log(centerAdministrator);
-    fetch("http://localhost:8081/api/centerAdministrators/createNewCenterAdmin/1",{
+    fetch("http://localhost:8081/api/centerAdministrators/createNewCenterAdmin/3",{
     method:"POST",
-    headers:{"Content-Type":"application/json"},
+    headers : { 
+      'Content-Type': 'application/json',
+       Authorization: `Bearer ${test.accessToken}`,
+     },
     body:JSON.stringify(centerAdministrator)
 
   }).then(() =>{
@@ -98,6 +103,8 @@ export default function CenterAdministratorNew() {
           value={education}
           onChange = {(e) =>setEducation(e.target.value)}
           />
+
+       
 
 
           

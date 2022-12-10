@@ -11,7 +11,14 @@ export default function CenterAdministrator() {
   var [pas, setPas]  = useState('')
 
   useEffect(() =>{
-    fetch("http://localhost:8081/api/centerAdministrators/getOne/1")
+    var test = JSON.parse(localStorage.getItem('testToken'))
+    fetch("http://localhost:8081/api/centerAdministrators/getOne/3", {
+      method:"GET",
+      headers : { 
+        'Content-Type': 'application/json',
+         Authorization: `Bearer ${test.accessToken}`,
+       },
+    })
     .then(res => res.json())
     .then((result) =>
     {
@@ -27,7 +34,9 @@ export default function CenterAdministrator() {
     console.log(admin);
     fetch("http://localhost:8081/api/centerAdministrators/updatePassword/1",{
     method:"PUT",
-    headers:{"Content-Type":"application/json"},
+    headers:{"Content-Type":"application/json"
+    },
+    
     body:JSON.stringify(admin)
 
   }).then(() =>{

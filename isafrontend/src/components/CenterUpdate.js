@@ -17,7 +17,13 @@ export default function Center() {
 
 
   useEffect(() =>{
-    fetch("http://localhost:8081/api/centers/getOneByCentersAdministratorId/1")
+    var test = JSON.parse(localStorage.getItem('testToken'))
+    fetch("http://localhost:8081/api/centers/getOneByCentersAdministratorId/3", {
+      method:"GET",
+      headers:{"Content-Type":"application/json",
+                Authorization: `Bearer ${test.accessToken}`,}
+
+    })
     .then(res => res.json())
     .then((result) =>
     {

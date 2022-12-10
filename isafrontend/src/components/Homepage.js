@@ -18,6 +18,7 @@ import RegularUsers from './components/RegularUsers'
 import Login from './components/Login';
 
 export default function Homepage() {
+    // const Homepage = () =>  {
     ReactDOM.render(
     <Router>
         <Routes>
@@ -32,7 +33,7 @@ export default function Homepage() {
         <Route path='/newCenter' element={<NewCenter/>}/>
         <Route path='/centerAdministrator' element={<CenterAdministratorNew/>}/>
         <Route path='/regularUsers' element={<RegularUsers/>}/>
-        <Route path='/logIn' element={<Login/>}/>
+        <Route path='*' element={<Login/>}/>
        
 
         </Routes>
