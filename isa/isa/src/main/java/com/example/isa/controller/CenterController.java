@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -66,6 +67,7 @@ public class CenterController {
     }
 
     @GetMapping("/nameASC")
+    @PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
     public ResponseEntity<List<CenterDTO>> getCentersSortedByNameASC(){
         List<Center> centers = this.centerService.findByOrderByNameAsc();
 

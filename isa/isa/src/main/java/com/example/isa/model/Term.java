@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -37,11 +37,18 @@ public class Term implements Serializable {
 
     }
 
+    public Term(Date date, Integer duration) {
+        this.dateTerm = date;
+        this.duration = duration;
+    }
+
     public Term(Long id, Date dateTerm, Integer duration) {
         Id = id;
         this.dateTerm = dateTerm;
         this.duration = duration;
     }
+
+
 
 }
 
