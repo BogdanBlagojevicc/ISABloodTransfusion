@@ -1,6 +1,7 @@
 package com.example.isa.service;
 
-import javax.el.ELException;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,24 +14,44 @@ public class TermService {
     private final TermRepository termRepository;
 
     @Autowired
-    public TermService(TermRepository termRepository){
+    public TermService(TermRepository termRepository) {
         this.termRepository = termRepository;
     }
 
-    public Term create (Term term) throws Exception{
-        if(term.getId() != null){
+    public Term create(Term term) throws Exception {
+        if (term.getId() != null) {
             throw new Exception("ID must be null");
         }
         return this.termRepository.save(term);
     }
 
-    public Term findOne(Long id) throws Exception{
+    public List<Term> findAll() {
+        return this.termRepository.findAll();
+
+    }
+
+    public Term findOne(Long id) throws Exception {
         Term term = this.termRepository.getById(id);
 
-        if(term == null){
+        if (term == null) {
             throw new Exception("Term does not exist");
         }
 
         return term;
+    }
+
+    public boolean checkTerm(List<Term> terms, LocalDateTime localDateTime) {
+        for (Term t : terms) {
+            LocalDateTime toTime = localDateTime.plusHours(1l);
+            if ((localDateTime.isBefore(t.getDateTerm())
+                    && (toTime.isAfter(t.getDateTerm()) && toTime.isBefore(localDateTime.plusHours(1l))))
+                    || (localDateTime.isBefore(t.getDateTerm()) && toTime.isAfter(t.getDateTerm().plusHours(1l)))
+                    || (localDateTime.isAfter(t.getDateTerm()) && localDateTime.isBefore(t.getDateTerm().plusHours(1l))
+                            && toTime.isAfter(t.getDateTerm().plusHours(1l)))
+                    || (localDateTime.equals(t.getDateTerm()) && toTime.equals(t.getDateTerm().plusHours(1l)))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

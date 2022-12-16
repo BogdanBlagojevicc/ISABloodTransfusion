@@ -8,4 +8,6 @@ import java.util.List;
 public interface TermRepository extends JpaRepository<Term,Long> {
     
     List<Term> findByOrderByDateTerm();
+    
+    List<Term> findAll();
 }
