@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,18 +46,19 @@ public class TermController {
         if( center == null){
             throw new Exception("This center does not exist");
         }
-        
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Term term = new Term(formatter.parse(termDTO.getDateTerm()), termDTO.getDuration());
+       
+        //SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Term term = new Term(termDTO.getDateTerm(), termDTO.getDuration());
         term.setCenterTerm(center);
 
         Term newTerm = this.termService.create(term);
 
-        TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm().toString(), newTerm.getDuration());
-
+        TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm(), newTerm.getDuration());
+        System.out.println(newTerm.getRegular_user());
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
 
 
     }
+    
     
 }

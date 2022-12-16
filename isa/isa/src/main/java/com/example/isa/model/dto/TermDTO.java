@@ -1,5 +1,7 @@
 package com.example.isa.model.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +10,7 @@ import lombok.Setter;
 public class TermDTO {
     private Long id;
 
-    private String dateTerm;
+    private LocalDateTime dateTerm;
 
     private Integer duration;
 
@@ -18,7 +20,7 @@ public class TermDTO {
 
 
 
-    public TermDTO(Long id, String dateTerm, Integer duration) {
+    public TermDTO(Long id, LocalDateTime dateTerm, Integer duration) {
         this.id = id;
         this.dateTerm = dateTerm;
         this.duration = duration;
