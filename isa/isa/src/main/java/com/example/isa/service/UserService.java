@@ -70,6 +70,26 @@ public class UserService {
 		return this.userRepository.save(u);
 	}
 
+    public User saveRegularUser(UserRequest userRequest) {
+		User u = new User();
+		u.setUsername(userRequest.getUsername());
+		
+		// pre nego sto postavimo lozinku u atribut hesiramo je kako bi se u bazi nalazila hesirana lozinka
+		// treba voditi racuna da se koristi isi password encoder bean koji je postavljen u AUthenticationManager-u kako bi koristili isti algoritam
+		u.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+		
+		u.setFirstName(userRequest.getFirstname());
+		u.setLastName(userRequest.getLastname());
+		u.setEnabled(true);
+		//u.setEmail(userRequest.getEmail()); ****************** MOZDA BUDE TREBALO DA SE MENJA ************************ CONE
+
+		// u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
+		List<Role> roles = roleService.findByName("ROLE_REGULAR_USER");
+		u.setRoles(roles);
+		
+		return this.userRepository.save(u);
+	}
+
 
 
 }

@@ -77,4 +77,16 @@ public class AuthenticationController {
 
 		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}
+	@PostMapping("regularUser/signup")
+	public ResponseEntity<User> addRegularUser(@RequestBody UserRequest userRequest, UriComponentsBuilder ucBuilder) {
+		User existUser = this.userService.findByUsername(userRequest.getUsername());
+
+		if (existUser != null) {
+			throw new ResourceConflictException(userRequest.getId(), "Username already exists");
+		}
+
+		User user = this.userService.saveRegularUser(userRequest);
+
+		return new ResponseEntity<>(user, HttpStatus.CREATED);
+	}
 }
