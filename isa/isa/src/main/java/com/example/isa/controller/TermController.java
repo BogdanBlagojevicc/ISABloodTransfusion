@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,7 +43,7 @@ public class TermController {
         Center center = this.centerService.findOne(centerId);
 
         if( center == null){
-            throw new Exception("This center does not exist");
+            throw new Exception("This center does not exist!");
         }
         
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -57,5 +58,28 @@ public class TermController {
 
 
     }
+
+    @DeleteMapping(value = "/{termId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    public ResponseEntity<TermDTO> deleteTerm(@PathVariable("termId") Long termId) throws Exception{ // mozda bude problem jer pise consumes a nemam request body
+
+        Term term = this.termService.findOne(termId);
+
+        if(term == null){
+            throw new Exception("This term does not exist!");
+        }
+
+        this.termService.delete(term);
+
+        Term tempTerm = new Term(term.getDateTerm(), term.getDuration());
+        tempTerm.setCenterTerm(term.getCenterTerm());
+
+        Term newTerm = this.termService.create(tempTerm);
+
+        TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm().toString(), newTerm.getDuration());
+
+        return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
+
+    }   
     
 }

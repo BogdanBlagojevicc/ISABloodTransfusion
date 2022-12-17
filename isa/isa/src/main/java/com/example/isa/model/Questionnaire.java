@@ -5,10 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import com.example.isa.model.dto.BloodType;
+
 import java.io.Serializable;
 
-
-enum BloodType {ZERO, A, B, AB}
 
 @Entity
 @Getter
@@ -32,6 +33,10 @@ public class Questionnaire implements Serializable {
 
     public Questionnaire(Long id, BloodType bloodType) {
         this.id = id;
+        this.bloodType = bloodType;
+    }
+
+    public Questionnaire(BloodType bloodType) {
         this.bloodType = bloodType;
     }
 

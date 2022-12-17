@@ -33,4 +33,8 @@ public class TermService {
 
         return term;
     }
+
+    public void delete(Term term) throws Exception{
+        this.termRepository.delete(term);
+    }
 }
