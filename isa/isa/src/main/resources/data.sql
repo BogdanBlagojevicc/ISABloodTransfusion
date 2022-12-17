@@ -1,12 +1,12 @@
 INSERT INTO centers (address, average_grade, country, description, end_time, name, start_time)
-VALUES ('Kisacka 1', 8, 'Republika Srbija', 'odlicno', '2000-10-11', 'srbija',  '2000-10-10');
+VALUES ('Kisacka 1', 8, 'Republika Srbija', 'odlicno', '08:00', 'srbija',  '16:00');
 
 INSERT INTO centers (address, average_grade, country, description, end_time, name, start_time)
-VALUES ('Kisacka 1', 2, 'Mepublika Srbija', 'dobro', '2000-10-11', 'braon',  '2000-10-10');
+VALUES ('Kisacka 1', 2, 'Mepublika Srbija', 'dobro', '08:00', 'braon',  '16:00');
 
 
 INSERT INTO centers (address, average_grade, country, description, end_time, name, start_time)
-VALUES ('Kisacka 1', 9, 'Aepublika Srbija', 'lose', '2000-10-11', 'zeleni',  '2000-10-10');
+VALUES ('Kisacka 1', 9, 'Aepublika Srbija', 'lose', '08:00', 'zeleni',  '16:00');
 
 INSERT INTO ROLE (name) VALUES('ROLE_SYSTEM_ADMINISTRATOR');
 INSERT INTO ROLE (name) VALUES('ROLE_REGULAR_USER');

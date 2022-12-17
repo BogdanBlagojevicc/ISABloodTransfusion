@@ -57,6 +57,16 @@ export default function Login() {
   )    
 };
 
+const signUpClick = (e) =>{
+  e.preventDefault()
+  window.location.href = '/signUp';
+};
+
+const showCentersNoRegUser = (e) =>{
+  e.preventDefault()
+  window.location.href = '/showCenters';
+};
+
 
   return (
     <Box
@@ -85,6 +95,15 @@ export default function Login() {
           Submit
         </Button>
         </Paper>
+
+        <Button variant="contained" color="secondary" onClick={signUpClick}>
+          Sign up
+        </Button>
+
+        
+        <Button variant="contained" color="secondary" onClick={showCentersNoRegUser}>
+          Show centers
+        </Button>
 
       </Container>
       

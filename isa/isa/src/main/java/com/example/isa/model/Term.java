@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -19,7 +20,7 @@ public class Term implements Serializable {
     private Long Id;
 
     @Column
-    private Date dateTerm;
+    private LocalDateTime dateTerm;
 
     @Column
     private Integer duration;
@@ -37,12 +38,12 @@ public class Term implements Serializable {
 
     }
 
-    public Term(Date date, Integer duration) {
+    public Term(LocalDateTime date, Integer duration) {
         this.dateTerm = date;
         this.duration = duration;
     }
 
-    public Term(Long id, Date dateTerm, Integer duration) {
+    public Term(Long id, LocalDateTime dateTerm, Integer duration) {
         Id = id;
         this.dateTerm = dateTerm;
         this.duration = duration;

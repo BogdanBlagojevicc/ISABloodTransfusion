@@ -23,15 +23,9 @@ import com.example.isa.service.CenterAdministratorService;
 import com.example.isa.service.CenterService;
 import com.example.isa.service.SystemAdministratorService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 //@CrossOrigin(origins = "http://localhost:63342")
 @CrossOrigin
@@ -44,54 +38,57 @@ public class CenterController {
     private final SystemAdministratorService systemAdministratorService;
 
     @Autowired
-    public CenterController(CenterService centerService, CenterAdministratorService centerAdministratorService, SystemAdministratorService systemAdministratorService){
+    public CenterController(CenterService centerService, CenterAdministratorService centerAdministratorService,
+            SystemAdministratorService systemAdministratorService) {
         this.centerService = centerService;
         this.centerAdministratorService = centerAdministratorService;
         this.systemAdministratorService = systemAdministratorService;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CenterDTO>> getCenters(){
+    public ResponseEntity<List<CenterDTO>> getCenters() {
         List<Center> centers = this.centerService.findAll();
 
         List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(), center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+        for (Center center : centers) {
+            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),
+                    center.getDescription(), center.getAverageGrade(),
+                    center.getCountry(), center.getStartTime(), center.getEndTime());
             centerDTOS.add(centerDTO);
         }
 
         return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
-        
+
     }
 
     @GetMapping("/nameASC")
     @PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
-    public ResponseEntity<List<CenterDTO>> getCentersSortedByNameASC(){
+    public ResponseEntity<List<CenterDTO>> getCentersSortedByNameASC() {
         List<Center> centers = this.centerService.findByOrderByNameAsc();
 
         List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+        for (Center center : centers) {
+            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),
+                    center.getDescription(), center.getAverageGrade(),
+                    center.getCountry(), center.getStartTime(), center.getEndTime());
             centerDTOS.add(centerDTO);
         }
 
         return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
     }
 
-    
     @GetMapping("/nameDESC")
-    public ResponseEntity<List<CenterDTO>> getCentersSortedByNameDESC(){
+    public ResponseEntity<List<CenterDTO>> getCentersSortedByNameDESC() {
         List<Center> centers = this.centerService.findByOrderByNameDesc();
 
         List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+        for (Center center : centers) {
+            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),
+                    center.getDescription(), center.getAverageGrade(),
+                    center.getCountry(), center.getStartTime(), center.getEndTime());
             centerDTOS.add(centerDTO);
         }
 
@@ -99,46 +96,47 @@ public class CenterController {
     }
 
     @GetMapping("/averageGradeASC")
-    public ResponseEntity<List<CenterDTO>> getCentersSortedByAverageGradeASC(){
+    public ResponseEntity<List<CenterDTO>> getCentersSortedByAverageGradeASC() {
         List<Center> centers = this.centerService.findByOrderByAverageGradeAsc();
 
         List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+        for (Center center : centers) {
+            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),
+                    center.getDescription(), center.getAverageGrade(),
+                    center.getCountry(), center.getStartTime(), center.getEndTime());
             centerDTOS.add(centerDTO);
         }
 
         return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
     }
 
-    
     @GetMapping("/averageGradeDESC")
-    public ResponseEntity<List<CenterDTO>> getCentersSortedByAverageGradeDESC(){
+    public ResponseEntity<List<CenterDTO>> getCentersSortedByAverageGradeDESC() {
         List<Center> centers = this.centerService.findByOrderByAverageGradeDesc();
 
         List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+        for (Center center : centers) {
+            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),
+                    center.getDescription(), center.getAverageGrade(),
+                    center.getCountry(), center.getStartTime(), center.getEndTime());
             centerDTOS.add(centerDTO);
         }
 
         return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
     }
 
-    
     @GetMapping("/countryASC")
-    public ResponseEntity<List<CenterDTO>> getCentersSortedByCountryASC(){
+    public ResponseEntity<List<CenterDTO>> getCentersSortedByCountryASC() {
         List<Center> centers = this.centerService.findByOrderByCountryAsc();
 
         List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+        for (Center center : centers) {
+            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),
+                    center.getDescription(), center.getAverageGrade(),
+                    center.getCountry(), center.getStartTime(), center.getEndTime());
             centerDTOS.add(centerDTO);
         }
 
@@ -146,14 +144,15 @@ public class CenterController {
     }
 
     @GetMapping("/countryDESC")
-    public ResponseEntity<List<CenterDTO>> getCentersSortedByCountryDESC(){
+    public ResponseEntity<List<CenterDTO>> getCentersSortedByCountryDESC() {
         List<Center> centers = this.centerService.findByOrderByCountryDesc();
 
         List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+        for (Center center : centers) {
+            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),
+                    center.getDescription(), center.getAverageGrade(),
+                    center.getCountry(), center.getStartTime(), center.getEndTime());
             centerDTOS.add(centerDTO);
         }
 
@@ -161,91 +160,97 @@ public class CenterController {
     }
 
     @PutMapping(value = "/{adminCenterId}/{centerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CenterDTO> update(@PathVariable Long adminCenterId, @PathVariable Long centerId, @RequestBody CenterDTO centerDTO) throws Exception{
+    public ResponseEntity<CenterDTO> update(@PathVariable Long adminCenterId, @PathVariable Long centerId,
+            @RequestBody CenterDTO centerDTO) throws Exception {
 
         CenterAdministrator centerAdministrator = this.centerAdministratorService.findOne(adminCenterId);
-        if(centerAdministrator == null){
+        if (centerAdministrator == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
+        // SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Center center = new Center(
-            centerDTO.getName(),
-            centerDTO.getAddress(),
-            centerDTO.getDescription(),
-            centerDTO.getAverageGrade(),
-            centerDTO.getCountry(),
-            formatter.parse(centerDTO.getStartTime()),
-            formatter.parse(centerDTO.getEndTime())
-        );
+                centerDTO.getName(),
+                centerDTO.getAddress(),
+                centerDTO.getDescription(),
+                centerDTO.getAverageGrade(),
+                centerDTO.getCountry(),
+                centerDTO.getStartTime(),
+                centerDTO.getEndTime());
 
         center.setId(centerId);
 
         Center updatedCenter = centerService.update(center);
 
-        CenterDTO updatedCenterDTO = new CenterDTO(updatedCenter.getId(), updatedCenter.getName(), updatedCenter.getAddress(), updatedCenter.getDescription(), updatedCenter.getAverageGrade(), updatedCenter.getCountry(), updatedCenter.getStartTime().toString(), updatedCenter.getEndTime().toString());
+        CenterDTO updatedCenterDTO = new CenterDTO(updatedCenter.getId(), updatedCenter.getName(),
+                updatedCenter.getAddress(), updatedCenter.getDescription(), updatedCenter.getAverageGrade(),
+                updatedCenter.getCountry(), updatedCenter.getStartTime(), updatedCenter.getEndTime());
 
         return new ResponseEntity<>(updatedCenterDTO, HttpStatus.OK);
     }
 
     @GetMapping(value = "/grade/{AverageGrade}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CenterDTO> getAVG(@PathVariable("AverageGrade") Double averageGrade){
-         
+    public ResponseEntity<CenterDTO> getAVG(@PathVariable("AverageGrade") Double averageGrade) {
+
         Center center = this.centerService.findByGrade(averageGrade);
- 
-        CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(),center.getAddress(), center.getDescription(), center.getAverageGrade(),
-        center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
-        
- 
- 
-         return new ResponseEntity<>(centerDTO, HttpStatus.OK);
- 
-    } 
+
+        CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),
+                center.getDescription(), center.getAverageGrade(),
+                center.getCountry(), center.getStartTime(), center.getEndTime());
+
+        return new ResponseEntity<>(centerDTO, HttpStatus.OK);
+
+    }
 
     @PostMapping(value = "/createNewCenter/{SystemAdminId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CenterDTO> createCenter(@PathVariable("SystemAdminId") Long systemAdminId, @RequestBody CenterDTO centerDTO) throws Exception{
-        if(systemAdministratorService.findOne(systemAdminId) == null){
+    public ResponseEntity<CenterDTO> createCenter(@PathVariable("SystemAdminId") Long systemAdminId,
+            @RequestBody CenterDTO centerDTO) throws Exception {
+        if (systemAdministratorService.findOne(systemAdminId) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Center center = new Center(centerDTO.getName(), centerDTO.getAddress(), centerDTO.getDescription(), centerDTO.getAverageGrade(), centerDTO.getCountry(), formatter.parse(centerDTO.getStartTime()), formatter.parse(centerDTO.getEndTime()));
-        
+        Center center = new Center(centerDTO.getName(), centerDTO.getAddress(), centerDTO.getDescription(),
+                centerDTO.getAverageGrade(), centerDTO.getCountry(), centerDTO.getStartTime(), centerDTO.getEndTime());
+
         Center newCenter = this.centerService.create(center);
 
-        CenterDTO newCenterDTO = new CenterDTO(newCenter.getId(), newCenter.getName(), newCenter.getAddress(), newCenter.getDescription(), newCenter.getAverageGrade(), newCenter.getCountry(), newCenter.getStartTime().toString(), newCenter.getEndTime().toString());
+        CenterDTO newCenterDTO = new CenterDTO(newCenter.getId(), newCenter.getName(), newCenter.getAddress(),
+                newCenter.getDescription(), newCenter.getAverageGrade(), newCenter.getCountry(),
+                newCenter.getStartTime(), newCenter.getEndTime());
 
         return new ResponseEntity<>(newCenterDTO, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/getOneByCentersAdministratorId/{centerAdministratorId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CenterDTO> getByCentersAdministratorId(@PathVariable Long centerAdministratorId) throws Exception{
+    public ResponseEntity<CenterDTO> getByCentersAdministratorId(@PathVariable Long centerAdministratorId)
+            throws Exception {
 
         Center center = this.centerAdministratorService.findOne(centerAdministratorId).getCenterCAS();
 
         CenterDTO centerDTO = new CenterDTO(
-            center.getId(),
-            center.getName(),
-            center.getAddress(),
-            center.getDescription(),
-            center.getAverageGrade(),
-            center.getCountry(),
-            center.getStartTime().toString(),
-            center.getEndTime().toString()
-        );
+                center.getId(),
+                center.getName(),
+                center.getAddress(),
+                center.getDescription(),
+                center.getAverageGrade(),
+                center.getCountry(),
+                center.getStartTime(),
+                center.getEndTime());
 
         return new ResponseEntity<>(centerDTO, HttpStatus.OK);
     }
 
-
     @GetMapping("/filter/{firstnumber}/{secondnumber}")
-    public ResponseEntity<List<CenterDTO>> filterCenters(@PathVariable("firstnumber") Double firstnumber, @PathVariable("secondnumber")Double secondnumber){
-        List<Center> centers = this.centerService.filterByGrade(firstnumber,secondnumber);
+    public ResponseEntity<List<CenterDTO>> filterCenters(@PathVariable("firstnumber") Double firstnumber,
+            @PathVariable("secondnumber") Double secondnumber) {
+        List<Center> centers = this.centerService.filterByGrade(firstnumber, secondnumber);
 
         List<CenterDTO> centerDTOS = new ArrayList<>();
 
-        for(Center center : centers){
-            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),center.getDescription(), center.getAverageGrade(),
-            center.getCountry(), center.getStartTime().toString(), center.getEndTime().toString());
+        for (Center center : centers) {
+            CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),
+                    center.getDescription(), center.getAverageGrade(),
+                    center.getCountry(), center.getStartTime(), center.getEndTime());
             centerDTOS.add(centerDTO);
         }
 
@@ -253,4 +258,3 @@ public class CenterController {
     }
 
 }
-

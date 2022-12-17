@@ -5,10 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -37,12 +35,12 @@ public class Center implements Serializable {
     private String country;
 
     @Column
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
-    private Date startTime;
+    // @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    private LocalTime startTime;
 
     @Column
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
-    private Date endTime;
+    // @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    private LocalTime endTime;
 
     @OneToOne(mappedBy = "centerWH", fetch = FetchType.LAZY)
     private Warehouse wareHouse;
@@ -56,16 +54,17 @@ public class Center implements Serializable {
     @OneToMany(mappedBy = "centerCAS", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CenterAdministrator> administrators;
 
-    //slobodni termini za rezervaciju
+    // slobodni termini za rezervaciju
     @OneToMany(mappedBy = "centerTerm", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Term> terms;
 
-    public Center(){
+    public Center() {
 
     }
 
-    public Center(String name, String address, String description, Double averageGrade, String country, Date startTime,
-            Date endTime) {
+    public Center(String name, String address, String description, Double averageGrade, String country,
+            LocalTime startTime,
+            LocalTime endTime) {
         this.name = name;
         this.address = address;
         this.description = description;
@@ -75,7 +74,8 @@ public class Center implements Serializable {
         this.endTime = endTime;
     }
 
-    public Center(Long id, String name, String address, String description, Double averageGrade, String country,Date startTime, Date endTime, List<CenterAdministrator> administrators, List<Term> terms) {
+    public Center(Long id, String name, String address, String description, Double averageGrade, String country,
+            LocalTime startTime, LocalTime endTime, List<CenterAdministrator> administrators, List<Term> terms) {
         this.id = id;
         this.name = name;
         this.address = address;

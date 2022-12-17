@@ -18,6 +18,20 @@ public class UserRequest {
 
 	private String lastname;
 	
-	private String email;
+    private String address;
+
+    private String city;
+
+    private String country;
+
+    private String phoneNumber;
+
+    private String jmbg;
+
+    private String gender;
+
+    private String profession;
+
+    private String education;
 
 }

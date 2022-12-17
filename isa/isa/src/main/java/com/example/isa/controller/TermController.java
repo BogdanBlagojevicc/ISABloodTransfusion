@@ -2,8 +2,7 @@ package com.example.isa.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-
-import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,31 +30,35 @@ public class TermController {
     private final CenterService centerService;
 
     @Autowired
-    public TermController(TermService termService, CenterService centerService){
+    public TermController(TermService termService, CenterService centerService) {
         this.termService = termService;
         this.centerService = centerService;
     }
 
     @PostMapping(value = "/{centerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
-    public ResponseEntity<TermDTO> createNewTerm(@PathVariable("centerId") Long centerId, @RequestBody TermDTO termDTO) throws Exception{
+    public ResponseEntity<TermDTO> createNewTerm(@PathVariable("centerId") Long centerId, @RequestBody TermDTO termDTO)
+            throws Exception {
 
         Center center = this.centerService.findOne(centerId);
 
-        if( center == null){
-            throw new Exception("This center does not exist!");
+        if (center == null) {
+            throw new Exception("This center does not exist");
         }
-        
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Term term = new Term(formatter.parse(termDTO.getDateTerm()), termDTO.getDuration());
+
+        List<Term> terms = termService.findAll();
+        if (!termService.checkTerm(terms, termDTO.getDateTerm())) {
+            throw new Exception("Term already exist");
+        }
+
+        Term term = new Term(termDTO.getDateTerm(), termDTO.getDuration());
         term.setCenterTerm(center);
 
         Term newTerm = this.termService.create(term);
 
-        TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm().toString(), newTerm.getDuration());
+        TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm(), newTerm.getDuration());
 
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
-
 
     }
 
@@ -76,10 +79,10 @@ public class TermController {
 
         Term newTerm = this.termService.create(tempTerm);
 
-        TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm().toString(), newTerm.getDuration());
+        TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm(), newTerm.getDuration());
 
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
 
     }   
-    
+
 }
