@@ -49,7 +49,14 @@ const columns =[
 
   const NameAsc = (e) =>{
     e.preventDefault()
-    fetch("http://localhost:8081/api/centers/nameASC")
+    var test = JSON.parse(localStorage.getItem('testToken'))
+    fetch("http://localhost:8081/api/centers/nameASC",{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        Authorization: `Bearer ${test.accessToken}`,
+       },
+    })
     .then(res =>res.json())
     .then((result)=>
     {
@@ -107,7 +114,14 @@ const columns =[
   };
 
   useEffect(()=>{
-    fetch("http://localhost:8081/api/centers/nameASC")
+    var test = JSON.parse(localStorage.getItem('testToken'))
+    fetch("http://localhost:8081/api/centers/nameASC",{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        Authorization: `Bearer ${test.accessToken}`,
+       },
+    })
     .then(res =>res.json())
     .then((result)=>
     {
