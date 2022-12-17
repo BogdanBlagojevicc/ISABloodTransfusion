@@ -2,6 +2,8 @@ package com.example.isa.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,11 +49,11 @@ public class TermController {
         }
 
         List<Term> terms = termService.findAll();
-        if (!termService.checkTerm(terms, termDTO.getDateTerm())) {
+        if (!termService.checkTerm(terms, LocalDateTime.parse(termDTO.getDateTerm()))) {
             throw new Exception("Term already exist");
         }
 
-        Term term = new Term(termDTO.getDateTerm(), termDTO.getDuration());
+        Term term = new Term(LocalDateTime.parse(termDTO.getDateTerm()), termDTO.getDuration());
         term.setCenterTerm(center);
 
         Term newTerm = this.termService.create(term);

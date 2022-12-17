@@ -10,7 +10,7 @@ import lombok.Setter;
 public class TermDTO {
     private Long id;
 
-    private LocalDateTime dateTerm;
+    private String dateTerm;
 
     private Integer duration;
 
@@ -22,7 +22,7 @@ public class TermDTO {
 
     public TermDTO(Long id, LocalDateTime dateTerm, Integer duration) {
         this.id = id;
-        this.dateTerm = dateTerm;
+        this.dateTerm = dateTerm.toString();
         this.duration = duration;
     }
 
