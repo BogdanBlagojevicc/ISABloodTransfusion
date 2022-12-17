@@ -16,6 +16,7 @@ const Navbar = () => {
                     <li>
                         <Link to='/changePassword'>Change password</Link>
                     </li>
+                    
                     <li>
                         <Link to='/about'>Centers</Link>
                     </li>

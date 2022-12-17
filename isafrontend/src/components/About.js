@@ -8,6 +8,7 @@ import filterFactory, { textFilter} from 'react-bootstrap-table2-filter'
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css'
 import TextField from '@mui/material/TextField'
 import {Paper} from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 const About = () => {
   const [centers, setCenters] = useState([])
@@ -46,6 +47,16 @@ const columns =[
     }
     )
   };
+
+  const navigate = useNavigate();
+
+  const rowEvent = {
+    onClick: (e, row) => {
+      navigate(`/Careers/`+row.id);
+      // window.location.href = `/Careers?id=${row}`;
+    },
+  };
+  
 
   const NameAsc = (e) =>{
     e.preventDefault()
@@ -133,6 +144,7 @@ const columns =[
     <div className='app-container'>
       <BootstrapTable bootstrap4 keyField='name' columns = {columns}
        data ={centers} 
+       rowEvents={rowEvent} 
        filter = {filterFactory()}/>
 <Paper elevation={3} style={paperStyle}>
         <TextField id="standard-basic" variant="standard" label="Min grade"  
@@ -150,24 +162,7 @@ const columns =[
         </Button>
 
 </Paper>
-      {/* <Button variant="contained" color="secondary" onClick={CountryAsc}>
-          CountryAsc
-        </Button>
-        <Button variant="contained" color="secondary" onClick={CountryDesc}>
-        CountryDesc
-        </Button>
-        <Button variant="contained" color="secondary" onClick={NameAsc}>
-          NameAsc
-        </Button>
-        <Button variant="contained" color="secondary" onClick={NameDesc}>
-          NameDesc
-        </Button>
-        <Button variant="contained" color="secondary" onClick={gradeAsc}>
-          gradeAsc
-        </Button>
-        <Button variant="contained" color="secondary" onClick={gradeDesc}>
-          gradeDesc
-        </Button> */}
+     
     </div>
   )
 }

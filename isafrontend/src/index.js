@@ -19,6 +19,7 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import SignUp  from './components/SignUp';
 import ShowCenters from './components/ShowCenters';
+import Careers from './components/Careers';
 
 ReactDOM.render(
   <Router>
@@ -38,6 +39,7 @@ ReactDOM.render(
         <Route path='/navbar' element={<Navbar/>}/>
         <Route path='/signUp' element={<SignUp/>}/>
         <Route path='/showCenters' element={<ShowCenters/>}/>
+        <Route path='/Careers/:id' element={<Careers/>}/>
     </Routes>
   </Router>,
  document.getElementById('root')

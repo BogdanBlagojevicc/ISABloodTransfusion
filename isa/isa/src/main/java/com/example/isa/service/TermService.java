@@ -30,6 +30,10 @@ public class TermService {
 
     }
 
+    public List<Term> findByCenterIdOrderByDateTerm(Long id){
+        return termRepository.findByCenterIdOrderByDateTerm(id);
+    }
+
     public Term findOne(Long id) throws Exception {
         Term term = this.termRepository.getById(id);
 

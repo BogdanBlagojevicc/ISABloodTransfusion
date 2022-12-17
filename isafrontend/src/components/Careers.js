@@ -1,90 +1,52 @@
-//import React, { useEffect, useState } from 'react'
-import React from "react";
+import React, { useEffect, useState } from 'react'
+import { Button } from '@mui/material'
+import BootstrapTable from 'react-bootstrap-table-next'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter'
+import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css'
+import TextField from '@mui/material/TextField'
+import { Paper } from '@mui/material'
+import { useParams } from 'react-router-dom';
 
 const Careers = () => {
+  let { id } = useParams();
+  const [terms, setTerms] = useState([])
+  const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" }
+
+  const columns = [
+    { dataField: 'dateTerm', text: 'Date Term' },
+    { dataField: 'duration', text: 'Duration' }
+  ]
+
+  useEffect(() => {
+    var test = JSON.parse(localStorage.getItem('testToken'))
+    fetch("http://localhost:8081/api/terms/order/" + id, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        Authorization: `Bearer ${test.accessToken}`,
+      },
+    })
+      .then(res => res.json())
+      .then((result) => {
+        setTerms(result);
+      }
+      )
+  }, [])
   return (
-    <div>
-        <h1>I am a careers page</h1>
+    <div className='app-container'>
+      <BootstrapTable bootstrap4 keyField='name' columns={columns}
+        data={terms}
+        //rowEvents={rowEvent} 
+        filter={filterFactory()} />
+      <Paper elevation={3} style={paperStyle}>
+
+
+      </Paper>
+
     </div>
   )
 }
-
- /*function UpdateAdministratorCenterForm(){
-
- let navigate = useNavigate();
-  const {control, handleSubmit, reset} = useForm();
-  const [CenterAdministrator, setCenterAdministrator] = useState({});
-
-  const handleUpdate = async (data) => {
-    try {
-      const resp = await axiosApi.put(`/api/centerAdministrators/updatePassword/${CenterAdministrator.id}/`, data);
-      console.log(resp.data);
-      navigate('/user-profile/');
-    }catch (error){
-      console.log(error.response);
-    }
-  }
-
-  const getAdministratorCenter = async (e) => {
-    try{
-      const res = await axiosApi.get('/api/centerAdministrators/user-profile/');
-      console.log("Administrator centra update", res.data);
-      setCenterAdministrator(res.data);
-      return res.data;
-    }catch (error){
-      console.log(error.response);
-    }
-  };
-
-  useEffect(() => {
-    getAdministratorCenter().then(reset);
-  },[]);
-
-  return(
-    <div>
-      <Typography variant="h4" color={green[800]} marginTop={2}>
-        Update profile
-      </Typography>
-      <Grid
-        container
-        marginTop={"-40px"}
-        rowspacing={2}
-        sx={{ padding: "55px 550px 0px 550px"}}
-      >
-        <Grid item xs={12}>
-          <InputTextField
-            name = "password"
-            control = {control}
-            variant = "filled"
-            label = "Password"
-            autoFocus
-            fullWidth
-          />
-      </Grid>
-        <Grid item xs = {12}>
-          <Button
-            type = "submit"
-            fullWidth
-            variant = "contained"
-            onClick={handleSubmit(handleUpdate)}
-            sx={{
-                mt: 3,
-                mb: 2,
-                background: "#6fbf73",
-                height: "30",
-                "&.MuiButtonBase-root":{
-                  "&:hover":{
-                    backgroundColor: green[600],
-                  },
-                },
-            }}
-          >
-            Submit
-          </Button>  
-        </Grid>
-      </Grid> 
-    </div>
-  );
-}*/
 
 export default Careers
