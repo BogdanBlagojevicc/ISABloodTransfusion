@@ -18,15 +18,9 @@ public class TermDTO {
 
     }
 
-
-
     public TermDTO(Long id, LocalDateTime dateTerm, Integer duration) {
         this.id = id;
         this.dateTerm = dateTerm.toString();
         this.duration = duration;
     }
-
-    
-
-
 }
