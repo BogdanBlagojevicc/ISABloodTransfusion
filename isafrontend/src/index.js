@@ -24,6 +24,7 @@ import ShowRegUserTerms from './components/ShowRegUserTerms';
 import TermDetails from './components/TermDetails';
 import Careers from './components/Careers';
 import NewTerm from './components/NewTerm';
+import StartTerm from './components/StartTerm';
 
 ReactDOM.render(
   <Router>
@@ -48,6 +49,7 @@ ReactDOM.render(
         <Route path='/showRegUsers' element={<ShowRegUsers/>}/>
         <Route path='/showRegUsers/showRegUserTerms:regUserId' element={<ShowRegUserTerms/>}/>
         <Route path='/showRegUsers/showRegUserTerms:regUserId/termDetails:termId' element={<TermDetails/>}/>
+        <Route path='/showRegUsers/showRegUserTerms:regUserId/termDetails:termId/startTerm' element={<StartTerm/>}/>
     </Routes>
   </Router>,
  document.getElementById('root')

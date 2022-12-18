@@ -23,8 +23,8 @@ public class QuestionnaireService {
         return this.questionnaireRepository.save(questionnaire);
     }
 
-    public Questionnaire findQuestionnaireByUserId(Long userId){
-        return questionnaireRepository.findByUserId(userId);
+    public Questionnaire findOneByRegularUserId(Long regularUserId){
+        return this.questionnaireRepository.findOneByRegularUserId(regularUserId);
     }
 
 }

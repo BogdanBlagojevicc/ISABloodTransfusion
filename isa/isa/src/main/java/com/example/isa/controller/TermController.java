@@ -160,8 +160,11 @@ public class TermController {
             throw new Exception("This center does not exist");
         }
 
-        if(questionnaireService.findQuestionnaireByUserId(regUserId) == null){
+        if(questionnaireService.findOneByRegularUserId(regUserId) == null){
             throw new Exception("Questionnaire is not filled");
+        }
+        if(questionnaireService.findOneByRegularUserId(regUserId).getIsPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths()){
+            throw new Exception("User cannot schedule term beacuse he donate blood in previous six months ");
         }
         Term term = new Term(LocalDateTime.parse(stringDateTerm),1);
         term.setCenterTerm(center);
