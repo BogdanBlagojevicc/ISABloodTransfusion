@@ -24,6 +24,7 @@ import com.example.isa.model.Term;
 import com.example.isa.model.dto.CenterDTO;
 import com.example.isa.model.dto.TermDTO;
 import com.example.isa.service.CenterService;
+import com.example.isa.service.QuestionnaireService;
 import com.example.isa.service.TermService;
 
 @CrossOrigin
@@ -33,11 +34,13 @@ public class TermController {
 
     private final TermService termService;
     private final CenterService centerService;
+    private final QuestionnaireService questionnaireService;
 
     @Autowired
-    public TermController(TermService termService, CenterService centerService) {
+    public TermController(TermService termService, CenterService centerService, QuestionnaireService questionnaireService) {
         this.termService = termService;
         this.centerService = centerService;
+        this.questionnaireService = questionnaireService;
     }
 
     @PostMapping(value = "/{centerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -143,4 +146,32 @@ public class TermController {
         }
         return new ResponseEntity<>(centerDTOs, HttpStatus.OK);
     }
+
+
+    @PostMapping(value = "/scheduleTerm/{centerId}/{dateTerm}/{regUserId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    public ResponseEntity<TermDTO> createNewTerm(@PathVariable("centerId") Long centerId, @PathVariable("dateTerm") String stringDateTerm,
+    @PathVariable("regUserId") Long regUserId)
+            throws Exception {
+
+        Center center = centerService.findOne(centerId);
+
+        if (center == null) {
+            throw new Exception("This center does not exist");
+        }
+
+        if(questionnaireService.findQuestionnaireByUserId(regUserId) == null){
+            throw new Exception("Questionnaire is not filled");
+        }
+        Term term = new Term(LocalDateTime.parse(stringDateTerm),1);
+        term.setCenterTerm(center);
+
+        Term newTerm = termService.create(term);
+
+        TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm(), newTerm.getDuration());
+
+        return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
+
+    }
+
 }
