@@ -55,7 +55,7 @@ const columns =[
       navigate(`/Careers/`+row.id);
       // window.location.href = `/Careers?id=${row}`;
     },
-  };
+  }; 
   
 
   const NameAsc = (e) =>{

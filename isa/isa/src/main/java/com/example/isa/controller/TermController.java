@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.isa.model.Center;
 import com.example.isa.model.Term;
+import com.example.isa.model.dto.CenterDTO;
 import com.example.isa.model.dto.TermDTO;
 import com.example.isa.service.CenterService;
 import com.example.isa.service.TermService;
@@ -68,11 +69,15 @@ public class TermController {
 
     @DeleteMapping(value = "/{termId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
-    public ResponseEntity<TermDTO> deleteTerm(@PathVariable("termId") Long termId) throws Exception{ // mozda bude problem jer pise consumes a nemam request body
+    public ResponseEntity<TermDTO> deleteTerm(@PathVariable("termId") Long termId) throws Exception { // mozda bude
+                                                                                                      // problem jer
+                                                                                                      // pise consumes a
+                                                                                                      // nemam request
+                                                                                                      // body
 
         Term term = this.termService.findOne(termId);
 
-        if(term == null){
+        if (term == null) {
             throw new Exception("This term does not exist!");
         }
 
@@ -87,22 +92,38 @@ public class TermController {
 
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
 
-    }   
+    }
+
     @GetMapping("/order/{centerTerm}")
     @PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
-    public ResponseEntity<List<TermDTO>> findterms(@PathVariable("centerTerm") Long centerTerm
-           ) {
+    public ResponseEntity<List<TermDTO>> findterms(@PathVariable("centerTerm") Long centerTerm) {
         List<Term> terms = this.termService.findByCenterIdOrderByDateTerm(centerTerm);
 
         List<TermDTO> termDTOS = new ArrayList<>();
 
         for (Term term : terms) {
-            TermDTO termDTO = new TermDTO(term.getId(),term.getDateTerm(), term.getDuration()
-                    );
-                    termDTOS.add(termDTO);
+            TermDTO termDTO = new TermDTO(term.getId(), term.getDateTerm(), term.getDuration());
+            termDTOS.add(termDTO);
         }
 
         return new ResponseEntity<>(termDTOS, HttpStatus.OK);
     }
 
+    @GetMapping("/availableTerms/{dateTerm}")
+    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    public ResponseEntity<List<CenterDTO>> checkIfAvailable(@PathVariable("dateTerm") String stringDateTerm) {
+        LocalDateTime dateTerm = LocalDateTime.parse(stringDateTerm);
+
+        List<CenterDTO> centerDTOs = new ArrayList<>();
+        List<Center> allCenters = centerService.findAll();
+        for (Center c : allCenters) {
+            List<Term> allTerms = termService.findByCenterIdOrderByDateTerm(c.getId());
+            if (termService.checkTerm(allTerms, dateTerm)) {
+                centerDTOs.add(
+                        new CenterDTO(c.getId(), c.getName(), c.getAddress(), c.getDescription(), c.getAverageGrade(),
+                                c.getCountry(), c.getStartTime(), c.getEndTime()));
+            }
+        }
+        return new ResponseEntity<>(centerDTOs, HttpStatus.OK);
+    }
 }

@@ -30,7 +30,7 @@ public class TermService {
 
     }
 
-    public List<Term> findByCenterIdOrderByDateTerm(Long id){
+    public List<Term> findByCenterIdOrderByDateTerm(Long id) {
         return termRepository.findByCenterIdOrderByDateTerm(id);
     }
 
@@ -44,9 +44,10 @@ public class TermService {
         return term;
     }
 
-    public void delete(Term term) throws Exception{
+    public void delete(Term term) throws Exception {
         this.termRepository.delete(term);
     }
+
     public boolean checkTerm(List<Term> terms, LocalDateTime localDateTime) {
         for (Term t : terms) {
             LocalDateTime toTime = localDateTime.plusHours(1l);
