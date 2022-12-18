@@ -91,6 +91,14 @@ public class UserService {
 		u.setFirstName(userRequest.getFirstname());
 		u.setLastName(userRequest.getLastname());
 		u.setEnabled(true);
+		u.setAddress(userRequest.getAddress());
+        u.setCity(userRequest.getCity());
+        u.setCountry(userRequest.getCountry());
+        u.setPhoneNumber(userRequest.getPhoneNumber());
+        u.setJmbg(userRequest.getJmbg());
+        u.setGender(Gender.valueOf(userRequest.getGender()));
+        u.setProfession(userRequest.getProfession());
+        u.setEducation(userRequest.getEducation());
 		//u.setEmail(userRequest.getEmail()); ****************** MOZDA BUDE TREBALO DA SE MENJA ************************ CONE
 
 		// u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER

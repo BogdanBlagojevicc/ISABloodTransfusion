@@ -55,6 +55,10 @@ const Navbar = () => {
                         <Link to='/logIn'>Log In</Link>
                     </li>
 
+                    <li>
+                        <Link to='/showRegUsers'>All regular users</Link>
+                    </li>
+
                 </ul>
             </nav>
         </div>

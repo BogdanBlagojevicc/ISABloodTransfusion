@@ -61,4 +61,8 @@ public class TermService {
         }
         return true;
     }
+
+    public List<Term> findAllByRegularUserId(Long id){
+        return termRepository.findAllByRegularUserId(id);
+    }
 }
