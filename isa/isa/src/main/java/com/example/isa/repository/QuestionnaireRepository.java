@@ -5,5 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.isa.model.Questionnaire;
 
 public interface QuestionnaireRepository extends JpaRepository<Questionnaire, Long> {
+
+    Questionnaire findOneByRegularUserId(Long id);
     
 }
