@@ -28,7 +28,7 @@ import com.example.isa.service.TermService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "api/terms")
+@RequestMapping(value = "/api/terms")
 public class TermController {
 
     private final TermService termService;
@@ -107,6 +107,23 @@ public class TermController {
         }
 
         return new ResponseEntity<>(termDTOS, HttpStatus.OK);
+    }
+    
+    @GetMapping(value = "/getAllTermsByRegUserId/{regUserId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TermDTO>> getAllTermsByRegularUserId(@PathVariable Long regUserId){
+
+        List<Term> terms = this.termService.findAllByRegularUserId(regUserId);
+        List<TermDTO> termDTOs = new ArrayList<>();
+
+        for(Term term : terms){
+            TermDTO termDTO = new TermDTO(
+                term.getId(),
+                term.getDateTerm(),
+                term.getDuration()
+            );
+            termDTOs.add(termDTO);
+        }
+        return new ResponseEntity<>(termDTOs, HttpStatus.OK);
     }
 
     @GetMapping("/availableTerms/{dateTerm}")

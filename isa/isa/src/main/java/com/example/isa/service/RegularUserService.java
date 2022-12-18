@@ -81,13 +81,9 @@ public class RegularUserService {
         return updatedRegularUser;
     }
     
-
-
-
-    //NE MOZE DOK NE RESIMO PROBLEM ONEtoONE
-    // public List<RegularUser> findAll(){
-    //     return regularUserRepository.findAll();
-    // }
+    public List<RegularUser> findAll(){
+        return regularUserRepository.findAll();
+    }
 
     // public List<RegularUser> findByFirstNameAndLastName(String firstName, String lastName){
     //     return this.regularUserRepository.findByFirstNameAndLastName(firstName, lastName);

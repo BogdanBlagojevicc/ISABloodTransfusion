@@ -33,6 +33,7 @@ export default function SignUp() {
       return;
     }
     fetch("http://localhost:8081/auth/signup",{
+    //fetch("http://localhost:8081/auth/regularUser/signup",{ OVAKO TREBA
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(new_user)

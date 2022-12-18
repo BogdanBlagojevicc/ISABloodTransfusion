@@ -29,8 +29,15 @@ VALUES ('micurinova2', 'novi sad', 'srbija', 'srednja', 'sesa@gmail.com', 'nenad
 INSERT INTO users (address, city, country, education, username, first_name, gender, jmbg, last_name, password, phone_number, profession, enabled)
 VALUES ('zepsa', 'novi sad', 'bosna', 'srednja', 'sladjana@gmail.com', 'kava', 'MALE', '67452', 'solja', '1286634', '45445', 'radi', TRUE);
 
+
+-- INSERT INTO users (address, city, country, education, username, first_name, gender, jmbg, last_name, password, phone_number, profession, enabled)
+-- VALUES ('rumenacka3', 'novi sad', 'srb', 'srednja', 'marko@gmail.com', 'marko', 'MALE', '8778', 'markovic', '444545', '989746', 'prog', TRUE);
+
 INSERT INTO regularusers (loyalty, penalties, points, user_id)
 VALUES ('REGULAR', 0, 0, 1);
+
+-- INSERT INTO regularusers (loyalty, penalties, points, user_id)
+-- VALUES ('REGULAR', 0, 0, 5);
 
 INSERT INTO systemadministrators(user_id)
 VALUES(2);
@@ -39,6 +46,9 @@ INSERT INTO terms (date_term, duration, center_term_id, regular_user_id)
 VALUES ('2000-10-10T12:30', 1, 1, 1);
 INSERT INTO terms (date_term, duration, center_term_id, regular_user_id)
 VALUES ('2000-10-10T11:30', 1, 1, 1);
+
+-- INSERT INTO terms (date_term, duration, center_term_id, regular_user_id)
+-- VALUES ('2000-11-11', 7, 1, 2);
 
 INSERT INTO centeradministrators(user_id, centercas_id, term_id)
 VALUES(3, 1, 1);
@@ -52,8 +62,13 @@ INSERT INTO user_role (user_id, role_id) VALUES (4, 3);
 INSERT INTO user_role (user_id, role_id) VALUES (2, 1);
 INSERT INTO user_role (user_id, role_id) VALUES (1, 2);
 
+-- INSERT INTO user_role (user_id, role_id) VALUES (5, 2);
+
 INSERT INTO complaints(response, text, centerco_id, center_administrator_id, regular_user_id, system_administrator_id)
 VALUES ('dobar', 'neki test', 1, 1, 1 ,1);
+
+-- INSERT INTO complaints(response, text, centerco_id, center_administrator_id, regular_user_id, system_administrator_id)
+-- VALUES ('ok', 'nesto', 1, 1, 2 ,1);
 
 INSERT INTO grades(grade, centergr_id, regular_user_id)
 VALUES (5, 1, 1);
@@ -61,4 +76,7 @@ VALUES (5, 1, 1);
 
 INSERT INTO questionnaries (blood_type, regular_user_id)
 VALUES ('ZERO', 1);
+
+-- INSERT INTO questionnaries (blood_type, regular_user_id)
+-- VALUES ('ZERO', 2);
 

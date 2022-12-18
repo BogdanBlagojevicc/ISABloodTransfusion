@@ -29,7 +29,7 @@ public class Term implements Serializable {
     private Center centerTerm;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private RegularUser regular_user;
+    private RegularUser regularUser;
 
     @OneToOne(mappedBy = "term", fetch = FetchType.LAZY)
     private CenterAdministrator centerAdministrator;
