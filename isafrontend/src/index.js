@@ -20,6 +20,7 @@ import Navbar from './components/Navbar';
 import SignUp  from './components/SignUp';
 import ShowCenters from './components/ShowCenters';
 import Careers from './components/Careers';
+import NewTerm from './components/NewTerm';
 
 ReactDOM.render(
   <Router>
@@ -39,6 +40,7 @@ ReactDOM.render(
         <Route path='/navbar' element={<Navbar/>}/>
         <Route path='/signUp' element={<SignUp/>}/>
         <Route path='/showCenters' element={<ShowCenters/>}/>
+        <Route path='/NewTerm' element={<NewTerm/>}/>
         <Route path='/Careers/:id' element={<Careers/>}/>
     </Routes>
   </Router>,
