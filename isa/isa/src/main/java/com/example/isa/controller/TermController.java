@@ -130,7 +130,7 @@ public class TermController {
     }
 
     @GetMapping("/availableTerms/{dateTerm}")
-    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    @PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
     public ResponseEntity<List<CenterDTO>> checkIfAvailable(@PathVariable("dateTerm") String stringDateTerm) {
         LocalDateTime dateTerm = LocalDateTime.parse(stringDateTerm);
 

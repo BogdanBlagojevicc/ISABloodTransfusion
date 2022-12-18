@@ -8,7 +8,7 @@ import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css
 import TextField from '@mui/material/TextField'
 import { Paper } from '@mui/material'
 import { useParams } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom'
 
 
 const NewTerm = () => {
@@ -22,7 +22,7 @@ const NewTerm = () => {
 
     const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" }
   
-   
+    const navigate = useNavigate();
     
   
     const handleClick = (e) =>{
@@ -42,6 +42,9 @@ const NewTerm = () => {
         }
         )
       }
+      const handleClickk = (e) =>{
+        navigate(`/questionaire`);
+      }
       
   return (
     <div className='app-container'>
@@ -58,6 +61,10 @@ const NewTerm = () => {
         <Button variant="contained" color="secondary" onClick={handleClick}>
           Add new term
         </Button>
+        <Button  color="secondary" onClick={handleClickk}>
+          Fill questionary
+        </Button>
+
 
       </Paper>
 
