@@ -4,35 +4,92 @@ import './styles/Contact.scss'
 import TextField from '@mui/material/TextField'
 import { Container } from '@mui/system';
 import {Paper, Button} from '@mui/material'
+import { useParams } from 'react-router-dom'
 
 export default function StartTerm() {
   const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
   var [questionnaire, setQuestionnaire] = useState([])
+  let { termId } = useParams();
+  let { regUserId } = useParams();
+
+  var [isFelGood, setIsFelGood] = useState('')
+  var [isSkinChang, setisSkinChang] = useState('')
+  var [isPrevTherMoreThanSixDays, setisPrevTherMoreThanSixDays] = useState('')
+  var [isInMonthlyCycle, setInMonthlyCycle] = useState('')
+  var [isPrevDentalInterMoreThanSicDay, setisPrevDentalInterMoreThanSicDay] = useState('')
+  var [isPrevSurgicalInterMoreThanSicMonths, setisPrevSurgicalInterMoreThanSicMonths] = useState('')
 
 
   useEffect(() =>{
-    fetch("http://localhost:8081/api/centerAdministrators/getOne/1")
+    var test = JSON.parse(localStorage.getItem('testToken'))
+    console.log("IDR:" + regUserId);
+    fetch("http://localhost:8081/api/questionnaire/getOneByRegularUserId/" + regUserId,{
+        
+        headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            Authorization: `Bearer ${test.accessToken}`,
+           },
+    })
     .then(res => res.json())
     .then((result) =>
     {
-      setCenterAdministrator(result);
+        setQuestionnaire(result);
     }
     )
+
+    if(questionnaire.isFeelsGood == true){
+        setIsFelGood("Yes");
+    }else{
+        setIsFelGood("No");
+    }
+
+    if(questionnaire.isSkinChanged == true){
+        setisSkinChang("Yes");
+    }else{
+        setisSkinChang("No");
+    }
+
+    if(questionnaire.isPreviousTherapyMoreThanSixDays == true){
+        setisPrevTherMoreThanSixDays("Yes");
+    }else{
+        setisPrevTherMoreThanSixDays("No");
+    }
+
+    if(questionnaire.isUnderRegularMonthlyCycle == true){
+        setInMonthlyCycle("Yes");
+    }else{
+        setInMonthlyCycle("No");
+    }
+
+    if(questionnaire.isUnderRegularMonthlyCycle == true){
+        setisPrevDentalInterMoreThanSicDay("Yes");
+    }else{
+        setisPrevDentalInterMoreThanSicDay("No");
+    }
+
+    if(questionnaire.isUnderRegularMonthlyCycle == true){
+        setisPrevSurgicalInterMoreThanSicMonths("Yes");
+    }else{
+        setisPrevSurgicalInterMoreThanSicMonths("No");
+    }
+
+
   },[])
 
-  const handleClick = (e) =>{
-    e.preventDefault()
-    var admin = centerAdministrator;
-    console.log(admin);
-    fetch("http://localhost:8081/api/centerAdministrators/1",{
-    method:"PUT",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify(admin)
+//   const handleClick = (e) =>{
+//     e.preventDefault()
+//     var admin = centerAdministrator;
+//     console.log(admin);
+//     fetch("http://localhost:8081/api/centerAdministrators/1",{
+//     method:"PUT",
+//     headers:{"Content-Type":"application/json"},
+//     body:JSON.stringify(admin)
 
-  }).then(() =>{
-    console.log("Admin changed")
-  })
-}
+//   }).then(() =>{
+//     console.log("Admin changed")
+//   })
+// }
 
   return (
     <Box
@@ -44,58 +101,49 @@ export default function StartTerm() {
       autoComplete="off"
     >
       <Container>
-        <h1>Change all</h1>
+        <h1>Start term</h1>
         <Paper elevation={3} style={paperStyle}>
 
-      
-        <TextField id="standard-basic" variant="standard" label="email" fullWidth 
-        placeholder={centerAdministrator.email}
-        onChange = {(e) => setEma(e.target.value)}
-        />
+        <label> Date of donation:  {questionnaire.currentDateTime}</label>
+        <br/>
 
-        <TextField id="standard-basic" variant="standard" label="firstName" fullWidth 
-        placeholder={centerAdministrator.firstName}
-        onChange = {(e) => setFir(e.target.value)}
-        />
+        <label> Number of previous Transfusions:  {questionnaire.previousTransfusions}</label>
+        <br/>
 
-        <TextField id="standard-basic" variant="standard" label="lastName" fullWidth 
-        placeholder={centerAdministrator.lastName}
-        onChange = {(e) => setLas(e.target.value)}
-        />
+        <label> Weight:  {questionnaire.weight}</label>
+        <br/>
 
-        <TextField id="standard-basic" variant="standard" label="address" fullWidth 
-        placeholder={centerAdministrator.address}
-        onChange = {(e) => setAdd(e.target.value)}
-        />
+        <label> Are you feel good:  {isFelGood}</label>
+        <br/>
 
-        <TextField id="standard-basic" variant="standard" label="city" fullWidth 
-        placeholder={centerAdministrator.city}
-        onChange = {(e) => setCit(e.target.value)}
-        />
+        <label> Is skin changed:  {isSkinChang}</label>
+        <br/>
 
-        <TextField id="standard-basic" variant="standard" label="country" fullWidth 
-        placeholder={centerAdministrator.country}
-        onChange = {(e) => setCou(e.target.value)}
-        />
+        <label> High blood pressure:  {questionnaire.highBloodPressure}</label>
+        <br/>
 
-        <TextField id="standard-basic" variant="standard" label="phoneNumber" fullWidth 
-        placeholder={centerAdministrator.phoneNumber}
-        onChange = {(e) => setPnu(e.target.value)}
-        />
+        <label> Low blood pressure:  {questionnaire.lowBloodPressure}</label>
+        <br/>
 
-        <TextField id="standard-basic" variant="standard" label="profession" fullWidth 
-        placeholder={centerAdministrator.profession}
-        onChange = {(e) => setPro(e.target.value)}
-        />
+        <label> Is previous therapy more than six days:  {isPrevTherMoreThanSixDays}</label>
+        <br/>
 
-        <TextField id="standard-basic" variant="standard" label="education" fullWidth 
-        placeholder={centerAdministrator.education}
-        onChange = {(e) => setEdu(e.target.value)}
-        />
+        <label> Are you in monthly cycle (woman):  {isInMonthlyCycle}</label>
+        <br/>
+
+        <label> Is previous dental intervention more than six days:  {isPrevDentalInterMoreThanSicDay}</label>
+        <br/>
+
+        <label> Is previous surgical intervention or blood donation more than six months:  {isPrevSurgicalInterMoreThanSicMonths}</label>
+        <br/>
+
+        <label> Blood type:  {questionnaire.bloodType}</label>
+        <br/>
+
   
-        <Button variant="contained" color="secondary" onClick={handleClick}>
+        {/* <Button variant="contained" color="secondary" onClick={handleClick}>
           Submit
-        </Button>
+        </Button> */}
         </Paper>
 
       </Container>
