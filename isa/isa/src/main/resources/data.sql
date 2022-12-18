@@ -74,8 +74,9 @@ INSERT INTO grades(grade, centergr_id, regular_user_id)
 VALUES (5, 1, 1);
 
 
-INSERT INTO questionnaries (blood_type, regular_user_id)
-VALUES ('ZERO', 1);
+INSERT INTO questionnaries (blood_type, current_date_time, high_blood_pressure, is_feels_good,  is_previous_dental_intervention_more_than_six_days, is_previous_surgical_intervention_or_blood_donation_more_than_s,
+is_previous_therapy_more_than_six_days, is_skin_changed, is_under_regular_monthly_cycle, low_blood_pressure, previous_transfusions, weight, regular_user_id)
+VALUES ('ZERO', '2000-10-10T12:30', 120, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, 80, 5, 65, 1);
 
 -- INSERT INTO questionnaries (blood_type, regular_user_id)
 -- VALUES ('ZERO', 2);
