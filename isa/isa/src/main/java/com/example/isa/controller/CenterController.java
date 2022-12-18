@@ -257,4 +257,24 @@ public class CenterController {
         return new ResponseEntity<>(centerDTOS, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/getOneByTermId/{termId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CenterDTO> getByTermId(@PathVariable Long termId) throws Exception {
+
+        Center center = this.centerService.findOneByTermId(termId);
+
+        CenterDTO centerDTO = new CenterDTO(
+                center.getId(),
+                center.getName(),
+                center.getAddress(),
+                center.getDescription(),
+                center.getAverageGrade(),
+                center.getCountry(),
+                center.getStartTime(),
+                center.getEndTime());
+
+        return new ResponseEntity<>(centerDTO, HttpStatus.OK);
+    }
+
+
+
 }

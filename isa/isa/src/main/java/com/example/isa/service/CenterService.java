@@ -1,7 +1,10 @@
 package com.example.isa.service;
 
 import com.example.isa.model.Center;
+import com.example.isa.model.Term;
 import com.example.isa.repository.CenterRepository;
+import com.example.isa.repository.TermRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +14,12 @@ import java.util.List;
 public class CenterService {
     
     private final CenterRepository centerRepository;
+    private final TermService termService;
 
     @Autowired
-    public CenterService(CenterRepository centerRepository){
+    public CenterService(CenterRepository centerRepository, TermService termService){
         this.centerRepository = centerRepository;
+        this.termService = termService;
     }
 
     public List<Center> findAll(){
@@ -112,6 +117,12 @@ public class CenterService {
 
     public List<Center> filterByGrade(Double firstnumber, Double secondnumber){
         return this.centerRepository.filterByGrade(firstnumber, secondnumber);
+    }
+
+    public Center findOneByTermId(Long termId) throws Exception{
+        Term term = this.termService.findOne(termId);
+        Center center = this.centerRepository.getById(term.getCenterTerm().getId());
+        return center;
     }
 
 }

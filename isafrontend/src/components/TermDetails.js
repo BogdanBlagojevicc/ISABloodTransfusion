@@ -28,12 +28,6 @@ const didntClick = (e) =>{
   //window.location.href = '/signUp';
 };
 
-const viewQuestionnaire = (e) =>{
-  e.preventDefault()
-  //window.location.href = '/showCenters';
-};
-
-
   return (
     <Box
       component="form"
@@ -53,11 +47,6 @@ const viewQuestionnaire = (e) =>{
 
         <Button variant="contained" color="secondary" onClick={didntClick}>
           Did't come
-        </Button>
-
-        
-        <Button variant="contained" color="secondary" onClick={viewQuestionnaire}>
-          See Questionnaire
         </Button>
 
         </Paper>
