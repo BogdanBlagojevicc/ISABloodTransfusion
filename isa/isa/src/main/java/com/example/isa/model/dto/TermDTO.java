@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TermDTO {
+    
     private Long id;
 
     private String dateTerm;

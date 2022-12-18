@@ -34,7 +34,7 @@ public class RegularUser {
     @OneToOne(mappedBy = "regularUser", fetch = FetchType.LAZY)
     private Grade grade;
 
-    @OneToMany(mappedBy = "regular_user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "regularUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Term> terms;
     
     @OneToMany(mappedBy = "regularUser", fetch=FetchType.LAZY, cascade = CascadeType.ALL)

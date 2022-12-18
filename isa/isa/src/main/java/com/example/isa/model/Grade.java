@@ -19,10 +19,10 @@ public class Grade implements Serializable {
     @Column
     private Integer grade;
 
-    @OneToOne()
+    @OneToOne(fetch = FetchType.LAZY)
     private RegularUser regularUser;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Center centerGR;
 
     public Grade() {

@@ -31,8 +31,7 @@ import com.example.isa.service.UserService;
 //@CrossOrigin(origins = "http://localhost:63342")
 @CrossOrigin
 @RestController
-@RequestMapping(value = "api/regularUsers")
-
+@RequestMapping(value = "/api/regularUsers")
 public class RegularUserController {
     
     private final RegularUserService regularUserService;
@@ -141,24 +140,35 @@ public class RegularUserController {
         
     }
 
+    @GetMapping(value = "/getAllRegularUsers", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<RegularUserDTO>> getAllRegularUsers(){
 
-    //OVA METODA NE RADI DOK NE RESIMO ONEtoONE PROBLEM
-    // @GetMapping(value = "/getAllRegularUsers/{SystemAdminId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<List<RegularUserDTO>> getAllRegularUsers(@PathVariable("SystemAdminId") Long systemAdminId){
+        List<RegularUser> regularUsers = this.regularUserService.findAll();
+        List<RegularUserDTO> regularUserDTOs = new ArrayList<>();
 
-    //     if(systemAdministratorService.findOne(systemAdminId) == null){
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-
-    //     List<RegularUser> regularUsers = this.regularUserService.findAll();
-    //     List<RegularUserDTO> regularUserDTOs = new ArrayList<>();
-
-    //     for(RegularUser regularUser : regularUsers){
-    //         RegularUserDTO regularUserDTO = new RegularUserDTO(regularUser.getId(), regularUser.getEmail(), regularUser.getFirstName(), regularUser.getLastName(), regularUser.getAddress(), regularUser.getCity(), regularUser.getCountry(), regularUser.getPhoneNumber(), regularUser.getJmbg(), regularUser.getGender(), regularUser.getProfession(), regularUser.getEducation(), regularUser.getLoyalty(), regularUser.getPoints(), regularUser.getPenalties());
-    //         regularUserDTOs.add(regularUserDTO);
-    //     }
-    //     return new ResponseEntity<>(regularUserDTOs, HttpStatus.OK);
-    // }
+        for(RegularUser regularUser : regularUsers){
+            RegularUserDTO regularUserDTO = new RegularUserDTO(
+                regularUser.getId(), 
+                regularUser.getBaseUserRU().getUsername(),
+                regularUser.getBaseUserRU().getPassword(), 
+                regularUser.getBaseUserRU().getFirstName(), 
+                regularUser.getBaseUserRU().getLastName(), 
+                regularUser.getBaseUserRU().getAddress(), 
+                regularUser.getBaseUserRU().getCity(), 
+                regularUser.getBaseUserRU().getCountry(), 
+                regularUser.getBaseUserRU().getPhoneNumber(), 
+                regularUser.getBaseUserRU().getJmbg(), 
+                regularUser.getBaseUserRU().getGender(), 
+                regularUser.getBaseUserRU().getProfession(), 
+                regularUser.getBaseUserRU().getEducation(), 
+                regularUser.getLoyalty(), 
+                regularUser.getPoints(), 
+                regularUser.getPenalties()
+            );
+            regularUserDTOs.add(regularUserDTO);
+        }
+        return new ResponseEntity<>(regularUserDTOs, HttpStatus.OK);
+    }
 
     //SESA METODA
     // @GetMapping(value = "/findByFirstNameAndLastName/{Id}/{FirstName}/{LastName}", produces = MediaType.APPLICATION_JSON_VALUE)
