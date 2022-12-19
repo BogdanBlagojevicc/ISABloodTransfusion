@@ -170,6 +170,39 @@ public class RegularUserController {
         return new ResponseEntity<>(regularUserDTOs, HttpStatus.OK);
     }
 
+    @PutMapping(value = "/updatePenalty/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<RegularUserDTO> updatePenalty(@PathVariable Long id, @RequestBody RegularUserDTO regularUserDTO) throws Exception {
+
+        // RegularUser updatedRegularUser = this.regularUserService.update(id, regularUserDTO);
+
+        RegularUser updatedRegularUser = this.regularUserService.updatePenalty(id);
+
+        RegularUserDTO updatedRegularUserDTO = new RegularUserDTO(
+            updatedRegularUser.getBaseUserRU().getId(),
+            updatedRegularUser.getBaseUserRU().getUsername(),
+            updatedRegularUser.getBaseUserRU().getPassword(),
+            updatedRegularUser.getBaseUserRU().getFirstName(),
+            updatedRegularUser.getBaseUserRU().getLastName(),
+            updatedRegularUser.getBaseUserRU().getAddress(),
+            updatedRegularUser.getBaseUserRU().getCity(),
+            updatedRegularUser.getBaseUserRU().getCountry(),
+            updatedRegularUser.getBaseUserRU().getPhoneNumber(),
+            updatedRegularUser.getBaseUserRU().getJmbg(),
+            updatedRegularUser.getBaseUserRU().getGender(),
+            updatedRegularUser.getBaseUserRU().getProfession(),
+            updatedRegularUser.getBaseUserRU().getEducation(),
+            updatedRegularUser.getLoyalty(),
+            updatedRegularUser.getPoints(),
+            updatedRegularUser.getPenalties()
+        );
+
+
+        return new ResponseEntity<>(updatedRegularUserDTO, HttpStatus.OK);
+        
+    }
+
+
+
     //SESA METODA
     // @GetMapping(value = "/findByFirstNameAndLastName/{Id}/{FirstName}/{LastName}", produces = MediaType.APPLICATION_JSON_VALUE)
     // public ResponseEntity<List<RegularUserDTO>> getRegularUsersByFirstAndLastName(@PathVariable("Id") Long id, @PathVariable("FirstName") String firstName, @PathVariable("LastName") String lastName){

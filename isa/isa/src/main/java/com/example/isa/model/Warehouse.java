@@ -54,5 +54,18 @@ public class Warehouse implements Serializable {
         this.testTubes = testTubes;
         this.bandage = bandage;
     }
+
+    public Warehouse(Integer bloodQuantityA, Integer bloodQuantityB, Integer bloodQuantityAB, Integer bloodQuantity0,
+            Integer needles, Integer testTubes, Integer bandage) {
+        this.bloodQuantityA = bloodQuantityA;
+        this.bloodQuantityB = bloodQuantityB;
+        this.bloodQuantityAB = bloodQuantityAB;
+        this.bloodQuantity0 = bloodQuantity0;
+        this.needles = needles;
+        this.testTubes = testTubes;
+        this.bandage = bandage;
+    }
+
+    
 }
 
