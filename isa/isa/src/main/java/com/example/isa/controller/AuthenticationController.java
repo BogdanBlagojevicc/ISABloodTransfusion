@@ -93,7 +93,7 @@ public class AuthenticationController {
 
 		User user = this.userService.saveRegularUser(userRequest);
 		RegularUser regularUser = this.regularUserService.createNewRegularUser(user);
-
+		
 		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}
 }

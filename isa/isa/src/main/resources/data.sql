@@ -16,8 +16,8 @@ INSERT INTO ROLE (name) VALUES('ROLE_CENTER_ADMINISTRATOR');
 INSERT INTO warehouses (bandage, blood_quantity0, blood_quantitya, blood_quantityab, blood_quantityb, needles, test_tubes, centerwh_id)
 VALUES (1, 2, 3, 4, 5, 6, 7, 1);
 
-INSERT INTO users (address, city, country, education, username, first_name, gender, jmbg, last_name, password, phone_number, profession, enabled)
-VALUES ('micurinova', 'novi sad', 'srbija', 'srednja', 'nenad@gmail.com', 'nenad', 'MALE', '3334444', 'jodlic', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', '333487445', 'student', TRUE);
+INSERT INTO users (address, city, country, education,email, username, first_name, gender, jmbg, last_name, password, phone_number, profession, enabled)
+VALUES ('micurinova', 'novi sad', 'srbija', 'srednja', 'nenad@gmail.com', 'nenad@gmail.com', 'nenad', 'MALE', '3334444', 'jodlic', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', '333487445', 'student', TRUE);
 
 INSERT INTO users (address, city, country, education, username, first_name, gender, jmbg, last_name, password, phone_number, profession, enabled)
 VALUES ('micurinova1', 'novi sad', 'srbija', 'srednja', 'bogdan@gmail.com', 'nenad1', 'MALE', '33344464', 'jodlic','$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', '33362487445', 'student', TRUE);

@@ -32,8 +32,8 @@ export default function SignUp() {
       window.alert("Passwords must match")
       return;
     }
-    fetch("http://localhost:8081/auth/signup",{
-    //fetch("http://localhost:8081/auth/regularUser/signup",{ OVAKO TREBA
+    //fetch("http://localhost:8081/auth/signup",{
+    fetch("http://localhost:8081/auth/regularUser/signup",{ 
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(new_user)

@@ -26,6 +26,7 @@ import com.example.isa.model.User;
 import com.example.isa.model.dto.CenterDTO;
 import com.example.isa.model.dto.TermDTO;
 import com.example.isa.service.CenterService;
+import com.example.isa.service.EmailService;
 import com.example.isa.service.QuestionnaireService;
 import com.example.isa.service.RegularUserService;
 import com.example.isa.service.TermService;
@@ -43,16 +44,18 @@ public class TermController {
     private final QuestionnaireService questionnaireService;
     private final RegularUserService regularUserService;
     private final UserService userService;
+    private final EmailService emailService;
     @Autowired
 	private  TokenUtils tokenUtils;
 
     @Autowired
-    public TermController(TermService termService, CenterService centerService, QuestionnaireService questionnaireService, RegularUserService regularUserService, UserService userService) {
+    public TermController(TermService termService, CenterService centerService, QuestionnaireService questionnaireService, RegularUserService regularUserService, UserService userService, EmailService emailService) {
         this.termService = termService;
         this.regularUserService = regularUserService;
         this.centerService = centerService;
         this.questionnaireService = questionnaireService;
         this.userService = userService;
+        this.emailService=emailService;
     }
 
     @PostMapping(value = "/{centerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -109,7 +112,7 @@ public class TermController {
         term.setRegularUser(regularUser);
 
         this.termService.update(term);
-
+        emailService.sendEmail(regularUser.getBaseUserRU().getEmail());
         TermDTO newTermDTO = new TermDTO();
 
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
@@ -234,9 +237,10 @@ public class TermController {
         RegularUser regularUser= this.regularUserService.findOne(Long.valueOf(1));
         term.setRegularUser(regularUser);
         Term newTerm = termService.create(term);
-
+        emailService.sendEmail(regularUser.getBaseUserRU().getEmail());
         TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm(), newTerm.getDuration());
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
+
 
     }
 
