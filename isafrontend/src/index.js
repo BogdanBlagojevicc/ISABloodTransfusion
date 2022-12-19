@@ -19,12 +19,14 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import SignUp  from './components/SignUp';
 import ShowCenters from './components/ShowCenters';
+import AllCenters from './components/AllCenters';
 import ShowRegUsers from './components/ShowRegUsers';
 import ShowRegUserTerms from './components/ShowRegUserTerms';
 import TermDetails from './components/TermDetails';
 import Careers from './components/Careers';
 import NewTerm from './components/NewTerm';
 import StartTerm from './components/StartTerm';
+import RegularUserTerms from './components/RegularUserTerms';
 
 ReactDOM.render(
   <Router>
@@ -44,8 +46,10 @@ ReactDOM.render(
         <Route path='/navbar' element={<Navbar/>}/>
         <Route path='/signUp' element={<SignUp/>}/>
         <Route path='/showCenters' element={<ShowCenters/>}/>
+        <Route path='/allCenters' element={<AllCenters/>}/>
         <Route path='/NewTerm' element={<NewTerm/>}/>
         <Route path='/Careers/:id' element={<Careers/>}/>
+        <Route path='/RegularUserTerms/:id' element={<RegularUserTerms/>}/>
         <Route path='/showRegUsers' element={<ShowRegUsers/>}/>
         <Route path='/showRegUsers/showRegUserTerms:regUserId' element={<ShowRegUserTerms/>}/>
         <Route path='/showRegUsers/showRegUserTerms:regUserId/termDetails:termId' element={<TermDetails/>}/>

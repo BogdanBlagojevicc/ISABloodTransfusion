@@ -20,12 +20,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.isa.model.Center;
+import com.example.isa.model.RegularUser;
 import com.example.isa.model.Term;
+import com.example.isa.model.User;
 import com.example.isa.model.dto.CenterDTO;
 import com.example.isa.model.dto.TermDTO;
 import com.example.isa.service.CenterService;
 import com.example.isa.service.QuestionnaireService;
+import com.example.isa.service.RegularUserService;
 import com.example.isa.service.TermService;
+import com.example.isa.service.UserService;
+import com.example.isa.util.TokenUtils;
+
 
 @CrossOrigin
 @RestController
@@ -35,12 +41,18 @@ public class TermController {
     private final TermService termService;
     private final CenterService centerService;
     private final QuestionnaireService questionnaireService;
+    private final RegularUserService regularUserService;
+    private final UserService userService;
+    @Autowired
+	private  TokenUtils tokenUtils;
 
     @Autowired
-    public TermController(TermService termService, CenterService centerService, QuestionnaireService questionnaireService) {
+    public TermController(TermService termService, CenterService centerService, QuestionnaireService questionnaireService, RegularUserService regularUserService, UserService userService) {
         this.termService = termService;
+        this.regularUserService = regularUserService;
         this.centerService = centerService;
         this.questionnaireService = questionnaireService;
+        this.userService = userService;
     }
 
     @PostMapping(value = "/{centerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -70,13 +82,44 @@ public class TermController {
 
     }
 
+
+    @PostMapping(value = "/assign/{termId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER')")
+    public ResponseEntity<TermDTO> assignRegularUser(@PathVariable("termId") Long termId, @RequestBody String token) throws Exception {
+
+        Term term = this.termService.findOne(termId);
+        if(term == null){
+            throw new Exception("This term does not exist");
+        }
+        System.out.println("***************************************************");
+        System.out.println(token);
+        System.out.println("***************************************************");
+
+        String username = tokenUtils.getUsernameFromToken(token);
+
+
+        System.out.println("***************************************************");
+        System.out.println(username);
+        System.out.println("***************************************************");
+
+        
+        User user = this.userService.findByUsername("yy");
+        RegularUser regularUser = this.regularUserService.findOne(user.getId());
+
+        term.setRegularUser(regularUser);
+
+        this.termService.update(term);
+
+        TermDTO newTermDTO = new TermDTO();
+
+        return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
+
+    }
+
+
     @DeleteMapping(value = "/{termId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
-    public ResponseEntity<TermDTO> deleteTerm(@PathVariable("termId") Long termId) throws Exception { // mozda bude
-                                                                                                      // problem jer
-                                                                                                      // pise consumes a
-                                                                                                      // nemam request
-                                                                                                      // body
+    public ResponseEntity<TermDTO> deleteTerm(@PathVariable("termId") Long termId) throws Exception {
 
         Term term = this.termService.findOne(termId);
 
@@ -98,7 +141,7 @@ public class TermController {
     }
 
     @GetMapping("/order/{centerTerm}")
-    @PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_CENTER_ADMINISTRATOR', 'ROLE_REGULAR_USER')")
     public ResponseEntity<List<TermDTO>> findterms(@PathVariable("centerTerm") Long centerTerm) {
         List<Term> terms = this.termService.findByCenterIdOrderByDateTerm(centerTerm);
 

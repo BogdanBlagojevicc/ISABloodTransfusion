@@ -126,7 +126,7 @@ const columns =[
 
   useEffect(()=>{
     var test = JSON.parse(localStorage.getItem('testToken'))
-    fetch("http://localhost:8081/api/centers/nameASC",{
+    fetch("http://localhost:8081/api/centers/nameDESC",{
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json',

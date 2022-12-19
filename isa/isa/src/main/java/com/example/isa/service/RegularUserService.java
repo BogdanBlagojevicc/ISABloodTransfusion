@@ -36,6 +36,14 @@ public class RegularUserService {
         return newRegularUser;
     }
 
+    public RegularUser createNewRegularUser(User user){
+
+        RegularUser regularUser = new RegularUser(LoyaltyProgram.REGULAR, 0, 0, user);
+       
+        RegularUser newRegularUser = this.regularUserRepository.save(regularUser);
+        return newRegularUser;
+    }
+
     public RegularUser findOne(Long id) throws Exception{
         RegularUser regularUser = this.regularUserRepository.findByBaseUserRUId(id);
         if(regularUser == null){

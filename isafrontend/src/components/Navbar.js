@@ -40,6 +40,10 @@ const Navbar = () => {
                     </li>
 
                     <li>
+                        <Link to='/allCenters'>All centers</Link>
+                    </li>
+
+                    <li>
                         <Link to='/newCenter'>NewCenter</Link>
                     </li>
 
