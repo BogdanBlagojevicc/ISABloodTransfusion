@@ -5,8 +5,13 @@ import TextField from '@mui/material/TextField'
 import { Container } from '@mui/system';
 import {Paper, Button} from '@mui/material'
 import { useParams } from 'react-router-dom'
+import Switch from '@mui/material/Switch'
 
 export default function StartTerm() {
+
+  const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
+
   const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
   var [questionnaire, setQuestionnaire] = useState([])
   var [warehousee, setWarehousee] = useState([])
@@ -203,6 +208,22 @@ export default function StartTerm() {
         <br/>
 
         <label> Blood type:  {questionnaire.bloodType}</label>
+        <br/>
+
+        <label>Have a surgery?</label>
+        <Switch {...label} defaultChecked />
+        <br/>
+
+        <label>Have a tatoo?</label>
+        <Switch {...label} defaultChecked />
+        <br/>
+
+        <label>Feel sick?</label>
+        <Switch {...label} defaultChecked />
+        <br/>
+
+        <label>Have a infections?</label>
+        <Switch {...label} defaultChecked />
         <br/>
 
         </Paper>
