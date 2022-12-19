@@ -10,7 +10,7 @@ import { Paper } from '@mui/material'
 import { useParams } from 'react-router-dom';
 
 
-const RegularUserTerms = () => {
+const AvailableTerms = () => {
   let { id } = useParams();
   const [terms, setTerms] = useState([])
   const[dateTerm, setDateTerm] = useState('')
@@ -24,7 +24,7 @@ const RegularUserTerms = () => {
 
   useEffect(() => {
     var test = JSON.parse(localStorage.getItem('testToken'))
-    fetch("http://localhost:8081/api/terms/order/" + id, {
+    fetch("http://localhost:8081/api/terms/availableTerms", {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -41,13 +41,13 @@ const RegularUserTerms = () => {
   const rowEvent = {
     onClick: (e, row) => {
       var test = JSON.parse(localStorage.getItem('testToken'))
-      fetch("http://localhost:8081/api/terms/assign/" +row.id,{
-      method:"POST",
+      fetch("http://localhost:8081/api/terms/" +row.id,{
+      method:"DELETE",
       headers : { 
         'Content-Type': 'application/json',
          Authorization: `Bearer ${test.accessToken}`,
        },
-      body:JSON.stringify(test.accessToken)
+      //body:JSON.stringify(test.accessToken)
   
     }).then(() =>{
       console.log(row.id)
@@ -100,4 +100,4 @@ const RegularUserTerms = () => {
   )
 }
 
-export default RegularUserTerms
+export default AvailableTerms

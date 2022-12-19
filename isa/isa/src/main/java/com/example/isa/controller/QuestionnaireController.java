@@ -14,15 +14,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.example.isa.model.Questionnaire;
+import com.example.isa.model.RegularUser;
 import com.example.isa.model.dto.BloodType;
 import com.example.isa.model.dto.QuestionnaireDTO;
 import com.example.isa.service.QuestionnaireService;
+import com.example.isa.service.RegularUserService;
 
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/api/questionnaire")
 public class QuestionnaireController {
     private final QuestionnaireService questionnaireService;
+    private final RegularUserService regularUserService;
 
     @Autowired
     public QuestionnaireController(QuestionnaireService questionnaireService){
@@ -30,12 +33,22 @@ public class QuestionnaireController {
     }
 
     @PostMapping(value = "/new", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER', 'ROLE_CENTER_ADMINISTRATOR')")
     public ResponseEntity<QuestionnaireDTO> createNewQuestionnaire(@RequestBody QuestionnaireDTO questionnaireDTO) throws Exception{
 
-        Questionnaire questionnaire = new Questionnaire(BloodType.valueOf(questionnaireDTO.getBloodType()));
+        Questionnaire questionnaire = new Questionnaire(questionnaireDTO.getPreviousTransfusions(), questionnaireDTO.getWeight(), questionnaireDTO.getIsFeelsGood(),
+        questionnaireDTO.getIsSkinChanged(), questionnaireDTO.getHighBloodPressure(), questionnaireDTO.getLowBloodPressure(),
+        questionnaireDTO.getIsPreviousTherapyMoreThanSixDays(), questionnaireDTO.getIsUnderRegularMonthlyCycle(),
+        questionnaireDTO.getIsPreviousDentalInterventionMoreThanSixDays(), questionnaireDTO.getIsPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths(),
+         BloodType.valueOf(questionnaireDTO.getBloodType()));
+
+        RegularUser regularUser = this.regularUserService.findOne(Long.valueOf(1));
+
+        questionnaire.setRegularUser(regularUser);
 
         Questionnaire newQuestionnaire = this.questionnaireService.create(questionnaire);
+
+        
 
         QuestionnaireDTO newQuestionnaireDTO  = new QuestionnaireDTO(
             newQuestionnaire.getId(),

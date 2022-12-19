@@ -18,12 +18,39 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Questionare = () => {
   const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
 
-  const [age, setAge] = React.useState('');
+  const [bloodType, setAge] = React.useState('');
+  const [previousTransfusions, setPreviousTransfusions] = React.useState('');
+  const [weight, setWeight] = React.useState('');
+  const [highBloodPressure, setHighBloodPressure] = React.useState('');
+  const [lowBloodPressure, setLowBloodPressure] = React.useState('');
+  const [isFeelsGood, setIsFeelsGood] = React.useState(false);
+  const [isSkinChanged, setSkinChanged] = React.useState(false);
+  const [isPreviousTherapyMoreThanSixDays, setSsPreviousTherapyMoreThanSixDays] =React.useState(false);
+  const [isUnderRegularMonthlyCycle, setIsUnderRegularMonthlyCycle] = React.useState(false);
+  const [isPreviousDentalInterventionMoreThanSixDays, setIsPreviousDentalInterventionMoreThanSixDays] =React.useState(false);
+  const [isPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths, setIsPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths] = React.useState(false);
+
   const handleChange = (event) => {
     setAge(event.target.value);
   };
   const handleClick = (e) =>{
+    e.preventDefault()
+    const new_questionnaire = {bloodType, previousTransfusions, weight, highBloodPressure, lowBloodPressure, isFeelsGood, isSkinChanged, isPreviousTherapyMoreThanSixDays, isUnderRegularMonthlyCycle,
+      isPreviousDentalInterventionMoreThanSixDays, isPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths}
+    console.log(new_questionnaire);
+    var test = JSON.parse(localStorage.getItem('testToken'))
+    fetch("http://localhost:8081/api/questionnaire/new",{
+    //fetch("http://localhost:8081/auth/regularUser/signup",{ OVAKO TREBA
+    method:"POST",
+    headers : { 
+      'Content-Type': 'application/json',
+       Authorization: `Bearer ${test.accessToken}`,
+     },
+    body:JSON.stringify(new_questionnaire)
 
+  }).then(() =>{
+    console.log("New questionnaire added")
+  })
 }
   return (
     <Box
@@ -38,25 +65,27 @@ const Questionare = () => {
       <h1>Questionare</h1>
       <Paper elevation={3} style={paperStyle}>
 
-      <TextField id="standard-basic" label="name" variant="standard" fullWidth 
-        />
 
-        <TextField id="standard-basic" label="lastname" variant="standard" fullWidth 
-        />
-          <TextField id="standard-basic" label="jmbg" variant="standard" fullWidth 
+      <TextField id="standard-basic" label="previousTransfusions" variant="standard" fullWidth 
+          value={previousTransfusions}
+          onChange = {(e) =>setPreviousTransfusions(e.target.value)}
+          />
 
-        />
-          <TextField id="standard-basic" label="address" variant="standard" fullWidth 
+      <TextField id="standard-basic" label="weight" variant="standard" fullWidth 
+          value={weight}
+          onChange = {(e) =>setWeight(e.target.value)}
+          />
 
-        />
+      <TextField id="standard-basic" label="highBloodPressure" variant="standard" fullWidth 
+          value={highBloodPressure}
+          onChange = {(e) =>setHighBloodPressure(e.target.value)}
+          />
 
-        <TextField id="standard-basic" label="phone number" variant="standard" fullWidth 
+    <TextField id="standard-basic" label="lowBloodPressure" variant="standard" fullWidth 
+          value={lowBloodPressure}
+          onChange = {(e) =>setLowBloodPressure(e.target.value)}
+          />
 
-        />
-
-          <TextField id="standard-basic" label="profession" variant="standard" fullWidth 
-
-        />
                       <br></br>
                       <br></br>
 
@@ -66,50 +95,77 @@ const Questionare = () => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={age}
+                value={bloodType}
                 label="Age"
                 onChange={handleChange}
               >
 
-                <MenuItem value={0}>A</MenuItem>
-                <MenuItem value={1}>B</MenuItem>
-                <MenuItem value={2}>AB</MenuItem>
-                <MenuItem value={3}>0</MenuItem>
+                <MenuItem value={"A"}>A</MenuItem>
+                <MenuItem value={"B"}>B</MenuItem>
+                <MenuItem value={"AB"}>AB</MenuItem>
+                <MenuItem value={"ZERO"}>0</MenuItem>
               </Select>
       </FormControl>
 
         <br></br>
         <br></br>
         <br></br>
-        <b>Did you in past 6 months?</b>
-        <br></br>
-        Have a surgery?
-        <Switch {...label} defaultChecked />
-
-        <br></br>
-        Done a tattoo?
-        <Switch {...label} defaultChecked />
-
-        <br></br>
-        Had sexual intercourse without protection?
-        <Switch {...label} defaultChecked />
-
-        <br></br>
-        <b>Forms of risky behaviours</b>
-
-        <br></br>
-        Did you ever have hepatitis A, B or C?
-        <Switch {...label} defaultChecked />
-
-        <br></br>
-        Did you consume any kind of psychoactive substances?
-        <Switch {...label} defaultChecked />
         
-        <br></br>
-        Did you offer sexual service for money or drugs?
-        <Switch {...label} defaultChecked />
-        
+      <label>
+        <input
+          type="checkbox"
+          value="check"
+          onChange = {(e) =>setIsFeelsGood(prevCheck => !prevCheck)}
+        />
+        Is Feels good?
+      </label>
 
+      <br></br>
+      <label>
+        <input
+          type="checkbox"
+          value="check"
+          onChange = {(e) =>setSkinChanged(prevCheck => !prevCheck)}
+        />
+        Is skin changed?
+      </label>
+
+      <br></br>
+      <label>
+        <input
+          type="checkbox"
+          value="check"
+          onChange = {(e) =>setSsPreviousTherapyMoreThanSixDays(prevCheck => !prevCheck)}
+        />
+        Is previous therapy more than six days?
+      </label>
+      <br></br>
+      <label>
+        <input
+          type="checkbox"
+          value="check"
+          onChange = {(e) =>setIsUnderRegularMonthlyCycle(prevCheck => !prevCheck)}
+        />
+        Is under regular monthly cycle?
+      </label>
+      <br></br>
+      <label>
+        <input
+          type="checkbox"
+          value="check"
+          onChange = {(e) =>setIsPreviousDentalInterventionMoreThanSixDays(prevCheck => !prevCheck)}
+        />
+        Is previous dental intervention more than six days?
+      </label>
+      <br></br>
+      <label>
+        <input
+          type="checkbox"
+          value="check"
+          onChange = {(e) =>setIsPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths(prevCheck => !prevCheck)}
+        />
+        is previous surgical intervention or blood donation more than six months?
+      </label>
 
         <br></br>
         <br></br>
