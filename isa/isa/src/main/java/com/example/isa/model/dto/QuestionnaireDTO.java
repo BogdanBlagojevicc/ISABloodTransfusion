@@ -76,6 +76,25 @@ public class QuestionnaireDTO {
         this.isPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths = isPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths;
 }
 
+
+public QuestionnaireDTO(String bloodType,  Integer previousTransfusions,
+Integer weight, Boolean isFeelsGood, Boolean isSkinChanged, Integer highBloodPressure,
+Integer lowBloodPressure, Boolean isPreviousTherapyMoreThanSixDays, Boolean isUnderRegularMonthlyCycle,
+Boolean isPreviousDentalInterventionMoreThanSixDays,
+Boolean isPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths) {
+    this.bloodType = bloodType;
+    this.previousTransfusions = previousTransfusions;
+    this.weight = weight;
+    this.isFeelsGood = isFeelsGood;
+    this.isSkinChanged = isSkinChanged;
+    this.highBloodPressure = highBloodPressure;
+    this.lowBloodPressure = lowBloodPressure;
+    this.isPreviousTherapyMoreThanSixDays = isPreviousTherapyMoreThanSixDays;
+    this.isUnderRegularMonthlyCycle = isUnderRegularMonthlyCycle;
+    this.isPreviousDentalInterventionMoreThanSixDays = isPreviousDentalInterventionMoreThanSixDays;
+    this.isPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths = isPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths;
+}
+
     
 
 }

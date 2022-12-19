@@ -38,6 +38,16 @@ public class TermService {
         return this.termRepository.save(term);
     }
 
+    public Term removeUser(Term term) throws Exception{
+        if(term.getId() == null){
+            throw new Exception("ID must be null");
+        }
+
+        term.setRegularUser(null);
+
+        return this.termRepository.save(term);
+    }
+
     public List<Term> findByCenterIdOrderByDateTerm(Long id) {
         return termRepository.findByCenterIdOrderByDateTerm(id);
     }

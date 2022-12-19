@@ -76,5 +76,25 @@ public class Questionnaire implements Serializable {
         this.bloodType = bloodType;
     }
 
+    public Questionnaire(Integer previousTransfusions, Integer weight, Boolean isFeelsGood, Boolean isSkinChanged,
+            Integer highBloodPressure, Integer lowBloodPressure, Boolean isPreviousTherapyMoreThanSixDays,
+            Boolean isUnderRegularMonthlyCycle, Boolean isPreviousDentalInterventionMoreThanSixDays,
+            Boolean isPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths, BloodType bloodType) {
+        this.previousTransfusions = previousTransfusions;
+        this.weight = weight;
+        this.isFeelsGood = isFeelsGood;
+        this.isSkinChanged = isSkinChanged;
+        this.highBloodPressure = highBloodPressure;
+        this.lowBloodPressure = lowBloodPressure;
+        this.isPreviousTherapyMoreThanSixDays = isPreviousTherapyMoreThanSixDays;
+        this.isUnderRegularMonthlyCycle = isUnderRegularMonthlyCycle;
+        this.isPreviousDentalInterventionMoreThanSixDays = isPreviousDentalInterventionMoreThanSixDays;
+        this.isPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths = isPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths;
+        this.bloodType = bloodType;
+        this.currentDateTime = LocalDateTime.now();
+    }
+
+    
+
 }
 

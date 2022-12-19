@@ -124,23 +124,23 @@ public class TermController {
     @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
     public ResponseEntity<TermDTO> deleteTerm(@PathVariable("termId") Long termId) throws Exception {
 
+        LocalDateTime now = LocalDateTime.now();
+
         Term term = this.termService.findOne(termId);
 
         if (term == null) {
             throw new Exception("This term does not exist!");
         }
 
-        this.termService.delete(term);
+        if(!now.isBefore(term.getDateTerm().minusDays(1))){
+            throw new Exception("Too late");
+        }
 
-        Term tempTerm = new Term(term.getDateTerm(), term.getDuration());
-        tempTerm.setCenterTerm(term.getCenterTerm());
+        Term tempTerm =  this.termService.removeUser(term);
 
-        Term newTerm = this.termService.create(tempTerm);
-
-        TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm(), newTerm.getDuration());
+        TermDTO newTermDTO = new TermDTO(tempTerm.getId(), tempTerm.getDateTerm(), tempTerm.getDuration());
 
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
-
     }
 
     @GetMapping("/order/{centerTerm}")

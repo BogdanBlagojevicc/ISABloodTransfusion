@@ -21,6 +21,7 @@ import SignUp  from './components/SignUp';
 import ShowCenters from './components/ShowCenters';
 import AllCenters from './components/AllCenters';
 import ShowRegUsers from './components/ShowRegUsers';
+import AvailableTerms from './components/AvailableTerms';
 import ShowRegUserTerms from './components/ShowRegUserTerms';
 import TermDetails from './components/TermDetails';
 import Careers from './components/Careers';
@@ -51,6 +52,7 @@ ReactDOM.render(
         <Route path='/Careers/:id' element={<Careers/>}/>
         <Route path='/RegularUserTerms/:id' element={<RegularUserTerms/>}/>
         <Route path='/showRegUsers' element={<ShowRegUsers/>}/>
+        <Route path='/availableTerms' element={<AvailableTerms/>}/>
         <Route path='/showRegUsers/showRegUserTerms:regUserId' element={<ShowRegUserTerms/>}/>
         <Route path='/showRegUsers/showRegUserTerms:regUserId/termDetails:termId' element={<TermDetails/>}/>
         <Route path='/showRegUsers/showRegUserTerms:regUserId/termDetails:termId/startTerm' element={<StartTerm/>}/>

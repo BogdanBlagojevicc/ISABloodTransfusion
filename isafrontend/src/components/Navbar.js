@@ -44,6 +44,10 @@ const Navbar = () => {
                     </li>
 
                     <li>
+                        <Link to='/availableTerms'>Available terms</Link>
+                    </li>
+
+                    <li>
                         <Link to='/newCenter'>NewCenter</Link>
                     </li>
 
