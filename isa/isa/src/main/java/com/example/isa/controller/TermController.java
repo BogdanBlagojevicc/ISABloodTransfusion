@@ -29,6 +29,11 @@ import com.example.isa.service.CenterService;
 import com.example.isa.service.RegularUserService;
 import com.example.isa.service.TermService;
 import com.example.isa.service.UserService;
+import com.example.isa.util.TokenUtils;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
 
 @CrossOrigin
 @RestController
@@ -38,12 +43,16 @@ public class TermController {
     private final TermService termService;
     private final CenterService centerService;
     private final RegularUserService regularUserService;
+    private final UserService userService;
+    @Autowired
+	private  TokenUtils tokenUtils;
 
     @Autowired
-    public TermController(TermService termService, CenterService centerService, RegularUserService regularUserService) {
+    public TermController(TermService termService, CenterService centerService, RegularUserService regularUserService, UserService userService) {
         this.termService = termService;
         this.regularUserService = regularUserService;
         this.centerService = centerService;
+        this.userService = userService;
     }
 
     @PostMapping(value = "/{centerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -74,16 +83,28 @@ public class TermController {
     }
 
 
-    @PostMapping(value = "/assign/{termId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
-    public ResponseEntity<TermDTO> assignRegularUser(@PathVariable("termId") Long termId) throws Exception {
+    @PostMapping(value = "/assign/{termId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER')")
+    public ResponseEntity<TermDTO> assignRegularUser(@PathVariable("termId") Long termId, @RequestBody String token) throws Exception {
 
         Term term = this.termService.findOne(termId);
         if(term == null){
             throw new Exception("This term does not exist");
         }
+        System.out.println("***************************************************");
+        System.out.println(token);
+        System.out.println("***************************************************");
 
-        RegularUser regularUser = this.regularUserService.findOne(Long.valueOf(5));
+        String username = tokenUtils.getUsernameFromToken(token);
+
+
+        System.out.println("***************************************************");
+        System.out.println(username);
+        System.out.println("***************************************************");
+
+        
+        User user = this.userService.findByUsername("yy");
+        RegularUser regularUser = this.regularUserService.findOne(user.getId());
 
         term.setRegularUser(regularUser);
 
@@ -94,6 +115,7 @@ public class TermController {
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
 
     }
+
 
     @DeleteMapping(value = "/{termId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ROLE_REGULAR_USER')")

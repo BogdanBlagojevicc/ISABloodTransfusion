@@ -29,7 +29,7 @@ public class TokenUtils {
 	public String SECRET;
 
 	// Period vazenja tokena - 30 minuta
-	@Value("1800000")
+	@Value("18000000")
 	private int EXPIRES_IN;
 	
 	// Naziv headera kroz koji ce se prosledjivati JWT u komunikaciji server-klijent
@@ -134,19 +134,52 @@ public class TokenUtils {
 	 * @return Korisničko ime iz tokena ili null ukoliko ne postoji.
 	 */
 	public String getUsernameFromToken(String token) {
-		String username;
-		
+		String username = "";
+		String temp;
 		try {
 			final Claims claims = this.getAllClaimsFromToken(token);
 			username = claims.getSubject();
+			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+			System.out.println(username);
+			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+			temp = username;
 		} catch (ExpiredJwtException ex) {
-			throw ex;
+			System.out.println("//////////////////USAO1//////////////////////////////////");
+			temp = username;
+			throw ex; 
 		} catch (Exception e) {
-			username = null;
+			//username = null;
+			temp = username;
+			System.out.println("//////////////////USAO2//////////////////////////////////");
 		}
-		
+
+
+		System.out.println("//////////////////USAO3//////////////////////////////////");
+		System.out.println(username);
 		return username;
 	}
+
+
+
+	// 	/**
+	//  * Funkcija za preuzimanje vlasnika tokena (korisničko ime).
+	//  * @param token JWT token.
+	//  * @return Korisničko ime iz tokena ili null ukoliko ne postoji.
+	//  */
+	// public String getUsernameFromToken2(String token) {
+	// 	String username;
+		
+	// 	try {
+	// 		final Claims claims = this.getAllClaimsFromToken(token);
+	// 		//username = claims("sub");
+	// 	} catch (ExpiredJwtException ex) {
+	// 		throw ex;
+	// 	} catch (Exception e) {
+	// 		username = null;
+	// 	}
+		
+	// 	return username;
+	// }
 
 	/**
 	 * Funkcija za preuzimanje datuma kreiranja tokena.
@@ -226,6 +259,27 @@ public class TokenUtils {
 		
 		// Preuzimanje proizvoljnih podataka je moguce pozivom funkcije claims.get(key)
 		
+		return claims;
+	}
+
+
+	private Claims getAllClaimsFromToken2(String token) {
+		Claims claims;
+		try {
+			claims = Jwts.parser()
+					//.setSigningKey(SECRET)
+					.parseClaimsJws(token)
+					.getBody();
+		} catch (ExpiredJwtException ex) {
+			throw ex;
+		} catch (Exception e) {
+			claims = null;
+		}
+		
+		// Preuzimanje proizvoljnih podataka je moguce pozivom funkcije claims.get(key)
+		if(claims == null){
+			System.out.println("----------------------------------------------------------------------------------------");
+		}
 		return claims;
 	}
 	

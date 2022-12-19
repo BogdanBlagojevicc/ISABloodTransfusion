@@ -40,14 +40,14 @@ const RegularUserTerms = () => {
 
   const rowEvent = {
     onClick: (e, row) => {
-        var test = JSON.parse(localStorage.getItem('testToken'))
+      var test = JSON.parse(localStorage.getItem('testToken'))
       fetch("http://localhost:8081/api/terms/assign/" +row.id,{
       method:"POST",
       headers : { 
         'Content-Type': 'application/json',
          Authorization: `Bearer ${test.accessToken}`,
        },
-      //body:JSON.stringify(term)
+      body:JSON.stringify(test.accessToken)
   
     }).then(() =>{
       console.log("row.id")
