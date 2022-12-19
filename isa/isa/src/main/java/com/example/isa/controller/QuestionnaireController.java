@@ -28,8 +28,9 @@ public class QuestionnaireController {
     private final RegularUserService regularUserService;
 
     @Autowired
-    public QuestionnaireController(QuestionnaireService questionnaireService){
+    public QuestionnaireController(QuestionnaireService questionnaireService, RegularUserService regularUserService){
         this.questionnaireService = questionnaireService;
+        this.regularUserService = regularUserService;
     }
 
     @PostMapping(value = "/new", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
