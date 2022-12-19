@@ -18,6 +18,25 @@ export default function TermDetails() {
   let { regUserId } = useParams();
   const navigate = useNavigate();
 
+  var [warehousee, setWarehousee] = useState([])
+
+  useEffect(() =>{
+    var test = JSON.parse(localStorage.getItem('testToken'))
+    fetch("http://localhost:8081/api/warehouse/getOneByTermId/" + termId,{
+    headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        Authorization: `Bearer ${test.accessToken}`,
+       },
+    })
+    .then(res => res.json())
+    .then((result) =>
+    {
+      setWarehousee(result);
+    }
+    )
+  },[])
+
   const startClick = (e) =>{
     e.preventDefault()
     navigate(`/showRegUsers/showRegUserTerms` + regUserId + `/termDetails` + termId + `/startTerm`);
@@ -25,7 +44,20 @@ export default function TermDetails() {
 
 const didntClick = (e) =>{
   e.preventDefault()
-  //window.location.href = '/signUp';
+  var admin = warehousee;
+  
+  var test = JSON.parse(localStorage.getItem('testToken'))
+  fetch("http://localhost:8081/api/regularUsers/updatePenalty/" + regUserId,{
+    method:"PUT",
+    headers:{
+      "Content-Type":"application/json",
+      Authorization: `Bearer ${test.accessToken}`,
+    },
+    body:JSON.stringify(admin)
+
+  }).then(() =>{
+    console.log("Admin changed")
+  })
 };
 
   return (

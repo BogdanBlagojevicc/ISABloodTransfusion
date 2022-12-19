@@ -89,4 +89,11 @@ public class RegularUserService {
     //     return this.regularUserRepository.findByFirstNameAndLastName(firstName, lastName);
     // }
 
+    public RegularUser updatePenalty(Long id) throws Exception{
+        RegularUser regularUser = regularUserRepository.getById(id);
+        regularUser.setPenalties(regularUser.getPenalties()+1);
+        regularUserRepository.save(regularUser);
+        return regularUser;
+    }
+
 }

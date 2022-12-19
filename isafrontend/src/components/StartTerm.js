@@ -9,6 +9,8 @@ import { useParams } from 'react-router-dom'
 export default function StartTerm() {
   const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
   var [questionnaire, setQuestionnaire] = useState([])
+  var [warehousee, setWarehousee] = useState([])
+  var [updatedWarehousee, setUpdatedWarehousee] = useState([])
   let { termId } = useParams();
   let { regUserId } = useParams();
 
@@ -18,6 +20,14 @@ export default function StartTerm() {
   var [isInMonthlyCycle, setInMonthlyCycle] = useState('')
   var [isPrevDentalInterMoreThanSicDay, setisPrevDentalInterMoreThanSicDay] = useState('')
   var [isPrevSurgicalInterMoreThanSicMonths, setisPrevSurgicalInterMoreThanSicMonths] = useState('')
+
+  var [bqA, setBqA]  = useState('')
+  var [bqB, setBqB]  = useState('')
+  var [bqAB, setBqAb]  = useState('')
+  var [bq0, setBq0]  = useState('')
+  var [needle, setNeedle]  = useState('')
+  var [testTube, setTestTube]  = useState('')
+  var [bandag, setBandag]  = useState('')
 
 
   useEffect(() =>{
@@ -35,6 +45,20 @@ export default function StartTerm() {
     .then((result) =>
     {
         setQuestionnaire(result);
+    }
+    )
+
+    fetch("http://localhost:8081/api/warehouse/getOneByTermId/" + termId,{
+    headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        Authorization: `Bearer ${test.accessToken}`,
+       },
+    })
+    .then(res => res.json())
+    .then((result) =>
+    {
+      setWarehousee(result);
     }
     )
 
@@ -77,13 +101,50 @@ export default function StartTerm() {
 
   },[])
 
-//   const handleClick = (e) =>{
-//     e.preventDefault()
-//     var admin = centerAdministrator;
-//     console.log(admin);
-//     fetch("http://localhost:8081/api/centerAdministrators/1",{
+  const handleClick = (e) =>{
+    e.preventDefault()
+    var admin = warehousee;
+    admin.bloodQuantityA = bqA;
+    admin.bloodQuantityB = bqB;
+    admin.bloodQuantityAB = bqAB;
+    admin.bloodQuantity0 = bq0;
+    admin.needles = needle;
+    admin.testTubes = testTube;
+    admin.bandage = bandag;
+
+    console.log(admin);
+    var test = JSON.parse(localStorage.getItem('testToken'))
+    fetch("http://localhost:8081/api/warehouse/update/1",{
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json",
+        Authorization: `Bearer ${test.accessToken}`,
+      },
+      body:JSON.stringify(admin)
+  
+    }).then(() =>{
+      console.log("Admin changed")
+    })
+}
+
+// const notAllowClick = (e) =>{
+//   e.preventDefault()
+//   var admin = warehousee;
+//   admin.bloodQuantityA = bqA;
+//   admin.bloodQuantityB = bqB;
+//   admin.bloodQuantityAB = bqAB;
+//   admin.bloodQuantity0 = bq0;
+//   admin.needles = needle;
+//   admin.testTubes = testTube;
+//   admin.bandage = bandag;
+  
+//   var test = JSON.parse(localStorage.getItem('testToken'))
+//   fetch("http://localhost:8081/api/regularUsers/updatePenalty/" + regUserId,{
 //     method:"PUT",
-//     headers:{"Content-Type":"application/json"},
+//     headers:{
+//       "Content-Type":"application/json",
+//       Authorization: `Bearer ${test.accessToken}`,
+//     },
 //     body:JSON.stringify(admin)
 
 //   }).then(() =>{
@@ -103,6 +164,10 @@ export default function StartTerm() {
       <Container>
         <h1>Start term</h1>
         <Paper elevation={3} style={paperStyle}>
+
+        <label>Questionnaire datails:</label>
+        <br/>
+        <br/>
 
         <label> Date of donation:  {questionnaire.currentDateTime}</label>
         <br/>
@@ -140,11 +205,60 @@ export default function StartTerm() {
         <label> Blood type:  {questionnaire.bloodType}</label>
         <br/>
 
-  
-        {/* <Button variant="contained" color="secondary" onClick={handleClick}>
-          Submit
-        </Button> */}
         </Paper>
+
+        <Paper elevation={3} style={paperStyle}>
+
+        <label>Warehouse datails:</label>
+        <br/>
+        <br/>
+
+
+        <TextField id="standard-basic" variant="standard" label="bloodQuantityA" fullWidth 
+        placeholder={warehousee.bloodQuantityA}
+        onChange = {(e) => setBqA(e.target.value)}
+        />
+
+        <TextField id="standard-basic" variant="standard" label="bloodQuantityB" fullWidth 
+        placeholder={warehousee.bloodQuantityB}
+        onChange = {(e) => setBqB(e.target.value)}
+        />
+
+       <TextField id="standard-basic" variant="standard" label="bloodQuantityAB" fullWidth 
+        placeholder={warehousee.bloodQuantityAB}
+        onChange = {(e) => setBqAb(e.target.value)}
+        />
+
+        <TextField id="standard-basic" variant="standard" label="bloodQuantity0" fullWidth 
+        placeholder={warehousee.bloodQuantity0}
+        onChange = {(e) => setBq0(e.target.value)}
+        />
+
+        <TextField id="standard-basic" variant="standard" label="Needles" fullWidth 
+        placeholder={warehousee.needles}
+        onChange = {(e) => setNeedle(e.target.value)}
+        />
+
+        <TextField id="standard-basic" variant="standard" label="testTubes" fullWidth 
+        placeholder={warehousee.testTubes}
+        onChange = {(e) => setTestTube(e.target.value)}
+        />
+
+        <TextField id="standard-basic" variant="standard" label="bandage" fullWidth 
+        placeholder={warehousee.bandage}
+        onChange = {(e) => setBandag(e.target.value)}
+        />
+
+        <Button variant="contained" color="secondary" onClick={handleClick}>
+          Submit
+        </Button>
+
+        {/* <Button variant="contained" color="secondary" onClick={notAllowClick}>
+          Not allow
+        </Button> */}
+        
+        </Paper>
+        
 
       </Container>
     </Box>
