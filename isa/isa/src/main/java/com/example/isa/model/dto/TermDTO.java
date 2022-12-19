@@ -13,6 +13,8 @@ public class TermDTO {
 
     private String dateTerm;
 
+    //test
+
     private Integer duration;
 
     public TermDTO(){
