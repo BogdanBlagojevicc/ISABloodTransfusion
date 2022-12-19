@@ -22,6 +22,7 @@ import com.example.isa.model.User;
 import com.example.isa.model.dto.JwtAuthenticationRequest;
 import com.example.isa.model.dto.UserRequest;
 import com.example.isa.model.dto.UserTokenState;
+import com.example.isa.service.EmailService;
 import com.example.isa.service.RegularUserService;
 import com.example.isa.service.UserService;
 import com.example.isa.util.TokenUtils;
@@ -43,6 +44,11 @@ public class AuthenticationController {
 	private UserService userService;
 	@Autowired
 	private RegularUserService regularUserService;
+
+	@Autowired
+	private EmailService emailService;
+
+
 	
 	// Prvi endpoint koji pogadja korisnik kada se loguje.
 	// Tada zna samo svoje korisnicko ime i lozinku i to prosledjuje na backend.
@@ -93,7 +99,7 @@ public class AuthenticationController {
 
 		User user = this.userService.saveRegularUser(userRequest);
 		RegularUser regularUser = this.regularUserService.createNewRegularUser(user);
-		
+		this.emailService.sendEmailRegistration(user.getUsername());
 		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}
 }

@@ -32,5 +32,23 @@ public class EmailService {
             System.out.println("Error while sending email");
         }
     }
+
+    public void sendEmailRegistration(String toEmail) {
+        
+        try {
+        MimeMessage msg = javaMailSender.createMimeMessage();
+        msg.setSubject("ISA ");
+        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+        helper.setTo(toEmail);
+        helper.setFrom("isamrs");
+        helper.setSubject("Potvrda o registraciji");
+        String message = "Uspesno ste zakazali registraciju "; 
+                
+        helper.setText(message, true);
+        javaMailSender.send(msg);
+    } catch (MessagingException ex) {
+        System.out.println("Error while sending email");
+    }
+}
     
 }
