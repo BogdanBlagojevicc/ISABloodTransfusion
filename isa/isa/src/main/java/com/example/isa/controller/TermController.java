@@ -175,7 +175,24 @@ public class TermController {
         return new ResponseEntity<>(termDTOs, HttpStatus.OK);
     }
 
-    @GetMapping("/availableTerms/{dateTerm}")
+    @GetMapping("/availableTerms")
+    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    public ResponseEntity<List<TermDTO>> findTermsForRegularUser() {
+        
+        List<Term> terms = this.termService.findAllByRegularUserId(Long.valueOf(1));
+
+        ArrayList<TermDTO> termDTOs = new ArrayList<TermDTO>();
+
+        for(Term t : terms){
+            TermDTO termDTO = new TermDTO(t.getId(), t.getDateTerm(), t.getDuration());
+            termDTOs.add(termDTO);
+        }
+
+        
+        return new ResponseEntity<>(termDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping("/listOfTerms/")
     @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
     public ResponseEntity<List<CenterDTO>> checkIfAvailable(@PathVariable("dateTerm") String stringDateTerm) {
         LocalDateTime dateTerm = LocalDateTime.parse(stringDateTerm);
@@ -222,5 +239,7 @@ public class TermController {
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
 
     }
+
+
 
 }
