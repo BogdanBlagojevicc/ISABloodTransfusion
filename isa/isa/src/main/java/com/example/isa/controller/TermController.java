@@ -32,9 +32,6 @@ import com.example.isa.service.TermService;
 import com.example.isa.service.UserService;
 import com.example.isa.util.TokenUtils;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
 
 @CrossOrigin
 @RestController
