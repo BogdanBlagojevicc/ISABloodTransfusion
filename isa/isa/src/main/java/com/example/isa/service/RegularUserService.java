@@ -3,9 +3,13 @@ package com.example.isa.service;
 import java.io.Console;
 import java.util.List;
 
+import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import com.example.isa.model.RegularUser;
 import com.example.isa.model.User;
 import com.example.isa.model.dto.Gender;
@@ -13,6 +17,7 @@ import com.example.isa.model.dto.RegularUserDTO;
 import com.example.isa.repository.RegularUserRepository;
 import com.example.isa.repository.UserRepository;
 import com.example.isa.model.dto.LoyaltyProgram;
+
 
 
 @Service
@@ -92,6 +97,32 @@ public class RegularUserService {
     public List<RegularUser> findAll(){
         return regularUserRepository.findAll();
     }
+
+    @Autowired
+	private JavaMailSender javaMailSender;
+
+    @Autowired
+	private Environment env;
+/* 
+    @Async
+	public void sendNotificaitionAsync(User user) throws MailException, InterruptedException {
+		System.out.println("Async metoda se izvrsava u drugom Threadu u odnosu na prihvaceni zahtev. Thread id: " + Thread.currentThread().getId());
+		//Simulacija duze aktivnosti da bi se uocila razlika
+		Thread.sleep(10000);
+		System.out.println("Slanje emaila...");
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(user.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Primer slanja emaila pomoću asinhronog Spring taska");
+		mail.setText("Pozdrav hvala što pratiš ISA.");
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
+*/
+   
+
 
     // public List<RegularUser> findByFirstNameAndLastName(String firstName, String lastName){
     //     return this.regularUserRepository.findByFirstNameAndLastName(firstName, lastName);

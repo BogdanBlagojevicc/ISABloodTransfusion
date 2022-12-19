@@ -173,7 +173,7 @@ public class TermController {
     }
 
     @GetMapping("/availableTerms/{dateTerm}")
-    @PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_CENTER_ADMINISTRATOR','ROLE_REGULAR_USER')")
     public ResponseEntity<List<CenterDTO>> checkIfAvailable(@PathVariable("dateTerm") String stringDateTerm) {
         LocalDateTime dateTerm = LocalDateTime.parse(stringDateTerm);
 
@@ -192,7 +192,7 @@ public class TermController {
 
 
     @PostMapping(value = "/scheduleTerm/{centerId}/{dateTerm}/{regUserId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER','ROLE_CENTER_ADMINISTRATOR')")
     public ResponseEntity<TermDTO> createNewTerm(@PathVariable("centerId") Long centerId, @PathVariable("dateTerm") String stringDateTerm,
     @PathVariable("regUserId") Long regUserId)
             throws Exception {
@@ -212,10 +212,13 @@ public class TermController {
         Term term = new Term(LocalDateTime.parse(stringDateTerm),1);
         term.setCenterTerm(center);
 
+       
+
+        RegularUser regularUser= this.regularUserService.findOne(Long.valueOf(1));
+        term.setRegularUser(regularUser);
         Term newTerm = termService.create(term);
 
         TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm(), newTerm.getDuration());
-
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
 
     }

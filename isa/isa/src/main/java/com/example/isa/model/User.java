@@ -46,6 +46,9 @@ public class User implements UserDetails {
     private String firstName;
 
     @Column
+    private String email;
+
+    @Column
     private String lastName;
 
     @Column

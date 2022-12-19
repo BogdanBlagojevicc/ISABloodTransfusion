@@ -23,6 +23,25 @@ const NewTerm = () => {
     const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" }
   
     const navigate = useNavigate();
+   
+    const rowEvent = {
+      onClick: (e, row) => {
+        var test = JSON.parse(localStorage.getItem('testToken'))
+        fetch("http://localhost:8081/api/terms/scheduleTerm/" +row.id+"/"+dateTerm+"/"+1,{
+        method:"POST",
+        headers : { 
+          'Content-Type': 'application/json',
+           Authorization: `Bearer ${test.accessToken}`,
+         },
+        
+    
+      }).then(() =>{
+        console.log("row.id")
+      })
+        navigate(`/NewTerm`);
+        // window.location.href = `/Careers?id=${row}`;
+      },
+    }; 
     
   
     const handleClick = (e) =>{
@@ -50,7 +69,7 @@ const NewTerm = () => {
     <div className='app-container'>
       <BootstrapTable bootstrap4 keyField='name' columns={columns}
         data={centers}
-        //rowEvents={rowEvent} 
+        rowEvents={rowEvent} 
         filter={filterFactory()} />
       <Paper elevation={3} style={paperStyle}>
       <TextField id="standard-basic" variant="standard" label=" Date"  
