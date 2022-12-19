@@ -8,6 +8,7 @@ import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css
 import TextField from '@mui/material/TextField'
 import { Paper } from '@mui/material'
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 
 const Careers = () => {
@@ -21,6 +22,8 @@ const Careers = () => {
     { dataField: 'dateTerm', text: 'Date Term' },
     { dataField: 'duration', text: 'Duration in hours' }
   ]
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     var test = JSON.parse(localStorage.getItem('testToken'))
@@ -36,6 +39,7 @@ const Careers = () => {
         setTerms(result);
       }
       )
+    
   }, [])
   const handleClick = (e) =>{
     var test = JSON.parse(localStorage.getItem('testToken'))
