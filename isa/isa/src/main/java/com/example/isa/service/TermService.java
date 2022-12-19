@@ -30,6 +30,14 @@ public class TermService {
 
     }
 
+    public Term update(Term term) throws Exception{
+        if(term.getId() == null){
+            throw new Exception("ID must be null");
+        }
+
+        return this.termRepository.save(term);
+    }
+
     public List<Term> findByCenterIdOrderByDateTerm(Long id) {
         return termRepository.findByCenterIdOrderByDateTerm(id);
     }

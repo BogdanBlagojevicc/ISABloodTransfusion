@@ -62,7 +62,7 @@ public class CenterController {
     }
 
     @GetMapping("/nameASC")
-    @PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
+    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
     public ResponseEntity<List<CenterDTO>> getCentersSortedByNameASC() {
         List<Center> centers = this.centerService.findByOrderByNameAsc();
 
@@ -79,6 +79,7 @@ public class CenterController {
     }
 
     @GetMapping("/nameDESC")
+    @PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
     public ResponseEntity<List<CenterDTO>> getCentersSortedByNameDESC() {
         List<Center> centers = this.centerService.findByOrderByNameDesc();
 
