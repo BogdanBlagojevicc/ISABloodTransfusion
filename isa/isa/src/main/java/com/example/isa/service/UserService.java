@@ -99,7 +99,7 @@ public class UserService {
         u.setGender(Gender.valueOf(userRequest.getGender()));
         u.setProfession(userRequest.getProfession());
         u.setEducation(userRequest.getEducation());
-		//u.setEmail(userRequest.getEmail()); ****************** MOZDA BUDE TREBALO DA SE MENJA ************************ CONE
+		u.setEmail(u.getUsername()); 
 
 		// u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
 		List<Role> roles = roleService.findByName("ROLE_REGULAR_USER");

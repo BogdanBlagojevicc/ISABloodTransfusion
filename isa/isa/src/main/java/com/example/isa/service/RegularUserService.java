@@ -2,13 +2,16 @@ package com.example.isa.service;
 
 import java.io.Console;
 import java.util.List;
+import java.util.Properties;
 
 import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.annotation.Async;
 import com.example.isa.model.RegularUser;
 import com.example.isa.model.User;
@@ -98,34 +101,36 @@ public class RegularUserService {
         return regularUserRepository.findAll();
     }
 
-    @Autowired
-	private JavaMailSender javaMailSender;
-
-    @Autowired
-	private Environment env;
-/* 
-    @Async
-	public void sendNotificaitionAsync(User user) throws MailException, InterruptedException {
-		System.out.println("Async metoda se izvrsava u drugom Threadu u odnosu na prihvaceni zahtev. Thread id: " + Thread.currentThread().getId());
-		//Simulacija duze aktivnosti da bi se uocila razlika
-		Thread.sleep(10000);
-		System.out.println("Slanje emaila...");
-
-		SimpleMailMessage mail = new SimpleMailMessage();
-		mail.setTo(user.getEmail());
-		mail.setFrom(env.getProperty("spring.mail.username"));
-		mail.setSubject("Primer slanja emaila pomoću asinhronog Spring taska");
-		mail.setText("Pozdrav hvala što pratiš ISA.");
-		javaMailSender.send(mail);
-
-		System.out.println("Email poslat!");
-	}
-*/
    
+    @Bean
+    public JavaMailSender getJavaMailSender() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("smtp.mailtrap.io");
+        mailSender.setPort(2525);
+
+        mailSender.setUsername("f41777af419e05");
+        mailSender.setPassword("002d47d6f84aaf");
+
+        Properties props = mailSender.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.starttls.required", "true");
+        props.put("mail.debug", "true");
+        props.put("management.health.mail.enabled", "false");
+        return mailSender;
+    }
 
 
     // public List<RegularUser> findByFirstNameAndLastName(String firstName, String lastName){
     //     return this.regularUserRepository.findByFirstNameAndLastName(firstName, lastName);
     // }
+
+    public RegularUser updatePenalty(Long id) throws Exception{
+        RegularUser regularUser = regularUserRepository.getById(id);
+        regularUser.setPenalties(regularUser.getPenalties()+1);
+        regularUserRepository.save(regularUser);
+        return regularUser;
+    }
 
 }
