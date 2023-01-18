@@ -51,6 +51,10 @@ public class UserService {
 		return userRepository.findByUsername(username);
 	}
 
+    public User findByEmail(String email) throws Exception{
+        return userRepository.findByEmail(email);
+    }
+
 	public User save(UserRequest userRequest) {
 		User u = new User();
 		u.setUsername(userRequest.getUsername());
@@ -99,7 +103,7 @@ public class UserService {
         u.setGender(Gender.valueOf(userRequest.getGender()));
         u.setProfession(userRequest.getProfession());
         u.setEducation(userRequest.getEducation());
-		u.setEmail(u.getUsername()); 
+		u.setEmail(userRequest.getEmail()); 
 
 		// u primeru se registruju samo obicni korisnici i u skladu sa tim im se i dodeljuje samo rola USER
 		List<Role> roles = roleService.findByName("ROLE_REGULAR_USER");

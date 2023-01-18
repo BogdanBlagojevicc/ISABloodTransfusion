@@ -90,8 +90,13 @@ public class AuthenticationController {
 		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}
 	@PostMapping("/regularUser/signup")
-	public ResponseEntity<User> addRegularUser(@RequestBody UserRequest userRequest, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<User> addRegularUser(@RequestBody UserRequest userRequest, UriComponentsBuilder ucBuilder) throws Exception {
 		User existUser = this.userService.findByUsername(userRequest.getUsername());
+		User userEmail = this.userService.findByEmail(userRequest.getEmail());
+
+		if(userEmail != null){
+			throw new Exception("User with this email already exists");
+		}
 
 		if (existUser != null) {
 			throw new ResourceConflictException(userRequest.getId(), "Username already exists");
@@ -99,7 +104,7 @@ public class AuthenticationController {
 
 		User user = this.userService.saveRegularUser(userRequest);
 		RegularUser regularUser = this.regularUserService.createNewRegularUser(user);
-		this.emailService.sendEmailRegistration(user.getUsername());
+		this.emailService.sendEmailRegistration(user.getEmail());
 		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}
 }
