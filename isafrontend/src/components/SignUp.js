@@ -21,10 +21,11 @@ export default function SignUp() {
   const[gender, setGender] = useState('')
   const[profession, setProfession] = useState('')
   const[education, setEducation] = useState('')
+  const[email, setEmail] = useState('')
 
   const handleClick = (e) =>{
     e.preventDefault()
-    const new_user = {password, firstname, lastname, username, address, city, country, phoneNumber, jmbg, gender, profession, education}
+    const new_user = {password, firstname, lastname, username, address, city, country, phoneNumber, jmbg, gender, profession, education, email}
     console.log(new_user);
     console.log(password);
     console.log(repeat);
@@ -59,6 +60,11 @@ export default function SignUp() {
           <TextField id="standard-basic" label="username" variant="standard" fullWidth 
           value={username}
           onChange = {(e) =>setUsername(e.target.value)}
+          />
+
+          <TextField id="standard-basic" label="email" variant="standard" fullWidth 
+          value={email}
+          onChange = {(e) =>setEmail(e.target.value)}
           />
           
             <TextField id="standard-basic" label="password" variant="standard" fullWidth 

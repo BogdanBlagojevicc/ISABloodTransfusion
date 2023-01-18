@@ -34,4 +34,6 @@ public class UserRequest {
 
     private String education;
 
+    private String email;
+
 }
