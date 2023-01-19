@@ -15,11 +15,13 @@ const RegularUserTerms = () => {
   const [terms, setTerms] = useState([])
   const[dateTerm, setDateTerm] = useState('')
   const[duration, setDuration] = useState('')
+  const[price, setPrice] = useState('')
   const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" }
 
   const columns = [
     { dataField: 'dateTerm', text: 'Date Term' },
-    { dataField: 'duration', text: 'Duration in hours' }
+    { dataField: 'duration', text: 'Duration in hours' },
+    { dataField: 'price', text: 'price'}
   ]
 
   useEffect(() => {

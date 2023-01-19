@@ -74,12 +74,12 @@ public class TermController {
             throw new Exception("Term already exist");
         }
 
-        Term term = new Term(LocalDateTime.parse(termDTO.getDateTerm()), termDTO.getDuration());
+        Term term = new Term(LocalDateTime.parse(termDTO.getDateTerm()), termDTO.getDuration(), termDTO.getPrice());
         term.setCenterTerm(center);
 
         Term newTerm = this.termService.create(term);
 
-        TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm(), newTerm.getDuration());
+        TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm(), newTerm.getDuration(), newTerm.getPrice());
 
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
 
@@ -138,7 +138,7 @@ public class TermController {
 
         Term tempTerm =  this.termService.removeUser(term);
 
-        TermDTO newTermDTO = new TermDTO(tempTerm.getId(), tempTerm.getDateTerm(), tempTerm.getDuration());
+        TermDTO newTermDTO = new TermDTO(tempTerm.getId(), tempTerm.getDateTerm(), tempTerm.getDuration(), tempTerm.getPrice());
 
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
     }
@@ -151,7 +151,7 @@ public class TermController {
         List<TermDTO> termDTOS = new ArrayList<>();
 
         for (Term term : terms) {
-            TermDTO termDTO = new TermDTO(term.getId(), term.getDateTerm(), term.getDuration());
+            TermDTO termDTO = new TermDTO(term.getId(), term.getDateTerm(), term.getDuration(), term.getPrice());
             termDTOS.add(termDTO);
         }
 
@@ -168,7 +168,8 @@ public class TermController {
             TermDTO termDTO = new TermDTO(
                 term.getId(),
                 term.getDateTerm(),
-                term.getDuration()
+                term.getDuration(),
+                term.getPrice()
             );
             termDTOs.add(termDTO);
         }
@@ -184,11 +185,49 @@ public class TermController {
         ArrayList<TermDTO> termDTOs = new ArrayList<TermDTO>();
 
         for(Term t : terms){
-            TermDTO termDTO = new TermDTO(t.getId(), t.getDateTerm(), t.getDuration());
+            TermDTO termDTO = new TermDTO(t.getId(), t.getDateTerm(), t.getDuration(), t.getPrice());
             termDTOs.add(termDTO);
         }
 
         
+        return new ResponseEntity<>(termDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/finishedTerms/{regUserUsername}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    public ResponseEntity<List<TermDTO>> findFinishedTermsForRegularUser(@PathVariable String regUserUsername) throws Exception {
+        User user = this.userService.findByUsername(regUserUsername);
+
+        RegularUser regularUser = this.regularUserService.findOne(user.getId());
+
+        List<Term> terms = this.termService.findFinishedTermsByRegularUserId(regularUser.getId());
+
+        ArrayList<TermDTO> termDTOs = new ArrayList<TermDTO>();
+
+        for(Term t : terms){
+            TermDTO termDTO = new TermDTO(t.getId(), t.getDateTerm(), t.getDuration(), t.getPrice());
+            termDTOs.add(termDTO);
+        }
+
+        return new ResponseEntity<>(termDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/scheduledTerms/{regUserUsername}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    public ResponseEntity<List<TermDTO>> findScheduledTerms(@PathVariable String regUserUsername) throws Exception {
+        User user = this.userService.findByUsername(regUserUsername);
+
+        RegularUser regularUser = this.regularUserService.findOne(user.getId());
+
+        List<Term> terms = this.termService.findScheduledTerms(regularUser.getId());
+
+        ArrayList<TermDTO> termDTOs = new ArrayList<TermDTO>();
+
+        for(Term t : terms){
+            TermDTO termDTO = new TermDTO(t.getId(), t.getDateTerm(), t.getDuration(), t.getPrice());
+            termDTOs.add(termDTO);
+        }
+
         return new ResponseEntity<>(termDTOs, HttpStatus.OK);
     }
 
@@ -229,7 +268,7 @@ public class TermController {
         if(questionnaireService.findOneByRegularUserId(regUserId).getIsPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths()){
             throw new Exception("User cannot schedule term beacuse he donate blood in previous six months ");
         }
-        Term term = new Term(LocalDateTime.parse(stringDateTerm),1);
+        Term term = new Term(LocalDateTime.parse(stringDateTerm),1, 10);
         term.setCenterTerm(center);
 
        
@@ -238,7 +277,7 @@ public class TermController {
         term.setRegularUser(regularUser);
         Term newTerm = termService.create(term);
         emailService.sendEmail(regularUser.getBaseUserRU().getEmail());
-        TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm(), newTerm.getDuration());
+        TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm(), newTerm.getDuration(), newTerm.getPrice());
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
 
 

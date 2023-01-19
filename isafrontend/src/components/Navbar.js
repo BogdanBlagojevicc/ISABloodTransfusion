@@ -23,6 +23,15 @@ const Navbar = () => {
                     <li>
                         <Link to='/projects'>Your profile</Link>
                     </li>
+
+                    <li>
+                        <Link to='/termHistory'>Finished terms</Link>
+                    </li>
+
+                    <li>
+                        <Link to='/scheduledTerms'>Scheduled terms</Link>
+                    </li>
+
                     <li>
                         <Link to='/contact'>Add regular user</Link>
                     </li>

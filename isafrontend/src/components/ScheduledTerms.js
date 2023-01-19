@@ -10,7 +10,7 @@ import { Paper } from '@mui/material'
 import { useParams } from 'react-router-dom';
 
 
-const AvailableTerms = () => {
+const ScheduledTerms = () => {
   let { id } = useParams();
   const [terms, setTerms] = useState([])
   const[dateTerm, setDateTerm] = useState('')
@@ -19,14 +19,14 @@ const AvailableTerms = () => {
   const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" }
 
   const columns = [
-    { dataField: 'dateTerm', text: 'Date Term' },
-    { dataField: 'duration', text: 'Duration in hours' },
-    {dataField: 'price', text: 'Price'}
+    { dataField: 'dateTerm', text: 'Date Term', sort:true },
+    { dataField: 'duration', text: 'Duration in hours', sort:true },
+    {dataField: 'price', text: 'Price', sort:true}
   ]
 
   useEffect(() => {
     var test = JSON.parse(localStorage.getItem('testToken'))
-    fetch("http://localhost:8081/api/terms/availableTerms", {
+    fetch("http://localhost:8081/api/terms/scheduledTerms/" + localStorage.getItem('reg_user_username') , {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -55,51 +55,16 @@ const AvailableTerms = () => {
       console.log(row.id)
     })
     },
-  }; 
-//   const handleClick = (e) =>{
-//     var test = JSON.parse(localStorage.getItem('testToken'))
-//       e.preventDefault()
-//       const term = {dateTerm, duration}
-//       console.log(term);
-//       fetch("http://localhost:8081/api/terms/" +id,{
-//       method:"POST",
-//       headers : { 
-//         'Content-Type': 'application/json',
-//          Authorization: `Bearer ${test.accessToken}`,
-//        },
-//       body:JSON.stringify(term)
-  
-//     }).then(() =>{
-//       console.log("New term added")
-//     })
-//   };
+  };
+
   return (
     <div className='app-container'>
       <BootstrapTable bootstrap4 keyField='name' columns={columns}
         data={terms}
         rowEvents = {rowEvent}
-        //rowEvents={rowEvent} 
         filter={filterFactory()} />
-      {/* <Paper elevation={3} style={paperStyle}> */}
-      {/* <TextField id="standard-basic" variant="standard" label=" Date"  
-        value={dateTerm}
-        onChange = {(e) =>setDateTerm(e.target.value)}
-        //onChange = {(e) => setPas(e.target.value)}
-        />
-
-        
-        <TextField id="standard-basic" variant="standard" label="Duration"  
-          value={duration}
-          onChange = {(e) =>setDuration(e.target.value)}
-          />
-        <Button variant="contained" color="secondary" onClick={handleClick}>
-          Add new term
-        </Button> */}
-
-      {/* </Paper> */}
-
     </div>
   )
 }
 
-export default AvailableTerms
+export default ScheduledTerms

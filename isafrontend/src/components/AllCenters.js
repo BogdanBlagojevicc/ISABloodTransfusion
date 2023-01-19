@@ -13,20 +13,11 @@ const ShowCenters = () => {
   const [centers, setCenters] = useState([])
 
 const columns =[
-{dataField:'name', text:'name'},
-{dataField:'address', text:'address'},
-{dataField:'averageGrade', text:'averageGrade'},
-// {dataField:'firstName', text:'First name'},
-// {dataField:'phoneNumber', text:'Phone number'},
-/*
-{dataField:'city', text:'City'},
-{dataField:'country', text:'Country'},
-{dataField:'gender', text:'Gender',sort:true, filter: textFilter()},
-{dataField:'jmbg', text:'JMBG',sort:true, filter: textFilter()},
-{dataField:'lastName', text:'Last name',sort:true, filter: textFilter()},
-{dataField:'password', text:'Password',sort:true, filter: textFilter()},
-{dataField:'profession', text:'Profession',sort:true, filter: textFilter()},
-*/
+{dataField:'name', text:'name', sort:true, filter: textFilter()},
+{dataField:'address', text:'address', sort:true, filter: textFilter()},
+{dataField:'averageGrade', text:'averageGrade', sort:true, filter: textFilter()},
+{dataField: 'country', text:'country', sort:true, filter: textFilter()}
+
 
 ]
 

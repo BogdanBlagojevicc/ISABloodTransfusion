@@ -25,6 +25,9 @@ public class Term implements Serializable {
     @Column
     private Integer duration;
 
+    @Column
+    private Integer price;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Center centerTerm;
 
@@ -38,15 +41,17 @@ public class Term implements Serializable {
 
     }
 
-    public Term(LocalDateTime date, Integer duration) {
+    public Term(LocalDateTime date, Integer duration, Integer price) {
         this.dateTerm = date;
         this.duration = duration;
+        this.price = price;
     }
 
-    public Term(Long id, LocalDateTime dateTerm, Integer duration) {
+    public Term(Long id, LocalDateTime dateTerm, Integer duration, Integer price) {
         Id = id;
         this.dateTerm = dateTerm;
         this.duration = duration;
+        this.price = price;
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.isa.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,38 @@ public class TermService {
             }
         }
         return true;
+    }
+
+    public List<Term> findFinishedTermsByRegularUserId(Long id){
+        List<Term> allTerms = termRepository.findAllByRegularUserId(id);
+
+        List<Term> finishedTerms = new ArrayList<Term>();
+
+        LocalDateTime now = LocalDateTime.now();
+
+        for(Term t : allTerms){
+            if(t.getDateTerm().isBefore(now)){
+                finishedTerms.add(t);
+            }
+        }
+
+        return finishedTerms;
+    }
+
+    public List<Term> findScheduledTerms(Long id){
+        List<Term> allTerms = termRepository.findAllByRegularUserId(id);
+
+        List<Term> scheduledTerms = new ArrayList<Term>();
+
+        LocalDateTime now = LocalDateTime.now();
+
+        for(Term t : allTerms){
+            if(t.getDateTerm().isAfter(now)){
+                scheduledTerms.add(t);
+            }
+        }
+
+        return scheduledTerms;
     }
 
     public List<Term> findAllByRegularUserId(Long id){

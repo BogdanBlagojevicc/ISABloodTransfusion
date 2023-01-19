@@ -25,7 +25,7 @@ const rowEvent = {
 const columns =[
 {dataField:'dateTerm', text:'dateTerm'},
 {dataField:'duration', text:'duration'},
-
+{dateField: 'price', text: 'price'}
 ]
   useEffect(()=>{
     var test = JSON.parse(localStorage.getItem('testToken'))

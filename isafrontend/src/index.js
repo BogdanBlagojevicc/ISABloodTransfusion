@@ -28,6 +28,8 @@ import Careers from './components/Careers';
 import NewTerm from './components/NewTerm';
 import StartTerm from './components/StartTerm';
 import RegularUserTerms from './components/RegularUserTerms';
+import TermHistory from './components/TermHistory';
+import ScheduledTerms from './components/ScheduledTerms';
 
 ReactDOM.render(
   <Router>
@@ -56,6 +58,9 @@ ReactDOM.render(
         <Route path='/showRegUsers/showRegUserTerms:regUserId' element={<ShowRegUserTerms/>}/>
         <Route path='/showRegUsers/showRegUserTerms:regUserId/termDetails:termId' element={<TermDetails/>}/>
         <Route path='/showRegUsers/showRegUserTerms:regUserId/termDetails:termId/startTerm' element={<StartTerm/>}/>
+
+        <Route path='/termHistory' element = {<TermHistory/>}/>
+        <Route path='/scheduledTerms' element = {<ScheduledTerms/>}/>
     </Routes>
   </Router>,
  document.getElementById('root')

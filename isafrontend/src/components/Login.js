@@ -45,10 +45,14 @@ export default function Login() {
 
 
     localStorage.setItem('testToken', JSON.stringify(testToken));
+    localStorage.setItem('reg_user_username', username);
 
 
     let test = localStorage.getItem('testToken')
     console.log(JSON.parse(test));
+
+    let user_test = localStorage.getItem('reg_user_username')
+    console.log(user_test);
 
 
     window.location.href = '/navbar';    

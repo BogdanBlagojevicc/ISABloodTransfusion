@@ -16,11 +16,13 @@ const Careers = () => {
   const [terms, setTerms] = useState([])
   const[dateTerm, setDateTerm] = useState('')
   const[duration, setDuration] = useState('')
+  const[price, setPrice] = useState('')
   const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" }
 
   const columns = [
     { dataField: 'dateTerm', text: 'Date Term' },
-    { dataField: 'duration', text: 'Duration in hours' }
+    { dataField: 'duration', text: 'Duration in hours' },
+    { dateField: 'price', text: 'Price'}
   ]
 
   const navigate = useNavigate();
@@ -44,7 +46,7 @@ const Careers = () => {
   const handleClick = (e) =>{
     var test = JSON.parse(localStorage.getItem('testToken'))
       e.preventDefault()
-      const term = {dateTerm, duration}
+      const term = {dateTerm, duration, price}
       console.log(term);
       fetch("http://localhost:8081/api/terms/" +id,{
       method:"POST",
@@ -75,6 +77,11 @@ const Careers = () => {
         <TextField id="standard-basic" variant="standard" label="Duration"  
           value={duration}
           onChange = {(e) =>setDuration(e.target.value)}
+          />
+
+        <TextField id="standard-basic" variant="standard" label="Price"  
+          value={price}
+          onChange = {(e) =>setPrice(e.target.value)}
           />
         <Button variant="contained" color="secondary" onClick={handleClick}>
           Add new term

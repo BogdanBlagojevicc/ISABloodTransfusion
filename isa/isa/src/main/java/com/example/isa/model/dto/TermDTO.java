@@ -17,13 +17,16 @@ public class TermDTO {
 
     private Integer duration;
 
+    private Integer price;
+
     public TermDTO(){
 
     }
 
-    public TermDTO(Long id, LocalDateTime dateTerm, Integer duration) {
+    public TermDTO(Long id, LocalDateTime dateTerm, Integer duration, Integer price) {
         this.id = id;
         this.dateTerm = dateTerm.toString();
         this.duration = duration;
+        this.price = price;
     }
 }
