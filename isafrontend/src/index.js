@@ -30,6 +30,10 @@ import StartTerm from './components/StartTerm';
 import RegularUserTerms from './components/RegularUserTerms';
 import TermHistory from './components/TermHistory';
 import ScheduledTerms from './components/ScheduledTerms';
+import QRCodesTerms from './components/QRCodesTerms';
+import ViewProfile from './components/ViewProfile';
+import CenterComplaintList from './components/CenterComplaintList';
+import CenterComplaint from './components/CenterComplaint';
 
 ReactDOM.render(
   <Router>
@@ -61,6 +65,10 @@ ReactDOM.render(
 
         <Route path='/termHistory' element = {<TermHistory/>}/>
         <Route path='/scheduledTerms' element = {<ScheduledTerms/>}/>
+        <Route path='/qrCodesTerms' element = {<QRCodesTerms/>} />
+        <Route path='/viewProfile' element = {<ViewProfile/>} />
+        <Route path='/centerComplaintList' element ={<CenterComplaintList/>} />
+        <Route path='/CenterComplaint/:id' element={<CenterComplaint/>}/>
     </Routes>
   </Router>,
  document.getElementById('root')

@@ -22,7 +22,7 @@ export default function RegularUser() {
 
   useEffect(() =>{
     var test = JSON.parse(localStorage.getItem('testToken'))
-    fetch("http://localhost:8081/api/regularUsers/1",{
+    fetch("http://localhost:8081/api/regularUsers/" + localStorage.getItem('reg_user_username'),{
       headers : { 
         'Content-Type': 'application/json',
          Authorization: `Bearer ${test.accessToken}`,

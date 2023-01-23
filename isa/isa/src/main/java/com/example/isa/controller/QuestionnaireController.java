@@ -15,10 +15,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.example.isa.model.Questionnaire;
 import com.example.isa.model.RegularUser;
+import com.example.isa.model.User;
 import com.example.isa.model.dto.BloodType;
 import com.example.isa.model.dto.QuestionnaireDTO;
 import com.example.isa.service.QuestionnaireService;
 import com.example.isa.service.RegularUserService;
+import com.example.isa.service.UserService;
 
 @CrossOrigin
 @RestController
@@ -26,16 +28,18 @@ import com.example.isa.service.RegularUserService;
 public class QuestionnaireController {
     private final QuestionnaireService questionnaireService;
     private final RegularUserService regularUserService;
+    private final UserService userService;
 
     @Autowired
-    public QuestionnaireController(QuestionnaireService questionnaireService, RegularUserService regularUserService){
+    public QuestionnaireController(QuestionnaireService questionnaireService, RegularUserService regularUserService, UserService userService){
         this.questionnaireService = questionnaireService;
         this.regularUserService = regularUserService;
+        this.userService = userService;
     }
 
-    @PostMapping(value = "/new", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/new/{regUserUsername}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER', 'ROLE_CENTER_ADMINISTRATOR')")
-    public ResponseEntity<QuestionnaireDTO> createNewQuestionnaire(@RequestBody QuestionnaireDTO questionnaireDTO) throws Exception{
+    public ResponseEntity<QuestionnaireDTO> createNewQuestionnaire(@RequestBody QuestionnaireDTO questionnaireDTO, @PathVariable String regUserUsername) throws Exception{
 
         Questionnaire questionnaire = new Questionnaire(questionnaireDTO.getPreviousTransfusions(), questionnaireDTO.getWeight(), questionnaireDTO.getIsFeelsGood(),
         questionnaireDTO.getIsSkinChanged(), questionnaireDTO.getHighBloodPressure(), questionnaireDTO.getLowBloodPressure(),
@@ -43,7 +47,9 @@ public class QuestionnaireController {
         questionnaireDTO.getIsPreviousDentalInterventionMoreThanSixDays(), questionnaireDTO.getIsPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths(),
          BloodType.valueOf(questionnaireDTO.getBloodType()));
 
-        RegularUser regularUser = this.regularUserService.findOne(Long.valueOf(1));
+        User user = this.userService.findByUsername(regUserUsername);
+
+        RegularUser regularUser = this.regularUserService.findOne(user.getId());
 
         questionnaire.setRegularUser(regularUser);
 

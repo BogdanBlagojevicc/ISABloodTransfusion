@@ -4,6 +4,7 @@ import './styles/Navbar.scss'
 
 const Navbar = () => {
     return (
+        <div>
         <div  className='sum'>
             <div className="logo">
                 Blood
@@ -30,6 +31,14 @@ const Navbar = () => {
 
                     <li>
                         <Link to='/scheduledTerms'>Scheduled terms</Link>
+                    </li>
+
+                    <li>
+                        <Link to='/qrCodesTerms'>QR terms</Link>
+                    </li>
+
+                    <li>
+                        <Link to ='/viewProfile'>My profile</Link>
                     </li>
 
                     <li>
@@ -81,7 +90,14 @@ const Navbar = () => {
 
                 </ul>
             </nav>
+   
         </div>
+        <br/>
+        <a>
+            <Link to='/centerComplaintList'>Center complaint</Link>
+        </a>
+        </div>
+        
     )
 }
 

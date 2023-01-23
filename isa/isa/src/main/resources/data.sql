@@ -45,6 +45,8 @@ VALUES(2);
 INSERT INTO terms (date_term, duration, center_term_id, regular_user_id, price)
 VALUES ('2030-10-10T12:30', 1, 1, 1, 20);
 INSERT INTO terms (date_term, duration, center_term_id, regular_user_id, price)
+VALUES ('2031-11-10T12:30', 1, 1, 1, 15);
+INSERT INTO terms (date_term, duration, center_term_id, regular_user_id, price)
 VALUES ('2000-10-10T11:30', 1, 1, 1, 30);
 
 -- INSERT INTO terms (date_term, duration, center_term_id, regular_user_id)

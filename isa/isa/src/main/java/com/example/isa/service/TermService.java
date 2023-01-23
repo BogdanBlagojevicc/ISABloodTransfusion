@@ -117,4 +117,37 @@ public class TermService {
     public List<Term> findAllByRegularUserId(Long id){
         return termRepository.findAllByRegularUserId(id);
     }
+
+    public List<Term> findByDateTermAsc(Long id){
+
+        List<Term> allTerms = termRepository.findByRegularUserIdOrderByDateTermAsc(id);
+
+        List<Term> scheduledTerms = new ArrayList<Term>();
+
+        LocalDateTime now = LocalDateTime.now();
+
+        for(Term t : allTerms){
+            if(t.getDateTerm().isAfter(now)){
+                scheduledTerms.add(t);
+            }
+        }
+
+        return scheduledTerms;
+    }
+
+    public List<Term> findByDateTermDesc(Long id){
+        List<Term> allTerms = termRepository.findByRegularUserIdOrderByDateTermDesc(id);
+
+        List<Term> scheduledTerms = new ArrayList<Term>();
+
+        LocalDateTime now = LocalDateTime.now();
+
+        for(Term t : allTerms){
+            if(t.getDateTerm().isAfter(now)){
+                scheduledTerms.add(t);
+            }
+        }
+
+        return scheduledTerms;
+    }
 }

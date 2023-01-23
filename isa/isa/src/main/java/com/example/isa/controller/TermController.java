@@ -249,6 +249,45 @@ public class TermController {
         return new ResponseEntity<>(centerDTOs, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/termASC/{regUserUsername}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    public ResponseEntity<List<TermDTO>> findTermsByDateTermSortedAsc(@PathVariable String regUserUsername) throws Exception{
+
+        User user = this.userService.findByUsername(regUserUsername);
+
+        RegularUser regularUser = this.regularUserService.findOne(user.getId());
+
+        List<Term> terms = this.termService.findByDateTermAsc(regularUser.getId());
+
+        ArrayList<TermDTO> termDTOs = new ArrayList<TermDTO>();
+
+        for(Term t : terms){
+            TermDTO termDTO = new TermDTO(t.getId(), t.getDateTerm(), t.getDuration(), t.getPrice());
+            termDTOs.add(termDTO);
+        }
+
+        return new ResponseEntity<>(termDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping(value ="/termDESC/{regUserUsername}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    public ResponseEntity<List<TermDTO>> findTermsByDateTermSortedDesc(@PathVariable String regUserUsername) throws Exception{
+        User user = this.userService.findByUsername(regUserUsername);
+
+        RegularUser regularUser = this.regularUserService.findOne(user.getId());
+
+        List<Term> terms = this.termService.findByDateTermDesc(regularUser.getId());
+
+        ArrayList<TermDTO> termDTOs = new ArrayList<TermDTO>();
+
+        for(Term t : terms){
+            TermDTO termDTO = new TermDTO(t.getId(), t.getDateTerm(), t.getDuration(), t.getPrice());
+            termDTOs.add(termDTO);
+        }
+
+        return new ResponseEntity<>(termDTOs, HttpStatus.OK);
+    }
+
 
     @PostMapping(value = "/scheduleTerm/{centerId}/{dateTerm}/{regUserId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER','ROLE_CENTER_ADMINISTRATOR')")

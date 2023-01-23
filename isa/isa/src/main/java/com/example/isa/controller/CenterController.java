@@ -1,7 +1,9 @@
 package com.example.isa.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,11 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.isa.model.Center;
+import com.example.isa.model.User;
+import com.example.isa.model.Term;
+import com.example.isa.model.RegularUser;
 import com.example.isa.model.CenterAdministrator;
 import com.example.isa.model.dto.CenterDTO;
 import com.example.isa.service.CenterAdministratorService;
 import com.example.isa.service.CenterService;
 import com.example.isa.service.SystemAdministratorService;
+import com.example.isa.service.UserService;
+import com.example.isa.service.RegularUserService;
+import com.example.isa.service.TermService;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -35,13 +43,19 @@ public class CenterController {
     private final CenterService centerService;
     private final CenterAdministratorService centerAdministratorService;
     private final SystemAdministratorService systemAdministratorService;
+    private final UserService userService;
+    private final RegularUserService regularUserService;
+    private final TermService termService;
 
     @Autowired
     public CenterController(CenterService centerService, CenterAdministratorService centerAdministratorService,
-            SystemAdministratorService systemAdministratorService) {
+            SystemAdministratorService systemAdministratorService, UserService userService, RegularUserService regularUserService, TermService termService ) {
         this.centerService = centerService;
         this.centerAdministratorService = centerAdministratorService;
         this.systemAdministratorService = systemAdministratorService;
+        this.userService = userService;
+        this.regularUserService = regularUserService;
+        this.termService = termService;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -273,6 +287,43 @@ public class CenterController {
                 center.getEndTime());
 
         return new ResponseEntity<>(centerDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/centersRegularUser/{regUserUsername}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CenterDTO>> getCentersForRegUser(@PathVariable String regUserUsername) throws Exception{
+        User user = this.userService.findByUsername(regUserUsername);
+
+        RegularUser regularUser = this.regularUserService.findOne(user.getId());
+
+        List<Term> terms = this.termService.findFinishedTermsByRegularUserId(regularUser.getId());
+
+        List<Center> centers = new ArrayList<Center>();
+
+        for(Term t : terms){
+            centers.add(t.getCenterTerm());
+        }
+
+        Set<Center> temp = new HashSet<>(centers);
+        centers.clear();
+        centers.addAll(temp);
+
+        List<CenterDTO> centerDTOs = new ArrayList<CenterDTO>();
+
+        for(Center c : centers){
+            CenterDTO centerDTO = new CenterDTO(
+                c.getId(),
+                c.getName(),
+                c.getAddress(),
+                c.getDescription(),
+                c.getAverageGrade(),
+                c.getCountry(),
+                c.getStartTime(),
+                c.getEndTime()
+            );
+            centerDTOs.add(centerDTO);
+        }
+
+        return new ResponseEntity<>(centerDTOs, HttpStatus.OK);
     }
 
 

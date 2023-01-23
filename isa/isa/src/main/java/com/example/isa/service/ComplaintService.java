@@ -29,6 +29,10 @@ public class ComplaintService {
         return this.complaintRepository.save(complaint);
     }
 
+    public Complaint create(Complaint complaint) throws Exception{
+        return this.complaintRepository.save(complaint);
+    }
+
     public List<Complaint> findAll(){
         return this.complaintRepository.findAll();
     }

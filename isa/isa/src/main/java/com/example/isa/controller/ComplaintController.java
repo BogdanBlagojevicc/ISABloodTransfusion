@@ -10,15 +10,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.isa.model.Complaint;
+import com.example.isa.model.User;
+import com.example.isa.model.RegularUser;
 import com.example.isa.model.dto.ComplaintDTO;
 import com.example.isa.service.ComplaintService;
 import com.example.isa.service.SystemAdministratorService;
+import com.example.isa.service.UserService;
+import com.example.isa.service.RegularUserService;
 
 //@CrossOrigin(origins = "http://localhost:63342")
 @CrossOrigin
@@ -28,11 +33,15 @@ public class ComplaintController {
     
     private final ComplaintService complaintService;
     private final SystemAdministratorService systemAdministratorService;
+    private final UserService userService;
+    private final RegularUserService regularUserService;
 
     @Autowired
-    public ComplaintController(ComplaintService complaintService, SystemAdministratorService systemAdministratorService){
+    public ComplaintController(ComplaintService complaintService, SystemAdministratorService systemAdministratorService, UserService userService, RegularUserService regularUserService){
         this.complaintService = complaintService;
         this.systemAdministratorService = systemAdministratorService;
+        this.userService = userService;
+        this.regularUserService = regularUserService;
     }
 
     @PutMapping(value = "/updateComplaint/{SystemAdminId}/{ComplaintId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -51,6 +60,23 @@ public class ComplaintController {
 
         return new ResponseEntity<>(updatedComplaintDTO, HttpStatus.OK);
     }
+
+    @PostMapping(value = "/center/{regUserUsername}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ComplaintDTO> createCenterComplaint(@PathVariable String regUserUsername, @RequestBody ComplaintDTO complaintDTO) throws Exception{
+        User user = this.userService.findByUsername(regUserUsername);
+
+        RegularUser regularUser = this.regularUserService.findOne(user.getId());
+
+        Complaint complaint = new Complaint(complaintDTO.getText(), complaintDTO.getResponse());
+        complaint.setRegularUser(regularUser);
+
+        Complaint newComplaint = this.complaintService.create(complaint);
+
+        ComplaintDTO newComplaintDTO = new ComplaintDTO(newComplaint.getId(), newComplaint.getText(), newComplaint.getResponse());
+
+        return new ResponseEntity<>(newComplaintDTO, HttpStatus.OK);
+    }
+
 
     @GetMapping(value = "/allComplaints", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ComplaintDTO>> getAllComplaints(){

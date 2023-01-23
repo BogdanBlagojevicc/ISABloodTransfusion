@@ -80,12 +80,12 @@ public class RegularUserController {
         return new ResponseEntity<>(newRegularUserDTO, HttpStatus.CREATED);
     }
 
-   @GetMapping(value = "/{Id}", produces = MediaType.APPLICATION_JSON_VALUE)
-   public ResponseEntity<RegularUserDTO> getRegularUser(@PathVariable Long Id) throws Exception{
+   @GetMapping(value = "/{regUserUsername}", produces = MediaType.APPLICATION_JSON_VALUE)
+   public ResponseEntity<RegularUserDTO> getRegularUser(@PathVariable String regUserUsername) throws Exception{
 
-        User user = userService.findOne(Id);
+        User user = userService.findByUsername(regUserUsername);
         
-       RegularUser regularUser = this.regularUserService.findOne(Id);
+       RegularUser regularUser = this.regularUserService.findOne(user.getId());
 
        RegularUserDTO regularUserDTO = new RegularUserDTO(
         user.getId(),

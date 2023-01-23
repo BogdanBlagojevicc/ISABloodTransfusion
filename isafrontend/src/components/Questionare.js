@@ -39,8 +39,7 @@ const Questionare = () => {
       isPreviousDentalInterventionMoreThanSixDays, isPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths}
     console.log(new_questionnaire);
     var test = JSON.parse(localStorage.getItem('testToken'))
-    fetch("http://localhost:8081/api/questionnaire/new",{
-    //fetch("http://localhost:8081/auth/regularUser/signup",{ OVAKO TREBA
+    fetch("http://localhost:8081/api/questionnaire/new/" + localStorage.getItem('reg_user_username'),{
     method:"POST",
     headers : { 
       'Content-Type': 'application/json',
