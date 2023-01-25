@@ -96,6 +96,11 @@ const Navbar = () => {
         <a>
             <Link to='/centerComplaintList'>Center complaint</Link>
         </a>
+        <br/>
+        <br/>
+        <a>
+            <Link to ='/administratorComplaintList'>Administrator complaint</Link>
+        </a>
         </div>
         
     )

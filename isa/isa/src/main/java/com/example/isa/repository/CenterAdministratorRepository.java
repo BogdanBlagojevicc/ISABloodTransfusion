@@ -15,6 +15,8 @@ public interface CenterAdministratorRepository extends JpaRepository<CenterAdmin
 
     CenterAdministrator findByBaseUserCAId(Long id);
 
+    //CenterAdministrator findById(Long id);
+
     List<Long> findAllUserIdByCenterCASId(Long id);
 
     //@Query("select c from CenterAdministrator c where c.center =?1")

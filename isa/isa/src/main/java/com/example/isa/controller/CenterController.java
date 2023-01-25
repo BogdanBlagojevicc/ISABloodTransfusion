@@ -290,6 +290,7 @@ public class CenterController {
     }
 
     @GetMapping(value = "/centersRegularUser/{regUserUsername}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
     public ResponseEntity<List<CenterDTO>> getCentersForRegUser(@PathVariable String regUserUsername) throws Exception{
         User user = this.userService.findByUsername(regUserUsername);
 

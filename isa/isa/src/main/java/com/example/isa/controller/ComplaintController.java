@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.isa.model.Complaint;
+import com.example.isa.model.Center;
+import com.example.isa.model.CenterAdministrator;
 import com.example.isa.model.User;
 import com.example.isa.model.RegularUser;
 import com.example.isa.model.dto.ComplaintDTO;
@@ -24,6 +27,8 @@ import com.example.isa.service.ComplaintService;
 import com.example.isa.service.SystemAdministratorService;
 import com.example.isa.service.UserService;
 import com.example.isa.service.RegularUserService;
+import com.example.isa.service.CenterAdministratorService;
+import com.example.isa.service.CenterService;
 
 //@CrossOrigin(origins = "http://localhost:63342")
 @CrossOrigin
@@ -35,13 +40,18 @@ public class ComplaintController {
     private final SystemAdministratorService systemAdministratorService;
     private final UserService userService;
     private final RegularUserService regularUserService;
+    private final CenterAdministratorService centerAdministratorService;
+    private final CenterService centerService;
 
     @Autowired
-    public ComplaintController(ComplaintService complaintService, SystemAdministratorService systemAdministratorService, UserService userService, RegularUserService regularUserService){
+    public ComplaintController(ComplaintService complaintService, SystemAdministratorService systemAdministratorService, UserService userService, 
+    RegularUserService regularUserService, CenterAdministratorService centerAdministratorService, CenterService centerService){
         this.complaintService = complaintService;
         this.systemAdministratorService = systemAdministratorService;
         this.userService = userService;
         this.regularUserService = regularUserService;
+        this.centerAdministratorService = centerAdministratorService;
+        this.centerService = centerService;
     }
 
     @PutMapping(value = "/updateComplaint/{SystemAdminId}/{ComplaintId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -61,14 +71,40 @@ public class ComplaintController {
         return new ResponseEntity<>(updatedComplaintDTO, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/center/{regUserUsername}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ComplaintDTO> createCenterComplaint(@PathVariable String regUserUsername, @RequestBody ComplaintDTO complaintDTO) throws Exception{
+    @PostMapping(value = "/center/{regUserUsername}/{centerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    public ResponseEntity<ComplaintDTO> createCenterComplaint(@PathVariable String regUserUsername,@PathVariable Long centerId, @RequestBody ComplaintDTO complaintDTO) throws Exception{
         User user = this.userService.findByUsername(regUserUsername);
+
+        Center center = this.centerService.findOne(centerId);
+
 
         RegularUser regularUser = this.regularUserService.findOne(user.getId());
 
         Complaint complaint = new Complaint(complaintDTO.getText(), complaintDTO.getResponse());
         complaint.setRegularUser(regularUser);
+        complaint.setCenterCO(center);
+
+        Complaint newComplaint = this.complaintService.create(complaint);
+
+        ComplaintDTO newComplaintDTO = new ComplaintDTO(newComplaint.getId(), newComplaint.getText(), newComplaint.getResponse());
+
+        return new ResponseEntity<>(newComplaintDTO, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/centerAdmin/{regUserUsername}/{centerAdminUsername}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    public ResponseEntity<ComplaintDTO> createCenterAdminComplaint(@PathVariable String regUserUsername,@PathVariable String centerAdminUsername, @RequestBody ComplaintDTO complaintDTO) throws Exception{
+        User user = this.userService.findByUsername(regUserUsername);
+        User user2 = this.userService.findByUsername(centerAdminUsername);
+        CenterAdministrator centerAdministrator = this.centerAdministratorService.findOne(user2.getId());
+
+        RegularUser regularUser = this.regularUserService.findOne(user.getId());
+
+        Complaint complaint = new Complaint(complaintDTO.getText(), complaintDTO.getResponse());
+        complaint.setRegularUser(regularUser);
+
+        complaint.setCenterAdministrator(centerAdministrator);
 
         Complaint newComplaint = this.complaintService.create(complaint);
 

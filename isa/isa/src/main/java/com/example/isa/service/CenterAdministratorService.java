@@ -34,6 +34,20 @@ public class CenterAdministratorService {
         return centerAdministrator;
     }
 
+    // public CenterAdministrator getOne(Long id) throws Exception{
+    //     CenterAdministrator centerAdministrator = this.centerAdministratorRepository.findById(id);
+
+    //     if(centerAdministrator == null){
+    //         throw new Exception("Invalid id");
+    //     }
+
+    //     return centerAdministrator;
+    // }
+
+    public List<CenterAdministrator> findAll() throws Exception{
+        return this.centerAdministratorRepository.findAll();
+    }
+
     public CenterAdministrator update(CenterAdministratorDTO centerAdministratorDTO) throws Exception{
 
         CenterAdministrator centerAdministratorToUpdate = this.centerAdministratorRepository.findByBaseUserCAId(centerAdministratorDTO.getId());

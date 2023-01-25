@@ -7,30 +7,29 @@ import { Container } from '@mui/system';
 import {Paper, Button} from '@mui/material'
 import { useParams } from 'react-router-dom';
 
-const CenterComplaint = () => {
-    let { id } = useParams();
-    const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
-    const[text, setText] = useState('')
+const AdministratorComplaint = () => {
+  let { id } = useParams();
+  const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
+  const[text, setText] = useState('')
+  const handleClick = (e) =>{
+    e.preventDefault()
+    let response = ""
+    const complaint = {text, response}
+    console.log(complaint);
+    var test = JSON.parse(localStorage.getItem('testToken'))
+    fetch("http://localhost:8081/api/complaint/centerAdmin/" + localStorage.getItem('reg_user_username') + "/" + localStorage.getItem('centerAdmin_username'), {
+    method:"POST",
+    headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        Authorization: `Bearer ${test.accessToken}`,
+       },
+    body:JSON.stringify(complaint)
 
-    const handleClick = (e) =>{
-        e.preventDefault()
-        let response = ""
-        const complaint = {text, response}
-        console.log(complaint);
-        var test = JSON.parse(localStorage.getItem('testToken'))
-        fetch("http://localhost:8081/api/complaint/center/" + localStorage.getItem('reg_user_username') + "/" + id, {
-        method:"POST",
-        headers : { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            Authorization: `Bearer ${test.accessToken}`,
-           },
-        body:JSON.stringify(complaint)
-    
-      }).then(() =>{
-        console.log("New complaint added")
-      })
-    }
+  }).then(() =>{
+    console.log("New complaint added")
+  })
+}
   return (
     <Box
       component="form"
@@ -59,4 +58,4 @@ const CenterComplaint = () => {
   )
 }
 
-export default CenterComplaint
+export default AdministratorComplaint

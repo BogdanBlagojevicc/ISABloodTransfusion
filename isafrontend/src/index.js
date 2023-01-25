@@ -34,6 +34,8 @@ import QRCodesTerms from './components/QRCodesTerms';
 import ViewProfile from './components/ViewProfile';
 import CenterComplaintList from './components/CenterComplaintList';
 import CenterComplaint from './components/CenterComplaint';
+import AdministratorComplaintList from './components/AdministratorComplaintList';
+import AdministratorComplaint from './components/AdministratorComplaint';
 
 ReactDOM.render(
   <Router>
@@ -69,6 +71,8 @@ ReactDOM.render(
         <Route path='/viewProfile' element = {<ViewProfile/>} />
         <Route path='/centerComplaintList' element ={<CenterComplaintList/>} />
         <Route path='/CenterComplaint/:id' element={<CenterComplaint/>}/>
+        <Route path='/administratorComplaintList' element={<AdministratorComplaintList/>}/>
+        <Route path='/AdministratorComplaint/:id' element={<AdministratorComplaint/>}/>
     </Routes>
   </Router>,
  document.getElementById('root')
