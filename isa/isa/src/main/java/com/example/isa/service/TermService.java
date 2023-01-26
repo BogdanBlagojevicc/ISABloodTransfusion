@@ -160,4 +160,20 @@ public class TermService {
 
         return scheduledTerms;
     }
+
+    public List<Term> findTermsForCenter(Long id){
+        List<Term> terms = termRepository.findByCenterTermId(id);
+
+        LocalDateTime now = LocalDateTime.now();
+
+        List<Term> futureTerms = new ArrayList<Term>();
+
+        for(Term t : terms){
+            if(t.getDateTerm().isAfter(now) && t.getRegularUser() == null){
+                futureTerms.add(t);
+            }
+        }
+
+        return futureTerms;
+    }
 }

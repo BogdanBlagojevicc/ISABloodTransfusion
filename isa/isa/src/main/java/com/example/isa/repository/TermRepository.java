@@ -18,4 +18,6 @@ public interface TermRepository extends JpaRepository<Term,Long> {
     List<Term> findByRegularUserIdOrderByDateTermAsc(Long id);
 
     List<Term> findByRegularUserIdOrderByDateTermDesc(Long id);
+
+    List<Term> findByCenterTermId(Long id);
 }

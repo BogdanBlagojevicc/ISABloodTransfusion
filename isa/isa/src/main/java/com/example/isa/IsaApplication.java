@@ -20,9 +20,9 @@ public class IsaApplication {
 		SpringApplication.run(IsaApplication.class, args);
 	}
 
-	@EventListener(ApplicationReadyEvent.class)
-	public void sendEmail(){
-		emailService.sendEmail("joldicnenad13@gmail.com");
-	}
+	// @EventListener(ApplicationReadyEvent.class)
+	// public void sendEmail(){
+	// 	emailService.sendEmail("joldicnenad13@gmail.com");
+	// }
 
 }
