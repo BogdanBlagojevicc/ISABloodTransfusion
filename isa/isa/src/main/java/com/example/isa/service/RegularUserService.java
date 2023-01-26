@@ -133,4 +133,8 @@ public class RegularUserService {
         return regularUser;
     }
 
+    // public List<RegularUser> findByOrderByFirstNameAsc(){
+    //     return this.regularUserRepository.findByOrderByFirstNameAsc();
+    // }
+
 }

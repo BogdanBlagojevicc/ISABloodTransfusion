@@ -36,6 +36,7 @@ import CenterComplaintList from './components/CenterComplaintList';
 import CenterComplaint from './components/CenterComplaint';
 import AdministratorComplaintList from './components/AdministratorComplaintList';
 import AdministratorComplaint from './components/AdministratorComplaint';
+import NavbarCA from './components/NavbarCA';
 
 ReactDOM.render(
   <Router>
@@ -64,6 +65,7 @@ ReactDOM.render(
         <Route path='/showRegUsers/showRegUserTerms:regUserId' element={<ShowRegUserTerms/>}/>
         <Route path='/showRegUsers/showRegUserTerms:regUserId/termDetails:termId' element={<TermDetails/>}/>
         <Route path='/showRegUsers/showRegUserTerms:regUserId/termDetails:termId/startTerm' element={<StartTerm/>}/>
+        <Route path='/navbarCA' element={<NavbarCA/>}/>
 
         <Route path='/termHistory' element = {<TermHistory/>}/>
         <Route path='/scheduledTerms' element = {<ScheduledTerms/>}/>

@@ -201,6 +201,27 @@ public class RegularUserController {
         
     }
 
+    // @GetMapping("/firstNameAsc")
+    // public ResponseEntity<List<RegularUserDTO>> getRegularUsersSortedByFirstNameAsc() {
+    //     List<RegularUser> users = this.regularUserService.findByOrderByFirstNameAsc();
+
+    //     List<RegularUserDTO> userDTOS = new ArrayList<>();
+
+    //     // for (Center center : centers) {
+    //     //     CenterDTO centerDTO = new CenterDTO(center.getId(), center.getName(), center.getAddress(),
+    //     //             center.getDescription(), center.getAverageGrade(),
+    //     //             center.getCountry(), center.getStartTime(), center.getEndTime());
+    //     //     centerDTOS.add(centerDTO);
+    //     // }
+
+    //     for (RegularUser user : users){
+    //         RegularUserDTO userDTO = new RegularUserDTO(user.getId(), user.getBaseUserRU().getUsername(), user.getBaseUserRU().getPassword(), user.getBaseUserRU().getFirstName(), user.getBaseUserRU().getLastName(), user.getBaseUserRU().getAddress(), user.getBaseUserRU().getCity(), user.getBaseUserRU().getCountry(), user.getBaseUserRU().getPhoneNumber(), user.getBaseUserRU().getJmbg(), user.getBaseUserRU().getGender(), user.getBaseUserRU().getProfession(), user.getBaseUserRU().getEducation(), user.loyalty, user.getPoints(), user.getPenalties());
+    //         userDTOS.add(userDTO);
+    //     }
+
+    //     return new ResponseEntity<>(userDTOS, HttpStatus.OK);
+    // }
+
 
 
     //SESA METODA
