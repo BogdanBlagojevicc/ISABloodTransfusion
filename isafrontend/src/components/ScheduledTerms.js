@@ -43,7 +43,7 @@ const ScheduledTerms = () => {
   const rowEvent = {
     onClick: (e, row) => {
       var test = JSON.parse(localStorage.getItem('testToken'))
-      fetch("http://localhost:8081/api/terms/" +row.id,{
+      fetch("http://localhost:8081/api/terms/"+ localStorage.getItem('reg_user_username') + "/" +row.id,{
       method:"DELETE",
       headers : { 
         'Content-Type': 'application/json',
