@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import './styles/Projects.scss'
 import { Container } from '@mui/system';
 import {Paper, Button} from '@mui/material'
+import jwt_decoder from 'jwt-decode'
 
 export default function RegularUser() {
   const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
@@ -22,7 +23,8 @@ export default function RegularUser() {
 
   useEffect(() =>{
     var test = JSON.parse(localStorage.getItem('testToken'))
-    fetch("http://localhost:8081/api/regularUsers/" + localStorage.getItem('reg_user_username'),{
+    let username=getUsernameFromToken()
+    fetch("http://localhost:8081/api/regularUsers/" + username,{
       headers : { 
         'Content-Type': 'application/json',
          Authorization: `Bearer ${test.accessToken}`,
@@ -51,7 +53,9 @@ export default function RegularUser() {
     admin.education = education;
 
     console.log(admin);
-    fetch("http://localhost:8081/api/regularUsers/1",{
+    var test = JSON.parse(localStorage.getItem('testToken'))
+   let username=test.accessToken.getUsernameFromToken()
+    fetch("http://localhost:8081/api/regularUsers/"+username,{
     method:"PUT",
     headers : { 
       'Content-Type': 'application/json',
@@ -62,6 +66,15 @@ export default function RegularUser() {
   }).then(() =>{
     console.log("User changed")
   })
+}
+function getUsernameFromToken() {
+  console.log(decodeToken())
+  return decodeToken()?.sub;
+}
+
+function decodeToken() {
+const token = localStorage.getItem('testToken');
+return token ? jwt_decoder(token) : null;
 }
 
   return (
@@ -82,7 +95,6 @@ export default function RegularUser() {
         placeholder={regularUser.password}
         onChange = {(e) => setPas(e.target.value)}
         />
-
         <TextField id="standard-basic" variant="standard" label="First name" fullWidth 
         placeholder={regularUser.firstName}
         onChange = {(e) => setPas(e.target.value)}

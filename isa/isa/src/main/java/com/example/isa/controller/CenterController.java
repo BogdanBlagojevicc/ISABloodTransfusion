@@ -76,7 +76,7 @@ public class CenterController {
     }
 
     @GetMapping("/nameASC")
-    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER','ROLE_CENTER_ADMINISTRATOR','ROLE_SYSTEM_ADMINISTRATOR')")
     public ResponseEntity<List<CenterDTO>> getCentersSortedByNameASC() {
         List<Center> centers = this.centerService.findByOrderByNameAsc();
 
@@ -93,7 +93,7 @@ public class CenterController {
     }
 
     @GetMapping("/nameDESC")
-    @PreAuthorize("hasRole('ROLE_CENTER_ADMINISTRATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER','ROLE_CENTER_ADMINISTRATOR','ROLE_SYSTEM_ADMINISTRATOR')")
     public ResponseEntity<List<CenterDTO>> getCentersSortedByNameDESC() {
         List<Center> centers = this.centerService.findByOrderByNameDesc();
 
@@ -110,6 +110,7 @@ public class CenterController {
     }
 
     @GetMapping("/averageGradeASC")
+    @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER','ROLE_CENTER_ADMINISTRATOR','ROLE_SYSTEM_ADMINISTRATOR')")
     public ResponseEntity<List<CenterDTO>> getCentersSortedByAverageGradeASC() {
         List<Center> centers = this.centerService.findByOrderByAverageGradeAsc();
 
@@ -126,6 +127,7 @@ public class CenterController {
     }
 
     @GetMapping("/averageGradeDESC")
+    @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER','ROLE_CENTER_ADMINISTRATOR','ROLE_SYSTEM_ADMINISTRATOR')")
     public ResponseEntity<List<CenterDTO>> getCentersSortedByAverageGradeDESC() {
         List<Center> centers = this.centerService.findByOrderByAverageGradeDesc();
 
@@ -142,6 +144,7 @@ public class CenterController {
     }
 
     @GetMapping("/countryASC")
+    @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER','ROLE_CENTER_ADMINISTRATOR','ROLE_SYSTEM_ADMINISTRATOR')")
     public ResponseEntity<List<CenterDTO>> getCentersSortedByCountryASC() {
         List<Center> centers = this.centerService.findByOrderByCountryAsc();
 
@@ -158,6 +161,7 @@ public class CenterController {
     }
 
     @GetMapping("/countryDESC")
+    @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER','ROLE_CENTER_ADMINISTRATOR','ROLE_SYSTEM_ADMINISTRATOR')")
     public ResponseEntity<List<CenterDTO>> getCentersSortedByCountryDESC() {
         List<Center> centers = this.centerService.findByOrderByCountryDesc();
 
@@ -174,6 +178,7 @@ public class CenterController {
     }
 
     @PutMapping(value = "/{adminCenterId}/{centerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER','ROLE_CENTER_ADMINISTRATOR','ROLE_SYSTEM_ADMINISTRATOR')")
     public ResponseEntity<CenterDTO> update(@PathVariable Long adminCenterId, @PathVariable Long centerId,
             @RequestBody CenterDTO centerDTO) throws Exception {
 
@@ -204,6 +209,7 @@ public class CenterController {
     }
 
     @GetMapping(value = "/grade/{AverageGrade}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER','ROLE_CENTER_ADMINISTRATOR','ROLE_SYSTEM_ADMINISTRATOR')")
     public ResponseEntity<CenterDTO> getAVG(@PathVariable("AverageGrade") Double averageGrade) {
 
         Center center = this.centerService.findByGrade(averageGrade);
@@ -255,6 +261,7 @@ public class CenterController {
     }
 
     @GetMapping("/filter/{firstnumber}/{secondnumber}")
+    @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER','ROLE_CENTER_ADMINISTRATOR','ROLE_SYSTEM_ADMINISTRATOR')")
     public ResponseEntity<List<CenterDTO>> filterCenters(@PathVariable("firstnumber") Double firstnumber,
             @PathVariable("secondnumber") Double secondnumber) {
         List<Center> centers = this.centerService.filterByGrade(firstnumber, secondnumber);

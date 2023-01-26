@@ -100,8 +100,15 @@ const columns =[
 
   
   const handleClick = (e) =>{
+    var test = JSON.parse(localStorage.getItem('testToken'))
     e.preventDefault()
-    fetch("http://localhost:8081/api/centers/filter/"+firstnumber+"/"+secondnumber)
+    fetch("http://localhost:8081/api/centers/filter/"+firstnumber+"/"+secondnumber,{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        Authorization: `Bearer ${test.accessToken}`,
+       },
+    })
     .then(res =>res.json())
     .then((result)=>
     {

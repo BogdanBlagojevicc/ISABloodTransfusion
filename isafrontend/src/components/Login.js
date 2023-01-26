@@ -8,7 +8,7 @@ import {Paper, Button} from '@mui/material'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ChangePassword from './ChangePassword';
 import { Navigate  } from 'react-router-dom';
-
+import jwt_decoder from 'jwt-decode'
 
 export default function Login() {
   const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto"}
@@ -60,6 +60,14 @@ export default function Login() {
   }
   )    
 };
+function getIdFromToken() {
+    return decodeToken()?.id;
+}
+
+function decodeToken() {
+	const token = localStorage.getItem('token');
+	return token ? jwt_decoder(token) : null;
+}
 
 const signUpClick = (e) =>{
   e.preventDefault()

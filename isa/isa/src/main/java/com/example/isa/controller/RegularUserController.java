@@ -84,6 +84,7 @@ public class RegularUserController {
    public ResponseEntity<RegularUserDTO> getRegularUser(@PathVariable String regUserUsername) throws Exception{
 
         User user = userService.findByUsername(regUserUsername);
+        System.out.println("TUUU SAM "+user.getId());
         
        RegularUser regularUser = this.regularUserService.findOne(user.getId());
 

@@ -57,10 +57,11 @@ public class TokenUtils {
 	 * @param username Korisničko ime korisnika kojem se token izdaje
 	 * @return JWT token
 	 */
-	public String generateToken(String username) {
+	public String generateToken(String username, Long id) {
 
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("role", "ROLE_CENTER_ADMINISTRATOR");
+		claims.put("id", id);
 		//claims.put("username", username);
 		return Jwts.builder()
 				.setIssuer(APP_NAME)

@@ -53,6 +53,7 @@ public class RegularUserService {
     }
 
     public RegularUser findOne(Long id) throws Exception{
+    
         RegularUser regularUser = this.regularUserRepository.findByBaseUserRUId(id);
         if(regularUser == null){
             throw new Exception("User does not exist");
