@@ -82,6 +82,16 @@ public class TermService {
         return true;
     }
 
+    public boolean checkIsTermInFuture(LocalDateTime localDateTime){
+        LocalDateTime now = LocalDateTime.now();
+        if(localDateTime.isBefore(now)){
+            return false;
+        }
+
+        return true;
+
+    }
+
     public List<Term> findFinishedTermsByRegularUserId(Long id){
         List<Term> allTerms = termRepository.findAllByRegularUserId(id);
 

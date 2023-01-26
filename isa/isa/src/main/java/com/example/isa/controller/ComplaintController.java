@@ -126,4 +126,8 @@ public class ComplaintController {
         }
         return new ResponseEntity<>(complaintDTOs, HttpStatus.OK);
     }
+
+    //TODO funkcija koja pronalazi sve termine u buducnosti koji za reg_usera imaju null
+    //TODO funkcija koja prima reg_user_username i zakazuje termin za tog usera, prvo proverava jel popunio upitnik, jel dao krv u prethodnih 6 meseci i jel ima 3 penala
+    //TODO funkcija koja iz liste zakazanih termina za poslatog korisnika otkazuje termin, dodaje ga u listu termina mogucih za zakazivanje i korisniku poveceva broj penala
 }

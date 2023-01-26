@@ -69,9 +69,13 @@ public class TermController {
             throw new Exception("This center does not exist");
         }
 
-        List<Term> terms = termService.findAll();
-        if (!termService.checkTerm(terms, LocalDateTime.parse(termDTO.getDateTerm()))) {
-            throw new Exception("Term already exist");
+        // List<Term> terms = termService.findAll();
+        // if (!termService.checkTerm(terms, LocalDateTime.parse(termDTO.getDateTerm()))) {
+        //     throw new Exception("Term already exist");
+        // }
+
+        if(termService.checkIsTermInFuture(LocalDateTime.parse(termDTO.getDateTerm())) == false){
+            throw new Exception("Date and time must be in future");
         }
 
         Term term = new Term(LocalDateTime.parse(termDTO.getDateTerm()), termDTO.getDuration(), termDTO.getPrice());
