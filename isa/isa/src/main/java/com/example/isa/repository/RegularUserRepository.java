@@ -14,4 +14,8 @@ public interface RegularUserRepository extends JpaRepository<RegularUser, Long> 
 
     // List<RegularUser> findByFirstNameAndLastName(String firstName, String lastName);
 
+    //List<RegularUser> findByOrderByFirstNameAsc();
+
+    Long findBaseUserRUIdById(Long id);
+
 }

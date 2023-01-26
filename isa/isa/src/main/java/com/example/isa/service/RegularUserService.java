@@ -162,5 +162,8 @@ public class RegularUserService {
         regularUser.setPenalties(penalties);
         this.regularUserRepository.save(regularUser);
     }
+    // public List<RegularUser> findByOrderByFirstNameAsc(){
+    //     return this.regularUserRepository.findByOrderByFirstNameAsc();
+    // }
 
 }

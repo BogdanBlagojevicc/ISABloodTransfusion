@@ -3,6 +3,7 @@ package com.example.isa.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,15 +13,29 @@ import com.example.isa.model.User;
 import com.example.isa.model.dto.Gender;
 import com.example.isa.model.dto.UserDTO;
 import com.example.isa.model.dto.UserRequest;
+import com.example.isa.repository.CenterAdministratorRepository;
+import com.example.isa.repository.RegularUserRepository;
+import com.example.isa.repository.TermRepository;
 import com.example.isa.repository.UserRepository;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final TermRepository termRepository;
+    private final RegularUserRepository regularUserRepository;
+    private final CenterAdministratorRepository centerAdministratorRepository;
+
+    // @Autowired
+    // public UserService(UserRepository userRepository){
+    //     this.userRepository = userRepository;
+    // }
 
     @Autowired
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository, TermRepository termRepository, RegularUserRepository regularUserRepository, CenterAdministratorRepository centerAdministratorRepository){
         this.userRepository = userRepository;
+        this.termRepository = termRepository;
+        this.regularUserRepository = regularUserRepository;
+        this.centerAdministratorRepository = centerAdministratorRepository;
     }
 
     @Autowired
@@ -112,6 +127,10 @@ public class UserService {
 		return this.userRepository.save(u);
 	}
 
-
+    public List<User> donatedUsers(){
+        Long centarCASId = (long) 1;
+        List<Long> termIds = centerAdministratorRepository.findAllTermIdByCenterCASId(centarCASId); 
+        return null;
+    }
 
 }

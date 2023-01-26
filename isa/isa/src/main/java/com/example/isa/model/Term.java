@@ -5,6 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.OptimisticLockType;
+import org.hibernate.annotations.OptimisticLocking;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -17,7 +22,7 @@ public class Term implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column
     private LocalDateTime dateTerm;
@@ -30,6 +35,10 @@ public class Term implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Center centerTerm;
+
+    @Version
+    @Column(name = "version", columnDefinition = "integer DEFAULT 0", nullable = false)
+    private Long version;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private RegularUser regularUser;
@@ -48,7 +57,7 @@ public class Term implements Serializable {
     }
 
     public Term(Long id, LocalDateTime dateTerm, Integer duration, Integer price) {
-        Id = id;
+        this.id = id;
         this.dateTerm = dateTerm;
         this.duration = duration;
         this.price = price;
