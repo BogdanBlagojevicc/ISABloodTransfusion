@@ -31,6 +31,7 @@ const columns =[
 ]
   useEffect(()=>{
     var test = JSON.parse(localStorage.getItem('testToken'))
+    console.log("TOKEN" + test)
     fetch("http://localhost:8081/api/centers",{
       headers : { 
         'Content-Type': 'application/json',
