@@ -227,7 +227,7 @@ public class TermController {
         return new ResponseEntity<>(termDTOs, HttpStatus.OK);
     }
 
-     @GetMapping("/availableTerms/{dateTerm}")
+     @GetMapping("/availableTermss/{dateTerm}")
     @PreAuthorize("hasAnyRole('ROLE_CENTER_ADMINISTRATOR','ROLE_REGULAR_USER')")
     public ResponseEntity<List<CenterDTO>> checkIfAvailable(@PathVariable("dateTerm") String stringDateTerm) {
         LocalDateTime dateTerm = LocalDateTime.parse(stringDateTerm);
@@ -293,7 +293,7 @@ public class TermController {
 
         Center center = centerService.findOne(centerId);
 
-        if (center == null) {
+      /*  if (center == null) {
             throw new Exception("This center does not exist");
         }
 
@@ -303,15 +303,19 @@ public class TermController {
         if(questionnaireService.findOneByRegularUserId(regUserId).getIsPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths()){
             throw new Exception("User cannot schedule term beacuse he donate blood in previous six months ");
         }
+      */
+      
+      RegularUser reqularUser = this.regularUserService.findOne(regUserId);
+      regularUserService.canUserScheduleTerm(reqularUser);
+
+      
         Term term = new Term(LocalDateTime.parse(stringDateTerm),1, 10);
         term.setCenterTerm(center);
 
-       
 
-        RegularUser regularUser= this.regularUserService.findOne(Long.valueOf(1));
-        term.setRegularUser(regularUser);
+        term.setRegularUser(reqularUser);
         Term newTerm = termService.create(term);
-        emailService.sendEmail(regularUser.getBaseUserRU().getEmail());
+        emailService.sendEmail(reqularUser.getBaseUserRU().getEmail());
         TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm(), newTerm.getDuration(), newTerm.getPrice());
 
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);

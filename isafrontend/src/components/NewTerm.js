@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField'
 import { Paper } from '@mui/material'
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'
-
+import jwt_decoder from 'jwt-decode'
 
 const NewTerm = () => {
     const [centers, setCenters] = useState([])
@@ -27,7 +27,8 @@ const NewTerm = () => {
     const rowEvent = {
       onClick: (e, row) => {
         var test = JSON.parse(localStorage.getItem('testToken'))
-        fetch("http://localhost:8081/api/terms/scheduleTerm/" +row.id+"/"+dateTerm+"/"+1,{
+        var id = getIdFromToken();
+        fetch("http://localhost:8081/api/terms/scheduleTerm/" +row.id+"/"+dateTerm+"/"+id,{
         method:"POST",
         headers : { 
           'Content-Type': 'application/json',
@@ -43,10 +44,19 @@ const NewTerm = () => {
       },
     }; 
     
+    function getIdFromToken() {
+      console.log(decodeToken())
+      return decodeToken()?.id;
+    }
+    
+    function decodeToken() {
+    const token = localStorage.getItem('testToken');
+    return token ? jwt_decoder(token) : null;
+    }
   
     const handleClick = (e) =>{
         var test = JSON.parse(localStorage.getItem('testToken'))
-        fetch("http://localhost:8081/api/terms/availableTerms/" + dateTerm,{
+        fetch("http://localhost:8081/api/terms/availableTermss/" + dateTerm,{
 
           headers : { 
             'Content-Type': 'application/json',
