@@ -1,6 +1,7 @@
 package com.example.isa.service;
 
 import java.io.Console;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Properties;
 
@@ -147,10 +148,10 @@ public class RegularUserService {
         if(questionnaire == null){
             return false;
         }
-        if(questionnaire.getIsPreviousSurgicalInterventionOrBloodDonationMoreThanSixMonths() == false){
+        LocalDateTime now = LocalDateTime.now();
+        if(!questionnaire.getCurrentDateTime().plusMonths(6).isBefore(now)){
             return false;
         }
-
         return true;
 
     }

@@ -85,7 +85,7 @@ public class TermController {
     }
 
 
-    @PostMapping(value = "/assign/{regUserUsername}/{termId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/assign/{regUserUsername}/{termId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER')")
     public ResponseEntity<TermDTO> assignRegularUser(@PathVariable("termId") Long termId, @PathVariable String regUserUsername) throws Exception {
 
