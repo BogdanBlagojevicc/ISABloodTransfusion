@@ -69,11 +69,6 @@ public class TermController {
             throw new Exception("This center does not exist");
         }
 
-        // List<Term> terms = termService.findAll();
-        // if (!termService.checkTerm(terms, LocalDateTime.parse(termDTO.getDateTerm()))) {
-        //     throw new Exception("Term already exist");
-        // }
-
         if(termService.checkIsTermInFuture(LocalDateTime.parse(termDTO.getDateTerm())) == false){
             throw new Exception("Date and time must be in future");
         }
@@ -90,33 +85,27 @@ public class TermController {
     }
 
 
-    @PostMapping(value = "/assign/{termId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/assign/{regUserUsername}/{termId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ROLE_REGULAR_USER')")
-    public ResponseEntity<TermDTO> assignRegularUser(@PathVariable("termId") Long termId, @RequestBody String token) throws Exception {
+    public ResponseEntity<TermDTO> assignRegularUser(@PathVariable("termId") Long termId, @PathVariable String regUserUsername) throws Exception {
 
         Term term = this.termService.findOne(termId);
         if(term == null){
-            throw new Exception("This term does not exist");
+            throw new Exception("Term does not exist");
         }
-        System.out.println("***************************************************");
-        System.out.println(token);
-        System.out.println("***************************************************");
 
-        String username = tokenUtils.getUsernameFromToken(token);
-
-
-        System.out.println("***************************************************");
-        System.out.println(username);
-        System.out.println("***************************************************");
-
-        
-        User user = this.userService.findByUsername("yy");
+        User user = this.userService.findByUsername(regUserUsername);
         RegularUser regularUser = this.regularUserService.findOne(user.getId());
+
+        //provera za broj penala i da li je popunio upitnik i da li je dao krv u prethodnih 6 meseci
+        if(!this.regularUserService.canUserScheduleTerm(regularUser)){
+            throw new Exception("This user can't schedule term!");
+        }
 
         term.setRegularUser(regularUser);
 
         this.termService.update(term);
-        emailService.sendEmail(regularUser.getBaseUserRU().getEmail());
+        //emailService.sendEmail(regularUser.getBaseUserRU().getEmail());
         TermDTO newTermDTO = new TermDTO();
 
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
@@ -124,9 +113,12 @@ public class TermController {
     }
 
 
-    @DeleteMapping(value = "/{termId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/{regUserUsername}/{termId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
-    public ResponseEntity<TermDTO> deleteTerm(@PathVariable("termId") Long termId) throws Exception {
+    public ResponseEntity<TermDTO> deleteTerm(@PathVariable("termId") Long termId, @PathVariable String regUserUsername) throws Exception {
+        User user = this.userService.findByUsername(regUserUsername);
+
+        RegularUser regularUser = this.regularUserService.findOne(user.getId());
 
         LocalDateTime now = LocalDateTime.now();
 
@@ -321,9 +313,30 @@ public class TermController {
         Term newTerm = termService.create(term);
         emailService.sendEmail(regularUser.getBaseUserRU().getEmail());
         TermDTO newTermDTO = new TermDTO(newTerm.getId(), newTerm.getDateTerm(), newTerm.getDuration(), newTerm.getPrice());
+
         return new ResponseEntity<>(newTermDTO, HttpStatus.CREATED);
+    }
 
+    //TODO funkcija koja pronalazi sve termine u buducnosti koji za reg_usera imaju null
+    @GetMapping(value="/availableTerms/{centerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_REGULAR_USER')")
+    public ResponseEntity<List<TermDTO>> findAvailableTermsForCenter(@PathVariable Long centerId) throws Exception{
+        Center center = this.centerService.findOne(centerId);
 
+        if(center == null){
+            throw new Exception("Center id does not exist");
+        }
+
+        List<Term> terms = this.termService.findTermsForCenter(centerId);
+ 
+        ArrayList<TermDTO> termDTOs = new ArrayList<TermDTO>();
+
+        for(Term t : terms){
+            TermDTO termDTO = new TermDTO(t.getId(), t.getDateTerm(), t.getDuration(), t.getPrice());
+            termDTOs.add(termDTO);
+        }
+
+        return new ResponseEntity<>(termDTOs, HttpStatus.OK);
     }
 
 

@@ -26,7 +26,7 @@ const RegularUserTerms = () => {
 
   useEffect(() => {
     var test = JSON.parse(localStorage.getItem('testToken'))
-    fetch("http://localhost:8081/api/terms/order/" + id, {
+    fetch("http://localhost:8081/api/terms/availableTerms/" + id, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -43,7 +43,7 @@ const RegularUserTerms = () => {
   const rowEvent = {
     onClick: (e, row) => {
       var test = JSON.parse(localStorage.getItem('testToken'))
-      fetch("http://localhost:8081/api/terms/assign/" +row.id,{
+      fetch("http://localhost:8081/api/terms/assign/" + localStorage.getItem('reg_user_username') + "/" +row.id,{
       method:"POST",
       headers : { 
         'Content-Type': 'application/json',

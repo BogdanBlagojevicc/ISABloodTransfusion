@@ -1,6 +1,7 @@
 package com.example.isa.repository;
 
 import com.example.isa.model.CenterAdministrator;
+import com.example.isa.model.Term;
 
 import java.util.List;
 
@@ -22,5 +23,7 @@ public interface CenterAdministratorRepository extends JpaRepository<CenterAdmin
     //@Query("select c from CenterAdministrator c where c.center =?1")
     @Query(value = "SELECT * FROM centeradministrators u WHERE u.center_id = ?1", nativeQuery = true)
     List<CenterAdministrator> findAllCenterAdministrators(Long id);
+
+    List<Long> findAllTermIdByCenterCASId(Long id);
     
 }

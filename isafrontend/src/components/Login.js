@@ -54,9 +54,11 @@ export default function Login() {
     let user_test = localStorage.getItem('reg_user_username')
     console.log(user_test);
 
-
-    window.location.href = '/navbar';    
-
+    // if(username == "boki"){
+    //   window.location.href = '/navbarCA';
+    // }else{
+      window.location.href = '/navbar'; 
+    // }
   }
   )    
 };

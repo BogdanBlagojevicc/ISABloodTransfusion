@@ -26,7 +26,7 @@ public class EmailService {
             message.setText("neki tekst random");
             message.setSubject("provera za registraciju");
 
-            javaMailSender.send(message);
+           // javaMailSender.send(message);
 
             System.out.println("Mail send successfully...");
     }

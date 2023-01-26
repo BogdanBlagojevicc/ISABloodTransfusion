@@ -1,14 +1,19 @@
 package com.example.isa.service;
 
+import java.io.Console;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.isa.model.Term;
 import com.example.isa.repository.TermRepository;
+
+import net.bytebuddy.implementation.bytecode.Throw;
 
 @Service
 public class TermService {
@@ -19,11 +24,39 @@ public class TermService {
         this.termRepository = termRepository;
     }
 
+    @Transactional
     public Term create(Term term) throws Exception {
         if (term.getId() != null) {
             throw new Exception("ID must be null");
         }
-        return this.termRepository.save(term);
+
+       // termRepository.findWithLockingById(term.getId());
+        //if(termRepository.findWithLockingById(term.getId()).isEmpty()){
+        //if(termRepository.findById(term.getId()) == null){
+            
+            List<Term> terms = this.termRepository.findAll();
+            //List<Term> terms = this.termRepository.findAllWithLocking().get();
+            Long hour = (long) 1;
+            Integer counter = 0;
+            for(Term t : terms){
+                if((t.getDateTerm().compareTo(term.getDateTerm()) < 0 && t.getDateTerm().plusHours(hour).compareTo(term.getDateTerm()) > 0) || (term.getDateTerm().compareTo(t.getDateTerm()) < 0 && term.getDateTerm().plusHours(hour).compareTo(t.getDateTerm()) > 0)){
+                    counter ++;
+                    System.out.println("USAOOOOOOOOOO");
+                    System.out.println("t.getDateTerm()  je:" + t.getDateTerm().toString());
+                    System.out.println("t.getDateTerm().plusHours(hour)  je:" + t.getDateTerm().plusHours(hour).toString());
+                }
+            }
+
+            if(counter == 0){
+                Term savedTerm = this.termRepository.save(term);
+                Thread.sleep(3_000);
+                return savedTerm;
+            }
+            //Thread.sleep(1_000);
+            
+            //Throw new Exception("");
+       // }
+        throw new Exception("Term is null");
     }
 
     public List<Term> findAll() {
@@ -54,7 +87,7 @@ public class TermService {
     }
 
     public Term findOne(Long id) throws Exception {
-        Term term = this.termRepository.getById(id);
+        Term term = this.termRepository.findById(id).get();
 
         if (term == null) {
             throw new Exception("Term does not exist");
@@ -159,5 +192,21 @@ public class TermService {
         }
 
         return scheduledTerms;
+    }
+
+    public List<Term> findTermsForCenter(Long id){
+        List<Term> terms = termRepository.findByCenterTermId(id);
+
+        LocalDateTime now = LocalDateTime.now();
+
+        List<Term> futureTerms = new ArrayList<Term>();
+
+        for(Term t : terms){
+            if(t.getDateTerm().isAfter(now) && t.getRegularUser() == null){
+                futureTerms.add(t);
+            }
+        }
+
+        return futureTerms;
     }
 }

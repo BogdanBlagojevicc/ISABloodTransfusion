@@ -1,6 +1,7 @@
 package com.example.isa.service;
 
 import java.io.Console;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Properties;
 
@@ -13,11 +14,14 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.annotation.Async;
+
+import com.example.isa.model.Questionnaire;
 import com.example.isa.model.RegularUser;
 import com.example.isa.model.User;
 import com.example.isa.model.dto.Gender;
 import com.example.isa.model.dto.RegularUserDTO;
 import com.example.isa.repository.RegularUserRepository;
+import com.example.isa.repository.QuestionnaireRepository;
 import com.example.isa.repository.UserRepository;
 import com.example.isa.model.dto.LoyaltyProgram;
 
@@ -28,11 +32,13 @@ public class RegularUserService {
 
     private final RegularUserRepository regularUserRepository;
     private final UserRepository userRepository;
+    private final QuestionnaireRepository questionnaireRepository;
 
     @Autowired
-    public RegularUserService(RegularUserRepository regularUserRepository, UserRepository userRepository){
+    public RegularUserService(RegularUserRepository regularUserRepository, UserRepository userRepository, QuestionnaireRepository questionnaireRepository){
         this.regularUserRepository = regularUserRepository;
         this.userRepository = userRepository;
+        this.questionnaireRepository = questionnaireRepository;
     }
 
     
@@ -133,5 +139,32 @@ public class RegularUserService {
         regularUserRepository.save(regularUser);
         return regularUser;
     }
+
+    public boolean canUserScheduleTerm(RegularUser regularUser){
+        if(regularUser.getPenalties() > 2){
+            return false;
+        }
+
+        Questionnaire questionnaire = this.questionnaireRepository.findOneByRegularUserId(regularUser.getId());
+        if(questionnaire == null){
+            return false;
+        }
+        LocalDateTime now = LocalDateTime.now();
+        if(!questionnaire.getCurrentDateTime().plusMonths(6).isBefore(now)){
+            return false;
+        }
+        return true;
+
+    }
+
+    public void increasePenalties(RegularUser regularUser){
+        Integer penalties = regularUser.getPenalties();
+        penalties += 1;
+        regularUser.setPenalties(penalties);
+        this.regularUserRepository.save(regularUser);
+    }
+    // public List<RegularUser> findByOrderByFirstNameAsc(){
+    //     return this.regularUserRepository.findByOrderByFirstNameAsc();
+    // }
 
 }
